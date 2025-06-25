@@ -48,6 +48,7 @@ export default function WhoWeAre() {
     };
 
     const handleMouseEnter = (i) => {
+        if (!cardRefs.current[i]) return;
         setHoveredIndex(i);
         gsap.killTweensOf(cardRefs.current[i]);
         gsap.to(cardRefs.current[i], {
@@ -59,6 +60,7 @@ export default function WhoWeAre() {
     };
 
     const handleMouseLeave = (i) => {
+        if (!cardRefs.current[i]) return;
         setHoveredIndex(null);
         gsap.killTweensOf(cardRefs.current[i]);
         gsap.to(cardRefs.current[i], {
@@ -88,7 +90,7 @@ export default function WhoWeAre() {
                         return (
                             <div key={i} ref={(el) => (cardRefs.current[i] = el)} onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={() => handleMouseLeave(i)} className="relative w-[250px] h-[180px] rounded-2xl bg-[#f9f9f9] shadow-md overflow-hidden flex flex-col items-center justify-between text-center" >
                                 <div className={`absolute left-1/2 transform -translate-x-1/2 w-[180px] h-[100px] ${isTop ? 'top-0' : 'bottom-0'} z-0`} >
-                                    <div className={`absolute transition-all duration-500 inset-0 rounded-full blur-2xl z-0 ${isTop ? '-top-[20px]' : '-bottom-[20px]'}`} style={{ background: getShadowColor(item.bg), opacity: hoveredIndex === i ? 0.6 : 0, }} />
+                                    <div className={`absolute transition-all duration-500 inset-0 rounded-full blur-2xl z-0 ${isTop ? '-top-[20px]' : '-bottom-[20px]'}`} style={{ background: getShadowColor(item.bg), opacity: hoveredIndex === i ? 0.6 : 0, pointerEvents: 'none', }} />
                                     <img src={item.arcImg} alt="arc" className={`w-full h-[50%] object-cover ${isTop ? 'rounded-b-full absolute top-0' : 'rounded-t-full absolute bottom-0'} z-10`} />
                                 </div>
                                 <div className={`absolute left-1/2 transform -translate-x-1/2 z-20 w-10 h-10 ${isTop ? 'top-[20px]' : 'bottom-[20px]'} flex items-center justify-center`}>

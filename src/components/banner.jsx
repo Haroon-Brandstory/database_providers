@@ -12,10 +12,7 @@ import { Autoplay as SwiperAutoplay } from 'swiper/modules';
 import dynamic from 'next/dynamic';
 SwiperCore.use([SwiperAutoplay]);
 
-const LottieAnimation = dynamic(() => import('./lottie'), {
-    ssr: false,
-    loading: () => <div className="h-60" />, // Optional loader
-});
+const LottieAnimation = dynamic(() => import('./lottie'), {ssr: false,loading: () => <div className="h-60" />,});
 
 const CLIENT_LOGOS = [
     '/banner_images/client_testimonial_icon1.svg',

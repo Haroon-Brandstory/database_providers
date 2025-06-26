@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import CountSection from "@/components/countSection";
 import WhoWeAre from "@/components/whoWeAre";
 import BtoBMarketing from "@/components/btobmarketing";
+import ServiceSection from '@/components/serviceSection';
 const HomeBanner = dynamic(() => import('@/components/banner'), { ssr: true });
 
 export default function HomeNew() {
@@ -11,6 +12,7 @@ export default function HomeNew() {
       <WhoWeAre />
       <CountSection />
       <BtoBMarketing />
+      <ServiceSection />
     </div>
   );
 }

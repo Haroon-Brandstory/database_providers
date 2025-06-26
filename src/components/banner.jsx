@@ -4,7 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import Image from 'next/image';
-
+import { useInView } from 'react-intersection-observer';
+import Lottie from 'lottie-react';
+import animationData from '../animations/dash_in_banner.json';
 
 // Import Autoplay from Swiper
 import SwiperCore from 'swiper';
@@ -12,7 +14,17 @@ import { Autoplay as SwiperAutoplay } from 'swiper/modules';
 import dynamic from 'next/dynamic';
 SwiperCore.use([SwiperAutoplay]);
 
-const LottieAnimation = dynamic(() => import('./lottie'), {ssr: false,loading: () => <div className="h-60" />,});
+const LottieAnimation = () => {
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+
+    return (
+        <div ref={ref} style={{ minHeight: 200 }}>
+            {inView && (
+                <Lottie animationData={animationData} loop={true} />
+            )}
+        </div>
+    );
+};
 
 const CLIENT_LOGOS = [
     '/banner_images/client_testimonial_icon1.svg',

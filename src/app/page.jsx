@@ -1,5 +1,6 @@
-import HomeNew from "./(home)/page";
+import HomeNew from "./home/page";
 
 export default function Home() {
   return <HomeNew />;
 }
+ 

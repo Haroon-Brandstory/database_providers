@@ -120,7 +120,7 @@ export default function HomeBanner() {
     }, []);
 
     return (
-        <div className="relative bg-gradient-to-b from-black via-[#00132A] to-[#133dd6] text-white min-h-screen flex flex-col items-center justify-center px-4 pt-20 pb-20 overflow-hidden">
+        <div className="relative bg-gradient-to-b from-black via-[#00132A] to-[#133dd6] text-white min-h-screen flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-20 overflow-hidden">
             {/* Background Cube Grid */}
             <div ref={gridRef} className="absolute inset-0 z-0 overflow-hidden" />
 
@@ -128,9 +128,9 @@ export default function HomeBanner() {
                 <h1 className="font-display text-3xl md:text-5xl font-bold mb-4 font-medium">Refine Your B2B Marketing Strategy</h1>
                 <h1 className="text-3xl md:text-5xl font-medium mb-6">With Trusted Data Services</h1>
                 <p className="mb-8 text-gray-300 font-light text-[18px]">Get high-priority data and increase leads and revenue.</p>
-                <button className="relative text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 group drop-shadow-[0px_0px_25px_#0133E9CC]">
+                <button className="relative text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in drop-shadow-[0px_0px_25px_#0133E9CC]">
                     <span className="relative z-10">Get a free sample data</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#0055ff1a] via-[#0133E9] to-[#0055FF] bg-[length:200%_100%] bg-left group-hover:bg-right transition-all duration-700 ease-in-out rounded-full blur-sm">
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#0055ff1a] via-[#0133E9] to-[#0055FF] bg-[length:200%_100%] bg-left transition-all duration-700 ease-in-out rounded-full blur-sm animate-gradient-loop">
                     </span>
                 </button>
                 {/* <button className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-full font-medium text-[15px] drop-shadow-[0px_0px_25px_#0133E9CC] transition z-100 relative">Get a free sample data</button> */}

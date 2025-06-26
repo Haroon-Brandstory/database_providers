@@ -72,12 +72,12 @@ export default function WhoWeAre() {
     };
 
     return (
-        <section className="bg-white py-20 px-4 text-black text-center flex flex-col items-center">
+        <section className="bg-white py-20 px-4 md:px-20 text-black text-center flex flex-col items-center">
             <div className="container flex flex-col items-center">
                 <div className="tex-center max-w-4xl">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">Who We Are</h5>
                     <h2 className="text-[#000000] text-[36px] font-medium">
-                        Your Data Enthusiasts For <span className="block text-[#00000066]">B2B Marketing</span>
+                        Your Data Enthusiasts For <span className="block text-[#00000080]">B2B Marketing</span>
                     </h2>
                     <p className="text-center text-[16px] text-[#54555F] pt-5 max-w-3xl">
                         Database Providers is a reputable data service company in the USA specializing in segmenting and optimizing key data information. We enhance your business outreach and ABM marketing goals through accurate and authentic data.

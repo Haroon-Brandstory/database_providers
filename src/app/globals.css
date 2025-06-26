@@ -26,12 +26,22 @@ body {
 }
 
 /* Headings use Inter Display */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display) !important;
 }
 
 /* Body text uses Inter Tight */
-p, li, a, ul, span, div {
+p,
+li,
+a,
+ul,
+span,
+div {
   font-family: var(--font-body) !important;
 }
 
@@ -41,7 +51,10 @@ button {
 }
 
 /* Ensure form elements use the body font */
-input, textarea, select, label {
+input,
+textarea,
+select,
+label {
   font-family: var(--font-body) !important;
 }
 
@@ -91,6 +104,25 @@ input, textarea, select, label {
   box-shadow: 0 0 30px rgba(2, 54, 239, 0.6);
 }
 
-.prev-drop-shadow{
+.prev-drop-shadow {
   box-shadow: 0px -50px 150px -27px #0133e9;
+}
+
+@keyframes gradientLoop {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-loop {
+  background-size: 200% 200%;
+  animation: gradientLoop 5s ease infinite;
 }

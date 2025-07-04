@@ -138,7 +138,6 @@ export default function Segmentation() {
                                 </div>
                                 <div className="lottie-wrapper w-full">
                                     <Lottie animationData={item.animationData} loop autoplay />
-                                    lotti
                                 </div>
                             </div>
                         </div>

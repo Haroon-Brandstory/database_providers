@@ -63,9 +63,10 @@ export default function Segmentation() {
                 pin: true,
                 start: "bottom bottom",
                 end: () => `+=${items.length * 100}%`,
+                // end: () => `bottom bottom`,
                 scrub: 1,
                 invalidateOnRefresh: true,
-                // markers: true,
+                markers: true,
             },
             defaults: { ease: "none" },
         });

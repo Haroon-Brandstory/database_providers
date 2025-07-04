@@ -126,3 +126,9 @@ label {
   background-size: 200% 200%;
   animation: gradientLoop 5s ease infinite;
 }
+
+.custom-swiper-prev.swiper-button-disabled,
+.custom-swiper-next.swiper-button-disabled{
+  opacity: 0.6;
+  pointer-events: none;
+}

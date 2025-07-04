@@ -36,7 +36,7 @@ function ServiceCard({ icon, title, description }) {
                     <h3 className="text-xl font-semibold mb-2 text-gray-900">{title}</h3>
                 </div>
                 <div>
-                    <p className="text-gray-600 text-[14px] md:text-[18px] text-base mb-6">{description}</p>
+                    <p className="text-gray-600 md:text-[14px] text-[12px]  text-base mb-6">{description}</p>
                 </div>
                 <hr className="w-full border-t border-[#C4C4C4] mb-4" />
                 <div>

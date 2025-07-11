@@ -59,14 +59,13 @@ export default function Segmentation() {
 
         const timeline = gsap.timeline({
             scrollTrigger: {
-                trigger: wrapperRef.current,
+                trigger: sectionRef.current,
                 pin: true,
-                start: "bottom bottom",
-                end: () => `+=${items.length * 100}%`,
-                // end: () => `bottom bottom`,
+                start: "top+=280 top",
+                end: () => `+=1000`, // 2000px of scroll
                 scrub: 1,
                 invalidateOnRefresh: true,
-                markers: true,
+                // markers: true,
             },
             defaults: { ease: "none" },
         });
@@ -86,7 +85,7 @@ export default function Segmentation() {
                     },
                     "<"
                 );
-            }
+            } 
         });
 
         return () => {
@@ -138,7 +137,7 @@ export default function Segmentation() {
                                     </div>
                                 </div>
                                 <div className="lottie-wrapper w-full">
-                                    <Lottie animationData={item.animationData} loop autoplay />
+                                    {/* <Lottie animationData={item.animationData} loop autoplay /> */}
                                 </div>
                             </div>
                         </div>

@@ -24,8 +24,8 @@ export default function HomeNew() {
       <ServiceSection />
       <Segmentation />
       <UseCases />
-      <WhyChooseUs />
-      <IntegrationSection />
+      {/* <WhyChooseUs /> */}
+      {/* <IntegrationSection /> */}
       <LatestBlogs />
       <ClientSuccessSection />
       <ClientForm />

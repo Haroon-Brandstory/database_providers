@@ -1,11 +1,6 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import WaterEffectSection from "./demoscroll";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const cardData = [
     {
@@ -43,90 +38,89 @@ const cardData = [
 export default function WhyChooseUs() {
     const sectionRefN = useRef(null);
     const scrollRef = useRef(null);
+    const [translateX, setTranslateX] = useState(0);
 
     useEffect(() => {
         const section = sectionRefN.current;
         const scrollContainer = scrollRef.current;
-
         if (!section || !scrollContainer) return;
 
-        const totalScrollWidth = scrollContainer.scrollWidth;
-        const viewportWidth = section.offsetWidth;
-        const scrollDistance = totalScrollWidth - viewportWidth;
+        const onScroll = () => {
+            const rect = section.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const totalScrollWidth = scrollContainer.scrollWidth;
+            const viewportWidth = section.offsetWidth;
+            const scrollDistance = totalScrollWidth - viewportWidth;
 
-        let ctx = gsap.context(() => {
-            gsap.to(scrollContainer, {
-                x: -scrollDistance,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top top",
-                    end: () => `+=${totalScrollWidth}`,
-                    pin: true,
-                    scrub: 1,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true,
-                },
-            });
-        }, section);
+            if (rect.top <= 0 && Math.abs(rect.top) <= rect.height - windowHeight) {
+                const progress = Math.abs(rect.top) / (rect.height - windowHeight);
+                setTranslateX(-scrollDistance * progress);
+            } else if (rect.top > 0) {
+                setTranslateX(0);
+            } else if (Math.abs(rect.top) > rect.height - windowHeight) {
+                setTranslateX(-scrollDistance);
+            }
+        };
 
-        ScrollTrigger.refresh();
-
-        return () => ctx.revert();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        onScroll();
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onScroll);
+        };
     }, []);
 
     return (
-        <>
-            <section
-                ref={sectionRefN}
-                className="relative w-full pt-24 pb-60 px-4 md:px-20 bg-[url('/whychooseus/sectionbanner.png')] bg-top bg-cover overflow-hidden"
-                style={{ minHeight: "100vh" }}
-            >
-                <div className="w-full flex flex-col items-center justify-center">
-                    <div className="text-center max-w-4xl flex flex-col justify-center mb-12">
-                        <h5 className="text-[#2C6BFF] text-[16px] font-medium">Why Choose Us</h5>
-                        <h2 className="text-white text-[36px] font-medium mb-6">
-                            Get your B2B Data With{" "}
-                            <span className="block">
-                                <span className="text-[#5673F6]">Accuracy & Reliability</span>
-                            </span>
-                        </h2>
-                        <p className="text-center text-[#D0D0D0] text-[16px] pb-6">
-                            As a leading B2B data service provider in the USA, we are backed by professionals and industry experts in every step of the data processing journey.
-                        </p>
-                        <p className="text-center text-[#D0D0D0] text-[16px] pb-6">
-                            We continue to serve the B2B market with advanced analytics and technology that empower our client’s businesses with personalized strategies, potential prospects, and exponential growth.
-                        </p>
-                    </div>
-
-                    {/* Horizontal Scroll Section */}
-                    <div className="w-full overflow-hidden">
-                        <div
-                            ref={scrollRef}
-                            className="flex gap-4"
-                            style={{
-                                width: `${cardData.length * 386}px`, // 350px card + 16px gap
-                                willChange: "transform",
-                            }}
-                        >
-                            {cardData.map((item, i) => (
-                                <div
-                                    key={i}
-                                    className="each-cards p-5 w-[350px] shrink-0  rounded-xl"
-                                >
-                                    <div className="card-img-wrapper mb-4 border-b pb-5">
-                                        <Image src={item.img} width={52} height={52} alt="img" />
-                                    </div>
-                                    <div className="card-content">
-                                        <h4 className="text-white text-[24px] font-semibold mb-2">{item.title}</h4>
-                                        <p className="text-[14px] text-white font-normal">{item.description}</p>
-                                    </div>
+        <section
+            ref={sectionRefN}
+            className="relative w-full pt-12 pb-60 px-4 md:px-20 bg-[url('/whychooseus/sectionbanner.png')] bg-top bg-cover overflow-hidden"
+            style={{ minHeight: "100vh" }}
+        >
+            <div className="w-full flex flex-col items-center justify-center">
+                <div className="text-center max-w-4xl flex flex-col justify-center mb-12">
+                    <h5 className="text-[#2C6BFF] text-[16px] font-medium">Why Choose Us</h5>
+                    <h2 className="text-white text-[36px] font-medium mb-6">
+                        Get your B2B Data With{" "}
+                        <span className="block">
+                            <span className="text-[#5673F6]">Accuracy & Reliability</span>
+                        </span>
+                    </h2>
+                    <p className="text-center text-[#D0D0D0] text-[16px] pb-6">
+                        As a leading B2B data service provider in the USA, we are backed by professionals and industry experts in every step of the data processing journey.
+                    </p>
+                    <p className="text-center text-[#D0D0D0] text-[16px] pb-6">
+                        We continue to serve the B2B market with advanced analytics and technology that empower our client’s businesses with personalized strategies, potential prospects, and exponential growth.
+                    </p>
+                </div>
+                {/* Horizontal Scroll Section */}
+                <div className="w-full overflow-hidden" style={{ position: "relative", height: "250px" }}>
+                    <div
+                        ref={scrollRef}
+                        className="flex gap-4"
+                        style={{
+                            width: `${cardData.length * 386}px`,
+                            willChange: "transform",
+                            transform: `translateX(${translateX}px)`
+                        }}
+                    >
+                        {cardData.map((item, i) => (
+                            <div
+                                key={i}
+                                className="each-cards p-5 w-[350px] shrink-0  rounded-xl"
+                            >
+                                <div className="card-img-wrapper mb-4 border-b pb-5">
+                                    <Image src={item.img} width={52} height={52} alt="img" />
                                 </div>
-                            ))}
-                        </div>
+                                <div className="card-content">
+                                    <h4 className="text-white text-[24px] font-semibold mb-2">{item.title}</h4>
+                                    <p className="text-[14px] text-white font-normal">{item.description}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 }

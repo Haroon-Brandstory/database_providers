@@ -56,7 +56,7 @@ export default function ServiceSection() {
     const nextRef = useRef(null);
 
     return (
-        <section className="py-20 px-4 md:px-20 bg-[url('/servicesection/sevice_banner.png')] bg-center bg-cover">
+        <section className="py-20 px-4 md:px-20 bg-[url('/servicesection/sevice_banner.png')] overflow-hidden bg-center bg-cover">
             <div className="container mx-auto">
                 <div className="grid lg:grid-cols-2 grid-cols-1 items-center gap-10">
                     <div className="text-start max-w-4xl flex flex-col justify-center">

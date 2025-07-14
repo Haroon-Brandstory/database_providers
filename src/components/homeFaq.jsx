@@ -33,7 +33,7 @@ export default function HomeFaqSection() {
     };
 
     return (
-        <section className="py-24 bg-white flex flex-col items-center text-black">
+        <section className="pt-10 pb-24 bg-white flex flex-col items-center text-black">
             <div className="max-w-5xl w-full mx-auto flex flex-col items-center">
                 <div className="text-center max-w-4xl mb-12">
                     <h2 className="text-[#000000] text-[36px] font-medium">FAQ's</h2>
@@ -72,14 +72,15 @@ export default function HomeFaqSection() {
                                 <div
                                     id={`faq-content-${i}`}
                                     ref={el => (contentRefs.current[i] = el)}
-                                    className="overflow-hidden transition-all duration-300 ease-in-out"
-                                    style={
-                                        isOpen && contentRefs.current[i]
-                                            ? { maxHeight: contentRefs.current[i].scrollHeight }
-                                            : { maxHeight: 0 }
-                                    }
+                                    style={{
+                                        height: isOpen
+                                            ? contentRefs.current[i]?.scrollHeight
+                                            : 0,
+                                        transition: "height 0.5s cubic-bezier(0.4,0,0.2,1)",
+                                        overflow: "hidden"
+                                    }}
                                 >
-                                    <div className={`text-[#444] text-[15px] leading-relaxed ${isOpen ? 'opacity-100 mt-2' : 'opacity-0 mt-0'}`}>
+                                    <div className={`text-[#444] text-[15px] leading-relaxed transition-opacity duration-500 ${isOpen ? 'opacity-100 mt-2 delay-200' : 'opacity-0 mt-0 delay-0'}`}>
                                         {faq.answer}
                                     </div>
                                 </div>

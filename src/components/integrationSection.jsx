@@ -5,7 +5,7 @@ import integrationAnimation from '../animations/integrations.json'
 
 export default function IntegrationSection() {
     return (
-        <section className="pb-20 pt-100 px-4 md:px-20 bg-white relative">
+        <section className="pb-20 lg:pt-100 pt-50 px-4 md:px-20 bg-white relative">
             <div className="absolute -top-[100px] w-[89%] flex justify-center items-center">
                 <WaterEffectSection />
             </div>

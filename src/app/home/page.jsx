@@ -9,9 +9,10 @@ import WhyChooseUs from '@/components/whyChooseUs';
 import WaterEffectSection from '@/components/demoscroll';
 import IntegrationSection from '@/components/integrationSection';
 import LatestBlogs from '@/components/latestBlogs';
-import ClientSuccessSection from '@/components/clientSuccess';
+import SliderTestimonial from '@/components/sliderTestimonial';
 import ClientForm from '@/components/clientForm';
 import HomeFaqSection from '@/components/homeFaq';
+import Footer from '@/components/footer';
 const HomeBanner = dynamic(() => import('@/components/banner'), { ssr: true });
 
 export default function HomeNew() {
@@ -24,12 +25,13 @@ export default function HomeNew() {
       <ServiceSection />
       <Segmentation />
       <UseCases />
-      {/* <WhyChooseUs /> */}
-      {/* <IntegrationSection /> */}
+      <WhyChooseUs />
+      <IntegrationSection />
       <LatestBlogs />
-      <ClientSuccessSection />
+      <SliderTestimonial />
       <ClientForm />
       <HomeFaqSection />
+      <Footer/>
     </div>
   );
 }

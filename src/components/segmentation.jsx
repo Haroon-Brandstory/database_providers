@@ -1,149 +1,158 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lottie from "lottie-react";
-import indBasedLottie from '../animations/Industry-Data-base.json'
-import jobBasedLottie from '../animations/Job-Roles-Data-base.json'
-import regionBasedLottie from '../animations/Region-Data-base.json'
-import technologyBasedLottie from '../animations/Technology-Data-base.json'
 
-gsap.registerPlugin(ScrollTrigger);
+import React, { useEffect, useRef } from "react";
+import Lottie from "lottie-react";
+
+import indBasedLottie from "../animations/Industry-Data-base.json";
+import jobBasedLottie from "../animations/Job-Roles-Data-base.json";
+import regionBasedLottie from "../animations/Region-Data-base.json";
+import technologyBasedLottie from "../animations/Technology-Data-base.json";
 
 const cardData = [
     {
         title: "Industry Based Segmentation",
-        description: "Maximize targeted precision in business strategies by empowering organizations to understand unique industry dynamics, tailor offerings, and effectively allocate resources. ",
-        subDescription: "With granular insights about industry leads, businesses can optimize decision-making, enhance customer engagement, and gain a competitive edge, leading to sustained growth and maximum business success.",
+        description:
+            "Maximize targeted precision in business strategies by empowering organizations to understand unique industry dynamics, tailor offerings, and effectively allocate resources.",
+        subDescription:
+            "With granular insights about industry leads, businesses can optimize decision-making, enhance customer engagement, and gain a competitive edge, leading to sustained growth and maximum business success.",
         animationData: indBasedLottie,
-        cta: '#'
+        cta: "#",
     },
     {
         title: "Job Roles based Segmentation",
-        description: "Attaining remarkable business success is made possible by harnessing the power of titles and job role data. By gaining insights into the responsibilities and positions of influential decision-makers, businesses can devise tailored strategies, improve customer acquisition, and offer relevant solutions. ",
-        subDescription: "This approach leads to heightened conversions, increased customer satisfaction, and enhanced profitability, cementing a strong foundation for overall business prosperity.",
+        description:
+            "Attaining remarkable business success is made possible by harnessing the power of titles and job role data. By gaining insights into the responsibilities and positions of influential decision-makers, businesses can devise tailored strategies, improve customer acquisition, and offer relevant solutions.",
+        subDescription:
+            "This approach leads to heightened conversions, increased customer satisfaction, and enhanced profitability, cementing a strong foundation for overall business prosperity.",
         animationData: jobBasedLottie,
-        cta: '#'
+        cta: "#",
     },
     {
         title: "Region Based Segmentation",
-        description: "Understanding local preferences, cultural nuances, and market dynamics through region/geography segmentation helps organizations maximize relevance, customer engagement, and market penetration. ",
-        subDescription: "This focused approach is essential for achieving targeted business success and growth, making it indispensable in today's business landscape.",
+        description:
+            "Understanding local preferences, cultural nuances, and market dynamics through region/geography segmentation helps organizations maximize relevance, customer engagement, and market penetration.",
+        subDescription:
+            "This focused approach is essential for achieving targeted business success and growth, making it indispensable in today's business landscape.",
         animationData: regionBasedLottie,
-        cta: '#'
+        cta: "#",
     },
     {
         title: "Technology Based Segmentation",
-        description: "Harnessing the division of technology preferences in data-centric corporate communication yields specific achievements and financial expansion. Organizations can customize messages, product choices, and interactions by comprehending customers' technological inclinations. ",
-        subDescription: "This personalized strategy amplifies involvement, cultivates customer devotion, and optimizes income channels, placing businesses in a favourable position for enduring triumph in a technology-dominated era.",
+        description:
+            "Harnessing the division of technology preferences in data-centric corporate communication yields specific achievements and financial expansion. Organizations can customize messages, product choices, and interactions by comprehending customers' technological inclinations.",
+        subDescription:
+            "This personalized strategy amplifies involvement, cultivates customer devotion, and optimizes income channels, placing businesses in a favourable position for enduring triumph in a technology-dominated era.",
         animationData: technologyBasedLottie,
-        cta: '#'
+        cta: "#",
     },
-
 ];
 
 export default function Segmentation() {
-    const sectionRef = useRef(null);
-    const wrapperRef = useRef(null);
     const cardRefs = useRef([]);
 
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        const items = cardRefs.current;
-        // Set initial state: only the first card is visible
-        items.forEach((item, index) => {
-            if (index !== 0) {
-                gsap.set(item, { yPercent: 100 });
-            }
-        });
+        const cards = cardRefs.current;
+        if (!cards.length) return;
 
-        const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: sectionRef.current,
-                pin: true,
-                start: "top+=280 top",
-                end: () => `+=1000`, // 2000px of scroll
-                scrub: 1,
-                invalidateOnRefresh: true,
-                // markers: true,
-            },
-            defaults: { ease: "none" },
-        });
+        const observers = [];
+        let animationFrame;
 
-        items.forEach((item, index) => {
-            // Animate the current card (scale, borderRadius for effect)
-            timeline.to(item, {
-                scale: 0.97,
-                borderRadius: "16px",
-            });
-            // Animate the next card sliding up
-            if (items[index + 1]) {
-                timeline.to(
-                    items[index + 1],
-                    {
-                        yPercent: 0,
-                    },
-                    "<"
-                );
-            } 
+        cards.forEach((card, index) => {
+            if (!card || index === cards.length - 1) return;
+
+            const nextCard = cards[index + 1];
+            const cardInner = card.querySelector(".card__inner");
+            const offsetTop = 20 + index * 20;
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    cancelAnimationFrame(animationFrame);
+                    animationFrame = requestAnimationFrame(() => {
+                        const ratio = entry.intersectionRatio;
+                        const scale = 1 - (cards.length - 1 - index) * 0.07 * ratio;
+                        const brightness = 1 - 0.3 * ratio;
+
+                        if (cardInner) {
+                            cardInner.style.transform = `scale(${scale})`;
+                            cardInner.style.filter = `brightness(${brightness})`;
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: `-${offsetTop}px 0px -${window.innerHeight - card.clientHeight}px 0px`,
+                    threshold: Array.from({ length: 101 }, (_, i) => i / 100),
+                }
+            );
+
+            observer.observe(nextCard);
+            observers.push(observer);
         });
 
         return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-            timeline.kill();
+            observers.forEach((observer) => observer.disconnect());
+            cancelAnimationFrame(animationFrame);
         };
     }, []);
 
     return (
-        <section ref={sectionRef} className="scroll-section vertical-section section bg-white py-20 px-4 md:px-20 overflow-hidden relative">
-            <div className="container mx-auto">
+        <>
+            {/* <div className="h-[50vh]"></div> */}
+
+            <section className="bg-white px-4 py-24 md:px-20 pb-20">
                 <div className="text-center max-w-4xl mx-auto">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">
                         Types of Segmentation
                     </h5>
                     <h2 className="text-black text-[36px] font-medium mb-6">
-                        We Scrutinize For Your <span className="text-[#00000080] block">Business</span>
+                        We Scrutinize For Your{" "}
+                        <span className="text-[#00000080] block">Business</span>
                     </h2>
                 </div>
-                <div
-                    ref={wrapperRef}
-                    className="wrapper mt-16 pt-10"
-                    style={{ height: "100vh", position: "relative" }}
-                >
+
+                <div className="cards mx-auto max-w-6xl mt-16 space-y-16">
                     {cardData.map((item, i) => (
                         <div
                             key={i}
-                            ref={el => (cardRefs.current[i] = el)}
-                            className="item card bg-white border border-[#E4E4E4] rounded-xl shadow-xl p-6 lg:p-12 flex items-center justify-center flex-col text-center text-black min-h-[500px]"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                position: "absolute",
-                                inset: 0,
-                                zIndex: cardData.length + i,
-                                boxShadow: "rgb(149, 157, 165, 0.2) 0px 8px 24px",
-                                overflow: "hidden",
-                            }}
+                            ref={(el) => (cardRefs.current[i] = el)}
+                            className="card sticky top-0"
                         >
-                            <div className="grid lg:grid-cols-2 gap-10 w-full">
-                                <div className="text-start flex flex-col justify-center">
-                                    <h2 className="text-2xl font-bold mb-2">{item.title}</h2>
-                                    <p className="text-gray-700 mb-2 text-[14px] md:text-[16px]">{item.description}</p>
-                                    <p className="text-gray-700 text-[14px] md:text-[16px]">{item.subDescription}</p>
+                            <div
+                                className="card__inner transition-transform transition-filter duration-300 ease-out will-change-transform will-change-filter
+                flex flex-col lg:flex-row bg-white rounded-xl overflow-hidden shadow-xl origin-top min-h-[500px] p-6 lg:p-12"
+                            >
+                                <div className="text-start flex-1 flex flex-col justify-center">
+                                    <h2 className="text-2xl text-black font-bold mb-2">{item.title}</h2>
+                                    <p className="text-gray-700 mb-2 text-sm md:text-base">
+                                        {item.description}
+                                    </p>
+                                    <p className="text-gray-700 text-sm md:text-base">
+                                        {item.subDescription}
+                                    </p>
                                     <div className="pt-4">
-                                        <a href={item.cta} className="text-[#2C6BFF] font-medium flex items-center gap-1">
+                                        <a
+                                            href={item.cta}
+                                            className="text-[#2C6BFF] font-medium flex items-center gap-1"
+                                        >
                                             Know More <span aria-hidden>→</span>
                                         </a>
                                     </div>
                                 </div>
-                                <div className="lottie-wrapper w-full">
-                                    <Lottie animationData={item.animationData} loop autoplay />
+                                <div className="w-full lg:w-1/2 flex justify-center items-center">
+                                    <Lottie
+                                        animationData={item.animationData}
+                                        loop
+                                        autoplay
+                                        className="max-w-[400px] w-full"
+                                    />
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-            </div>
-        </section>
+            </section>
+
+            {/* <div className="h-[80vh]"></div> */}
+        </>
     );
 }

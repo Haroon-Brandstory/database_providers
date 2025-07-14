@@ -17,8 +17,8 @@ export default function ClientForm() {
                 </div>
 
                 {/* Right Side (Form) - col-lg-8 equivalent */}
-                <div className="lg:col-span-7">
-                    <div className="w-full bg-white rounded-2xl p-10 drop-shadow-[0px_0px_35px_#0000001A]">
+                <div className="lg:col-span-6 flex items-end justify-end">
+                    <div className="w-full bg-white rounded-2xl lg:p-10 p-6 drop-shadow-[0px_0px_35px_#0000001A]">
                         <form className="flex flex-col gap-5">
                             <div>
                                 <label className="block text-[#222] text-[15px] mb-1">Name</label>

@@ -132,3 +132,13 @@ label {
   opacity: 0.6;
   pointer-events: none;
 }
+
+.card {
+  position: sticky;
+  top: 0;
+}
+.card__inner {
+  will-change: transform, filter;
+  transition: transform 0.3s ease-out, filter 0.3s ease-out;
+  transform-origin: top center;
+}

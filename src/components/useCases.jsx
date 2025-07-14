@@ -52,7 +52,7 @@ export default function useCases() {
                         How Businesses Use Our  <span className="block"><span className="text-[#00000080]">Email Databases</span></span>
                     </h2>
                 </div>
-                <div className="bg-[#F0F0FF] w-full lg:p-10 p-5 rounded-[20px]">
+                <div className="bg-[#F0F0FF] w-full lg:p-10 p-3 rounded-[20px]">
                     <div className="grid md:grid-cols-2 grid-cols-1  ">
                         {
                             emailBusiness_Content.map((item, index) => (

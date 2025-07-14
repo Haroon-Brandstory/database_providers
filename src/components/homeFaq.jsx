@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 const faqs = [
     {
@@ -25,11 +25,10 @@ const faqs = [
 ];
 
 export default function HomeFaqSection() {
-    const [openIndex, setOpenIndex] = useState(0);
-    const contentRefs = useRef([]);
+    const [openIndex, setOpenIndex] = useState(null);
 
     const handleAccordion = (i) => {
-        setOpenIndex(openIndex === i ? null : i);
+        setOpenIndex(prev => (prev === i ? null : i));
     };
 
     return (
@@ -38,13 +37,13 @@ export default function HomeFaqSection() {
                 <div className="text-center max-w-4xl mb-12">
                     <h2 className="text-[#000000] text-[36px] font-medium">FAQ's</h2>
                 </div>
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="w-full flex flex-wrap gap-6 items-start ">
                     {faqs.map((faq, i) => {
                         const isOpen = openIndex === i;
                         return (
                             <div
                                 key={i}
-                                className={`bg-white rounded-2xl p-6 shadow-sm transition-all duration-200 border  border-transparent ${isOpen ? "border-blue-100" : ""}`}
+                                className={`bg-white rounded-2xl p-6 shadow-sm transition-all duration-200 min-h-[110px] border ${isOpen ? "border-blue-100" : "border-transparent"} w-full md:w-[calc(50%-12px)]`}
                             >
                                 <div className="flex items-start justify-between gap-4">
                                     <button
@@ -59,7 +58,7 @@ export default function HomeFaqSection() {
                                     </button>
                                     <button
                                         onClick={() => handleAccordion(i)}
-                                        className="w-8 h-8 flex cursor-pointer items-center justify-center rounded-full bg-[#F6F8FF] text-[#175CFF] text-xl focus:outline-none"
+                                        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F6F8FF] text-[#175CFF] text-xl focus:outline-none"
                                         aria-label={isOpen ? "Collapse" : "Expand"}
                                     >
                                         {isOpen ? (
@@ -69,18 +68,15 @@ export default function HomeFaqSection() {
                                         )}
                                     </button>
                                 </div>
+
+                                {/* Animated content */}
                                 <div
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                                        isOpen ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"
+                                    }`}
                                     id={`faq-content-${i}`}
-                                    ref={el => (contentRefs.current[i] = el)}
-                                    style={{
-                                        height: isOpen
-                                            ? contentRefs.current[i]?.scrollHeight
-                                            : 0,
-                                        transition: "height 0.5s cubic-bezier(0.4,0,0.2,1)",
-                                        overflow: "hidden"
-                                    }}
                                 >
-                                    <div className={`text-[#444] text-[15px] leading-relaxed transition-opacity duration-500 ${isOpen ? 'opacity-100 mt-2 delay-200' : 'opacity-0 mt-0 delay-0'}`}>
+                                    <div className="text-[#444] text-[15px] leading-relaxed">
                                         {faq.answer}
                                     </div>
                                 </div>
@@ -92,5 +88,3 @@ export default function HomeFaqSection() {
         </section>
     );
 }
-
-    

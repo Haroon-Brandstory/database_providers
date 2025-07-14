@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 
 const cardData = [
@@ -38,36 +38,46 @@ const cardData = [
 export default function WhyChooseUs() {
     const sectionRefN = useRef(null);
     const scrollRef = useRef(null);
-    const [translateX, setTranslateX] = useState(0);
+    const animationFrame = useRef();
 
     useEffect(() => {
         const section = sectionRefN.current;
         const scrollContainer = scrollRef.current;
         if (!section || !scrollContainer) return;
 
-        const onScroll = () => {
+        let lastTranslateX = 0;
+
+        const updateScroll = () => {
             const rect = section.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             const totalScrollWidth = scrollContainer.scrollWidth;
             const viewportWidth = section.offsetWidth;
             const scrollDistance = totalScrollWidth - viewportWidth;
 
+            let nextTranslateX = 0;
             if (rect.top <= 0 && Math.abs(rect.top) <= rect.height - windowHeight) {
                 const progress = Math.abs(rect.top) / (rect.height - windowHeight);
-                setTranslateX(-scrollDistance * progress);
+                nextTranslateX = -scrollDistance * progress;
             } else if (rect.top > 0) {
-                setTranslateX(0);
+                nextTranslateX = 0;
             } else if (Math.abs(rect.top) > rect.height - windowHeight) {
-                setTranslateX(-scrollDistance);
+                nextTranslateX = -scrollDistance;
             }
+
+            // Smoothly interpolate towards the target value
+            lastTranslateX += (nextTranslateX - lastTranslateX) * 0.15;
+            scrollContainer.style.transform = `translateX(${lastTranslateX}px)`;
+
+            animationFrame.current = requestAnimationFrame(updateScroll);
         };
 
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll);
-        onScroll();
+        animationFrame.current = requestAnimationFrame(updateScroll);
+
+        window.addEventListener("resize", updateScroll);
+
         return () => {
-            window.removeEventListener("scroll", onScroll);
-            window.removeEventListener("resize", onScroll);
+            cancelAnimationFrame(animationFrame.current);
+            window.removeEventListener("resize", updateScroll);
         };
     }, []);
 
@@ -100,8 +110,7 @@ export default function WhyChooseUs() {
                         className="flex gap-4"
                         style={{
                             width: `${cardData.length * 386}px`,
-                            willChange: "transform",
-                            transform: `translateX(${translateX}px)`
+                            willChange: "transform"
                         }}
                     >
                         {cardData.map((item, i) => (

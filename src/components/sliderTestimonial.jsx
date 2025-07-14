@@ -37,24 +37,7 @@ export default function SliderTestimonial() {
   const rightSwiperRef = useRef(null);
   const [mainIndex, setMainIndex] = useState(0);
 
-  // Synchronize left swiper to be reverse of main swiper
-  const handleMainSlideChange = (swiper) => {
-    setMainIndex(swiper.realIndex);
-    if (leftSwiperRef.current && leftSwiperRef.current.swiper) {
-      const leftSwiper = leftSwiperRef.current.swiper;
-      const reverseIndex = testimonials.length - 1 - swiper.realIndex;
-      leftSwiper.slideToLoop(reverseIndex);
-    }
-  };
-
-  // When left swiper changes, do not update main (one-way sync)
-
-  const handleCenterOrRightSlideChange = (swiper) => {
-    const reverseIndex = testimonials.length - 1 - swiper.realIndex;
-    if (leftSwiperRef.current && leftSwiperRef.current.swiper) {
-      leftSwiperRef.current.swiper.slideToLoop(reverseIndex);
-    }
-  };
+  
 
   useEffect(() => {
     if (
@@ -90,7 +73,6 @@ export default function SliderTestimonial() {
                     slidesPerView={2.6}
                     autoplay={{ delay: 2000, disableOnInteraction: false, reverseDirection: true }}
                     speed={900}
-                    modules={[Autoplay]}
                     ref={leftSwiperRef}
                     className="w-full h-full"
                   >
@@ -113,7 +95,6 @@ export default function SliderTestimonial() {
                     spaceBetween={10}
                     modules={[Autoplay, Controller]}
                     ref={centerSwiperRef}
-                    controller={{ control: rightSwiperRef.current?.swiper }}
                     className="w-full h-[180px]"
                   >
                     {testimonials.map((testimonial, index) => (
@@ -144,7 +125,6 @@ export default function SliderTestimonial() {
                 autoplay={{ delay: 2000, disableOnInteraction: false }}
                 pagination={{ clickable: true }}
                 ref={rightSwiperRef}
-                controller={{ control: centerSwiperRef.current?.swiper }}
                 className="w-full h-full "
               >
                 {testimonials.map((testimonial, idx) => (

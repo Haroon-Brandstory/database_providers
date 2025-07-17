@@ -14,17 +14,11 @@ import { Autoplay as SwiperAutoplay } from 'swiper/modules';
 import dynamic from 'next/dynamic';
 SwiperCore.use([SwiperAutoplay]);
 
-const LottieAnimation = () => {
-    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-
-    return (
-        <div ref={ref} style={{ minHeight: 200 }}>
-            {inView && (
-                <Lottie animationData={animationData} loop={true} />
-            )}
-        </div>
-    );
-};
+const LottieAnimation = () => (
+    <div className='lg:min-h-[510px] min-h-[200px]'>
+        <Lottie animationData={animationData} loop={true} />
+    </div>
+);
 
 const CLIENT_LOGOS = [
     '/banner_images/client_testimonial_icon1.svg',
@@ -158,7 +152,7 @@ export default function HomeBanner() {
                 >
                     {CLIENT_LOGOS.map((logo, idx) => (
                         <SwiperSlide key={idx} className="flex justify-center items-center">
-                            <Image src={logo} alt={`client-${idx}`} width={100} height={100} className="object-contain grayscale hover:grayscale-0 transition duration-300" />
+                            <Image src={logo} alt={`client-${idx}`} width={100} height={100} style={{width:"100px",height:"auto"}} className="object-contain grayscale hover:grayscale-0 transition duration-300" />
                         </SwiperSlide>
                     ))}
                 </Swiper>

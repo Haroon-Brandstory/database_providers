@@ -15,8 +15,9 @@ const cardData = [
             "Maximize targeted precision in business strategies by empowering organizations to understand unique industry dynamics, tailor offerings, and effectively allocate resources.",
         subDescription:
             "With granular insights about industry leads, businesses can optimize decision-making, enhance customer engagement, and gain a competitive edge, leading to sustained growth and maximum business success.",
-        animationData: indBasedLottie,
+        // animationData: indBasedLottie,
         cta: "#",
+        vid: "/lottiReplacedVideos/segmentation-comp-vid1.mp4",
     },
     {
         title: "Job Roles based Segmentation",
@@ -24,8 +25,9 @@ const cardData = [
             "Attaining remarkable business success is made possible by harnessing the power of titles and job role data. By gaining insights into the responsibilities and positions of influential decision-makers, businesses can devise tailored strategies, improve customer acquisition, and offer relevant solutions.",
         subDescription:
             "This approach leads to heightened conversions, increased customer satisfaction, and enhanced profitability, cementing a strong foundation for overall business prosperity.",
-        animationData: jobBasedLottie,
+        // animationData: jobBasedLottie,
         cta: "#",
+        vid: "/lottiReplacedVideos/segmentation-comp-vid2.mp4",
     },
     {
         title: "Region Based Segmentation",
@@ -33,8 +35,9 @@ const cardData = [
             "Understanding local preferences, cultural nuances, and market dynamics through region/geography segmentation helps organizations maximize relevance, customer engagement, and market penetration.",
         subDescription:
             "This focused approach is essential for achieving targeted business success and growth, making it indispensable in today's business landscape.",
-        animationData: regionBasedLottie,
+        // animationData: regionBasedLottie,
         cta: "#",
+        vid: "/lottiReplacedVideos/segmentation-comp-vid3.mp4",
     },
     {
         title: "Technology Based Segmentation",
@@ -42,8 +45,9 @@ const cardData = [
             "Harnessing the division of technology preferences in data-centric corporate communication yields specific achievements and financial expansion. Organizations can customize messages, product choices, and interactions by comprehending customers' technological inclinations.",
         subDescription:
             "This personalized strategy amplifies involvement, cultivates customer devotion, and optimizes income channels, placing businesses in a favourable position for enduring triumph in a technology-dominated era.",
-        animationData: technologyBasedLottie,
+        // animationData: technologyBasedLottie,
         cta: "#",
+        vid: "/lottiReplacedVideos/segmentation-comp-vid4.mp4",
     },
 ];
 
@@ -138,13 +142,14 @@ export default function Segmentation() {
                                         </a>
                                     </div>
                                 </div>
-                                <div className="w-full lg:w-1/2 flex justify-center items-center">
-                                    <Lottie
+                                <div className="w-full lg:w-1/2 pt-4 md:pt-4 flex justify-center items-center">
+                                    {/* <Lottie
                                         animationData={item.animationData}
                                         loop
                                         autoplay
                                         className="max-w-[400px] w-full"
-                                    />
+                                    /> */}
+                                    <video src={item.vid} loop muted autoPlay playsInline className="rounded-[30px]" />
                                 </div>
                             </div>
                         </div>

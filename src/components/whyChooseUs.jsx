@@ -1,6 +1,10 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const cardData = [
     {
@@ -36,70 +40,88 @@ const cardData = [
 ];
 
 export default function WhyChooseUs() {
-    const sectionRefN = useRef(null);
+    const sectionRef = useRef(null);
     const scrollRef = useRef(null);
-    const animationFrame = useRef();
+    const [isMobile, setIsMobile] = useState(false);
+
+    // useEffect(() => {
+    //     // Set isMobile on mount and on resize
+    //     const checkMobile = () => {
+    //         setIsMobile(typeof window !== "undefined" && window.innerWidth <= 768);
+    //     };
+    //     checkMobile();
+    //     window.addEventListener("resize", checkMobile); 
+    //     return () => window.removeEventListener("resize", checkMobile);
+    // }, []);
 
     useEffect(() => {
-        const section = sectionRefN.current;
+        if (typeof window === "undefined" || isMobile) return;
+        const section = sectionRef.current;
         const scrollContainer = scrollRef.current;
         if (!section || !scrollContainer) return;
 
-        let lastTranslateX = 0;
-
-        const updateScroll = () => {
-            const rect = section.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+        let ctx = gsap.context(() => {
             const totalScrollWidth = scrollContainer.scrollWidth;
             const viewportWidth = section.offsetWidth;
             const scrollDistance = totalScrollWidth - viewportWidth;
 
-            let nextTranslateX = 0;
-            if (rect.top <= 0 && Math.abs(rect.top) <= rect.height - windowHeight) {
-                const progress = Math.abs(rect.top) / (rect.height - windowHeight);
-                nextTranslateX = -scrollDistance * progress;
-            } else if (rect.top > 0) {
-                nextTranslateX = 0;
-            } else if (Math.abs(rect.top) > rect.height - windowHeight) {
-                nextTranslateX = -scrollDistance;
+            gsap.set(scrollContainer, { x: 0 });
+
+            let startPin = "top top";
+            if (window.innerWidth <= 1500 && window.innerWidth >= 1220) {
+                startPin = "15% top"
             }
+            if (window.innerWidth <= 650) { startPin = "5% top" }
 
-            // Smoothly interpolate towards the target value
-            lastTranslateX += (nextTranslateX - lastTranslateX) * 0.15;
-            scrollContainer.style.transform = `translateX(${lastTranslateX}px)`;
+            ScrollTrigger.create({
+                trigger: section,
+                pin: true,
+                start: startPin,
+                end: () => `+=${scrollDistance}`,
+                scrub: 1,
+                pinSpacing: true,
+                invalidateOnRefresh: true,
+                // markers:true,
+                onUpdate: self => {
+                    const progress = self.progress;
+                    gsap.set(scrollContainer, {
+                        x: -scrollDistance * progress
+                    });
+                }
+            });
+        }, section);
 
-            animationFrame.current = requestAnimationFrame(updateScroll);
-        };
-
-        animationFrame.current = requestAnimationFrame(updateScroll);
-
-        window.addEventListener("resize", updateScroll);
+        ScrollTrigger.refresh();
 
         return () => {
-            cancelAnimationFrame(animationFrame.current);
-            window.removeEventListener("resize", updateScroll);
+            ctx.revert();
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
-    }, []);
+    }, [isMobile]);
+
+    const cardContainerClass = isMobile
+        ? "flex gap-4 overflow-x-auto md:overflow-x-visible scrollbar-hide"
+        : "flex gap-4";
 
     return (
         <section
-            ref={sectionRefN}
-            className="relative w-full pt-12 pb-60 px-4 md:px-20 bg-[url('/whychooseus/sectionbanner.png')] bg-top bg-cover overflow-hidden"
+            ref={sectionRef}
+            className="relative  w-full pt-12 pb-60 px-4 md:px-20 bg-[url('/whychooseus/sectionbanner.png')] bg-top bg-cover overflow-hidden"
             style={{ minHeight: "100vh" }}
         >
             <div className="w-full flex flex-col items-center justify-center">
-                <div className="text-center max-w-4xl flex flex-col justify-center mb-12">
+                <div className="text-center max-w-4xl flex flex-col justify-center mb-6">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">Why Choose Us</h5>
-                    <h2 className="text-white text-[36px] font-medium mb-6">
+                    <h2 className="text-white text-[36px] font-medium mb-3">
                         Get your B2B Data With{" "}
                         <span className="block">
                             <span className="text-[#5673F6]">Accuracy & Reliability</span>
                         </span>
                     </h2>
-                    <p className="text-center text-[#D0D0D0] text-[16px] pb-6">
+                    <p className="text-center text-[#D0D0D0] text-[16px] pb-3">
                         As a leading B2B data service provider in the USA, we are backed by professionals and industry experts in every step of the data processing journey.
                     </p>
-                    <p className="text-center text-[#D0D0D0] text-[16px] pb-6">
+                    <p className="text-center text-[#D0D0D0] text-[16px] pb-3">
                         We continue to serve the B2B market with advanced analytics and technology that empower our client’s businesses with personalized strategies, potential prospects, and exponential growth.
                     </p>
                 </div>
@@ -107,17 +129,14 @@ export default function WhyChooseUs() {
                 <div className="w-full overflow-hidden" style={{ position: "relative", height: "250px" }}>
                     <div
                         ref={scrollRef}
-                        className="flex gap-4"
+                        className={cardContainerClass}
                         style={{
-                            width: `${cardData.length * 386}px`,
+                            width: isMobile ? "100%" : `${cardData.length * 386}px`,
                             willChange: "transform"
                         }}
                     >
                         {cardData.map((item, i) => (
-                            <div
-                                key={i}
-                                className="each-cards p-5 w-[350px] shrink-0  rounded-xl"
-                            >
+                            <div key={i} className="each-cards p-5 w-[350px] shrink-0 rounded-xl">
                                 <div className="card-img-wrapper mb-4 border-b pb-5">
                                     <Image src={item.img} width={52} height={52} alt="img" />
                                 </div>

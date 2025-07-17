@@ -37,10 +37,8 @@ function useCountUp(target, inView, duration = 1500) {
 
 // Optimized Lottie loader
 function LottieAnimation() {
-    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
     const [lottieLoaded, setLottieLoaded] = useState(false);
 
-    // Ensure lottie is flagged as loaded early
     useEffect(() => {
         if (animationData) {
             setLottieLoaded(true);
@@ -48,12 +46,12 @@ function LottieAnimation() {
     }, []);
 
     return (
-        <div ref={ref}>
+        <div>
             <div className="md:flex hidden">
                 {!lottieLoaded && (
                     <div
                         style={{
-                            height: "150px",
+                            height: "200px",
                             width: "100%",
                             background: "#e0e7ff",
                             border: "2px solid #6366f1",
@@ -69,7 +67,7 @@ function LottieAnimation() {
                     </div>
                 )}
 
-                {inView && lottieLoaded && (
+                {lottieLoaded && (
                     <Lottie
                         animationData={animationData}
                         className='md:flex hidden'

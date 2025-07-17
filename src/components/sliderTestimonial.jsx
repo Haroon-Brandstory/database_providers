@@ -31,25 +31,33 @@ const testimonials = [
 ];
 
 export default function SliderTestimonial() {
-  const mainSwiperRef = useRef(null);
   const leftSwiperRef = useRef(null);
   const centerSwiperRef = useRef(null);
   const rightSwiperRef = useRef(null);
-  const [mainIndex, setMainIndex] = useState(0);
 
   
 
   useEffect(() => {
-    if (
-      centerSwiperRef.current?.swiper &&
-      rightSwiperRef.current?.swiper
-    ) {
-      const centerSwiper = centerSwiperRef.current.swiper;
-      const rightSwiper = rightSwiperRef.current.swiper;
+    const timer = setTimeout(() => {
+      if (
+        centerSwiperRef.current?.swiper &&
+        rightSwiperRef.current?.swiper
+      ) {
+        const centerSwiper = centerSwiperRef.current.swiper;
+        const rightSwiper = rightSwiperRef.current.swiper;
 
-      centerSwiper.controller.control = rightSwiper;
-      rightSwiper.controller.control = centerSwiper;
-    }
+        centerSwiper.controller.control = rightSwiper;
+        rightSwiper.controller.control = centerSwiper;
+
+        // Force update and restart autoplay
+        centerSwiper.update();
+        rightSwiper.update();
+        if (centerSwiper.autoplay) centerSwiper.autoplay.start();
+        if (rightSwiper.autoplay) rightSwiper.autoplay.start();
+      }
+    }, 100); // 100ms delay to ensure Swipers are initialized
+
+    return () => clearTimeout(timer);
   }, []);
 
 
@@ -65,8 +73,8 @@ export default function SliderTestimonial() {
           <div className="grid  grid-cols-1 bg-[#F6F6F6]  md:grid-cols-2 gap-0  rounded-2xl overflow-hidden shadow-md min-h-[420px]">
             {/* Left: 3x3 grid with two Swipers */}
             <div className="left-parent-wrapper">
-              <div className="md:grid grid-cols-3 gap-10 h-full flex justify-center  items-center">
-                <div className="leftMostSwiper hidden md:flex w-[200px] h-[420px] rounded-xl overflow-hidden">
+              <div className="md:grid grid-cols-3 gap-1 h-full flex justify-center  items-center">
+                <div className="leftMostSwiper hidden md:flex w-100% h-[420px] rounded-xl overflow-hidden">
                   <Swiper
                     direction="vertical"
                     loop={true}
@@ -83,7 +91,7 @@ export default function SliderTestimonial() {
                     ))}
                   </Swiper>
                 </div>
-                <div className="centerSwiper w-[200px] h-[420px] rounded-xl overflow-hidden flex flex-col items-center">
+                <div className="centerSwiper w-full h-[420px] rounded-xl overflow-hidden flex flex-col items-center">
                   {/* Top dummy square */}
                   <div className="bg-[#F6F6F6] w-full mb-3 h-[150px] rounded-lg" style={{ boxShadow: '0px 0px 4px 0px #00000040 inset' }}></div>
                   {/* Swiper */}
@@ -108,7 +116,7 @@ export default function SliderTestimonial() {
                   {/* Bottom dummy square */}
                   <div className="bg-[#F6F6F6] w-full mt-3 h-[150px] rounded-lg" style={{ boxShadow: '0px 0px 4px 0px #00000040 inset' }}></div>
                 </div>
-                <div className="rightMostDummyArea hidden md:block overflow-hidden h-[420px]">
+                <div className="rightMostDummyArea w-100% hidden md:block overflow-hidden h-[420px]">
                   <div className="bg-[#F6F6F6] w-full mb-3 h-[150px] rounded-lg" style={{ boxShadow: '0px 0px 4px 0px #00000040 inset' }}></div>
                   <div className="bg-[#F6F6F6] w-full mb-3 h-[150px] rounded-lg" style={{ boxShadow: '0px 0px 4px 0px #00000040 inset' }}></div>
                   <div className="bg-[#F6F6F6] w-full h-[150px] rounded-lg" style={{ boxShadow: '0px 0px 4px 0px #00000040 inset' }}></div>

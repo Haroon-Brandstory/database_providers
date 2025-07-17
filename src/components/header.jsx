@@ -3,7 +3,64 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
+
+const languages = [
+    { code: 'ind', label: 'English', flag: '/header/flag1.svg' },
+    { code: 'uae', label: 'Spanish', flag: '/header/flag2.svg' },
+    { code: 'sgp', label: 'Spanish', flag: '/header/flag3.svg' },
+    { code: 'tur', label: 'Spanish', flag: '/header/flag4.svg' },
+    { code: 'usa', label: 'Spanish', flag: '/header/flag5.svg' },
+];
+
+function LanguageDropdown() {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(languages[0]);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        if (!open) return;
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [open]);
+
+    return (
+        <div ref={dropdownRef} className="relative inline-block text-left ">
+            <button
+                type="button"
+                className="flex items-center gap-2 bg-black px-3 py-2 rounded cursor-pointer"
+                onClick={() => setOpen((o) => !o)}
+            >
+                <Image src={selected.flag} alt={selected.label} width={24} height={16} />
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            {open && (
+                <ul className="absolute right-0 mt-2 w-auto bg-[#0236ef3b] border-[#0236EF] rounded shadow-lg z-1000">
+                    {languages.map((lang) => (
+                        <li
+                            key={lang.code}
+                            className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-[#0236EF]"
+                            onClick={() => {
+                                setSelected(lang);
+                                setOpen(false);
+                            }}
+                        >
+                            <Image src={lang.flag} alt={lang.label} width={24} height={16} />
+                            {/* <span className="text-white hover:text-white">{lang.label}</span> */}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+}
 
 export default function Header() {
     const pathname = usePathname();
@@ -45,10 +102,7 @@ export default function Header() {
 
                     {/* Desktop Actions */}
                     <div className="hidden lg:flex items-center gap-10">
-                        <select className=" rounded px-2 py-1">
-                            <option value="en">🇺🇸 EN</option>
-                            <option value="es">🇪🇸 ES</option>
-                        </select>
+                        <LanguageDropdown />
                         <button className="header_cta_contact">
                             Contact Us
                         </button>
@@ -56,7 +110,7 @@ export default function Header() {
                 </div>
 
                 {/* Mobile Menu */}
-                <div className={`lg:hidden absolute left-0 right-0 bg-black transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 pt-4' : 'max-h-0'}`}>
+                <div className={`lg:hidden relative left-0 right-0 bg-black transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 pt-4' : 'max-h-0'}`}>
                     <nav className="flex flex-col space-y-4 p-4">
                         <Link
                             href="/"

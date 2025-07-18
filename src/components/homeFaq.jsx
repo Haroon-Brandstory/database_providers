@@ -3,24 +3,29 @@ import { useState } from "react";
 
 const faqs = [
     {
-        question: "What is a C-level executive's email list?",
-        answer: "It is your direct line to the boardroom. A list of C-level executives' email addresses provides verified email contact details of top decision makers like CEOs, CFOs, CTOs, CMOs, etc., across industries. So, you can pitch directly to the people with buying power.",
+        question: "What are the data attributes you provide us with?",
+        answer: "As per your requirement, we provide the following data elements business mail-id, key executive's names and LinkedIn URLs, company name, industry name, employee size, company domain,  and job designation.",
     },
     {
-        question: "How can a C-level mailing list help in B2B marketing campaigns?",
-        answer: "A C-level mailing list helps you target high-level decision makers, increasing your chances of closing deals and building valuable business relationships in B2B marketing.",
+        question: "What are the advantages of data-driven marketing?",
+        answer: "With our data, you can gain insights about key personnel, company decision maker's email-id, and employer size. With the provided insights, you can,",
+        liAnsers: ["Increase sales and marketing efficiency", "Gain higher lead generation", "Improve Customer Retention", "Enhance Targeting & Personalization"]
     },
     {
-        question: "Are your C-level email contacts GDPR and CAN-SPAM compliant?",
-        answer: "Yes, all our C-level email contacts are GDPR and CAN-SPAM compliant, ensuring your campaigns are both effective and legally sound.",
+        question: "For what industries do you provide data?",
+        answer: "At database providers, we work with all industries, from healthcare, manufacturing, technology, education, and many more. We will provide data as per your required industry verticals.",
     },
     {
-        question: "Can I get a custom C-level email database based on my requirements?",
-        answer: "Absolutely! We offer custom C-level email databases tailored to your specific industry, location, and other requirements.",
+        question: "In what format do you provide the data?",
+        answer: "We provide the data in Excel format for easy access.",
     },
     {
-        question: "Do you offer samples of your C-level executive's email list?",
-        answer: "Yes, we provide free samples so you can evaluate the quality and accuracy of our C-level executive email lists before making a purchase.",
+        question: "Do you verify the data before outsourcing?",
+        answer: "Yes. We provide only accurate and reliable information to help your business reach the right lead.",
+    },
+    {
+        question: "Can you provide data from small businesses too?",
+        answer: "Absolutely. We value our customers, and their requirement is what drives our business. So we provide data from companies that have employee sizes 1-50,51-100,101-250,251-500,501-1000,1001-2500,2501-5000,5000 & above."
     },
 ];
 
@@ -71,13 +76,15 @@ export default function HomeFaqSection() {
 
                                 {/* Animated content */}
                                 <div
-                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                                        isOpen ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"
-                                    }`}
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"
+                                        }`}
                                     id={`faq-content-${i}`}
                                 >
                                     <div className="text-[#444] text-[15px] leading-relaxed">
                                         {faq.answer}
+                                        {faq.liAnsers?.length === 0 ? "" : faq.liAnsers?.map((li_answers, i) => (
+                                            <li key={i}>{li_answers}</li>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

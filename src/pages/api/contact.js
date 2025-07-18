@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).send({ message: 'Only POST requests allowed' });
 
-    const { name, email, phone, company, message } = req.body;
+    const { name, businessEmail, mobileNumber, companyName, message } = req.body;
 
     // Configure your SMTP transporter
     const transporter = nodemailer.createTransport({
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         service: "gmail",
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
-        secure: process.env.SMTP_SECURE === 'true', 
+        secure: process.env.SMTP_SECURE === 'true',
         auth: {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS,
@@ -22,14 +22,15 @@ export default async function handler(req, res) {
     try {
         await transporter.sendMail({
             from: process.env.SMTP_USER,
-            to: "haroonalshaji@gmail.com",
+            to: "madhavan@brandstory.in",
+            cc: "sales@thedatabaseproviders.com,bala@brandstory.in",
             subject: "New Client Form Submission",
             html: `
         <h3>New Client Form Submission</h3>
         <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Company:</strong> ${company}</p>
+        <p><strong>Email:</strong> ${businessEmail}</p>
+        <p><strong>Phone:</strong> ${mobileNumber}</p>
+        <p><strong>Company:</strong> ${companyName}</p>
         <p><strong>Message:</strong><br/>${message}</p>
       `,
         });

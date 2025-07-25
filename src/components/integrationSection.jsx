@@ -13,7 +13,7 @@ export default function IntegrationSection() {
                 <div className="text-center max-w-4xl flex flex-col justify-center">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">Integrations</h5>
                     <h2 className="text-black text-[36px] font-medium mb-6">
-                        Lorem ipsum dolor sit amet <span className="block"><span className="text-[#00000080]"> consectetur. </span></span>
+                        Easily Integrate with Your <span className="block"><span className="text-[#00000080]"> Current System </span></span>
                     </h2>
                 </div>
                 <div className="integrationSection flex flex-col justify-center items-center">

@@ -4,19 +4,19 @@ export default function LatestBlogs() {
 
     const demoBlogDAta = [
         {
-            img: "/latestBlogs/demo_blog.png",
-            blogDesc: "Lorem ipsum dolor sit amet consectetur. Augue pellentesque eu eget semper ",
-            blogRedirection: "#"
+            img: "/latestBlogs/blog1.png",
+            blogDesc: "5 proven techniques to identify and contact your B2B audience",
+            blogRedirection: "https://thedatabaseproviders.com/blogs/5-proven-techniques-to-identify-and-contact-your-b2b-audience/"
         },
         {
-            img: "/latestBlogs/demo_blog.png",
-            blogDesc: "Lorem ipsum dolor sit amet consectetur. Augue pellentesque eu eget semper ",
-            blogRedirection: "#"
+            img: "/latestBlogs/blog2.png",
+            blogDesc: "Potential of content syndication for B2B lead generation",
+            blogRedirection: "https://thedatabaseproviders.com/blogs/potential-of-content-syndication-for-b2b-lead-generation/"
         },
         {
-            img: "/latestBlogs/demo_blog.png",
-            blogDesc: "Lorem ipsum dolor sit amet consectetur. Augue pellentesque eu eget semper ",
-            blogRedirection: "#"
+            img: "/latestBlogs/blog3.png",
+            blogDesc: "Step by step guide for B2B Email marketing",
+            blogRedirection: "https://thedatabaseproviders.com/blogs/step-by-step-guide-for-b2b-email-marketing/"
         },
     ]
 
@@ -44,7 +44,7 @@ export default function LatestBlogs() {
                                         {item?.blogDesc}
                                     </p>
                                     <a
-                                        href={item?.blogRedirection}
+                                        href={item?.blogRedirection} target="_blank"
                                         className="text-[#2C6BFF] font-medium flex items-center mb-4 gap-1"
                                     >
                                         Read More <span aria-hidden="true">→</span>

@@ -35,7 +35,7 @@ export default function SliderTestimonial() {
   const centerSwiperRef = useRef(null);
   const rightSwiperRef = useRef(null);
 
-  
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -70,7 +70,7 @@ export default function SliderTestimonial() {
           </h2>
         </div>
         <div className="relative max-w-6xl mx-auto bg-[#F6F6F6]">
-          <div className="grid  grid-cols-1 bg-[#F6F6F6]  md:grid-cols-2 gap-0  rounded-2xl overflow-hidden shadow-md min-h-[420px]">
+          <div className="lg:grid hidden  grid-cols-1 bg-[#F6F6F6]  md:grid-cols-2 gap-0  rounded-2xl overflow-hidden shadow-md min-h-[420px]">
             {/* Left: 3x3 grid with two Swipers */}
             <div className="left-parent-wrapper">
               <div className="md:grid grid-cols-3 gap-1 h-full flex justify-center  items-center">
@@ -148,6 +148,41 @@ export default function SliderTestimonial() {
                 ))}
               </Swiper>
             </div>
+          </div>
+          <div className='lg:hidden grid'>
+            <Swiper
+              pagination={{ clickable: true }}
+              spaceBetween={10}
+              slidesPerView={1}
+              loop={true}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              className='w-full h-full'
+            >
+              {testimonials.map((testimonial, index) => (
+                <SwiperSlide key={index}>
+                  <div className="testimonial-slide p-6">
+                    {/* Row with two col-12 (stacked) */}
+                    <div className="">
+                      {/* Top Column: Client Image */}
+                      <div className="bg-[#E5ECFA] h-[100px]  rounded-lg flex items-center justify-center mb-6"
+                        style={{ boxShadow: '0px 0px 4px 0px #00000040 inset' }}>
+                        <img src={testimonial.logo} alt={testimonial.company} width={100} height={100} className="w-25 h-25 object-contain" />
+                      </div>
+                    </div>
+
+                    <div className="h-full items-stretch">
+                      {/* Bottom Column: Client Details */}
+                      <div className="bg-white p-4 rounded-lg shadow-md text-center ">
+                        <p className="text-gray-700 mb-4 text-[14px] leading-relaxed">{testimonial.content}</p>
+                        <h4 className="text-blue-600 font-bold text-xl">{testimonial.name}</h4>
+                        <p className="text-blue-500 text-base">{testimonial.position}</p>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
           </div>
         </div>
       </div>

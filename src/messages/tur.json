@@ -1,0 +1,19 @@
+{
+	"home": {
+		"title": "Ana Sayfa",
+		"description": "Ana sayfa"
+	},
+	"nav": {
+		"home": "Ana Sayfa",
+		"resource": "Kaynaklar",
+		"about": "Hakkımızda",
+        "blogs": "Blogs",
+		"contact": "İletişim",
+        "testimonials": "Testimonials"
+	},
+	"banner": {
+		"heading": "B2B Pazarlama Stratejinizi Geliştirin",
+		"subheading": "Güvenilir Veri Hizmetleri ile",
+		"cta": "Ücretsiz örnek veri alın"
+	}
+}

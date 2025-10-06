@@ -22,6 +22,7 @@ export default async function handler(req, res) {
     try {
         await transporter.sendMail({
             from: process.env.SMTP_USER,
+            // to: "haroon@brandstory.in",
             to: "madhavan@brandstory.in",
             cc: "sales@thedatabaseproviders.com,bala@brandstory.in",
             subject: "New Client Form Submission",
@@ -39,6 +40,6 @@ export default async function handler(req, res) {
     } catch (error) {
         console.error("Error sending email:", error);
         res.status(500).json({ error: 'Error sending email' });
-        console.log(error)
+        // console.log(error)
     }
 }

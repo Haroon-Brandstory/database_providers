@@ -82,9 +82,13 @@ export default function HomeFaqSection() {
                                 >
                                     <div className="text-[#444] text-[15px] leading-relaxed">
                                         {faq.answer}
-                                        {faq.liAnsers?.length === 0 ? "" : faq.liAnsers?.map((li_answers, i) => (
-                                            <li key={i}>{li_answers}</li>
-                                        ))}
+                                        <ul style={{ paddingLeft: "20px", listStyle: "disc" }}>
+                                            {faq.liAnsers?.length === 0 ? "" : faq.liAnsers?.map((li_answers, i) => (
+
+                                                <li key={i}>{li_answers}</li>
+
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

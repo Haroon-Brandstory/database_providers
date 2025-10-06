@@ -7,11 +7,11 @@ import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import Lottie from 'lottie-react';
 import animationData from '../animations/dash_in_banner.json';
-
 // Import Autoplay from Swiper
 import SwiperCore from 'swiper';
 import { Autoplay as SwiperAutoplay } from 'swiper/modules';
 import dynamic from 'next/dynamic';
+import { useTranslations } from 'next-intl';
 SwiperCore.use([SwiperAutoplay]);
 
 const LottieAnimation = () => (
@@ -46,6 +46,9 @@ export default function HomeBanner() {
     const gridRef = useRef(null);
     const gridMapRef = useRef(new Map());
     const gridSize = 50; // 50px squares
+
+    const t = useTranslations();
+
 
     useEffect(() => {
         const grid = gridRef.current;
@@ -114,16 +117,17 @@ export default function HomeBanner() {
     }, []);
 
     return (
-        <div className="relative bg-gradient-to-b from-black via-[#00132A] to-[#133dd6] text-white min-h-screen flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-20 overflow-hidden">
+        <div className="relative bg-gradient-to-b from-black via-[#00132A] to-[#133dd6] text-white min-h-screen flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-20 overflow-hidden pt-50">
             {/* Background Cube Grid */}
             <div ref={gridRef} className="absolute inset-0 z-0 overflow-hidden" />
 
-            <div className="text-center max-w-4xl z-50">
-                <h1 className="font-display text-3xl md:text-5xl font-bold mb-4 font-medium">Refine Your B2B Marketing Strategy</h1>
-                <h1 className="text-3xl md:text-5xl font-medium mb-6">With Trusted Data Services</h1>
-                <p className="mb-8 text-gray-300 font-light text-[18px]">Get high-priority data and increase leads and revenue.</p>
+            <div className="text-center max-w-4xl z-9">
+                {/* <h1 className="font-display text-3xl md:text-5xl font-bold mb-4 font-medium">{t('home.title')}</h1> */}
+                <h1 className="font-display text-3xl md:text-5xl font-bold mb-4 font-medium">{t('banner.heading', { defaultMessage: 'Refine Your B2B Marketing Strategy' })}</h1>
+                <h1 className="text-3xl md:text-5xl font-medium mb-6">{t('banner.subheading', { defaultMessage: 'With Trusted Data Services' })}</h1>
+                <p className="mb-8 text-gray-300 font-light text-[18px]">{t('home.description', { defaultMessage: 'Get high-priority data and increase leads and revenue.' })}</p>
                 <button className="relative text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in drop-shadow-[0px_0px_25px_#0133E9CC]">
-                    <span className="relative z-10">Get a free sample data</span>
+                    <span className="relative z-10">{t('banner.cta', { defaultMessage: 'Get a free sample data' })}</span>
                     <span className="absolute inset-0 bg-gradient-to-r from-[#0055ff1a] via-[#0133E9] to-[#0055FF] bg-[length:200%_100%] bg-left transition-all duration-700 ease-in-out rounded-full blur-sm animate-gradient-loop">
                     </span>
                 </button>
@@ -135,7 +139,7 @@ export default function HomeBanner() {
                 <LottieAnimation />
             </div>
 
-            <div className="mt-20 w-full max-w-5xl z-50">
+            <div className="mt-20 w-full max-w-5xl z-9">
                 <p className="text-center mb-10 text-[18px] font-light text-[#BBC7E5]-400">Clients We Worked With</p>
                 <Swiper
                     autoplay={{ delay: 0 }}
@@ -152,7 +156,7 @@ export default function HomeBanner() {
                 >
                     {CLIENT_LOGOS.map((logo, idx) => (
                         <SwiperSlide key={idx} className="flex justify-center items-center">
-                            <Image src={logo} alt={`client-${idx}`} width={100} height={100} style={{width:"100px",height:"auto"}} className="object-contain grayscale hover:grayscale-0 transition duration-300" />
+                            <Image src={logo} alt={`client-${idx}`} width={100} height={100} unoptimized style={{ width: "100px", height: "auto" }} className="object-contain grayscale hover:grayscale-0 transition duration-300" />
                         </SwiperSlide>
                     ))}
                 </Swiper>

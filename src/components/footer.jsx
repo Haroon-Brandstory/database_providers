@@ -1,10 +1,12 @@
+import { useNavHref } from "@/hooks/useNavHref";
 import Image from "next/image";
 
 export default function Footer() {
+
+    const { navHref } = useNavHref();
     return (
         <footer className="bg-black text-white pt-10 pb-4 px-4 md:px-12">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-start gap-10 border-b border-[#222] pb-8">
-                {/* Left: Logo, description, social */}
                 <div className="flex-2 min-w-[220px] flex flex-col gap-6">
                     <div className="flex items-center gap-3">
                         <Image src="/header/db_pro_logo.svg" alt="Database Providers Logo" width={100} height={100} />
@@ -13,34 +15,31 @@ export default function Footer() {
                         Get started with accurate and industry-compliant data and experience a new level of marketing performance, successfully fueling your ABM and Email campaigns.
                     </p>
                     <div className="flex gap-4 mt-2">
-                        {/* Social icons */}
-                        <a href="#" aria-label="Facebook" className="hover:text-[#2C6BFF]">
+                        <a href="https://www.facebook.com/databaseprovidersbangalore/" aria-label="Facebook" className="hover:text-[#2C6BFF]">
                             <Image src="/footer/footer-soc-icon1.svg" width={25} height={25} alt="img" />
                         </a>
-                        <a href="#" aria-label="LinkedIn" className="hover:text-[#2C6BFF]">
+                        <a href="https://in.linkedin.com/company/thedatabase-providers" aria-label="LinkedIn" className="hover:text-[#2C6BFF]">
                             <Image src="/footer/footer-soc-icon2.svg" width={25} height={25} alt="img" />
                         </a>
-                        <a href="#" aria-label="X" className="hover:text-[#2C6BFF]">
+                        <a href="https://x.com/db_providers" aria-label="X" className="hover:text-[#2C6BFF]">
                             <Image src="/footer/footer-soc-icon3.svg" width={25} height={25} alt="img" />
                         </a>
-                        <a href="#" aria-label="Instagram" className="hover:text-[#2C6BFF]">
+                        <a href="https://www.instagram.com/thedatabaseproviders/" aria-label="Instagram" className="hover:text-[#2C6BFF]">
                             <Image src="/footer/footer-soc-icon4.svg" width={25} height={25} alt="img" />
                         </a>
-                        <a href="#" aria-label="YouTube" className="hover:text-[#2C6BFF]">
+                        <a href="https://www.youtube.com/channel/UC8ag8pQbzFAkmsgB4a99QAA" aria-label="YouTube" className="hover:text-[#2C6BFF]">
                             <Image src="/footer/footer-soc-icon5.svg" width={25} height={25} alt="img" />
                         </a>
                     </div>
                 </div>
-                {/* Center: Navigation */}
                 <div className="flex-1 min-w-[180px] flex flex-col gap-2 mt-2 md:mt-0">
                     <div className="font-semibold mb-2">&nbsp;</div>
-                    <a href="#" className="hover:text-[#2C6BFF] transition">About Us</a>
-                    <a href="#" className="hover:text-[#2C6BFF] transition">Services</a>
-                    <a href="#" className="hover:text-[#2C6BFF] transition">Features</a>
-                    <a href="#" className="hover:text-[#2C6BFF] transition">Blogs</a>
-                    <a href="#" className="hover:text-[#2C6BFF] transition">Privacy Policy</a>
+                    <a href={navHref('/about')} className="hover:text-[#2C6BFF] transition">About Us</a>
+                    <a href={navHref('/service-1')} className="hover:text-[#2C6BFF] transition">Services</a>
+                    <a href={navHref('/global-professional-data')} className="hover:text-[#2C6BFF] transition">Features</a>
+                    <a href={navHref('/blogs')} className="hover:text-[#2C6BFF] transition">Blogs</a>
+                    <a href={navHref('/privacy-policy')} className="hover:text-[#2C6BFF] transition">Privacy Policy</a>
                 </div>
-                {/* Right: Contact */}
                 <div className="flex-1 min-w-[220px] flex flex-col gap-4 mt-2 md:mt-0">
                     <div className="font-semibold mb-2">Contact Us</div>
                     <div className="flex items-start gap-3">

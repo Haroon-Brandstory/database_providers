@@ -1,0 +1,19 @@
+{
+	"home": {
+		"title": "Home (USA)",
+		"description": "Get high-priority data and increase leads and revenue."
+	},
+	"nav": {
+		"home": "Home",
+		"resource": "Resource",
+		"about": "About Us",
+		"contact": "Contact Us",
+        "blogs": "Blogs",
+        "testimonials": "Testimonials"
+	},
+	"banner": {
+		"heading": "Refine Your B2B Marketing Strategy",
+		"subheading": "With Trusted Data Services",
+		"cta": "Get a free sample data"
+	}
+}

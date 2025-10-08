@@ -180,7 +180,7 @@ export default function Header() {
 					<nav className="hidden lg:flex items-center space-x-6">
 						<Link
 							href={navHref("/")}
-							className={`hover:text-blue-400 ${isActive(navHref("/")) ? "border-b-2 border-[#0133E9]" : ""
+							className={`hover:text-blue-400 text-white ${isActive(navHref("/")) ? "border-b-2 border-[#0133E9]" : ""
 								}`}
 						>
 							{/* {t("nav.home", { defaultMessage: "Home" })} */}
@@ -188,7 +188,7 @@ export default function Header() {
 						</Link>
 						<Link
 							href={"/blogs"}
-							className={`hover:text-blue-400 ${isActive("/blogs") ? "border-b-2 border-[#0133E9]" : ""
+							className={`hover:text-blue-400 text-white ${isActive("/blogs") ? "border-b-2 border-[#0133E9]" : ""
 								}`}
 						>
 							{/* {t("nav.blogs", { defaultMessage: "Blogs" })} */}
@@ -196,7 +196,7 @@ export default function Header() {
 						</Link>
 						<Link
 							href={"/testimonials"}
-							className={`hover:text-blue-400 ${isActive("/testimonials") ? "border-b-2 border-[#0133E9]" : ""
+							className={`hover:text-blue-400 text-white ${isActive("/testimonials") ? "border-b-2 border-[#0133E9]" : ""
 								}`}
 						>
 							Testimonials
@@ -204,7 +204,7 @@ export default function Header() {
 						</Link>
 						<Link
 							href={navHref("/about")}
-							className={`hover:text-blue-400 ${isActive(navHref("/about")) ? "border-b-2 border-[#0133E9]" : ""
+							className={`hover:text-blue-400 text-white ${isActive(navHref("/about")) ? "border-b-2 border-[#0133E9]" : ""
 								}`}
 						>
 							{/* {t("nav.about", { defaultMessage: "About Us" })} */}

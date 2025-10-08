@@ -76,7 +76,7 @@ export default function WhoWeAre() {
             <div className="container flex flex-col items-center">
                 <div className="tex-center max-w-4xl">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">Who We Are</h5>
-                    <h2 className="text-[#000000] text-[36px] font-medium">
+                    <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">
                         Your Data Enthusiasts For <span className="block text-[#00000080]">B2B Marketing</span>
                     </h2>
                     <p className="text-center text-[16px] text-[#54555F] pt-5 max-w-3xl">

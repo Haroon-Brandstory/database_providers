@@ -117,7 +117,7 @@ export default function CountSection() {
             <div className="container flex flex-col items-center">
                 <div className="text-center max-w-4xl">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">Count Section</h5>
-                    <h2 className="text-[#000000] text-[36px] font-medium">
+                    <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">
                         Total 140 Million <span className="text-[#00000080]">Data</span>
                     </h2>
                 </div>

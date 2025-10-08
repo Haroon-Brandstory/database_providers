@@ -57,9 +57,39 @@ export default function PowerPackSection({ data }) {
                     <div className="bg-[url(/service-category/power-pack-sec-bg.png)] mt-12 bg-cover bg-center bg-no-repeat  rounded-[20px]">
                         <div className="grid lg:grid-cols-2">
                             <div className="p-8">
-                                {data.descriptionParaText.map((para, index) => (
+                                {data?.descriptionParaText?.map((para, index) => (
                                     <p key={index} className="text-[#54555F] text-[16px] mb-6">
-                                        {para.children.map((child, idx) => child.text)}
+                                        {para.children.map((child, idx) => {
+                                            // If it's plain text
+                                            if (child.type === "text") {
+                                                return <span key={idx}>{child.text}</span>;
+                                            }
+
+                                            // If it's a link
+                                            if (child.type === "link" && child.url) {
+                                                // Some links have children that contain text
+                                                const linkText =
+                                                    child.children && child.children.length > 0
+                                                        ? child.children.map((c, i) =>
+                                                            c.type === "text" ? c.text : ""
+                                                        )
+                                                        : child.url;
+
+                                                return (
+                                                    <a
+                                                        key={idx}
+                                                        href={child.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-blue-600 underline hover:text-blue-800"
+                                                    >
+                                                        {linkText}
+                                                    </a>
+                                                );
+                                            }
+
+                                            return null; // fallback
+                                        })}
                                     </p>
                                 ))}
                             </div>

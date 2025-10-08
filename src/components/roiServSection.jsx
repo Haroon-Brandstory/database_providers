@@ -20,7 +20,42 @@ export default function RoiServiceSection({ data }) {
                         <h2 className="text-2xl text-black md:text-[36px] text-center font-medium mb-4">
                             {data.sectionTitle}
                         </h2>
-                        <p className="max-w-4xl text-[#51525C] text-center">{data.sectionDescription}</p>
+                        {/* <p className="max-w-4xl text-[#51525C] text-center">{data.sectionDescription}</p> */}
+                        {data?.sectionLinkDescription?.map((para, index) => (
+                            <p key={index} className="text-[#54555F] text-[16px] mb-6 max-w-4xl text-center">
+                                {para.children.map((child, idx) => {
+                                    // If it's plain text
+                                    if (child.type === "text") {
+                                        return <span key={idx}>{child.text}</span>;
+                                    }
+
+                                    // If it's a link
+                                    if (child.type === "link" && child.url) {
+                                        // Some links have children that contain text
+                                        const linkText =
+                                            child.children && child.children.length > 0
+                                                ? child.children.map((c, i) =>
+                                                    c.type === "text" ? c.text : ""
+                                                )
+                                                : child.url;
+
+                                        return (
+                                            <a
+                                                key={idx}
+                                                href={child.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-blue-600 underline hover:text-blue-800"
+                                            >
+                                                {linkText}
+                                            </a>
+                                        );
+                                    }
+
+                                    return null; // fallback
+                                })}
+                            </p>
+                        ))}
                     </div>
                     <div className="grid grid-cols-2 justify-items-center md:grid-cols-5 justify-center items-center gap-6 max-w-5xl mx-auto my-8">
                         {RetData.map((item, idx) => (

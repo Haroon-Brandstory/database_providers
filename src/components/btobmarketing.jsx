@@ -51,7 +51,7 @@ export default function BtoBMarketing() {
         <section className="bg-[url('/btobsection/bg-img-btob.png')] bg-cover md:bg-top bg:left pt-16 pb-20 px-4 md:px-20 text-black text-center flex flex-col items-center">
             <div className="container flex flex-col items-center">
                 <div className="tex-center max-w-xl">
-                    <h2 className="text-[#000000] text-[36px] font-medium">B2B Email marketing could <span className="text-[#00000080]">be a game changer</span></h2>
+                    <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">B2B Email marketing could <span className="text-[#00000080]">be a game changer</span></h2>
                 </div>
             </div>
             <div className="container mt-10">

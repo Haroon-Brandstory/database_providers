@@ -14,28 +14,22 @@ export const metadata = {
   description: "Your trusted source for database solutions",
 };
 
-export default async function RootLayout({ children, params }) {
+export default async function LocaleRootLayout({ children, params }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body
-        className={`antialiased min-h-screen ${interDisplay.variable} ${interTight.variable}`}
-      >
+   
         <NextIntlClientProvider
           key={locale}
           locale={locale}
           messages={messages}
         >
-          <Header />
           <Toaster position="top-right" />
           <main className="">{children}</main>
-          <Footer />
         </NextIntlClientProvider>
-      </body>
-    </html>
+    
     // <div>
     //   {children}
     // </div>

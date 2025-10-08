@@ -61,7 +61,7 @@ export default function ServiceSection() {
                 <div className="grid lg:grid-cols-2 grid-cols-1 items-center gap-10">
                     <div className="text-start max-w-4xl flex flex-col justify-center">
                         <h5 className="text-[#2C6BFF] text-[16px] font-medium">Services</h5>
-                        <h2 className="text-white text-[36px] font-medium mb-6">
+                        <h2 className="text-white lg:text-[36px] text-[28px] font-medium mb-6">
                             Empower Businesses <span className="block">with exceptional <span className="text-[#5673F6]">B2B data solutions</span></span>
                         </h2>
                         <p className="text-[#D0D0D0] text-[16px] font-light w-[90%]">

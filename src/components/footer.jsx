@@ -1,3 +1,4 @@
+"use client"
 import { useNavHref } from "@/hooks/useNavHref";
 import Image from "next/image";
 

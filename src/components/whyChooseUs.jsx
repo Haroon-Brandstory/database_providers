@@ -106,13 +106,13 @@ export default function WhyChooseUs() {
     return (
         <section
             ref={sectionRef}
-            className="relative  w-full pt-12 pb-60 px-4 md:px-20 bg-[url('/whychooseus/sectionbanner.png')] bg-top bg-cover overflow-hidden"
+            className="relative flex justify-center items-center w-full pt-12 pb-60 px-4 md:px-20 bg-[url('/whychooseus/sectionbanner.png')] bg-top bg-cover overflow-hidden"
             style={{ minHeight: "100vh" }}
         >
             <div className="w-full flex flex-col items-center justify-center">
                 <div className="text-center max-w-4xl flex flex-col justify-center mb-6">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">Why Choose Us</h5>
-                    <h2 className="text-white text-[36px] font-medium mb-3">
+                    <h2 className="text-white lg:text-[36px] text-[28px] font-medium mb-3">
                         Get your B2B Data With{" "}
                         <span className="block">
                             <span className="text-[#5673F6]">Accuracy & Reliability</span>

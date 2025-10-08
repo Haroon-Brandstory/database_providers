@@ -24,7 +24,7 @@ export default function LatestBlogs() {
         <section className="py-24 px-4 md:px-20 bg-[#F0F4FF] relative">
             <div className="container mx-auto flex flex-col items-center justify-center">
                 <div className="text-center max-w-4xl flex flex-col justify-center">
-                    <h2 className="text-black text-[36px] font-medium mb-6">
+                    <h2 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
                         Our Latest <span className="text-[#00000080]">Blogs</span>
                     </h2>
                 </div>

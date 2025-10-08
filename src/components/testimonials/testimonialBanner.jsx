@@ -1,3 +1,4 @@
+"use client"
 import { useNavHref } from "@/hooks/useNavHref"
 import Link from "next/link";
 

@@ -49,7 +49,7 @@ export default function TestimonialAbout() {
     return (
         <section className="bg-white lg:py-32 py-16 px-6 flex items-center justify-center">
             <div className="container">
-                <h2 className="text-black text-[36px] font-medium text-center mb-12">
+                <h2 className="text-black lg:text-[36px] text-[26px] font-medium text-center mb-12">
                     Client <span className="text-[#00000080]">Reviews</span>
                 </h2>
                 <Swiper

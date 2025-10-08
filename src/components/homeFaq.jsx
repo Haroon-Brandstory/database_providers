@@ -38,9 +38,9 @@ export default function HomeFaqSection() {
 
     return (
         <section className="pt-10 pb-24 bg-white flex flex-col items-center text-black">
-            <div className="max-w-5xl w-full mx-auto flex flex-col items-center">
+            <div className="max-w-5xl container lg:px-0 px-1 w-full mx-auto flex flex-col items-center">
                 <div className="text-center max-w-4xl mb-12">
-                    <h2 className="text-[#000000] text-[36px] font-medium">FAQ's</h2>
+                    <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">FAQ's</h2>
                 </div>
                 <div className="w-full flex flex-wrap gap-6 items-start ">
                     {faqs.map((faq, i) => {

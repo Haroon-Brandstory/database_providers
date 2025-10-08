@@ -3,10 +3,10 @@ import ContactForm from "./contactForm";
 export default function ClientForm() {
     return (
         <section className="py-20 px-4 md:px-20 bg-white relative">
-            <div className="container px-4 mx-auto">
+            <div className="container px-1 mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 container mx-auto">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-black mb-4">
+                        <h2 className="lg:text-[36px] text-[28px] md:text-4xl font-semibold leading-tight text-black mb-4">
                             Haven’t Requested Your <br />
                             <span className="text-[#A3A3A3] font-normal">Free Sample Yet?</span>
                         </h2>

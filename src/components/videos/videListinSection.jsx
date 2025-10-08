@@ -8,13 +8,18 @@ export default function YtVideoListingSection() {
     const [visibleCount, setVisibleCount] = useState(6);
     const [loading, setLoading] = useState(true);
 
-    const channelId = "UC8ag8pQbzFAkmsgB4a99QAA"; 
-    const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    // const channelId = "UC8ag8pQbzFAkmsgB4a99QAA";
+    // const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    const API_KEY = process.env.NEXT_PUBLIC_YT_API_KEY;
+    const playlistId = "UU8ag8pQbzFAkmsgB4a99QAA"; // Note UC → UU
+
+    const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${API_KEY}`;
 
     useEffect(() => {
-        fetch(rss2jsonUrl)
+        fetch(apiUrl)
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 setVideos(data.items || []);
                 setLoading(false);
             })
@@ -29,7 +34,9 @@ export default function YtVideoListingSection() {
     };
 
     const showLess = () => {
-        setVisibleCount((prev) => Math.max(prev - 6, 6));
+        setVisibleCount(6);
+        // setVisibleCount((prev) => Math.max(prev - 6, 6));
+        window.scrollTo({ top: 500, behavior: "smooth" });
     };
 
     if (loading) {
@@ -46,7 +53,7 @@ export default function YtVideoListingSection() {
         <section className="bg-[#F0F4FF] py-16 px-6">
             <div className="container max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {videos.slice(0, visibleCount).map((video) => (
+                    {/* {videos.slice(0, visibleCount).map((video) => (
                         <div key={video.guid} className="bg-white rounded-xl shadow-sm overflow-hidden">
                             <a href={video.link} target="_blank" rel="noopener noreferrer">
                                 <div className="w-full h-48 bg-gray-200 relative">
@@ -78,7 +85,52 @@ export default function YtVideoListingSection() {
                                 </div>
                             </a>
                         </div>
-                    ))}
+                    ))} */}
+                    {videos.slice(0, visibleCount).map((item) => {
+                        const video = item.snippet;
+                        const videoUrl = `https://www.youtube.com/watch?v=${video.resourceId.videoId}`;
+                        return (
+                            <div key={video.resourceId.videoId} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                                <a href={videoUrl} target="_blank" rel="noopener noreferrer">
+                                    <div className="w-full h-48 bg-gray-200 relative">
+                                        <img
+                                            src={video.thumbnails.high.url}
+                                            alt={video.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="p-4">
+                                        <div className="flex items-center justify-between gap-2 mb-2">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                                                    D
+                                                </div>
+                                                <div className="text-xs text-gray-600">Database Provider</div>
+                                            </div>
+                                            <div className="text-xs text-gray-500 flex items-center gap-2">
+                                                • {formatDistanceToNow(new Date(video.publishedAt), { addSuffix: true })}
+                                                <span>
+                                                    <Image src="/videos/ytIcon.svg" width={20} height={12} alt="YouTube Icon" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h3 className="text-sm font-semibold text-gray-800 line-clamp-2">{video.title}</h3>
+                                        <div className="mt-2 text-blue-600 flex items-center text-sm hover:underline">
+                                            Watch on YouTube
+                                            <svg
+                                                className="w-4 h-4 ml-1 mt-[6px]"
+                                                fill="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path d="M19.615 3.184a2.75 2.75 0 0 0-1.938-1.938C16.378 1 12 1 12 1s-4.378 0-5.677.246a2.75 2.75 0 0 0-1.938 1.938C4 4.483 4 8.966 4 8.966s0 4.483.385 5.782a2.75 2.75 0 0 0 1.938 1.938C7.622 16 12 16 12 16s4.378 0 5.677-.246a2.75 2.75 0 0 0 1.938-1.938C20 13.449 20 8.966 20 8.966s0-4.483-.385-5.782zM9.75 12.545V5.387l6.25 3.579-6.25 3.579z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        );
+                    })}
+
                 </div>
 
                 {visibleCount < videos.length && (
@@ -90,7 +142,7 @@ export default function YtVideoListingSection() {
                         </button>
                     </div>
                 )}
-                {visibleCount > 6 && (
+                {visibleCount >= videos.length && videos.length > 6 && (
                     <div className="text-center mt-8">
                         <button onClick={showLess} className="relative text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in">
                             <span className="relative z-10">Show Less</span>

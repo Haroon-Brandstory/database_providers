@@ -108,7 +108,7 @@ export default function Segmentation() {
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">
                         Types of Segmentation
                     </h5>
-                    <h2 className="text-black text-[36px] font-medium mb-6">
+                    <h2 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
                         We Scrutinize For Your{" "}
                         <span className="text-[#00000080] block">Business</span>
                     </h2>

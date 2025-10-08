@@ -21,6 +21,11 @@ export default function middleware(request) {
     //     }
     // }
 
+    const globalPages = ['/thank-you', '/testimonials', '/contact-us', '/videos', '/blogs'];
+    if (globalPages.some((path) => pathname.startsWith(path))) {
+        return NextResponse.next();
+    }
+
     // Let next-intl handle locale redirects
     return createMiddleware(routing)(request);
 }

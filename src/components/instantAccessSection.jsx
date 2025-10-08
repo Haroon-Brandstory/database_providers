@@ -17,7 +17,7 @@ export default function InstantAccessSection({ data }) {
             </div>
             {/* Content */}
             <div className="relative z-10 p-8 my-10 lg:p-0 flex flex-col items-center justify-center w-full h-full">
-                <h2 className="text-[18px] md:text-4xl font-semibold text-white text-center md:mb-6 mb-2">
+                <h2 className="text-[18px] lg:text-[36px]  font-semibold text-white text-center md:mb-6 mb-2">
                     {data.sectionTitle}
                 </h2>
                 <p className="text-white max-w-3xl text-center mb-3">{data.sectionDescription}</p>

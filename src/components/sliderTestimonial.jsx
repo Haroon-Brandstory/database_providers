@@ -65,7 +65,7 @@ export default function SliderTestimonial() {
     <section className="py-24 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-4 flex flex-col justify-center">
-          <h2 className="text-black text-[36px] font-medium mb-6">
+          <h2 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
             Client's Success <span className="text-[#00000080]">Stories</span>
           </h2>
         </div>

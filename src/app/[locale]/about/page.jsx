@@ -11,7 +11,7 @@ export default function AboutUs() {
         sectionTitle: "Empower Your Business with Smart Data Solutions",
         sectionDescription: "Unlock the power of precision-driven data to reach the right audience, at the right time. Our targeted U.S. and global B2B databases help you connect with key decision-makers across industries, driving impactful engagement and measurable results.",
         button: {
-            buttonURL: "#",
+            buttonURL: "/contact-us",
             buttonLabel: "Contact Us",
         }
     }

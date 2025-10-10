@@ -276,7 +276,7 @@ export default function TestimonialsListingSection() {
             reviewerPosition: 'Head of Operation',
             review: "Most gifting companies talk about being thoughtful, but that only works when the right people are listening. With Database Providers, we finally reached them. Their targeted list of senior HR and procurement contacts gave our campaigns real weight. In just a few weeks, we saw a 3X boost in replies and conversations that actually turned into orders."
         },
-    ]
+    ] 
 
     const showMore = () => {
         setVisibleCount((prev) => prev + 6);

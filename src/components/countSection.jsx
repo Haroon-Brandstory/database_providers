@@ -3,6 +3,7 @@ import Lottie from 'lottie-react';
 import animationData from '../animations/cta-lottie.json';
 import { useInView } from 'react-intersection-observer';
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'use-intl';
 
 // Counter hook
 function useCountUp(target, inView, duration = 1500) {
@@ -86,24 +87,26 @@ function LottieAnimation() {
 }
 
 export default function CountSection() {
+    const t = useTranslations();
+
     const countCardData = [
         {
             title: "Healthcare",
             titleHighlight: "Data",
             contacts: 6,
-            description: "Reach doctors, nurses, hospital administrators, and healthcare executives across the world  verified and compliance-ready.",
+            description: t('home.section2.data1.para'),
         },
         {
             title: "Global Professional",
             titleHighlight: "Data",
             contacts: 15,
-            description: "C-level executives, decision-makers, and working professionals from sectors like IT, finance, HR, and marketing worldwide.",
+            description: t('home.section2.data2.para'),
         },
         {
             title: "Industry",
             titleHighlight: "Data",
             contacts: 9,
-            description: "Pre-segmented email databases for real estate, education, retail, manufacturing, construction, and more.",
+            description: t('home.section2.data3.para'),
         },
     ];
 
@@ -175,10 +178,21 @@ export default function CountSection() {
 
                 <div className="content-on-lotti absolute top-0 bottom-0 place-content-center left-0 right-0">
                     <h3 className="text-[24px] text-black text-center font-medium mb-4">
-                        Custom Data <span className="text-[#00000080]">Solutions</span>
+                        {(() => {
+                            const heading = t('home.section2.buttonHeading');
+                            const words = heading.split(' ');
+                            const lastThree = words.slice(-1).join(' ');
+                            const firstPart = words.slice(0, -1).join(' ');
+                            return (
+                                <>
+                                    {firstPart} <span className="text-[#00000080]">{lastThree}</span>
+                                </>
+                            );
+                        })()}
+                        {/* Custom Data <span className="text-[#00000080]">Solutions</span> */}
                     </h3>
                     <button className="relative bg-black text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in drop-shadow-[0px_0px_15px_#0133E9CC]">
-                        <span className="relative z-10">Tell us what you want</span>
+                        <span className="relative z-10">{t('home.section2.buttonCta')}</span>
                         <span className="absolute inset-0 bg-gradient-to-r from-[#0055ff1a] via-[#0133E9] to-[#0055FF] bg-[length:200%_100%] bg-left transition-all duration-700 ease-in-out rounded-full blur-sm animate-gradient-loop">
                         </span>
                     </button>

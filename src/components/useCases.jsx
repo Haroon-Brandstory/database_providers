@@ -1,46 +1,50 @@
+import { useTranslations } from "next-intl"
+
 export default function useCases() {
+    const t = useTranslations();
 
     const emailBusiness_Content = [
         {
-            title: "Lead Generation for B2B Sales Teams",
-            description: "Use purchased B2B email lists to reach decision-makers across industries and drive more qualified leads into your sales pipeline.",
+            title: t('home.section6.data1.title'),
+            description: t('home.section6.data1.description'),
         },
         {
-            title: "Targeted Email Campaigns by Geography",
-            description: "Run hyper-local campaigns by purchasing email lists based on ZIP code, state, or city to promote regional offers and events.",
+            title: t('home.section6.data2.title'),
+            description: t('home.section6.data2.description'),
         },
         {
-            title: "Healthcare Marketing Outreach",
-            description: "Reach doctors, nurses, hospital administrators, and medical staff with industry-specific databases for healthcare marketing.",
+            title: t('home.section6.data3.title'),
+            description: t('home.section6.data3.description'),
         },
         {
-            title: "Startup Product Launch Campaigns",
-            description: "Launching a new SaaS tool or product? Use verified email leads to reach early adopters and beta users in your target market.",
+            title: t('home.section6.data4.title'),
+            description: t('home.section6.data4.description'),
         },
         {
-            title: "Event Promotion and Webinar Invites",
-            description: "Drive registrations by sending personalized invites to business professionals segmented by role, industry, or interest.",
+            title: t('home.section6.data5.title'),
+            description: t('home.section6.data5.description'),
         },
         {
-            title: "Franchise and Dealer Network Expansion",
-            description: "Find potential franchisees or dealer partners by purchasing industry-focused business contact lists.",
+            title: t('home.section6.data6.title'),
+            description: t('home.section6.data6.description'),
         },
         {
-            title: "Recruitment Campaigns",
-            description: "HR firms and recruiters can directly reach professionals and executives through curated email lists segmented by job role.",
+            title: t('home.section6.data7.title'),
+            description: t('home.section6.data7.description'),
         },
         {
-            title: "Market Research Surveys",
-            description: "Distribute surveys to a targeted audience and collect fast, reliable feedback using pre-verified email contact lists.",
+            title: t('home.section6.data8.title'),
+            description: t('home.section6.data8.description'),
         },
         {
-            title: "Channel Partner and Reseller Outreach",
-            description: "Find value-added resellers, distributors, or white-label partners by using industry-specific email lists.",
+            title: t('home.section6.data9.title'),
+            description: t('home.section6.data9.description'),
         },
         {
-            title: "Promotions for B2C E-Commerce Offers",
-            description: "B2C brands can use consumer email databases to run seasonal sales, cart recovery campaigns, and personalized discounts.",
-        }
+            title: t('home.section6.data10.title'),
+            description: t('home.section6.data10.description'),
+        },
+
     ]
 
     return (

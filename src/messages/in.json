@@ -1,19 +1,176 @@
 {
-	"home": {
-		"title": "होम",
-		"description": "होम पेज"
-	},
-	"nav": {
-		"home": "होम",
-		"resource": "संसाधन",
-		"about": "हमारे बारे में",
-        "blogs": "ब्लॉग्स",
-		"contact": "संपर्क करें",
-        "testimonials": "प्रशंसापत्र"
-	},
-	"banner": {
-		"heading": "अपनी B2B मार्केटिंग रणनीति को परिष्कृत करें",
-		"subheading": "विश्वसनीय डेटा सेवाओं के साथ",
-		"cta": "निःशुल्क नमूना डेटा प्राप्त करें"
-	}
+  "home": {
+    "title": "Home",
+    "description": "Get high-priority data and increase leads and revenue.",
+    "banner": {
+      "heading": "Strengthen Your B2B Marketing with Trusted Data Services",
+      "subheading": "Gain access to premium data in India that drives leads, conversions, and measurable growth.",
+      "cta": "Get a free sample data"
+    },
+    "section1": {
+      "heading": "Your Reliable Partner in B2B Data Services",
+      "para": "Database Providers is a premier B2B data services company in India, offering verified, segmented, and precision-driven data to support your marketing goals. We help businesses scale outreach and execute Account-Based Marketing (ABM) strategies with assurance."
+    },
+    "section2": {
+      "heading": "Total 140 Million Data",
+      "data1": {
+        "heading": "Healthcare Data",
+        "para": "Connect with doctors, surgeons, hospital administrators, and healthcare leaders in India and worldwide. All records are compliant and meticulously verified."
+      },
+      "data2": {
+        "heading": "Global Professional Data",
+        "para": "Access C-level executives, decision-makers, and senior professionals in IT, BFSI, HR, and Marketing sectors worldwide."
+      },
+      "data3": {
+        "heading": "Industry Data",
+        "para": "Industry-specific email lists built for real estate, education, retail, manufacturing, construction, logistics, and more."
+      },
+      "buttonHeading": "Custom Data Solution",
+      "buttonCta": "Custom Data Solution"
+    },
+    "section3": {
+      "sectionHeading": "B2B Email Marketing: A Competitive Edge in India",
+      "sectionPara": "Strengthen your marketing strategy through accurate targeting. Leverage industry-specific insights, localised campaigns, and efficient resource allocation. Data-driven intelligence helps boost engagement, guide decisions, and gain a competitive edge.",
+      "sectionPara2": "",
+      "data1": {
+        "title": "Email Appending",
+        "para": "Enhance your contact database with verified email addresses of relevant executives and decision-makers."
+      },
+      "data2": {
+        "title": "Email Verification",
+        "para": "Maximise deliverability by validating each contact. Ensure your emails reach the right inbox—every time."
+      }
+    },
+    "section4": {
+      "sectionHeading": "Empowering Indian Businesses with Reliable B2B Data",
+      "sectionPara": "Accelerate growth and gain a competitive edge through our scalable, flexible, and quality-first data solutions.",
+      "data1": {
+        "title": "Data Profiling",
+        "description": "Assess data quality, completeness, and effectiveness before use. Ensure every contact delivers value."
+      },
+      "data2": {
+        "title": "Data Scrubbing",
+        "description": "We refine the data by removing duplicate information, errors, and inconsistencies that do not align with the dataset."
+      },
+      "data3": {
+        "title": "Data Validation",
+        "description": "We checklist the data collected for its authenticity and integrity against available standards and rules to ensure they are meant for the intended purpose."
+      }
+    },
+    "section5": {
+      "sectionHeading": "Target Smarter with Advanced Segmentation",
+      "slide1": {
+        "title": "Industry Based Segmentation",
+        "para1": "Industry-based segmentation helps businesses create strategies for specific market sectors. By looking at industry trends, challenges, and opportunities, organizations can improve outreach, make products more relevant, and engage key decision-makers. This targeted approach leads to higher engagement, more qualified leads, and ongoing competitive growth.",
+        "para2": " "
+      },
+      "slide2": {
+        "title": "Job Roles-Based Segmentation",
+        "para1": "The titles and responsibilities of professionals are the main focus of job roles-based segmentation. Businesses can tailor their communications, offer pertinent solutions, and increase engagement by understanding how decision-makers shape choices. For the best business outcomes, this focus guarantees that marketing and sales reach the right audience, increases conversion rates, and forges closer bonds with customers.",
+        "para2": " "
+      },
+      "slide3": {
+        "title": "Region Based Segmentation",
+        "para1": "Geographical, cultural, and local market trends are all taken into consideration by region-based segmentation. Businesses can expand their market reach, improve engagement, and increase relevance by customising campaigns for particular regions. This strategy builds regional brand awareness while assisting organisations in meeting local needs, making efficient use of resources, and experiencing quantifiable growth.",
+        "para2": " "
+      },
+      "slide4": {
+        "title": "Technology Based Segmentation",
+        "para1": "Technology-based segmentation examines customers’ preferred tools, platforms, and digital behaviors. Understanding tech usage enables personalized offerings, optimized communication, and timely solutions. This approach enhances customer engagement, strengthens loyalty, and drives revenue growth by reaching prospects with precise, relevant, and actionable technological insights.",
+        "para2": " "
+      }
+    },
+    "section6": {
+      "sectionHeading": "How Leading Brands Use Our Email Database",
+      "data1": {
+        "title": "Lead Generation for B2B Sales Teams",
+        "description": "Engage CXOs and influencers across sectors to speed up your pipeline and boost conversions."
+      },
+      "data2": {
+        "title": "Geo-Targeted Campaigns",
+        "description": "Launch localised campaigns at the state, city, or pin code level to increase relevance."
+      },
+      "data3": {
+        "title": "Healthcare Marketing",
+        "description": "Reach doctors, directors, and healthcare executives across India for effective outreach."
+      },
+      "data4": {
+        "title": "Startup Product Launches",
+        "description": "Target early adopters and innovators for traction and validation during launch."
+      },
+      "data5": {
+        "title": "Event & Webinar Invites",
+        "description": "Send personalized invites by role, location, or sector to improve attendance."
+      },
+      "data6": {
+        "title": "Franchise & Dealer Expansion",
+        "description": "Identify potential partners in niche or underserved regions with verified contacts."
+      },
+      "data7": {
+        "title": "Recruitment Campaigns",
+        "description": "Target talent by role, industry, and skillset to streamline hiring."
+      },
+      "data8": {
+        "title": "Market Research Surveys",
+        "description": "Gather insights with targeted surveys using reliable contact data."
+      },
+      "data9": {
+        "title": "Channel & Reseller Outreach",
+        "description": "Connect with VARs and system integrators to expand your distribution network."
+      },
+      "data10": {
+        "title": "B2C Promotions",
+        "description": "Leverage accurate consumer data to drive e-commerce campaigns across India."
+      }
+    },
+    "section7": {},
+    "section8": {
+      "sectionHeading": "Elevate Your Sales and Marketing with Precision Data"
+    },
+    "section9": {
+      "sectionHeading": "Seamless Integrations with Major CRMs and Platforms"
+    },
+    "section10": {},
+    "section11": {},
+    "section12": {
+      "sectionHeading": "Still Haven’t Claimed Your Free Sample?",
+      "sectionPara": "Fill in the form to receive a verified sample of our exclusive C-level email list.",
+      "sectionGreenText": "No guesswork. Verified data. Real results."
+    },
+    "faqSection": {
+      "question1": {
+        "q": "What services do Database Providers in India offer?",
+        "ans": "Database Providers in India provide verified and accurate data solutions, helping businesses generate leads, target the right audience and grow efficiently."
+      },
+      "question2": {
+        "q": "How can Database Providers in India benefit my marketing campaigns?",
+        "ans": "Database Providers in India offer targeted and updated email lists, allowing businesses to reach the right customers and increase conversion rates."
+      },
+      "question3": {
+        "q": "Can Database Providers in India customize Email Database Providers services?",
+        "ans": "Yes, Database Providers in India provide tailored email database solutions based on industry, geography, and business needs to ensure maximum relevance."
+      },
+      "question4": {
+        "q": "How reliable are Email Database Providers in India?",
+        "ans": "Email Database Providers in India ensure data is regularly verified and updated, giving businesses access to accurate and actionable email contacts for outreach campaigns."
+      },
+      "question5": {
+        "q": "Why should businesses in India choose Database Providers?",
+        "ans": "By choosing Database Providers in India, businesses gain access to high-quality Email Database Providers and other data solutions that help improve lead generation and marketing ROI."
+      }
+    }
+  },
+  "nav": {
+    "home": "होम",
+    "resource": "संसाधन",
+    "about": "हमारे बारे में",
+    "blogs": "ब्लॉग्स",
+    "contact": "संपर्क करें",
+    "testimonials": "प्रशंसापत्र"
+  },
+  "banner": {
+    "heading": "अपनी B2B मार्केटिंग रणनीति को परिष्कृत करें",
+    "subheading": "विश्वसनीय डेटा सेवाओं के साथ",
+    "cta": "निःशुल्क नमूना डेटा प्राप्त करें"
+  }
 }

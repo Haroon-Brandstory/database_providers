@@ -3,22 +3,24 @@ import Lottie from "lottie-react"
 import animationData from '../animations/email-verification.json'
 import gsap from "gsap";
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 
 export default function BtoBMarketing() {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const cardRefs = useRef([]);
+    const t = useTranslations();
 
     const emailMarketingContent = [
         {
             img: '/btobsection/emailm1.svg',
-            title: 'Email Appending',
-            desc: 'We enhance your database with valid email addresses of key employees and decision-makers lacking in your database.'
+            title: t('home.section3.data1.title'),
+            desc: t('home.section3.data1.para')
         },
         {
             img: '/btobsection/emailm2.svg',
-            title: 'Email Verification',
-            desc: 'We improve the deliverability of your email marketing by verifying the available email addresses and ensuring they reach the desired personnel to bring a big win to your business.'
+            title: t('home.section3.data2.title'),
+            desc: t('home.section3.data2.para')
         },
 
     ]
@@ -51,15 +53,27 @@ export default function BtoBMarketing() {
         <section className="bg-[url('/btobsection/bg-img-btob.png')] bg-cover md:bg-top bg:left pt-16 pb-20 px-4 md:px-20 text-black text-center flex flex-col items-center">
             <div className="container flex flex-col items-center">
                 <div className="tex-center max-w-xl">
-                    <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">B2B Email marketing could <span className="text-[#00000080]">be a game changer</span></h2>
+                    <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">
+                        {(() => {
+                            const heading = t('home.section3.sectionHeading');
+                            const words = heading.split(' ');
+                            const lastThree = words.slice(-3).join(' ');
+                            const firstPart = words.slice(0, -3).join(' ');
+                            return (
+                                <>
+                                    {firstPart} <span className="text-[#00000080]">{lastThree}</span>
+                                </>
+                            );
+                        })()}
+                    </h2>
                 </div>
             </div>
             <div className="container mt-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="content-container flex flex-col">
                         <div className="md:w-160 w-auto">
-                            <p className="text-[16px] text-start text-light text-[#51525C] mb-3">Maximize targeted precision in business strategies by empowering organizations to understand unique industry dynamics, tailor offerings, and effectively allocate resources. </p>
-                            <p className="text-[16px] text-start text-light text-[#51525C]">With granular insights about industry leads, businesses can optimize decision-making, enhance customer engagement, and gain a competitive edge, leading to sustained growth and maximum business success.</p>
+                            <p className="text-[16px] text-start text-light text-[#51525C] mb-3">{t('home.section3.sectionPara')}</p>
+                            <p className="text-[16px] text-start text-light text-[#51525C]"> {t('home.section3.sectionPara2')}</p>
                         </div>
                         <div className="email-tech flex flex-col gap-4 pt-10">
                             {emailMarketingContent.map((item, index) => (

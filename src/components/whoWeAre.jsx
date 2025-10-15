@@ -1,10 +1,12 @@
 "use client"
 import { useRef, useState } from "react";
 import gsap from "gsap";
+import { useTranslations } from "next-intl";
 
 export default function WhoWeAre() {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const cardRefs = useRef([]);
+    const t = useTranslations();
 
     const stats = [
         {
@@ -77,10 +79,21 @@ export default function WhoWeAre() {
                 <div className="tex-center max-w-4xl">
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">Who We Are</h5>
                     <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">
-                        Your Data Enthusiasts For <span className="block text-[#00000080]">B2B Marketing</span>
+                        {(() => {
+                            const heading = t('home.section1.heading');
+                            const words = heading.split(' ');
+                            const lastThree = words.slice(-3).join(' ');
+                            const firstPart = words.slice(0, -3).join(' ');
+                            return (
+                                <>
+                                    {firstPart} <span className="block text-[#00000080]">{lastThree}</span>
+                                </>
+                            );
+                        })()}
                     </h2>
+
                     <p className="text-center text-[16px] text-[#54555F] pt-5 max-w-3xl">
-                        Database Providers is a reputable data service company in the USA specializing in segmenting and optimizing key data information. We enhance your business outreach and ABM marketing goals through accurate and authentic data.
+                        {t('home.section1.para')}
                     </p>
                 </div>
 

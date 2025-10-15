@@ -40,9 +40,9 @@ export default function LatestBlogs() {
                                         alt="blog_demo"
                                         className="rounded-xl w-full h-[180px] object-cover mb-6"
                                     />
-                                    <p className="text-[#222] text-[16px]  font-normal mb-6">
+                                    <h3 className="text-[#222] text-[16px]  font-normal mb-6">
                                         {item?.blogDesc}
-                                    </p>
+                                    </h3>
                                     <a
                                         href={item?.blogRedirection} target="_blank"
                                         className="text-[#2C6BFF] font-medium flex items-center mb-4 gap-1"

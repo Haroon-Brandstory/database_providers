@@ -6,24 +6,8 @@ import 'swiper/css';
 import 'swiper/css/effect-cards';
 import { EffectCards, Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
+import { useTranslations } from 'next-intl';
 
-const services = [
-    {
-        icon: "/servicesection/service_testi_icon1.svg",
-        title: "Data Scrubbing",
-        description: "We refine the data by removing duplicate information, errors, and inconsistencies that do not align with the dataset."
-    },
-    {
-        icon: "/servicesection/service_testi_icon2.svg",
-        title: "Data Profiling",
-        description: "We assess the data's usability, quality, insights, and other patterns before providing it to the users."
-    },
-    {
-        icon: "/servicesection/service_testi_icon3.svg",
-        title: "Data Validation",
-        description: "We check the data collected for its authenticity and integrity against available standards and rules to ensure they are meant for the intended purpose."
-    }
-];
 
 function ServiceCard({ icon, title, description }) {
     return (
@@ -54,6 +38,25 @@ function ServiceCard({ icon, title, description }) {
 export default function ServiceSection() {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+    const t = useTranslations();
+
+    const services = [
+        {
+            icon: "/servicesection/service_testi_icon1.svg",
+            title: t('home.section4.data1.title'),
+            description: t('home.section4.data1.description')
+        },
+        {
+            icon: "/servicesection/service_testi_icon2.svg",
+            title: t('home.section4.data2.title'),
+            description: t('home.section4.data2.description')
+        },
+        {
+            icon: "/servicesection/service_testi_icon3.svg",
+            title: t('home.section4.data3.title'),
+            description: t('home.section4.data3.description')
+        }
+    ];
 
     return (
         <section className="py-20 px-4 md:px-20 bg-[url('/servicesection/sevice_banner.png')] overflow-hidden bg-center bg-cover">
@@ -62,10 +65,24 @@ export default function ServiceSection() {
                     <div className="text-start max-w-4xl flex flex-col justify-center">
                         <h5 className="text-[#2C6BFF] text-[16px] font-medium">Services</h5>
                         <h2 className="text-white lg:text-[36px] text-[28px] font-medium mb-6">
-                            Empower Businesses <span className="block">with exceptional <span className="text-[#5673F6]">B2B data solutions</span></span>
+                            {(() => {
+                                const heading = t('home.section4.sectionHeading');
+                                const words = heading.split(' ');
+                                const lastThree = words.slice(-3).join(' ');
+                                const firstPart = words.slice(0, -3).join(' ');
+
+                                return (
+                                    <>
+                                        {firstPart}
+                                        <span className="block">
+                                            <span className="text-[#5673F6]">{lastThree}</span>
+                                        </span>
+                                    </>
+                                );
+                            })()}
                         </h2>
                         <p className="text-[#D0D0D0] text-[16px] font-light w-[90%]">
-                            With unmatched flexibility, unwavering data purity, and deep business acumen, we empower you to drive growth, seize opportunities, and stay ahead of the competition with the following data services.
+                            {t('home.section4.sectionPara')}
                         </p>
                     </div>
                     <div className="text-start flex flex-col items-center justify-center">
@@ -86,7 +103,7 @@ export default function ServiceSection() {
                                 });
                             }}>
                             {services.map((service, idx) => (
-                                <SwiperSlide key={idx} style={{ display: "flex"}}>
+                                <SwiperSlide key={idx} style={{ display: "flex" }}>
                                     <ServiceCard {...service} />
                                 </SwiperSlide>
                             ))}

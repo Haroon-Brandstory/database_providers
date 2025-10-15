@@ -1,36 +1,51 @@
 "use client";
-import { useState } from "react";
+import { useTranslations } from "next-intl";
+import Script from "next/script";
+import { useMemo, useState } from "react";
 
-const faqs = [
-    {
-        question: "What are the data attributes you provide us with?",
-        answer: "As per your requirement, we provide the following data elements business mail-id, key executive's names and LinkedIn URLs, company name, industry name, employee size, company domain,  and job designation.",
-    },
-    {
-        question: "What are the advantages of data-driven marketing?",
-        answer: "With our data, you can gain insights about key personnel, company decision maker's email-id, and employer size. With the provided insights, you can,",
-        liAnsers: ["Increase sales and marketing efficiency", "Gain higher lead generation", "Improve Customer Retention", "Enhance Targeting & Personalization"]
-    },
-    {
-        question: "For what industries do you provide data?",
-        answer: "At database providers, we work with all industries, from healthcare, manufacturing, technology, education, and many more. We will provide data as per your required industry verticals.",
-    },
-    {
-        question: "In what format do you provide the data?",
-        answer: "We provide the data in Excel format for easy access.",
-    },
-    {
-        question: "Do you verify the data before outsourcing?",
-        answer: "Yes. We provide only accurate and reliable information to help your business reach the right lead.",
-    },
-    {
-        question: "Can you provide data from small businesses too?",
-        answer: "Absolutely. We value our customers, and their requirement is what drives our business. So we provide data from companies that have employee sizes 1-50,51-100,101-250,251-500,501-1000,1001-2500,2501-5000,5000 & above."
-    },
-];
+
 
 export default function HomeFaqSection() {
     const [openIndex, setOpenIndex] = useState(null);
+    const t = useTranslations();
+
+    const faqs = [
+        {
+            question: t('home.faqSection.question1.q'),
+            answer: t('home.faqSection.question1.ans'),
+        },
+        {
+            question: t('home.faqSection.question2.q'),
+            answer: t('home.faqSection.question2.ans'),
+        },
+        {
+            question: t('home.faqSection.question3.q'),
+            answer: t('home.faqSection.question3.ans'),
+        },
+        {
+            question: t('home.faqSection.question4.q'),
+            answer: t('home.faqSection.question4.ans'),
+        },
+        {
+            question: t('home.faqSection.question5.q'),
+            answer: t('home.faqSection.question5.ans'),
+        }
+    ];
+
+    const faqSchema = useMemo(() => {
+        return {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.answer
+                }
+            }))
+        };
+    }, [faqs]);
 
     const handleAccordion = (i) => {
         setOpenIndex(prev => (prev === i ? null : i));
@@ -38,6 +53,11 @@ export default function HomeFaqSection() {
 
     return (
         <section className="pt-10 pb-24 bg-white flex flex-col items-center text-black">
+            <Script
+                id="faq-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             <div className="max-w-5xl container lg:px-0 px-1 w-full mx-auto flex flex-col items-center">
                 <div className="text-center max-w-4xl mb-12">
                     <h2 className="text-[#000000] lg:text-[36px] text-[28px] font-medium">FAQ's</h2>

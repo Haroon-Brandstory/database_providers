@@ -127,7 +127,11 @@
         "description": "Run local eCommerce and promotional campaigns using verified consumer data."
       }
     },
-    "section7": {},
+    "section7": {
+      "heading": "Delivering Accuracy, Compliance & Growth",
+      "para1": "With deep regional understanding and global data capabilities, we empower businesses in the market smarter and scale faster.",
+      "para2": " "
+    },
     "section8": {
       "sectionHeading": "Supercharge Your Sales & Marketing with Data-Driven Decisions"
     },
@@ -176,5 +180,10 @@
 		"heading": "حسِّن استراتيجية تسويق B2B الخاصة بك",
 		"subheading": "مع خدمات بيانات موثوقة",
 		"cta": "احصل على عينة بيانات مجانية"
-	}
+	},"about": {
+    "seo": {
+      "title": "About Us | Database Providers - UAE",
+      "description": "Learn more about Database Providers, a leading B2B data service company dedicated to providing accurate and customized data solutions to help businesses connect with their target audience and drive growth."
+    }
+  }
 }

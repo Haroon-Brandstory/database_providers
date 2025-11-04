@@ -191,7 +191,7 @@ export default function CountSection() {
                         })()}
                         {/* Custom Data <span className="text-[#00000080]">Solutions</span> */}
                     </h3>
-                    <button className="relative bg-black text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in drop-shadow-[0px_0px_15px_#0133E9CC]">
+                    <button className="relative gtm-button bg-black text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in drop-shadow-[0px_0px_15px_#0133E9CC]">
                         <span className="relative z-10">{t('home.section2.buttonCta')}</span>
                         <span className="absolute inset-0 bg-gradient-to-r from-[#0055ff1a] via-[#0133E9] to-[#0055FF] bg-[length:200%_100%] bg-left transition-all duration-700 ease-in-out rounded-full blur-sm animate-gradient-loop">
                         </span>

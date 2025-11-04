@@ -5,7 +5,7 @@ import { useTranslations } from "use-intl";
 export default function WaterEffectSection() {
     const t = useTranslations()
     return (
-        <section className="relative h-[200px] md:h-[350px] w-full flex items-center justify-center overflow-hidden">
+        <section className="relative h-[200px] rounded md:h-[350px] w-full flex items-center justify-center overflow-hidden">
             {/* SVG Background */}
             <div className="absolute inset-0 w-full h-full z-0">
                 <Image
@@ -31,7 +31,7 @@ export default function WaterEffectSection() {
                         );
                     })()}
                 </h2>
-                <button className="md:mt-4 md:px-6 px-6 text-[12px] md:text-[18px] py-3 bg-white text-blue-700 font-medium rounded-full shadow-md hover:bg-blue-100 transition-all">
+                <button className="md:mt-4 gtm-button md:px-6 px-6 text-[12px] md:text-[18px] py-3 bg-white text-blue-700 font-medium rounded-full shadow-md hover:bg-blue-100 transition-all">
                     Get a free sample data
                 </button>
             </div>

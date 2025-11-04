@@ -1,0 +1,6 @@
+# robots.txt for https://www.thedatabaseproviders.com/
+
+User-agent: *
+Disallow: 
+
+Sitemap: https://www.thedatabaseproviders.com/global-sitemap.xml

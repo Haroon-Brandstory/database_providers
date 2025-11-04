@@ -78,7 +78,7 @@ export default function HomeFaqSection() {
                                         aria-controls={`faq-content-${i}`}
                                     >
                                         <span className="block mb-2">
-                                            {i + 1}. {faq.question}
+                                            <h3>{i + 1}. {faq.question}</h3>
                                         </span>
                                     </button>
                                     <button

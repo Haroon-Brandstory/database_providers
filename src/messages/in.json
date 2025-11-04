@@ -1,8 +1,8 @@
 {
   "home": {
-     "seo":{
-      "title":"Database Providers | B2B Database providers in India",
-      "description":"Connect with decision-makers faster. Database Providers is a leading name in B2B database providers in India for targeted and reliable contacts."
+    "seo": {
+      "title": "Database Providers | B2B Database providers in India",
+      "description": "Connect with decision-makers faster. Database Providers is a leading name in B2B database providers in India for targeted and reliable contacts."
     },
     "title": "Home",
     "description": "Get high-priority data and increase leads and revenue.",
@@ -30,7 +30,7 @@
         "para": "Industry-specific email lists built for real estate, education, retail, manufacturing, construction, logistics, and more."
       },
       "buttonHeading": "Custom Data Solution",
-      "buttonCta": "Custom Data Solution"
+      "buttonCta": "Tell us what you want"
     },
     "section3": {
       "sectionHeading": "B2B Email Marketing: A Competitive Edge in India",
@@ -127,7 +127,11 @@
         "description": "Leverage accurate consumer data to drive e-commerce campaigns across India."
       }
     },
-    "section7": {},
+    "section7": {
+      "heading": "Accuracy. Security. Growth.",
+      "para1": "As a trusted B2B data provider, our experienced team and robust technology ensure quality at every stage. We empower businesses with data-driven insights to craft personalized strategies, engage prospects and scale efficiently.",
+      "para2": " "
+    },
     "section8": {
       "sectionHeading": "Elevate Your Sales and Marketing with Precision Data"
     },
@@ -176,5 +180,11 @@
     "heading": "अपनी B2B मार्केटिंग रणनीति को परिष्कृत करें",
     "subheading": "विश्वसनीय डेटा सेवाओं के साथ",
     "cta": "निःशुल्क नमूना डेटा प्राप्त करें"
+  },
+  "about": {
+    "seo": {
+      "title": "About Us | Database Providers - IN",
+      "description": "Learn more about Database Providers, a leading B2B data service company dedicated to providing accurate and customized data solutions to help businesses connect with their target audience and drive growth."
+    }
   }
 }

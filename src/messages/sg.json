@@ -1,8 +1,8 @@
 {
   "home": {
-    "seo":{
-      "title":"Database Providers | B2B Database providers in Singapore",
-      "description":"Scale your business with Database Providers, reliable B2B database providers in Singapore offering accurate, industry-specific contact databases."
+    "seo": {
+      "title": "Database Providers | B2B Database providers in Singapore",
+      "description": "Scale your business with Database Providers, reliable B2B database providers in Singapore offering accurate, industry-specific contact databases."
     },
     "title": "Home",
     "description": "Get high-priority data and increase leads and revenue.",
@@ -30,7 +30,7 @@
         "para": "From Orchard Road retail to Jurong industrial sectors — access segmented databases across sectors."
       },
       "buttonHeading": "Custom Data Solution",
-      "buttonCta": "Custom Data Solution"
+      "buttonCta": "Tell us what you want"
     },
     "section3": {
       "sectionHeading": "The Smart Way to Grow Your Pipeline in Singapore",
@@ -62,7 +62,7 @@
       }
     },
     "section5": {
-      "sectionHeading": "Target Smarter with Advanced Segmentation",
+      "sectionHeading": "Optimize Targeting with Smart Segmentation",
       "slide1": {
         "title": "Industry Based Segmentation",
         "para1": "Businesses can concentrate on particular market segments by using industry-based segmentation. Businesses can establish connections with important decision-makers, provide pertinent solutions, and increase engagement by examining trends, obstacles, and opportunities. This tactic improves overall market positioning and guarantees higher-quality leads.",
@@ -127,7 +127,11 @@
         "description": "Engage Singaporean consumers with personalized email campaigns for seasonal offers, cart recovery, and exclusive deals."
       }
     },
-    "section7": {},
+    "section7": {
+      "heading": "Reliable, High-Precision B2B Data at Your Fingertips",
+      "para1": "As a leading B2B data service provider in Singapore, we are supported by experienced professionals and industry specialists at every stage of the data processing journey.",
+      "para2": "We proudly serve the B2B market with advanced analytics and cutting-edge technology—delivering tailored strategies, qualified prospects, and scalable growth for our clients’ businesses."
+    },
     "section8": {
       "sectionHeading": "Boost Business and Marketing Performance Through Data-Driven Insights"
     },
@@ -176,5 +180,11 @@
     "heading": "Refine Your B2B Marketing Strategy",
     "subheading": "With Trusted Data Services",
     "cta": "Get a free sample data"
+  },
+  "about": {
+    "seo": {
+      "title": "About Us | Database Providers - SGP",
+      "description": "Learn more about Database Providers, a leading B2B data service company dedicated to providing accurate and customized data solutions to help businesses connect with their target audience and drive growth."
+    }
   }
 }

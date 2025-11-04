@@ -8,16 +8,16 @@ import { useNavHref } from "@/hooks/useNavHref";
 const languages = [
 	{ code: "en", label: "English", flag: "/header/flag5.svg" },
 	{ code: "in", label: "English (IN)", flag: "/header/flag1.svg" },
-	{ code: "uae", label: "Arabic (UAE)", flag: "/header/flag2.svg" },
-	{ code: "sgp", label: "English (SGP)", flag: "/header/flag3.svg" },
-	{ code: "tur", label: "Turkish", flag: "/header/flag4.svg" },
+	{ code: "ae", label: "Arabic (UAE)", flag: "/header/flag2.svg" },
+	{ code: "sg", label: "English (SGP)", flag: "/header/flag4.svg" },
+	{ code: "my", label: "Malaysia", flag: "/header/flag3.svg" },
 ];
 
 function LanguageDropdown() {
 	const getLocaleFromPath = (pathname) => {
 		const parts = pathname.split("/");
 		const maybeLocale = parts[1];
-		const supported = ["en", "in", "uae", "sgp", "tur"];
+		const supported = ["en", "in", "ae", "sg", "my"];
 		return supported.includes(maybeLocale) ? maybeLocale : "en";
 	};
 	const pathname = usePathname();
@@ -105,7 +105,7 @@ export default function Header() {
 	const getLocaleFromPath = (pathname) => {
 		const parts = pathname.split("/");
 		const maybeLocale = parts[1];
-		const supported = ["en", "in", "uae", "sgp", "tur"];
+		const supported = ["en", "in", "ae", "sg", "tur"];
 		return supported.includes(maybeLocale) ? maybeLocale : "en";
 	};
 	const pathname = usePathname();

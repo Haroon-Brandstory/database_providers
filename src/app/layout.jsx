@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Script from "next/script";
+import { getLocale } from "next-intl/server";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -13,9 +14,21 @@ export const metadata = {
   description: "Your trusted source for database solutions",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+
+  const locale = await getLocale();
+
+  const localeMap = {
+    en: 'en-US',
+    in: 'en-IN',
+    ae: 'en-AE',
+    sg: 'en-SG',
+    my: 'en-MY'
+  };
+  const lang = localeMap[locale] || 'en-US';
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head />
       <body
         className={`antialiased min-h-screen ${interDisplay.variable} ${interTight.variable}`}

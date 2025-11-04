@@ -1,8 +1,8 @@
 {
   "home": {
-    "seo":{
-      "title":"Database Providers | Global B2B Database providers",
-      "description":"Database Providers is your global source for quality B2B database providers, helping brands connect, engage, and grow with verified business contacts."
+    "seo": {
+      "title": "Database Providers | Global B2B Database providers",
+      "description": "Database Providers is your global source for quality B2B database providers, helping brands connect, engage, and grow with verified business contacts."
     },
     "title": "Home",
     "description": "Get high-priority data and increase leads and revenue.",
@@ -30,7 +30,7 @@
         "para": "Pre-segmented email databases for real estate, education, retail, manufacturing, construction, and more."
       },
       "buttonHeading": "Custom Data Solution",
-      "buttonCta": "Custom Data Solution"
+      "buttonCta": "Tell us what you want"
     },
     "section3": {
       "sectionHeading": "Make B2B Email Marketing a Game Changer",
@@ -127,7 +127,11 @@
         "description": "B2C brands can use consumer email databases to run seasonal sales, cart recovery campaigns, and personalized discounts."
       }
     },
-    "section7": {},
+    "section7": {
+      "heading": "Get your B2B Data With Accuracy & Reliability",
+      "para1": "As a leading B2B data service provider in the USA, we are backed by professionals and industry experts in every step of the data processing journey.",
+      "para2": "We continue to serve the B2B market with advanced analytics and technology that empower our client’s businesses with personalized strategies, potential prospects, and exponential growth."
+    },
     "section8": {
       "sectionHeading": "Enhance your Business and Marketing efforts with a Data-Driven Strategy!"
     },
@@ -176,5 +180,11 @@
     "heading": "Refine Your B2B Marketing Strategy",
     "subheading": "With Trusted Data Services",
     "cta": "Get a free sample data"
+  },
+  "about": {
+    "seo": {
+      "title": "About Us | Database Providers - EN",
+      "description": "Learn more about Database Providers, a leading B2B data service company dedicated to providing accurate and customized data solutions to help businesses connect with their target audience and drive growth."
+    }
   }
 }

@@ -44,7 +44,6 @@ export default function useCases() {
             title: t('home.section6.data10.title'),
             description: t('home.section6.data10.description'),
         },
-
     ]
 
     return (
@@ -58,17 +57,14 @@ export default function useCases() {
                 </div>
                 <div className="bg-[#F0F0FF] w-full lg:p-10 p-3 rounded-[20px]">
                     <div className="grid md:grid-cols-2 grid-cols-1  ">
-                        {
-                            emailBusiness_Content.map((item, index) => (
-
-                                <div key={index} className="parent-text flex flex-col border-b-1 border-[#00000033] m-5">
-                                    <h4 className="lg:text-[24px] text-[20px] font-[500] text-black mb-6">{item.title}</h4>
-                                    <p className="text-[#51525C] text-[16px] mb-8">{item.description}</p>
-                                </div>
-                            ))
+                        {emailBusiness_Content.map((item, index) => (
+                            <div key={index} className="parent-text flex flex-col border-b-1 border-[#00000033] m-5">
+                                <h3 className="lg:text-[24px] text-[20px] font-[500] text-black mb-6">{item.title}</h3>
+                                <p className="text-[#51525C] text-[16px] mb-8">{item.description}</p>
+                            </div>
+                        ))
                         }
                     </div>
-
                 </div>
             </div>
         </section>

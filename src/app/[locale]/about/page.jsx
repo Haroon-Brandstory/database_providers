@@ -5,6 +5,27 @@ import SvgMap from "@/components/about/svgMap";
 import AboutVisionMission from "@/components/about/visionMission";
 import InstantAccessSection from "@/components/instantAccessSection";
 
+import { getTranslations } from 'next-intl/server';
+
+/**
+ * @param {{ params: { locale: string } }} context
+ */
+export async function generateMetadata({ params: paramsPromise }) {
+    const params = await paramsPromise;
+
+    const t = await getTranslations({ locale: params.locale, namespace: 'about' });
+
+    const title = t('seo.title');
+    const description = t('seo.description');
+    const canonical = `https://www.thedatabaseproviders.com/${params.locale == 'en' ? "" : params.locale + '/'}about`;
+
+    return {
+        title,
+        description,
+        alternates: { canonical },
+        robots: { index: true, follow: true },
+    };
+}
 export default function AboutUs() {
 
     const dataForInstantAcces = {

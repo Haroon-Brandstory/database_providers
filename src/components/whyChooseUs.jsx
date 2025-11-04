@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,6 +44,7 @@ export default function WhyChooseUs() {
     const sectionRef = useRef(null);
     const scrollRef = useRef(null);
     const [isMobile, setIsMobile] = useState(false);
+    const t = useTranslations();
 
     // useEffect(() => {
     //     // Set isMobile on mount and on resize
@@ -111,18 +113,29 @@ export default function WhyChooseUs() {
         >
             <div className="w-full flex flex-col items-center justify-center">
                 <div className="text-center max-w-4xl flex flex-col justify-center mb-6">
-                    <h5 className="text-[#2C6BFF] text-[16px] font-medium">Why Choose Us</h5>
-                    <h2 className="text-white lg:text-[36px] text-[28px] font-medium mb-3">
-                        Get your B2B Data With{" "}
-                        <span className="block">
-                            <span className="text-[#5673F6]">Accuracy & Reliability</span>
-                        </span>
-                    </h2>
+                    <h2 className="text-[#2C6BFF] text-[16px] font-medium">Why Choose Us</h2>
+                    {(() => {
+                        const heading = t('home.section7.heading');
+                        const words = heading.split(" ");
+                        const mid = Math.ceil(words.length / 2);
+                        const firstHalf = words.slice(0, mid-1).join(" ");
+                        const secondHalf = words.slice(mid-1).join(" ");
+
+                        return (
+                            <h2 className="text-white lg:text-[36px] text-[28px] font-medium mb-3">
+                                {firstHalf}
+                                <span className="block">
+                                    <span className="text-[#5673F6]">{secondHalf}</span>
+                                </span>
+                            </h2>
+                        );
+                    })()}
+
                     <p className="text-center text-[#D0D0D0] text-[16px] pb-3">
-                        As a leading B2B data service provider in the USA, we are backed by professionals and industry experts in every step of the data processing journey.
+                        {t('home.section7.para1')}
                     </p>
                     <p className="text-center text-[#D0D0D0] text-[16px] pb-3">
-                        We continue to serve the B2B market with advanced analytics and technology that empower our client’s businesses with personalized strategies, potential prospects, and exponential growth.
+                        {t('home.section7.para2')}
                     </p>
                 </div>
                 {/* Horizontal Scroll Section */}
@@ -141,7 +154,7 @@ export default function WhyChooseUs() {
                                     <Image src={item.img} width={52} height={52} alt="img" />
                                 </div>
                                 <div className="card-content">
-                                    <h4 className="text-white text-[24px] font-semibold mb-2">{item.title}</h4>
+                                    <h3 className="text-white text-[24px] font-semibold mb-2">{item.title}</h3>
                                     <p className="text-[14px] text-white font-normal">{item.description}</p>
                                 </div>
                             </div>

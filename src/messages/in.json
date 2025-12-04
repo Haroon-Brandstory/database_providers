@@ -185,6 +185,92 @@
     "seo": {
       "title": "About Us | Database Providers - IN",
       "description": "Learn more about Database Providers, a leading B2B data service company dedicated to providing accurate and customized data solutions to help businesses connect with their target audience and drive growth."
+    },
+    "section1": {
+      "para1": "With more than 10+ years of experience, we deliver verified and accurate B2B email databases that align with your business goals. Headquartered in the USA and trusted in 190+ countries, we help you connect with key decision-makers and improve marketing performance. ",
+      "para2": "We operate across major global locations, including the USA, India, the UAE, Singapore, Malaysia, and Dubai, ensuring seamless support and accessible service for clients worldwide. Our commitment to quality, compliance, and scalable reach ensures your business grows with confidence.",
+      "cta": "Get Verified B2B Data Now"
+    },
+    "section2": {
+      "title":"Accelerate Market Reach with Compliant, Insight-Driven Data",
+      "vision": {
+        "heading": "Vision",
+        "para": "To be the world’s most trusted partner in B2B data solutions, empowering businesses with fully verified, compliant, and ready-to-use data that drives smarter marketing, scalable lead generation, and lasting business growth through insight-driven strategies."
+      },
+      "mission": {
+        "heading": "Mission",
+        "para": "Deliver high-quality, verified B2B email databases and data solutions that empower businesses to scale lead generation, reach the right decision-makers, expand their market presence, and achieve measurable marketing success, while maintaining the highest standards of data privacy, security, and integrity."
+      }
+    },
+    "section3": {
+      "title": "Global B2B Data",
+      "title2": "Worldwide Email Contacts. Accurate and Compliant.",
+      "cta": "Explore More"
+    },
+    "section4": {
+      "title": "Industries we serve",
+      "healthcare": {
+        "title": "Healthcare",
+        "para": "Reach top healthcare professionals, decision-makers, and administrators with precision-targeted B2B data. Our U.S. healthcare database includes verified contact details across hospitals, clinics, pharma companies, and medical institutions, enabling compliant, high-impact outreach and meaningful partnership growth."
+      },
+      "globalProfessionalData": {
+        "title": "Global Professional Data",
+        "para": "Expand your business reach with verified global professional contacts in more than 190 countries. Our database covers C-level executives, senior leaders, managers, and niche specialists, all segmented by geography, role, and industry to help you execute smarter, faster, and fully GDPR-compliant marketing."
+      },
+      "industryData": {
+        "title": "Industry Data",
+        "para": "Get tailored B2B datasets across industries like manufacturing, finance, technology, and logistics. We segment data by company size, job title, tech stack, and additional firmographic layers to support real-time, high-converting campaigns with precision and compliance."
+      }
+    },
+    "section5": {
+      "title": "Client Reviews",
+      "review1": {
+        "reviewer": "Marketing Head",
+        "review": "Their accurate and well-segmented B2B data elevated our campaign performance across every channel. We saw faster conversions and stronger engagement from day one."
+      },
+      "review2": {
+        "reviewer": "Product Manager",
+        "review": "The datasets were clean, structured, and easy to integrate into our systems. It immediately improved product functionality and reduced internal processing time."
+      },
+      "review3": {
+        "reviewer": "CEO",
+        "review": "Their data quality and global coverage directly contributed to our expansion into new markets. A trustworthy partner that consistently supports sustainable growth."
+      }
+    },
+    "section6": {
+      "title": "Empower Your Business with Smart Data Solutions",
+      "para": "Reach the right audience with precision. Our targeted U.S. and global B2B databases give you direct access to key decision-makers across industries, enabling stronger engagement and measurable marketing results.",
+      "cta": "Contact Us"
+    }
+  },
+  "contact-us": {
+    "seo": {
+      "title": "Contact Database Providers (India)",
+      "description": "Database Providers India is here to assist you. Contact us for accurate B2B database services tailored to your sales and marketing needs."
+    },
+    "section1": {
+      "title": "Let’s Build Smarter Campaigns Together",
+      "content": "Looking for high-quality, verified B2B data tailored to your market? Share your requirements and our specialists will assist you in finding the right solution to drive better outreach and conversions."
+    }
+  },
+  "testimonials": {
+    "seo": {
+      "title": "Testimonials | Database Providers ( India )",
+      "description": "Discover what our clients say about Database Providers in India. Trusted for accurate business data, verified contacts, and exceptional service quality."
+    },
+    "section1": {
+      "title": "Testimonials",
+      "description": "Our clients share their stories of success built on quality and dependable service."
+    }
+  },
+  "videos": {
+    "seo": {
+      "title": "Videos | Database Providers ( India )",
+      "description": "Watch the latest videos from Database Providers in India showcasing our data solutions, client success stories, and insights into reliable business growth."
+    },
+    "section1": {
+      "title": "Videos",
+      "description": "Discover videos featuring client success stories and our service expertise."
     }
   }
 }

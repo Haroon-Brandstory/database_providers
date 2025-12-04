@@ -54,6 +54,7 @@ function LanguageDropdown() {
 		const pathWithoutLocale =
 			pathname.replace(new RegExp(`^/${locale}`), "") || "/";
 		router.push(`/${newLocale}${pathWithoutLocale}`);
+		// window.location.href = `/${newLocale}${pathWithoutLocale}`;
 		setOpen(false);
 	};
 
@@ -131,8 +132,8 @@ export default function Header() {
 	const { navHref } = useNavHref();
 
 	const isActive = (target) => {
-		const cleanPath = pathname.replace(/^\/(en|in|uae|sgp|tur)(?=\/|$)/, "");
-		const cleanTarget = target.replace(/^\/(en|in|uae|sgp|tur)(?=\/|$)/, "");
+		const cleanPath = pathname.replace(/^\/(en|in|uae|my|tur)(?=\/|$)/, "");
+		const cleanTarget = target.replace(/^\/(en|in|uae|my|tur)(?=\/|$)/, "");
 		return cleanPath === cleanTarget;
 	};
 
@@ -195,7 +196,7 @@ export default function Header() {
 							Blogs
 						</Link>
 						<Link
-							href={"/testimonials"}
+							href={navHref("/testimonials")}
 							className={`hover:text-blue-400 text-white ${isActive("/testimonials") ? "border-b-2 border-[#0133E9]" : ""
 								}`}
 						>
@@ -215,7 +216,7 @@ export default function Header() {
 					{/* Desktop Actions */}
 					<div className="hidden lg:flex items-center gap-10">
 						<LanguageDropdown />
-						<Link href={"/contact-us"}>
+						<Link href={navHref("/contact-us")}>
 							<button className="header_cta_contact">
 								{/* {t("nav.contact", { defaultMessage: "Contact Us" })} */}
 								Contact Us
@@ -267,7 +268,7 @@ export default function Header() {
 							{/* {t("nav.about", { defaultMessage: "About Us" })} */}
 						</Link>
 						<Link
-							href={"/contact-us"}
+							href={navHref("/contact-us")}
 							className={`hover:text-blue-400 ${isActive(navHref("/contact-us")) ? "text-blue-400" : ""
 								}`}
 							onClick={() => setIsMenuOpen(false)}

@@ -1,5 +1,5 @@
 "use client";
-
+import parser from "html-react-parser";
 import { useEffect, useState } from "react";
 
 export default function EachBlogContent({ blog }) {
@@ -80,6 +80,9 @@ export default function EachBlogContent({ blog }) {
                                     }
                                     return null;
                                 })}
+
+                                {/* {parser(blog.blogContents?.[0]?.newTestContent)} */}
+                                {/* the above line is for testing using the html-react-parser package */}
                             </div>
                         </article>
                     </div>

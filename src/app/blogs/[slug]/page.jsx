@@ -15,6 +15,7 @@ export default async function BlogDetails({ params }) {
     const { slug } = await params;
     const res = await getBlogBySlug(slug);
     const blog = res?.data?.[0];
+    console.log("to check how the blog is coming",blog);
     if (!blog) {
         return notFound();
     }

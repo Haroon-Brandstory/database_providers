@@ -100,7 +100,7 @@ export default function Segmentation() {
                     <h5 className="text-[#2C6BFF] text-[16px] font-medium">
                         Types of Segmentation
                     </h5>
-                    <h3 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
+                    <h2 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
                         {(() => {
                             const heading = t('home.section5.sectionHeading');
                             const words = heading.split(' ');
@@ -112,7 +112,7 @@ export default function Segmentation() {
                                 </>
                             );
                         })()}
-                    </h3>
+                    </h2>
                 </div>
 
                 <div className="cards mx-auto max-w-6xl mt-16 space-y-16">
@@ -127,7 +127,7 @@ export default function Segmentation() {
                 flex flex-col lg:flex-row bg-white rounded-xl overflow-hidden shadow-xl origin-top min-h-[500px] p-6 lg:p-12"
                             >
                                 <div className="text-start flex-1 flex flex-col justify-center">
-                                    <h2 className="text-2xl text-black font-bold mb-2">{item.title}</h2>
+                                    <h3 className="text-2xl text-black font-bold mb-2">{item.title}</h3>
                                     <p className="text-gray-700 mb-2 text-sm md:text-base">
                                         {item.description}
                                     </p>

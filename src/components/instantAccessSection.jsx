@@ -1,8 +1,10 @@
 "use client";
+import { useNavHref } from "@/hooks/useNavHref";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function InstantAccessSection({ data }) {
+    const { navHref } = useNavHref();
     return (
         <section className="relative h-[320px] md:h-[350px]  w-full flex items-center justify-center overflow-hidden">
             {/* SVG Background */}
@@ -21,7 +23,7 @@ export default function InstantAccessSection({ data }) {
                     {data.sectionTitle}
                 </h2>
                 <p className="text-white max-w-3xl text-center mb-3">{data.sectionDescription}</p>
-                <Link href={data.button.buttonURL}>
+                <Link href={navHref(data.button.buttonURL)}>
                     <button className="md:mt-4 md:px-6 cursor-pointer px-6 text-[12px] md:text-[18px] py-2 bg-white text-blue-700 font-medium rounded-full shadow-md hover:bg-blue-100 transition-all">
                         {data.button.buttonLabel}
                     </button>

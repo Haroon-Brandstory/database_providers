@@ -10,21 +10,21 @@ export default function TestimonialAbout() {
     const testimonialContent = [
         {
             rating: 4,
-            comments: "I've been consistently impressed with the quality of service provided by this website. They have exceeded my expectations and delivered exceptional results. Highly recommended!",
+            comments: "Their data quality and global coverage directly contributed to our expansion into new markets. A trustworthy partner that consistently supports sustainable growth.",
             reviewerImage: "/about-us/reviewerImg.svg",
             reviewerName: "John D.",
             reviewerDesignation: "Company CEO"
         },
         {
             rating: 3,
-            comments: "I've been consistently impressed with the quality of service provided by this website. They have exceeded my expectations and delivered exceptional results. Highly recommended!",
+            comments: "Their accurate and well-segmented B2B data elevated our campaign performance across every channel. We saw faster conversions and stronger engagement from day one.",
             reviewerImage: "/about-us/reviewerImg.svg",
             reviewerName: "Jane S.",
             reviewerDesignation: "Marketing Head"
         },
         {
             rating: 5,
-            comments: "I've been consistently impressed with the quality of service provided by this website. They have exceeded my expectations and delivered exceptional results. Highly recommended!",
+            comments: "The datasets were clean, structured, and easy to integrate into our systems. It immediately improved product functionality and reduced internal processing time.",
             reviewerImage: "/about-us/reviewerImg.svg",
             reviewerName: "Michael B.",
             reviewerDesignation: "Product Manager"

@@ -4,33 +4,41 @@ import IndustrySlider from "@/components/about/industriesSlider";
 import SvgMap from "@/components/about/svgMap";
 import AboutVisionMission from "@/components/about/visionMission";
 import InstantAccessSection from "@/components/instantAccessSection";
+import { generateSeoMetadata } from "@/lib/seo";
 
 import { getTranslations } from 'next-intl/server';
 
 /**
  * @param {{ params: { locale: string } }} context
  */
+const localeMap = {
+    en: 'en-US',
+    in: 'en-IN',
+    sg: 'en-SG',
+    my: 'en-MY',
+    ae: 'en-AE'
+};
+
 export async function generateMetadata({ params: paramsPromise }) {
     const params = await paramsPromise;
+    const t = await getTranslations({
+        locale: params.locale,
+        namespace: "about",
+    });
 
-    const t = await getTranslations({ locale: params.locale, namespace: 'about' });
-
-    const title = t('seo.title');
-    const description = t('seo.description');
-    const canonical = `https://www.thedatabaseproviders.com/${params.locale == 'en' ? "" : params.locale + '/'}about`;
-
-    return {
-        title,
-        description,
-        alternates: { canonical },
-        robots: { index: true, follow: true },
-    };
+    return generateSeoMetadata({
+        locale: params.locale,
+        slug: "about",
+        title: t("seo.title"),
+        description: t("seo.description"),
+    });
 }
+
 export default function AboutUs() {
 
     const dataForInstantAcces = {
         sectionTitle: "Empower Your Business with Smart Data Solutions",
-        sectionDescription: "Unlock the power of precision-driven data to reach the right audience, at the right time. Our targeted U.S. and global B2B databases help you connect with key decision-makers across industries, driving impactful engagement and measurable results.",
+        sectionDescription: "Reach the right audience with precision. Our targeted U.S. and global B2B databases give you direct access to key decision-makers across industries, enabling stronger engagement and measurable marketing results.",
         button: {
             buttonURL: "/contact-us",
             buttonLabel: "Contact Us",

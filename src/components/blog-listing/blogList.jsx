@@ -16,16 +16,17 @@ export default function BlogList() {
     useEffect(() => {
         fetchAllBlogsfromStrapi();
 
-        fetch("https://thedatabaseproviders.com/wp-json/wp/v2/posts?_embed")
-            .then((res) => res.json())
-            .then((data) => {
-                setBlogs(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error fetching posts:", error);
-                setLoading(false);
-            });
+        // fetch("https://thedatabaseproviders.com/wp-json/wp/v2/posts?_embed")
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         setBlogs(data);
+        //         setLoading(false);
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error fetching posts:", error);
+        //         setLoading(false);
+        //     });
+        
     }, []);
 
     const fetchAllBlogsfromStrapi = async () => {

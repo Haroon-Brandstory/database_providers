@@ -118,7 +118,7 @@ export default function SvgMap() {
                 </div>
                 <div className="flex flex-col items-center justify-center">
                     <p className="text-[#2C6BFF] text-[16px] font-medium">Global B2B Data</p>
-                    <h2 className="text-black  text-center lg:text-[36px] text-[26px] font-medium mb-6">Worldwide Email Lists. <span className="text-[#00000080]">Verified & Ready.</span></h2>
+                    <h2 className="text-black  text-center lg:text-[36px] text-[26px] font-medium mb-6">Worldwide Email Contacts. <span className="text-[#00000080]">Accurate and Compliant.</span></h2>
                     <button className="relative text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in ">
                         <span className="relative z-10">Know More</span>
                         <span className="absolute inset-0 bg-gradient-to-r from-[#0055ff1a] via-[#0133E9] to-[#0055FF] bg-[length:200%_100%] bg-left transition-all duration-700 ease-in-out rounded-full blur-sm animate-gradient-loop">

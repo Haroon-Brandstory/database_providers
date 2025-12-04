@@ -1,6 +1,23 @@
 import InstantAccessSection from "@/components/instantAccessSection";
 import TestimonialSectionBanner from "@/components/testimonials/testimonialBanner";
 import TestimonialsListingSection from "@/components/testimonials/testimonialListing";
+import { generateSeoMetadata } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+
+export async function generateMetadata({ params: paramsPromise }) {
+    const params = await paramsPromise;
+    const t = await getTranslations({
+        locale: params.locale,
+        namespace: "testimonials",
+    });
+
+    return generateSeoMetadata({
+        locale: params.locale,
+        slug: "testimonials",
+        title: t("seo.title"),
+        description: t("seo.description"),
+    });
+}
 
 export default function TestimonialPage() {
 

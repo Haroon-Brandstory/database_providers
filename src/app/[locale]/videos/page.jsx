@@ -1,6 +1,23 @@
 import InstantAccessSection from "@/components/instantAccessSection";
 import YtVideoListingSection from "@/components/videos/videListinSection";
 import YtVideoSectionBanner from "@/components/videos/videoSectionBanner";
+import { generateSeoMetadata } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+
+export async function generateMetadata({ params: paramsPromise }) {
+    const params= await paramsPromise;
+    const t = await getTranslations({
+        locale: params.locale,
+        namespace: "videos",
+    })
+
+    return generateSeoMetadata({
+        locale: params.locale,
+        slug: "videos",
+        title: t("seo.title"),
+        description: t("seo.description"),
+    })
+}
 
 export default function YoutubeVideoSec() {
 
@@ -12,6 +29,7 @@ export default function YoutubeVideoSec() {
             buttonLabel: "Contact Us",
         }
     }
+    
     return (
         <div>
             <YtVideoSectionBanner />

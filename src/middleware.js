@@ -4,6 +4,11 @@ import { routing } from './i18n/routing';
 
 export default function middleware(request) {
     const { pathname } = request.nextUrl;
+    const currentPathname = request.nextUrl.pathname;
+
+    if (currentPathname.startsWith("/sitemap.xml")) {
+        return NextResponse.redirect(new URL("/en", request.url));
+    }
 
     // Skip static files (images, videos, fonts)
     const hasFileExtension = /\/[^/]+\.[^/]+$/.test(pathname);
@@ -21,7 +26,7 @@ export default function middleware(request) {
     //     }
     // }
 
-    const globalPages = ['/thank-you', '/testimonials', '/contact-us', '/videos', '/blogs'];
+    const globalPages = ['/thank-you', '/blogs'];
     if (globalPages.some((path) => pathname.startsWith(path))) {
         return NextResponse.next();
     }

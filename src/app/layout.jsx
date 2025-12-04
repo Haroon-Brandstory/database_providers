@@ -10,9 +10,18 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Database Providers",
-  description: "Your trusted source for database solutions",
+  title: {
+    default: "Database Providers - Global B2B Business Database",
+    template: "%s | Database Providers"
+  },
+  description:
+    "Verified B2B database providers for global business growth, marketing, and lead generation.",
+  openGraph: {
+    siteName: "Database Providers",
+  },
+  applicationName: "Database Providers",
 };
+
 
 export default async function RootLayout({ children }) {
 

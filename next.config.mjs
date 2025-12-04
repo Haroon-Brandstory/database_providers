@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['localhost','thedatabaseproviders.com'],
+        domains: ['localhost', 'thedatabaseproviders.com'],
         remotePatterns: [{
             protocol: 'http',
             hostname: 'localhost',
@@ -14,6 +14,8 @@ const nextConfig = {
         }],
     },
     // DO NOT add i18n config here when using next-intl
+    trailingSlash: true,
+
 };
 
 export default withNextIntl(nextConfig);

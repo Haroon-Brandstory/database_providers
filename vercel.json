@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/",
+      "statusCode": 308
+    }
+  ]
+}

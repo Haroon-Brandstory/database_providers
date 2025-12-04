@@ -1,8 +1,11 @@
 "use client";
+import { useNavHref } from "@/hooks/useNavHref";
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslations } from "use-intl";
 
 export default function WaterEffectSection() {
+    const { navHref } = useNavHref();
     const t = useTranslations()
     return (
         <section className="relative h-[200px] rounded md:h-[350px] w-full flex items-center justify-center overflow-hidden">
@@ -31,9 +34,11 @@ export default function WaterEffectSection() {
                         );
                     })()}
                 </h2>
-                <button className="md:mt-4 gtm-button md:px-6 px-6 text-[12px] md:text-[18px] py-3 bg-white text-blue-700 font-medium rounded-full shadow-md hover:bg-blue-100 transition-all">
-                    Get a free sample data
-                </button>
+                <Link href={navHref('/contact-us')}>
+                    <button className="md:mt-4 cursor-pointer gtm-button md:px-6 px-6 text-[12px] md:text-[18px] py-3 bg-white text-blue-700 font-medium rounded-full shadow-md hover:bg-blue-100 transition-all">
+                        Get a free sample data
+                    </button>
+                </Link>
             </div>
         </section>
     );

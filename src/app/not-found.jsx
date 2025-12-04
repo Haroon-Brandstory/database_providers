@@ -61,7 +61,7 @@ export default function NotFound() {
                             <Image src='/404Red/orangeBall.png' width={80} height={80} alt="pnf-img" />
                         </div>
                     </div>
-                    <div className="flex justify-center items-center">
+                    {/* <div className="flex justify-center items-center">
                         <Link href='/en'>
                             <button className="relative text-white px-10 py-3 cursor-pointer rounded-full font-medium text-[15px] overflow-hidden z-10 hover:scale-105 transition duration-300 ease-in drop-shadow-[0px_0px_25px_#0133E9CC]">
                                 <span className="relative z-10">Go Back Home</span>
@@ -69,7 +69,7 @@ export default function NotFound() {
                                 </span>
                             </button>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

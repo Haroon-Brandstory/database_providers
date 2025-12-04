@@ -8,7 +8,7 @@ export function useNavHref() {
     // Derive locale from the first URL segment
     const getLocaleFromPath = () => {
         const parts = pathname.split("/").filter(Boolean);
-        const supportedLocales = ["en", "in", "uae", "sgp", "my"];
+        const supportedLocales = ["en", "in", "ae", "sg", "my"];
         return supportedLocales.includes(parts[0]) ? parts[0] : "en";
     };
 

@@ -6,11 +6,11 @@ import gsap from "gsap";
 
 export default function BannerThankYou() {
     const socialLinks = [
-        { href: "#", src: "/thankYou/tk-linkedin.svg", alt: "LinkedIn" },
-        { href: "#", src: "/thankYou/tk-fb.svg", alt: "Facebook" },
-        { href: "#", src: "/thankYou/tk-x.svg", alt: "X" },
-        { href: "#", src: "/thankYou/tk-ig.svg", alt: "Instagram" },
-        { href: "#", src: "/thankYou/tk-yt.svg", alt: "YouTube" },
+        { href: "https://www.linkedin.com/company/thedatabase-providers/", src: "/thankYou/tk-linkedin.svg", alt: "LinkedIn" },
+        { href: "https://www.facebook.com/thedatabaseproviders", src: "/thankYou/tk-fb.svg", alt: "Facebook" },
+        { href: "https://x.com/DB_Providers/", src: "/thankYou/tk-x.svg", alt: "X" },
+        { href: "https://www.instagram.com/thedatabaseproviders/", src: "/thankYou/tk-ig.svg", alt: "Instagram" },
+        { href: "https://www.youtube.com/@thedatabaseproviders", src: "/thankYou/tk-yt.svg", alt: "YouTube" },
     ];
 
     const imgRefs = useRef([]);

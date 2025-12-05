@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Script from "next/script";
 import { getLocale } from "next-intl/server";
+import ToasterWrapper from "./toasterWrapper";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -64,11 +65,9 @@ export default async function RootLayout({ children }) {
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-
-        <Header />
-        {children}
-        <Footer />
-        <Toaster position="top-center" />
+        <ToasterWrapper>
+          {children}
+        </ToasterWrapper>
       </body>
     </html>
   );

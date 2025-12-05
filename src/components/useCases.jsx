@@ -52,7 +52,18 @@ export default function useCases() {
                 <div className="text-center max-w-4xl flex flex-col justify-center">
                     <h2 className="text-[#2C6BFF] text-[16px] font-medium">Use Cases</h2>
                     <h2 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
-                        How Businesses Use Our  <span className="block"><span className="text-[#00000080]">Email Databases</span></span>
+                        {(() => {
+                            const heading = t('home.section6.sectionHeading');
+                            const words = heading.split(' ');
+                            const lastThree = words.slice(-2).join(' ');
+                            const firstPart = words.slice(0, -2).join(' ');
+                            return (
+                                <>
+                                    {firstPart}  <span className="block"><span className="text-[#00000080]">{lastThree}</span></span>
+
+                                </>
+                            );
+                        })()}
                     </h2>
                 </div>
                 <div className="bg-[#F0F0FF] w-full lg:p-10 p-3 rounded-[20px]">

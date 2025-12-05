@@ -16,6 +16,7 @@ export async function generateMetadata({ params: paramsPromise }) {
         slug: "testimonials",
         title: t("seo.title"),
         description: t("seo.description"),
+        canonical: "https://www.thedatabaseproviders.com/testimonials/"
     });
 }
 

@@ -146,7 +146,7 @@ export default function Header() {
 				<div className="flex items-center justify-between">
 					{/* Logo */}
 					<div className="flex items-center gap-2">
-						<Link href={`/${locale}`}>
+						<Link href={navHref("/")}>
 							<Image
 								src="/header/db_pro_logo.svg"
 								alt="Database Providers Logo"

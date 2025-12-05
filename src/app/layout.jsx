@@ -12,7 +12,7 @@ export const revalidate = 0;
 export const metadata = {
   title: {
     default: "Database Providers - Global B2B Business Database",
-    template: "%s | Database Providers"
+    // template: "%s | Database Providers"
   },
   description:
     "Verified B2B database providers for global business growth, marketing, and lead generation.",

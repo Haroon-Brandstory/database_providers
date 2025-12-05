@@ -141,7 +141,7 @@ export default function CountSection() {
                                 <h3 className="text-[20px] md:text-[24px] text-white font-medium">
                                     {item.title} <span className="text-[#5673F6]">{item.titleHighlight}</span>
                                 </h3>
-                                <h1 className="text-[72px] relative font-semibold mt-6 bg-gradient-to-b from-[#5A5E64] via-[#B3BDC9] to-[#5E5E5E] bg-clip-text text-transparent">
+                                <h3 className="text-[72px] relative font-semibold mt-6 bg-gradient-to-b from-[#5A5E64] via-[#B3BDC9] to-[#5E5E5E] bg-clip-text text-transparent">
                                     {animatedCount}M+
                                     <span>
                                         <img
@@ -150,7 +150,7 @@ export default function CountSection() {
                                             className="w-10 h-10 absolute top-[8px] right-[88px]"
                                         />
                                     </span>
-                                </h1>
+                                </h3>
                                 <p className="text-white -mt-4">Contacts</p>
                             </div>
 

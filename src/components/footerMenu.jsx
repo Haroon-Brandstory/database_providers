@@ -37,12 +37,12 @@ export default function FooterMenu() {
                     </div>
                     <div className="flex-1 min-w-[180px] flex flex-col gap-2 mt-2 md:mt-0">
                         <div className="font-semibold mb-2">Data</div>
-                        <a href={navHref('/about')} className="hover:text-[#2C6BFF] transition">Health Care Data</a>
-                        <a href={navHref('/service-1')} className="hover:text-[#2C6BFF] transition">Tech Install Base Data</a>
-                        <a href={navHref('/global-professional-data')} className="hover:text-[#2C6BFF] transition">B2B Custom Data</a>
-                        <a href={navHref('/blogs')} className="hover:text-[#2C6BFF] transition">Industry Data</a>
-                        <a href={navHref('/privacy-policy')} className="hover:text-[#2C6BFF] transition">Professionals' Data</a>
-                        <a href={navHref('/privacy-policy')} className="hover:text-[#2C6BFF] transition">Data Enrichment</a>
+                        <a href={navHref('/health-care-data')} className="hover:text-[#2C6BFF] transition">Health Care Data</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Tech Install Base Data</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">B2B Custom Data</a>
+                        <a href={navHref('/industry-wise-data')} className="hover:text-[#2C6BFF] transition">Industry Data</a>
+                        <a href={navHref('/global-professional-data')} className="hover:text-[#2C6BFF] transition">Professional's Data</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Data Enrichment</a>
                     </div>
                     <div className="flex-1 min-w-[180px] flex flex-col gap-2 mt-2 md:mt-0">
                         <div className="font-semibold mb-2">Products</div>
@@ -53,20 +53,20 @@ export default function FooterMenu() {
                     </div>
                     <div className="flex-1 min-w-[180px] flex flex-col gap-2 mt-2 md:mt-0">
                         <div className="font-semibold mb-2">Resources</div>
-                        <a href={navHref('/about')} className="hover:text-[#2C6BFF] transition">Case Studies</a>
-                        <a href={navHref('/service-1')} className="hover:text-[#2C6BFF] transition">Testimonials</a>
-                        <a href={navHref('/global-professional-data')} className="hover:text-[#2C6BFF] transition">News</a>
-                        <a href={navHref('/blogs')} className="hover:text-[#2C6BFF] transition">White Paper</a>
-                        <a href={navHref('/privacy-policy')} className="hover:text-[#2C6BFF] transition">Blogs</a>
-                        <a href={navHref('/privacy-policy')} className="hover:text-[#2C6BFF] transition">Marketing</a>
-                        <a href={navHref('/privacy-policy')} className="hover:text-[#2C6BFF] transition">Tools</a>
-                        <a href={navHref('/privacy-policy')} className="hover:text-[#2C6BFF] transition">Videos</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Case Studies</a>
+                        <a href={navHref('testimonials')} className="hover:text-[#2C6BFF] transition">Testimonials</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">News</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">White Paper</a>
+                        <a href={navHref('/blogs')} className="hover:text-[#2C6BFF] transition">Blogs</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Marketing</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Tools</a>
+                        <a href={navHref('/videos')} className="hover:text-[#2C6BFF] transition">Videos</a>
                     </div>
                     <div className="flex-1 min-w-[180px] flex flex-col gap-2 mt-2 md:mt-0">
                         <div className="font-semibold mb-2">Company</div>
                         <a href={navHref('/about')} className="hover:text-[#2C6BFF] transition">About Us</a>
-                        <a href={navHref('/service-1')} className="hover:text-[#2C6BFF] transition">Careers</a>
-                        <a href={navHref('/global-professional-data')} className="hover:text-[#2C6BFF] transition">Contact Us</a>
+                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Careers</a>
+                        <a href={navHref('/contact-us')} className="hover:text-[#2C6BFF] transition">Contact Us</a>
                     </div>
                     <div className="flex-1 min-w-[220px] flex flex-col gap-4 mt-2 md:mt-0">
                         <div className="font-semibold mb-2">Contact Us</div>

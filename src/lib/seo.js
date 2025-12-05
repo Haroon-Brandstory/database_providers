@@ -1,4 +1,3 @@
-// src/lib/seo.js
 export const localeMap = {
     en: "en-US",
     in: "en-IN",
@@ -9,37 +8,31 @@ export const localeMap = {
 
 const BASE_URL = "https://www.thedatabaseproviders.com";
 
-/**
- * noIntl = true means NO hreflang will be generated.
- */
 export function generateSeoMetadata({
     locale,
     slug,
     title,
     description,
     noIntl = false,
+    canonical,
 }) {
     const isHome = !slug;
 
-    // Canonical URL
-    const canonicalPath = isHome
-        ? locale === "en"
-            ? "/"
-            : `/${locale}/`
-        : locale === "en"
-            ? `/${slug}`
-            : `/${locale}/${slug}`;
+    const autoCanonicalPath = isHome ? (locale === "en" ? "/" : `/${locale}/`) : (locale === "en" ? `/${slug}` : `/${locale}/${slug}`);
 
-    /** ------------------------------
-     * If noIntl = true
-     * → return ONLY canonical, no hreflang
-     * -------------------------------*/
+    const autoCanonical = `${BASE_URL}${autoCanonicalPath}`.replace(/\/+$/, "/");
+
+    const finalCanonical = canonical ? canonical : autoCanonical;
+
+    /** -------------------------
+     * NO INTL (no hreflang)
+     * ------------------------- */
     if (noIntl) {
         return {
             title,
             description,
             alternates: {
-                canonical: `${BASE_URL}${canonicalPath}`.replace(/\/+$/, "/"),
+                canonical: finalCanonical,   // FIXED: now uses override
             },
             robots: {
                 index: true,
@@ -48,24 +41,16 @@ export function generateSeoMetadata({
         };
     }
 
-    /** ------------------------------
-     * HREFLANG generation (intl pages)
-     * -------------------------------*/
+    /** -------------------------
+     * INTL (hreflang enabled)
+     * ------------------------- */
     const languages = {};
 
     Object.entries(localeMap).forEach(([loc, langCode]) => {
-        const url = isHome
-            ? loc === "en"
-                ? `${BASE_URL}/`
-                : `${BASE_URL}/${loc}/`
-            : loc === "en"
-                ? `${BASE_URL}/${slug}`
-                : `${BASE_URL}/${loc}/${slug}`;
-
+        const url = isHome ? (loc === "en" ? `${BASE_URL}/` : `${BASE_URL}/${loc}/`) : (loc === "en" ? `${BASE_URL}/${slug}` : `${BASE_URL}/${loc}/${slug}`);
         languages[langCode] = url;
     });
 
-    // x-default
     languages["x-default"] = isHome
         ? `${BASE_URL}/`
         : `${BASE_URL}/${slug}`;
@@ -74,7 +59,7 @@ export function generateSeoMetadata({
         title,
         description,
         alternates: {
-            canonical: `${BASE_URL}${canonicalPath}`.replace(/\/+$/, "/"),
+            canonical: finalCanonical,
             languages,
         },
         robots: {

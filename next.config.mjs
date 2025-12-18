@@ -5,13 +5,19 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['localhost', 'thedatabaseproviders.com'],
-        remotePatterns: [{
-            protocol: 'http',
-            hostname: 'localhost',
-            port: '1337',
-            pathname: '/uploads/**',
-        }],
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'localhost',
+                port: '1337',
+                pathname: '/uploads/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'thedatabaseproviders.com',
+                pathname: '/**'
+            }
+        ],
     },
     // DO NOT add i18n config here when using next-intl
     trailingSlash: true,

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 
-export default function middleware(request) {
+export default function proxy(request) {
     const { pathname } = request.nextUrl;
     const currentPathname = request.nextUrl.pathname;
 

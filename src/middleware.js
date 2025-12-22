@@ -26,7 +26,7 @@ export default function middleware(request) {
     //     }
     // }
 
-    const globalPages = ['/thank-you', '/blogs'];
+    const globalPages = ['/thank-you', '/blogs', '/pricing-plans'];
     if (globalPages.some((path) => pathname.startsWith(path))) {
         return NextResponse.next();
     }

@@ -59,11 +59,17 @@ export default function IconCategorySection({ data }) {
                         <div key={index} className="flex items-center gap-3 md:p-3 p-2 rounded-xl transition-all duration-200 ease-in-out hover:scale-105 border shadow border-gray-200 bg-white hover:shadow-lg transition">
                             <div className="md:w-[50px] md:h-[50px] w-[35px] h-[35px] flex items-center justify-center rounded-lg ">
                                 <Image
-                                    src={STRAPI_URL + industry?.icon.url}
+                                    src={industry?.icon.url}
                                     alt="Finance & Insurance"
                                     width={50}
                                     height={50}
                                 />
+                                {/* <Image
+                                    src={STRAPI_URL + industry?.icon.url}
+                                    alt="Finance & Insurance"
+                                    width={50}
+                                    height={50}
+                                /> */}
                             </div>
                             <p className="text-gray-700 font-medium text-[16px] md:text-base">
                                 {industry?.industryName}

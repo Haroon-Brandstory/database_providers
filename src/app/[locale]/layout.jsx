@@ -1,8 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import { interDisplay, interTight } from "../../lib/fonts";
 import "../globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 

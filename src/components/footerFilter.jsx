@@ -39,7 +39,7 @@ export default function FooterFilter() {
                                         <p className="text-[#D0D0D0]">From data to delivery a complete 360° Marketing solution</p>
                                     </div>
                                     <div>
-                                        <Link href={navHref("/contact-us")}>
+                                        <Link href={"/pricing-plans"}>
                                             <button className="header_cta_contact">
                                                 {/* {t("nav.contact", { defaultMessage: "Contact Us" })} */}
                                                 See Pricing

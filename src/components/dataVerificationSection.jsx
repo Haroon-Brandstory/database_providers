@@ -73,7 +73,8 @@ export default function VerificationProcess({ data }) {
                         <div className="relative w-[420px] h-[280px]">
                             <Image
                                 key={activeStep} // ensures smooth fade on change
-                                src={STRAPI_URL + (retData.find((s) => s.id === activeStep)?.verificationImage.url || "")}
+                                // src={STRAPI_URL + (retData.find((s) => s.id === activeStep)?.verificationImage.url || "")}
+                                src={(retData.find((s) => s.id === activeStep)?.verificationImage.url || "")}
                                 alt="verification step"
                                 fill
                                 className="object-contain rounded-xl transition-opacity duration-300"

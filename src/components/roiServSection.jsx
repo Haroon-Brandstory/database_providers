@@ -66,7 +66,8 @@ export default function RoiServiceSection({ data }) {
                                 <div
                                     className='w-full h-auto rounded-xl flex items-center justify-center '
                                 >
-                                    <Image src={STRAPI_URL + item.componentIcon.url} alt={item.componentTitle} width={52} height={52} />
+                                    <Image src={item.componentIcon.url} alt={item.componentTitle} width={52} height={52} />
+                                    {/* <Image src={STRAPI_URL + item.componentIcon.url} alt={item.componentTitle} width={52} height={52} /> */}
                                 </div>
                                 <p className="mt-3 text-center text-gray-700 font-medium">{item.componentTitle}</p>
                             </div>

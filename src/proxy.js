@@ -26,7 +26,7 @@ export default function proxy(request) {
     //     }
     // }
 
-    const globalPages = ['/thank-you', '/blogs', '/pricing-plans'];
+    const globalPages = ['/thank-you', '/blogs', '/pricing-plans','/tools'];
     if (globalPages.some((path) => pathname.startsWith(path))) {
         return NextResponse.next();
     }

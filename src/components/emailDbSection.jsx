@@ -11,7 +11,8 @@ export default function EmailDatabaseSection({ data }) {
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="flex justify-end">
                         <Image
-                            src={STRAPI_URL + data.sectionImage.url}
+                            src={data.sectionImage.url}
+                            // src={STRAPI_URL + data.sectionImage.url}
                             alt="Business Professional"
                             width={800}
                             height={537}

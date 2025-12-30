@@ -44,12 +44,19 @@ export default function ServicePageBanner({ data }) {
                         <div className="flex items-center gap-3">
                             {data.currentCountryImg?.url && (
                                 <Image
-                                    src={STRAPI_URL + data.currentCountryImg.url}
+                                    src={data.currentCountryImg.url}
                                     alt={data.currentCountry}
                                     width={36}
                                     height={24}
                                     className="rounded"
                                 />
+                                // <Image
+                                //     src={STRAPI_URL + data.currentCountryImg.url}
+                                //     alt={data.currentCountry}
+                                //     width={36}
+                                //     height={24}
+                                //     className="rounded"
+                                // />
                             )}
                             <span className="font-semibold text-lg">
                                 {data.currentCountry}
@@ -67,12 +74,19 @@ export default function ServicePageBanner({ data }) {
                         <div className="flex items-center gap-3">
                             {data.worldWideImg?.url && (
                                 <Image
-                                    src={STRAPI_URL + data.worldWideImg.url}
+                                    src={data.worldWideImg.url}
                                     alt={data.worldWide}
                                     width={36}
                                     height={24}
                                     className="rounded"
                                 />
+                                // <Image
+                                //     src={STRAPI_URL + data.worldWideImg.url}
+                                //     alt={data.worldWide}
+                                //     width={36}
+                                //     height={24}
+                                //     className="rounded"
+                                // />
                             )}
                             <span className="font-semibold text-lg">
                                 {data.worldWide}

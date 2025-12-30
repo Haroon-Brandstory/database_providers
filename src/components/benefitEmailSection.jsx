@@ -43,7 +43,8 @@ export default function BenefitEmailCategory({ data }) {
                     {iconMap.map((icon, index) =>
                         <div key={index} className="bg-[#F7F7F8] p-6 rounded-[20px]">
                             <div className="icon pb-5 border-b-1 mb-3 border-[#D0D0D099]">
-                                <Image src={STRAPI_URL + icon.icon.url} width={52} height={52} alt="benefit-icon" />
+                                <Image src={icon.icon.url} width={52} height={52} alt="benefit-icon" />
+                                {/* <Image src={STRAPI_URL + icon.icon.url} width={52} height={52} alt="benefit-icon" /> */}
                             </div>
                             <div>
                                 <h4 className="text-black text-[20px] font-medium mb-2">{icon.cardTitle}</h4>

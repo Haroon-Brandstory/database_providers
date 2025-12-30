@@ -26,7 +26,7 @@ export default async function BlogDetails({ params }) {
         // const blog = JSON.parse(fileContents);
         return (
             <section className="">
-                <div style={{ background: `url(${STRAPI_URL + blog.BlogPreviewImage.url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className=" text-white  flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-10 overflow-hidden pt-30">
+                <div style={{ background: `url(${blog.BlogPreviewImage.url})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className=" text-white  flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-10 overflow-hidden pt-30">
                     <div className="container max-w-7xl mx-auto flex justify-start items-center ">
                         <div className="h-[450px] flex items-start flex-col justify-center">
                             <h1 className="text-white md:text-[48px] max-w-4xl font-medium text-[36px]">{blog.BlogName}</h1>

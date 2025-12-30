@@ -16,6 +16,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'thedatabaseproviders.com',
                 pathname: '/**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'light-agreement-480bf24ca8.media.strapiapp.com',
             }
         ],
     },

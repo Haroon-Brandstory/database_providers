@@ -38,6 +38,8 @@ export default function BlogList() {
         } finally {
             setLoading(false);
         }
+
+        console.log("data from blogs",returnedBlogLists)
     };
 
     // console.log(returnedBlogLists)
@@ -71,7 +73,7 @@ export default function BlogList() {
                                     {/* Blog Image */}
 
                                     <Image
-                                        src={STRAPI_URL + attrs.BlogPreviewImage.url}
+                                        src={attrs.BlogPreviewImage.url}
                                         width={320}
                                         height={180}
                                         alt={attrs.BlogName}

@@ -2,14 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function BusinessExpansionSection({ data }) {
+    console.log(data)
     const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL
     return (
         <section className="bg-white py-16 px-6">
             <div className="container max-w-7xl mx-auto">
                 <h2 className="text-black lg:text-[36px] text-center text-[26px] font-medium mb-6">
                     {(() => {
-                        const heading = data.sectionTitle;
-                        const match = heading.match(/^(.*?)\((.*?)\)(.*)$/);
+                        const heading = data?.sectionTitle;
+                        const match = heading?.match(/^(.*?)\((.*?)\)(.*)$/);
                         if (match) {
                             // Case 1: If brackets exist → highlight inside brackets
                             const [, before, inside, after] = match;
@@ -37,7 +38,7 @@ export default function BusinessExpansionSection({ data }) {
                 </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="businessImgWrapper">
-                        <Image src={STRAPI_URL + data.sectionImage.url} width={600} height={400} alt="img" />
+                        <Image src={data.sectionImage.url} width={600} height={400} alt="img" />
                     </div>
                     <div>
                         <div className="">

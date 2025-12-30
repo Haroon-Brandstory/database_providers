@@ -59,7 +59,7 @@ export default function FooterMenu() {
                         <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">White Paper</a>
                         <a href={navHref('/blogs')} className="hover:text-[#2C6BFF] transition">Blogs</a>
                         <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Marketing</a>
-                        <a href={navHref('#')} className="hover:text-[#2C6BFF] transition">Tools</a>
+                        <a href={navHref('/tools/')} className="hover:text-[#2C6BFF] transition">Tools</a>
                         <a href={navHref('/videos')} className="hover:text-[#2C6BFF] transition">Videos</a>
                     </div>
                     <div className="flex-1 min-w-[180px] flex flex-col gap-2 mt-2 md:mt-0">

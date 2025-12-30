@@ -89,7 +89,8 @@ export default function EmailFormatSection({ data }) {
                     <div className=" p-6 flex justify-center">
                         {data.sectionimage?.url && (
                             <Image
-                                src={STRAPI_URL + data.sectionimage.url}
+                                src={data.sectionimage.url}
+                                // src={STRAPI_URL + data.sectionimage.url}
                                 // src="/servicesection/emailFormatServ.png"
                                 alt="email format services"
                                 width={800}   // set actual or max width

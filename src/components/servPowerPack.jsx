@@ -94,7 +94,8 @@ export default function PowerPackSection({ data }) {
                                 ))}
                             </div>
                             <div className="mt-6">
-                                <Image src={STRAPI_URL + data.VideoAKALottie.url} width={650} height={540} alt="img" />
+                                <Image src={data.VideoAKALottie.url} width={650} height={540} alt="img" />
+                                {/* <Image src={STRAPI_URL + data.VideoAKALottie.url} width={650} height={540} alt="img" /> */}
                             </div>
                         </div>
                     </div>

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export default function PricingBanner({ onChange }) {
-    const [active, setActive] = useState("bulk");
+export default function PricingBanner({ onChange, defaultPlan }) {
+    const [active, setActive] = useState(defaultPlan);
 
     const handleClick = (value) => {
         setActive(value);
@@ -11,7 +11,7 @@ export default function PricingBanner({ onChange }) {
     };
 
     return (
-        <div className="banner bg-[url('/pricing-plan/pricing-plan-banner.png')] bg-no-repeat bg-cover bg-center py-20 lg:min-h-[80vh] flex items-center justify-center">
+        <div className="banner bg-[url('/pricing-plan/pricing-plan-banner.png')] bg-no-repeat bg-cover bg-center py-20 lg:min-h-[90vh] flex items-center justify-center">
             <div className="container mx-auto px-4 text-center text-whiteo flex items-center justify-center">
                 <div className="flex flex-col items-center justify-center">
                     <div className="backdrop-blur-[24px] border-blue-900 border w-fit rounded-full px-4 py-1 mt-8 inset-shadow-gray-300">
@@ -27,13 +27,13 @@ export default function PricingBanner({ onChange }) {
                             ></div>
                             <button
                                 onClick={() => handleClick("bulk")}
-                                className={`flex-1 text-center py-2 cursor-pointer rounded-full text-sm transition-all duration-300 relative z-10 ${active === "bulk" ? "text-[#14204b] " : "text-white"}`}
+                                className={`flex-1 text-center py-3 cursor-pointer rounded-full text-sm transition-all duration-300 relative z-10 ${active === "bulk" ? "text-[#14204b] " : "text-white"}`}
                             >
                                 Bulk Email Data
                             </button>
                             <button
                                 onClick={() => handleClick("abm")}
-                                className={`flex-1 text-center py-2 cursor-pointer rounded-full text-sm transition-all duration-300 relative z-10 ${active === "abm" ? "text-[#14204b] " : "text-white"}`}
+                                className={`flex-1 text-center py-3 cursor-pointer rounded-full text-sm transition-all duration-300 relative z-10 ${active === "abm" ? "text-[#14204b] " : "text-white"}`}
                             >
                                 ABM
                             </button>

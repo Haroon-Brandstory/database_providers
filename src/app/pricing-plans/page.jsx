@@ -1,10 +1,9 @@
-"use client";
-import PricingBanner from "@/components/pricingPlans/pricingBanner";
-import { useState } from "react";
+import PricingPageWrapper from "@/components/pricingPlans/pricingPageWrapper";
 
 export default function PricingPlans() {
-    const [plan,setPlan] = useState("bulk");
-    return (
-        <PricingBanner onChange={setPlan} />
-    );
+  return (
+    <>
+      <PricingPageWrapper />
+    </>
+  );
 }

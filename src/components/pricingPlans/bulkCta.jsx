@@ -42,7 +42,7 @@ export default function BulkCta({content}) {
             <section className="banner bg-[url('/pricing-plan/bulkCta.png')]  bg-no-repeat bg-cover bg-center py-30 min-h-[90vh] flex items-center justify-center">
                 <div className="container mx-auto px-4 flex flex-col items-center justify-center">
                     <div className="lg:mb-6 mb-4">
-                        <h2 className="lg:text-5xl text-4xl font-medium text-center" dangerouslySetInnerHTML={{__html:content?.title}}/>
+                        <h2 className="lg:text-5xl text-4xl text-white font-medium text-center" dangerouslySetInnerHTML={{__html:content?.title}}/>
                     </div>
                     <div className="flex flex-col lg:mb-6 mb-4 items-center justify-center">
                         <p className="text-[#FCFCFD] text-center lg:max-w-2xl md:text-[18px] text-[15px]">{content?.description}</p>

@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { Autoplay, Controller } from "swiper/modules";
 
 const dataAttributes = [
     "First Name",
@@ -13,6 +14,12 @@ const dataAttributes = [
     "Email",
     "Company Country",
     "Company Name",
+    "Title",
+    "Country",
+    "Company",
+    "Head Count",
+    "Industry",
+    "Personal Linkedin URL",
 ]
 
 export default function CustomDataAttribute() {
@@ -47,19 +54,43 @@ export default function CustomDataAttribute() {
                                     </div>
                                     <div>
                                         <Swiper
+                                            modules={[Controller, Autoplay]}
                                             direction={'vertical'}
-                                            autoplay={true}
+                                            autoplay={{
+                                                delay: 0,
+                                                disableOnInteraction: true,
+                                                pauseOnMouseEnter: false,
+                                            }}
+                                            freeMode={{
+                                                enabled: true,
+                                                momentum: false,
+                                            }}
+                                            allowTouchMove={false}
+                                            simulateTouch={false}
+                                            speed={750}
+                                            loop={true}
+                                            centeredSlides={true}
                                             slidesPerView={3.75}
                                             spaceBetween={15}
-                                            freeMode={true}
-                                            className="mySwiper h-[224px] fade-edges"
+                                            className="mySwiper h-[224px] pointer-events-none transition-all fade-edges w-[300px]"
                                         >
                                             {
                                                 dataAttributes.map((attributes, index) => (
                                                     <SwiperSlide key={index} style={{ display: "flex" }} className="flex items-center justify-center">
-                                                        <div className="border w-fit rounded-full text-center cursor-pointer px-4 py-3 flex items-center justify-center">
+                                                        {/* <div className="border border-white w-fit rounded-full text-center cursor-pointer px-4 py-3 flex items-center justify-center">
                                                             {attributes}
-                                                        </div>
+                                                        </div> */}
+                                                        {({ isActive }) => (
+                                                            <div
+                                                                className={`border w-fit rounded-full px-4 py-3 transition-all
+                                                                         ${isActive
+                                                                        ? "bg-blue-600 border-white text-white scale-105 border-transparent shadow-lg"
+                                                                        : "border-white text-white/70"
+                                                                    }`}
+                                                            >
+                                                                {attributes}
+                                                            </div>
+                                                        )}
                                                     </SwiperSlide>
                                                 ))
                                             }

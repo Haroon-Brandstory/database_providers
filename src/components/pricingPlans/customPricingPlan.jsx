@@ -33,6 +33,9 @@ export default function CustomPricingPlan() {
     const isCustom = activeIndex === pricingSlabs.length;
     const activePlan = !isCustom ? pricingSlabs[activeIndex] : null;
     const percentage = (activeIndex / pricingSlabs.length) * 100;
+    const activeContacts = !isCustom ? activePlan.contacts : 0;
+    const deliveryTime = activeContacts >= 8000 ? "48-Hour" : "24-Hour";
+
 
     return (
         <section className="bg-black text-white pb-14">
@@ -143,17 +146,17 @@ export default function CustomPricingPlan() {
                                                 <h4 className="md:text-[18px] text-[15px] font-semibold ">Your Plan</h4>
                                             </div>
                                             <div className="flex justify-between border-b border-gray-800 text-[#FFFFFFB2] md:p-5 p-3 md:text-[15px] text-[12px]">
-                                                <span>Standard Inclusions</span>
+                                                <span>{activePlan.contacts.toLocaleString()} credits</span>
                                                 <span>${activePlan.usd}</span>
                                             </div>
-                                            <div className="flex justify-between border-b border-gray-800 text-[#FFFFFFB2] md:p-5 p-3 md:text-[15px] text-[12px]">
+                                            {/* <div className="flex justify-between border-b border-gray-800 text-[#FFFFFFB2] md:p-5 p-3 md:text-[15px] text-[12px]">
                                                 <span>Cost per Contact</span>
                                                 <span>₹{activePlan.costPerContact}</span>
-                                            </div>
-                                            <div className="flex justify-between border-b border-gray-800 text-[#FFFFFFB2] md:p-5 p-3 md:text-[15px] text-[12px]">
+                                            </div> */}
+                                            {/* <div className="flex justify-between border-b border-gray-800 text-[#FFFFFFB2] md:p-5 p-3 md:text-[15px] text-[12px]">
                                                 <span>20,000 Verified Database</span>
                                                 <span>Included</span>
-                                            </div>
+                                            </div> */}
 
                                             <div className="flex justify-between border-b border-gray-800 text-[#FFFFFFB2] md:p-5 p-3 md:text-[15px] text-[12px]">
                                                 <span>GDPR-Compliant Data Sources</span>
@@ -161,7 +164,7 @@ export default function CustomPricingPlan() {
                                             </div>
 
                                             <div className="flex justify-between border-b border-gray-800 text-[#FFFFFFB2] md:p-5 p-3 md:text-[15px] text-[12px]">
-                                                <span>24-Hour Data Delivery</span>
+                                                <span>{deliveryTime} Data Delivery</span>
                                                 <span>Included</span>
                                             </div>
                                         </div>
@@ -197,7 +200,7 @@ export default function CustomPricingPlan() {
                                     {includedFeatures.map((feature, index) => (
                                         <li
                                             key={index}
-                                            className="grid grid-cols-[24px_1fr] gap-3 text-sm text-white/70"
+                                            className="grid grid-cols-[24px_1fr] gap-3 md:text-[18px] text-sm text-white/70"
                                         >
                                             <Image
                                                 src="/pricing-plan/green-tick.svg"

@@ -11,7 +11,7 @@ export default function PricingBanner({ onChange, defaultPlan }) {
     };
 
     return (
-        <div className="banner bg-[url('/pricing-plan/pricing-plan-banner.png')] bg-no-repeat bg-cover bg-center py-20 lg:min-h-[90vh] flex items-center justify-center">
+        <div className="banner bg-[url('/pricing-plan/pricing-plan-banner.png')] bg-no-repeat bg-cover bg-center py-20 lg:py-40 flex items-center justify-center">
             <div className="container mx-auto px-4 text-center text-whiteo flex items-center justify-center">
                 <div className="flex flex-col items-center justify-center">
                     <div className="backdrop-blur-[24px] border-blue-900 border w-fit rounded-full px-4 py-1 mt-8 inset-shadow-gray-300">

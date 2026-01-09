@@ -47,7 +47,7 @@ export default function CustomDataAttribute() {
                             <div className="flex justify-center items-end overflow-hidden">
                                 <Image ref={imgRef} src={"/pricing-plan/coin_tower.svg"} width={259} height={424} alt="coin-tower" className="lg:rotate-[0deg] rotate-[180deg]" />
                             </div>
-                            <div className="flex items-center justify-center">
+                            <div className="flex items-center justify-center lg:ms-40">
                                 <div className="p-4 flex flex-col items-center justify-center gap-4">
                                     <div>
                                         <h2 className="text-white lg:text-4xl text-2xl font-medium text-center">What Data Attributes Does <span className="md:block gradient-text">Each Contact Have?</span></h2>

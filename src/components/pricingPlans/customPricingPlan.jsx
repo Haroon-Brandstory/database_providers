@@ -70,7 +70,7 @@ export default function CustomPricingPlan() {
                                         className="absolute -top-8 -translate-x-1/2 bg-blue-600 text-white text-xs px-3 py-1 rounded-md shadow"
                                         style={{ left: `${percentage}%` }}
                                     >
-                                        {isCustom ? "More" : `${activePlan.contacts.toLocaleString()} Contacts`}
+                                        {isCustom ? "More" : `${activePlan.contacts.toLocaleString()} Credits`}
                                     </div>
 
                                     <input

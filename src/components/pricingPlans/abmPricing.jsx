@@ -5,7 +5,7 @@ const plans = [
     {
         name: "Basic",
         tag: null,
-        price: "$499",
+        price: "$299",
         oldPrice: "$699",
         description: "For B2B, B2C & D2C Brands\nStarting Email Growth",
         cta: "Get Started",
@@ -23,7 +23,7 @@ const plans = [
     {
         name: "Advanced",
         tag: "Most popular",
-        price: "$999",
+        price: "$499",
         oldPrice: "$1299",
         description:
             "For Growing B2B, B2C & D2C Brands\nNeeding Consistent Lead Flow",
@@ -42,14 +42,14 @@ const plans = [
     {
         name: "Plus",
         tag: "Best value for money",
-        price: "$1,999",
+        price: "$999",
         oldPrice: "$2299",
         description:
             "For Large B2B, B2C & D2C Brands\nRunning High-volume Campaigns",
         cta: "Get Started",
         highlighted: false,
         features: [
-            "ICP-based 25,000 contacts/credits",
+            "ICP-based 15,000 contacts/credits",
             "6 custom designs",
             "120,000 email sends",
             "Clustered messaging layers",
@@ -110,9 +110,9 @@ export default function AbmPricing() {
                                         <span className="text-white text-4xl font-bold">
                                             {plan.price}
                                         </span>
-                                        <span className="text-sm text-white/60 line-through">
+                                        {/* <span className="text-sm text-white/60 line-through">
                                             {plan.oldPrice}
-                                        </span>
+                                        </span> */}
                                     </div>
                                     <p className="text-xs text-white/50 mt-1">/ per month</p>
                                 </div>

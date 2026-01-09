@@ -10,24 +10,31 @@ export default function TestimonialAbout() {
     const testimonialContent = [
         {
             rating: 4,
-            comments: "Their data quality and global coverage directly contributed to our expansion into new markets. A trustworthy partner that consistently supports sustainable growth.",
+            comments: "If your company's not talking to potential customers, then you are lacking behind generating revenue. But if you start working with Database Providers who target only potential customers, then you can easily achieve your sales goals just like we did. Their data helped us reach the right insurance claim professionals, which was key to growing Prema Consulting Group’s forensic engineering services.",
             reviewerImage: "/about-us/reviewerImg.svg",
-            reviewerName: "John D.",
-            reviewerDesignation: "Company CEO"
+            reviewerName: "Steve Pignotti",
+            reviewerDesignation: "Chief Growth Officer"
         },
         {
             rating: 3,
-            comments: "Their accurate and well-segmented B2B data elevated our campaign performance across every channel. We saw faster conversions and stronger engagement from day one.",
+            comments: "B2B global database is hard to reach but with Database Providers it was really easy. We reached 32% of our sales goals within the first month. Their support with BFSI and government tech decision-maker data in UAE and Saudi Arabia gave SquareOne the edge we needed in a competitive market.",
             reviewerImage: "/about-us/reviewerImg.svg",
-            reviewerName: "Jane S.",
-            reviewerDesignation: "Marketing Head"
+            reviewerName: "Minosh Salam",
+            reviewerDesignation: "Chief Operating Officer"
         },
         {
             rating: 5,
-            comments: "The datasets were clean, structured, and easy to integrate into our systems. It immediately improved product functionality and reduced internal processing time.",
+            comments: "Reaching the right UHNI buyers in Chennai was a challenge until we partnered with Database Providers. Their data was spot on. Within just one month, we saw a 3.2X increase in high-intent enquiries and a 48% improvement in our lead-to-site-visit ratio. It gave our outreach the precision it needed.",
             reviewerImage: "/about-us/reviewerImg.svg",
-            reviewerName: "Michael B.",
-            reviewerDesignation: "Product Manager"
+            reviewerName: "Shiny VR",
+            reviewerDesignation: "Sourcing Manager"
+        },
+        {
+            rating: 4,
+            comments: "We were struggling to connect with the right people in supply chain and warehouse management. After partnering with Database Providers, we saw a 3.5X jump in demo requests and a 60% increase in qualified leads within the first month. Their database gave our outreach the exact push it needed.",
+            reviewerImage: "/about-us/reviewerImg.svg",
+            reviewerName: "Maya",
+            reviewerDesignation: "Marketing Analyst"
         },
     ];
 
@@ -68,6 +75,7 @@ export default function TestimonialAbout() {
                         1024: { slidesPerView: 1.8, spaceBetween: 20 },
                         1280: { slidesPerView: 1.8, spaceBetween: 20 },
                     }}
+                    className="!h-auto"
                 >
                     {testimonialContent.map((item, index) => (
                         <SwiperSlide key={index}>
@@ -85,8 +93,8 @@ export default function TestimonialAbout() {
                                         className="rounded-full"
                                     />
                                     <div>
-                                        <h4 className="font-semibold">{item.reviewerName}</h4>
-                                        <p className="text-gray-500 text-sm">{item.reviewerDesignation}</p>
+                                        <h4 className="font-semibold text-gray-700">{item.reviewerName}</h4>
+                                        <p className="text-gray-400 text-sm">{item.reviewerDesignation}</p>
                                     </div>
                                 </div>
                             </div>

@@ -15,7 +15,7 @@ export default function DataProcessWorks({ steps, title }) {
             <div className="container mx-auto px-6">
                 <div>
                     <h2 className="gradient-text capitalize text-4xl font-medium text-center mt-12">
-                       {title}
+                        {title}
                     </h2>
                 </div>
                 <div>
@@ -43,24 +43,63 @@ export default function DataProcessWorks({ steps, title }) {
                                 }}
                                 slideToClickedSlide
                                 watchSlidesProgress
-                                className="max-w-4xl mx-auto z-30"
+                                onProgress={(swiper) => {
+                                    const scaleStep = 0.2; // How much smaller each step gets
+                                    const yStep = 30;     // How much lower each step gets (in px)
+
+                                    swiper.slides.forEach((slide) => {
+                                        const slideProgress = slide.progress;
+                                        const absProgress = Math.abs(slideProgress);
+
+                                        // Calculate scale: starts at 1.1, decreases as it moves away
+                                        const scale = 1.1 - (absProgress * scaleStep);
+                                        const clampedScale = Math.max(scale, 0.5); // Ensure it doesn't disappear
+
+                                        // Calculate translateY: starts at 0, increases (moves down) as it moves away
+                                        const translateY = absProgress * absProgress * yStep; // Quadratic for a nicer curve
+
+                                        // Apply transforms directly to the inner content wrapper we look for
+                                        // or better, find the custom element inside to avoid conflicting with swiper's own slide transforms (if any)
+                                        const inner = slide.querySelector('.slide-inner-content');
+                                        if (inner) {
+                                            inner.style.transform = `translateY(${translateY}px) scale(${clampedScale})`;
+                                            // Adjust opacity or blur if needed
+                                            inner.style.opacity = Math.max(1 - (absProgress * 0.3), 0.3);
+                                        }
+                                    });
+                                }}
+                                onSetTransition={(swiper, duration) => {
+                                    swiper.slides.forEach((slide) => {
+                                        const inner = slide.querySelector('.slide-inner-content');
+                                        if (inner) {
+                                            inner.style.transitionDuration = `${duration}ms`;
+                                        }
+                                    });
+                                }}
+                                className="max-w-4xl mx-auto z-30 !overflow-visible py-12" // Allow chips to overflow visible area
                             >
                                 {steps.map((step, index) => (
                                     <SwiperSlide key={index}>
-                                        {({ isActive }) => (
-                                            <div
-                                                className={`flex justify-center items-center md:h-[200px] h-[150px] w-auto mb-3 transition-all duration-500 `}
-                                            >
+                                        <div
+                                            className="slide-inner-content flex justify-center items-center md:h-[180px] h-[150px] w-auto transition-all ease-out"
+                                            style={{
+                                                willChange: "transform"
+                                            }}
+                                        >
+                                            <div className="relative flex items-center justify-center">
                                                 <Image
                                                     src={step.icon}
                                                     width={150}
                                                     height={150}
                                                     alt={step.title}
-                                                    className={`flex cursor-pointer items-center justify-center rounded-full w-auto transition-all duration-500 
-                                                ${isActive ? "scale-110 shadow-[0_0_40px_#2563eb]" : "bg-blue-900/40 opacity-50 scale-50"}`}
+                                                    className="rounded-full w-auto object-contain"
                                                 />
+                                                {/* Optional: Add a shadow element that only appears when active via same logic if needed, 
+                                                    but current CSS logic relied on 'isActive'. 
+                                                    Since we control styles manually now, standard isActive class might not be enough for fluid animations.
+                                                    But let's keep it simple first. */}
                                             </div>
-                                        )}
+                                        </div>
                                     </SwiperSlide>
                                 ))}
                             </Swiper>

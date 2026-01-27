@@ -296,3 +296,7 @@ export async function getServicesByCategory(categorySlug) {
 export async function getAllCategoryBySlug(slug) {
     return fetchAPI(`/service-categories?filters[slug][$eq]=${slug}&populate[sections][populate]=*`);
 }
+
+export async function getAllCompanyData(){
+    return fetchAPI("/companies-data?populate=*")
+}

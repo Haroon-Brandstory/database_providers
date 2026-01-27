@@ -8,7 +8,8 @@ import CustomPricingPlan from "@/components/pricingPlans/customPricingPlan";
 import DataProcessWorks from "@/components/pricingPlans/dataProcessWorks";
 import FaqAccordion from "@/components/pricingPlans/faqAccordion";
 import PricingBanner from "@/components/pricingPlans/pricingBanner";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const reviews = [
     {
@@ -312,6 +313,16 @@ const abmSteps = [
 export default function PricingPageWrapper() {
 
     const [plan, setPlan] = useState("bulk");
+    const searchParams = useSearchParams();
+    const planQuery = searchParams.get("query");
+
+    useEffect(() => {
+        if (planQuery === "abm") {
+            setPlan("abm");
+        } else {
+            setPlan("bulk");
+        }
+    }, [planQuery]);
 
     return (
         <>

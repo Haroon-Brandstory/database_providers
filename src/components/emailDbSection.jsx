@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function EmailDatabaseSection({ data }) {
-    console.log("exclusiveEmail", data)
+    // console.log("exclusiveEmail", data)
     const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL
     return (
         <section className="w-full bg-[#0a0f1e] text-white bg-[url(/servicesection/bgBannerBusiness.png)] lg:bg-right bg-bottom-right bg-norepeat bg-cover">

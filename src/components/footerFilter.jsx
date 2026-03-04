@@ -2,12 +2,17 @@
 import { useNavHref } from "@/hooks/useNavHref";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function FooterFilter() {
     const { navHref } = useNavHref();
+    const pathname = usePathname();
+    // console.log("Current Pathname:", pathname); // Debugging log to check the current pathname
+    const hideFilter = pathname === "/abm/";
+
     return (
         <>
-            <div className="relative">
+            <div className={`relative ${hideFilter ? "hidden" : "block"}`}>
                 <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(ellipse_at_center,rgba(0, 0, 0, 0.02)_40%,rgba(0,0,0,0.6)_100%)]">
                 </div>
                 <div className="container px-2">

@@ -15,18 +15,6 @@ export default function BlogList() {
 
     useEffect(() => {
         fetchAllBlogsfromStrapi();
-
-        // fetch("https://thedatabaseproviders.com/wp-json/wp/v2/posts?_embed")
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         setBlogs(data);
-        //         setLoading(false);
-        //     })
-        //     .catch((error) => {
-        //         console.error("Error fetching posts:", error);
-        //         setLoading(false);
-        //     });
-        
     }, []);
 
     const fetchAllBlogsfromStrapi = async () => {
@@ -38,11 +26,11 @@ export default function BlogList() {
         } finally {
             setLoading(false);
         }
-
-        console.log("data from blogs",returnedBlogLists)
     };
 
-    // console.log(returnedBlogLists)
+    console.log(returnedBlogLists)
+
+    console.log(returnedBlogLists.map((blog) => blog.BlogPreviewImage.url));
 
     if (loading) {
         return (
@@ -73,7 +61,7 @@ export default function BlogList() {
                                     {/* Blog Image */}
 
                                     <Image
-                                        src={attrs.BlogPreviewImage.url}
+                                        src={STRAPI_URL+attrs.BlogPreviewImage.url}
                                         width={320}
                                         height={180}
                                         alt={attrs.BlogName}

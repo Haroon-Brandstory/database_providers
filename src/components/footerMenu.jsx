@@ -8,7 +8,7 @@ export default function FooterMenu() {
 
     return (
         <>
-            <div className="container px-2">
+            <div className="container px-2 pt-5">
                 <div className="max-w-7xl mx-auto flex flex-wrap flex-col md:flex-row md:justify-between md:items-start gap-10 border-b border-[#222] py-8">
                     <div className="flex-2 min-w-[220px] flex flex-col gap-6 hidden">
                         <div className="flex items-center gap-3">

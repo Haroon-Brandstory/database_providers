@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function BusinessExpansionSection({ data }) {
-    console.log(data)
+    // console.log(data)
     const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL
     return (
         <section className="bg-white py-16 px-6">

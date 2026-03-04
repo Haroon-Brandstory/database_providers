@@ -16,7 +16,7 @@ export default function ContactForm() {
     const [touched, setTouched] = useState({});
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const {navHref} = useNavHref();
+    const { navHref } = useNavHref();
 
     const validate = (data) => {
         if (!data.name.trim()) return { name: "Name is required" };
@@ -55,10 +55,20 @@ export default function ContactForm() {
         if (Object.keys(error).length === 0) {
             setLoading(true);
             try {
-                const res = await fetch("/api/contact", {
+                const mondayData = {
+                    first_name: formData.name,
+                    email: formData.businessEmail,
+                    phone: formData.mobileNumber,
+                    company: formData.companyName,
+                    years: "0", // Default value
+                    services: "Contact Enquiry", // Default value
+                    specialties: formData.message
+                };
+
+                const res = await fetch("/api/monday", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify(mondayData),
                 });
                 // console.log(res)
                 if (res.ok) {
@@ -120,6 +130,9 @@ export default function ContactForm() {
                         type="tel"
                         placeholder="Enter your mobile number"
                         name="mobileNumber"
+                        maxLength={10}
+                        pattern="[0-9]*"
+                        inputMode="numeric"
                         onChange={handleFormValues}
                         onBlur={handleBlur}
                         value={formData.mobileNumber}

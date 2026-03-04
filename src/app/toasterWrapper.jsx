@@ -8,7 +8,7 @@ export default function ToasterWrapper({ children }) {
             <Header />
             {children}
             <Footer />
-            <Toaster position="top-center" />
+            <Toaster position="top-right" />
         </>
     )
 }

@@ -24,7 +24,7 @@ export async function POST(req) {
                 phone: phone
             },
             color_mkspqgwf: "Website",
-            lead_company: company,
+            lead_company: first_name,
             numeric_mm0ppxzp: years,
             dropdown_mm0pezmt: services,
             long_text_mm10d24v: specialties
@@ -38,7 +38,7 @@ export async function POST(req) {
                 create_item(
                     board_id: ${boardId},
                     group_id: "${groupId}",
-                    item_name: "${first_name}",
+                    item_name: "${company}",
                     column_values: "${JSON.stringify(columnValues).replace(/"/g, '\\"')}"
                 ) {
                     id

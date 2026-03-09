@@ -1,0 +1,233 @@
+@media (max-width: 991px) {
+    .contaner-c {
+        padding: 0 15px;
+    }
+
+    section {
+        margin-bottom: 50px;
+    }
+
+    h2 {
+        font-size: 28px;
+        text-align: left;
+    }
+
+    p {
+        text-align: left;
+    }
+
+    /* Hero Banner */
+    .hero-inner {
+        flex-direction: column;
+        text-align: left;
+        padding: 60px 15px;
+        gap: 40px;
+    }
+
+    .hero-left {
+        width: 100%;
+    }
+
+    .hero-heading {
+        font-size: 36px;
+    }
+
+    .hero-subtext {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .hero-right {
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .connector-line {
+        display: none;
+    }
+
+    /* Stats Card */
+    .stats-row {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .stats-divider {
+        width: 100%;
+        height: 1px;
+        margin: 10px 0;
+    }
+
+    .stats-label-group {
+        justify-content: flex-start;
+        flex: none;
+    }
+
+    .stats-count-group {
+        text-align: left;
+    }
+
+    /* Access Section */
+    .access h2 {
+        font-size: 28px;
+        text-align: left;
+    }
+
+    .access-content {
+        flex-direction: column;
+        padding: 30px 20px !important;
+    }
+
+    .access-content .left {
+        padding-bottom: 40px !important;
+        text-align: left !important;
+    }
+
+    .access-content .right {
+        align-items: flex-start !important;
+    }
+
+    /* Instant Access */
+    .instant-access {
+        padding: 50px 0px;
+    }
+
+    .instant-access h2,
+    .instant-access p {
+        width: 100% !important;
+    }
+
+    .instant-access-content {
+        flex-direction: column-reverse;
+
+        .cbutton,
+        .wbutton {
+            width: max-content;
+            min-width: max-content;
+            padding: 12px 20px;
+        }
+
+        .flex-gap {
+            gap: 10px;
+            flex-direction: row;
+        }
+    }
+
+    .btn-group {
+        justify-content: flex-start;
+    }
+
+    .flex-gap {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Purchase Executives */
+    .purchase-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .purchase-executives h2 {
+        font-size: 28px;
+    }
+
+    /* Global Data Grid */
+    .data-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .global-data h2 {
+        font-size: 28px;
+    }
+
+    /* Double ROI section */
+    .double-your-roi .contaner-c {
+        padding: 40px 20px;
+    }
+
+    .double-your-roi h2,
+    .double-your-roi p {
+        width: 100% !important;
+    }
+
+    .double-your-roi .group {
+        flex-wrap: wrap;
+    }
+
+    .double-your-roi .item {
+        min-width: calc(50% - 10px);
+    }
+
+    /* Why Choose */
+    .why-choose-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .why-choose .right h2,
+    .why-choose .right p {
+        text-align: left !important;
+    }
+
+    .why-choose .right ul {
+        display: inline-block;
+        text-align: left;
+    }
+
+    /* FAQ */
+    .faq-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Free Sample */
+    .free-sample {
+        .sample-content {
+            flex-direction: column;
+            gap: 40px;
+        }
+    }
+
+    .free-sample .left h2 {
+        font-size: 28px;
+        text-align: left !important;
+    }
+
+    .free-sample .left p {
+        text-align: left !important;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .free-sample .left .tagline {
+        text-align: left !important;
+    }
+
+    .free-sample .right {
+        width: 100%;
+    }
+
+    .reach-us-executives {
+        margin-bottom: 0px;
+    }
+
+}
+
+@media (max-width: 575px) {
+    .hero-heading {
+        font-size: 28px;
+    }
+
+    .data-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .double-your-roi .item {
+        min-width: 100%;
+    }
+
+    .form-card {
+        padding: 20px !important;
+    }
+}

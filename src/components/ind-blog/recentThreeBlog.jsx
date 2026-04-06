@@ -1,23 +1,15 @@
+import { API_URL } from "@/utils/config";
 import Image from "next/image";
 
-export default function RecentThreeBlogs({ currentSlug = null }) {
-    const demoBlogDAta = [
-        {
-            img: "/latestBlogs/blog1.png",
-            blogDesc: "5 proven techniques to identify and contact your B2B audience",
-            blogRedirection: "/blogs/5-proven-techniques-to-identify-and-contact-your-b2b-audience/"
-        },
-        {
-            img: "/latestBlogs/blog2.png",
-            blogDesc: "Potential of content syndication for B2B lead generation",
-            blogRedirection: "/blogs/potential-of-content-syndication-for-b2b-lead-generation/"
-        },
-        {
-            img: "/latestBlogs/blog3.png",
-            blogDesc: "Step by step guide for B2B Email marketing",
-            blogRedirection: "/blogs/step-by-step-guide-for-b2b-email-marketing/"
-        },
-    ]
+export default function RecentThreeBlogs({ recentBlogs }) {
+
+    const demoBlogDAta = recentBlogs?.map((item) => {
+        return {
+            img: API_URL + item?.BlogPreviewImage?.url,
+            blogDesc: item?.BlogName,
+            blogRedirection: item?.BlogSlug,
+        }
+    })
 
     // Fetch all blogs and get 3 random ones
     // const allBlogs = await getAllBlogs();
@@ -45,11 +37,12 @@ export default function RecentThreeBlogs({ currentSlug = null }) {
                                             src={item?.img}
                                             width={320}
                                             height={180}
+                                            unoptimized
                                             alt="blog_demo"
                                             className="w-full h-[180px] object-cover transition-transform duration-300 hover:scale-110"
                                         />
                                     </div>
-                                    <p className="text-[#222] text-[16px]  font-normal mb-6">
+                                    <p className="text-[#222] text-[16px]  font-medium mb-6">
                                         {item?.blogDesc}
                                     </p>
                                     <a

@@ -12,6 +12,7 @@
     "@heroui/accordion": "^2.2.19",
     "@strapi/blocks-react-renderer": "1.0.2",
     "@swc/helpers": "^0.5.17",
+    "cheerio": "1.2.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.1",
     "gsap": "^3.13.0",

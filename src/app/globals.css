@@ -83,12 +83,10 @@ label {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at center,
-    #0236efe6,
-    #0236ef73,
-    #0236ef29
-  );
+  background: radial-gradient(circle at center,
+      #0236efe6,
+      #0236ef73,
+      #0236ef29);
   z-index: -2;
 }
 
@@ -117,14 +115,13 @@ label {
 }
 
 .gradient-text {
-  background: linear-gradient(
-    360deg,
-    rgba(255, 255, 255, 0.6) 0%,
-    #ffffff 100%
-  );
+  background: linear-gradient(360deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      #ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text; /* For modern browsers */
+  background-clip: text;
+  /* For modern browsers */
   color: transparent;
 }
 
@@ -135,13 +132,11 @@ input[type="range"] {
   width: 100%;
   height: 9px;
   border-radius: 999px;
-  background: linear-gradient(
-    to right,
-    #2563eb 0%,
-    #2563eb var(--range-progress),
-    #ffffff var(--range-progress),
-    #ffffff 100%
-  );
+  background: linear-gradient(to right,
+      #2563eb 0%,
+      #2563eb var(--range-progress),
+      #ffffff var(--range-progress),
+      #ffffff 100%);
   cursor: pointer;
   transition: background 0.15s ease-out;
 }
@@ -184,21 +179,17 @@ input[type="range"]::-moz-range-track {
 }
 
 .fade-edges {
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 20%,
-    black 80%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%);
 
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 20%,
-    black 80%,
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%);
 }
 
 
@@ -239,6 +230,7 @@ input[type="range"]::-moz-range-track {
 }
 
 @keyframes cloud-slow {
+
   0%,
   100% {
     transform: translateX(0);
@@ -250,6 +242,7 @@ input[type="range"]::-moz-range-track {
 }
 
 @keyframes cloud-slower {
+
   0%,
   100% {
     transform: translateY(0);
@@ -286,4 +279,8 @@ input[type="range"]::-moz-range-track {
     display: flex;
     align-items: stretch;
   }
+}
+
+article [id] {
+  scroll-margin-top: 110px;
 }

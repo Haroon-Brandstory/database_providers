@@ -1,4 +1,8 @@
 import { getCategoryBySlug, getServicesBySlug } from "@/lib/services";
+import fs from 'fs';
+import path from 'path';
+import * as cheerio from 'cheerio';
+import StaticPageFrame from '@/components/StaticPageFrame';
 import ServicePageBanner from '@/components/servicebanner';
 import PowerPackSection from '@/components/servPowerPack';
 import PowerPackInfinitySection from '@/components/catPowerInfinity';
@@ -37,9 +41,84 @@ const componentMap = {
     "service-category.email-open-rates": EmailOpenRates,
 };
 
-export default async function Page({ params }) {
-    const { slug } = await params;
+export async function generateMetadata({ params }) {
+    const { locale, slug } = await params;
+    
+    // 1. You can fetch SEO from Strapi here if those functions exist in your codebase in the future.
+    // let seoData = ...
 
+    // 2. Fallback to extracting from static HTML file
+    try {
+        const filePath = path.join(process.cwd(), 'src', 'content', 'static-pages', locale, `${slug}.html`);
+        if (fs.existsSync(filePath)) {
+            const htmlContent = fs.readFileSync(filePath, 'utf-8');
+            const $ = cheerio.load(htmlContent);
+            
+            const alternates = {
+                canonical: $('link[rel="canonical"]').attr('href') || '',
+                languages: {},
+            };
+
+            $('link[rel="alternate"][hreflang]').each((_, el) => {
+                const hreflang = $(el).attr('hreflang');
+                const href = $(el).attr('href');
+                if (hreflang && href) {
+                    alternates.languages[hreflang] = href;
+                }
+            });
+
+            return {
+                title: $('title').text() || `${slug} - Database Providers`,
+                description: $('meta[name="description"]').attr('content') || '',
+                keywords: $('meta[name="keywords"]').attr('content') || '',
+                alternates,
+                openGraph: {
+                    title: $('meta[property="og:title"]').attr('content') || $('title').text(),
+                    description: $('meta[property="og:description"]').attr('content') || $('meta[name="description"]').attr('content'),
+                    url: $('meta[property="og:url"]').attr('content') || '',
+                    siteName: $('meta[property="og:site_name"]').attr('content') || 'The Database Providers',
+                    images: [
+                        {
+                            url: $('meta[property="og:image"]').attr('content') || '',
+                        },
+                    ],
+                    type: $('meta[property="og:type"]').attr('content') || 'website',
+                },
+                robots: $('meta[name="robots"]').attr('content') || 'index, follow',
+                authors: [
+                    { name: $('meta[name="author"]').attr('content') || 'Database Providers' }
+                ],
+            };
+        }
+    } catch (err) {
+        console.error("Error reading static HTML for metadata:", err);
+    }
+    
+    return {
+        title: "Database Providers",
+    }
+}
+
+export default async function Page({ params }) {
+    const { locale, slug } = await params;
+
+    // 1. Check for static HTML file FIRST (before Strapi, because fetchAPI calls notFound() on error)
+    const filePath = path.join(process.cwd(), 'src', 'content', 'static-pages', locale, `${slug}.html`);
+    if (fs.existsSync(filePath)) {
+        try {
+            const htmlContent = fs.readFileSync(filePath, 'utf-8');
+
+            return (
+                <div className="static-page-container">
+                    <StaticPageFrame htmlContent={htmlContent} title={slug} />
+                </div>
+            );
+        } catch (err) {
+            console.error("Error rendering static HTML:", err);
+        }
+    }
+
+    // 2. No static file — try Strapi API
     let data = await getServicesBySlug(slug);
 
     if (!data?.data?.[0]) {

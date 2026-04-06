@@ -1,6 +1,9 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 export default function BlogBlocksRenderer({ content }) {
+    if (!content || !Array.isArray(content)) {
+        return null;
+    }
     return (
         <BlocksRenderer
             content={content}

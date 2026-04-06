@@ -2,8 +2,30 @@
 import { useEffect, useState } from "react";
 import BlogBlocksRenderer from "./BlogBlocksRenderer";
 import BlogKeyPoint from "./blogKeyPoint";
+import AuthorDetails from "./AuthorDetails";
+import AnalyzeArticleWithAi from "./AnalyzeArticleWithAi";
+import BlogQuote from "./BlogQuote";
+import BlogNote from "./BlogNote";
+import EmailMarket from "./EmailMarket";
+import DownloadPdf from "./DownloadPdf";
+import BlogFaq from "./BlogFaq";
+import DynamicTable from "./DynamicTable";
+import BlogTableOfContent from "./BlogTableOfContent";
+import BlogContentImage from "./BlogContentImage";
 
-export default function EachBlogContent({ blog }) {
+const COMPONENT_MAP = {
+    "blog.article-analyzer": AnalyzeArticleWithAi,
+    "blog.keypoints": BlogKeyPoint,
+    "blog.blog-image": BlogContentImage,
+    "blog.blog-quote": BlogQuote,
+    "blog.blog-note": BlogNote,
+    "blog.blog-cta": EmailMarket,
+    "blog.blog-pdf": DownloadPdf,
+    "blog.table": DynamicTable,
+    "blog.blog-faq": BlogFaq,
+};
+
+export default function EachBlogContent({ blog, blogSections }) {
     const [activeId, setActiveId] = useState(null);
 
     useEffect(() => {
@@ -23,6 +45,29 @@ export default function EachBlogContent({ blog }) {
         return () => observer.disconnect();
     }, []);
 
+    const renderSection = (section, index) => {
+        const componentType = section.__component;
+
+        if (componentType === "blog.blog-content") {
+            return (
+                <div key={index} className="bg-white rounded-[20px] shadow md:p-8 p-5 mb-8">
+                    <BlogBlocksRenderer content={section.blogContents} />
+                </div>
+            );
+        }
+
+        const Component = COMPONENT_MAP[componentType];
+
+        if (Component) {
+            return <Component key={index} section={section} {...section} />;
+        }
+
+        return (
+            <div key={index} className="text-red-500 text-xs p-4 border border-red-200 rounded mb-4">
+                Unknown component: {componentType}
+            </div>
+        );
+    };
 
     return (
         <div className="bg-white py-8">
@@ -30,33 +75,22 @@ export default function EachBlogContent({ blog }) {
                 <div className="container max-w-7xl mx-auto flex flex-col p-2 text-black justify-start  ">
                     <div className="md:flex relative gap-4">
                         {/* Left Column - Table of Contents */}
-                        <aside className="w-full md:w-1/4 absolute md:p-6 p-2 h-fit sticky md:top-24 mb-4 shadow rounded-[20px]">
-                            <h2 className="text-[24px] font-[500] border-b pb-4 mb-4 border-[#00000033]">Table of contents</h2>
-                            {blog.BlogTableOfContents?.length > 0 && (
-                                <ul className="space-y-3 text-sm">
-                                    {blog.BlogTableOfContents.map((toc) => (
-                                        <li key={toc.id}>
-                                            <a
-                                                href={`#${toc.anchorLink}`}
-                                                className={`block transition-colors ${activeId === toc.anchorLink
-                                                    ? "text-[#2C6BFF] font-medium"
-                                                    : "text-[#00000099]"
-                                                    }`}
-                                            >
-                                                {toc.sectionTitle}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </aside>
+                        <BlogTableOfContent
+                            tableOfContents={blog.BlogTableOfContents}
+                            activeId={activeId}
+                        />
                         {/* Right Column - Blog Content */}
                         <article className="w-full md:w-3/4" >
                             {/* Blog Content */}
-                            <BlogKeyPoint />
-                            <div className=" bg-white rounded-[20px] shadow md:p-8 p-5">
-                                <BlogBlocksRenderer content={blog?.newBlogContents} />
-                            </div>
+                            <AuthorDetails author={blog.author} updatedAt={blog.updatedAt} />
+
+                            {blogSections && blogSections.length > 0 ? (
+                                blogSections.map((section, index) => renderSection(section, index))
+                            ) : (
+                                <div className="bg-white rounded-[20px] shadow md:p-8 p-5">
+                                    <BlogBlocksRenderer content={blog?.newBlogContents || []} />
+                                </div>
+                            )}
                         </article>
                     </div>
                 </div>

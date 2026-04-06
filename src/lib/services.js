@@ -278,8 +278,54 @@ export async function getAllBlogs() {
     return fetchAPI("/blog-posts?populate=*")
 }
 
+export async function getLatestThreeBlogs() {
+    return fetchAPI("/blog-posts?populate=*&limit=3")
+}
+
 export async function getBlogBySlug(slug) {
-    return fetchAPI(`/blog-posts?filters[BlogSlug][$eq]=${slug}&populate=*`);
+    const query = qs.stringify({
+        filters: {
+            BlogSlug: { $eq: slug },
+        },
+        populate: {
+            BlogTableOfContents: {
+                populate: "*"
+            },
+            author: {
+                populate: "*"
+            },
+            BlogPreviewImage: {
+                populate: "*"
+            },
+            blogSections: {
+                populate: true,
+                on: {
+                    "blog.article-analyzer": { populate: "*" },
+                    "blog.blog-content": { populate: "*" },
+                    "blog.keypoints": { populate: "*" },
+                    "blog.blog-image": { populate: "*" },
+                    "blog.blog-quote": { populate: "*" },
+                    "blog.blog-note": { populate: "*" },
+                    "blog.blog-cta": { populate: "*" },
+                    "blog.blog-pdf": { populate: "*" },
+                    "blog.table": {
+                        populate: {
+                            tableHeading: { populate: "*" },
+                            tableRows: {
+                                populate: {
+                                    cells: {
+                                        populate: "*"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "blog.blog-faq": { populate: "*" },
+                },
+            },
+        },
+    }, { encodeValuesOnly: true });
+    return fetchAPI(`/blog-posts?${query}`);
 }
 
 // Fetch all services (can be paginated)
@@ -297,6 +343,6 @@ export async function getAllCategoryBySlug(slug) {
     return fetchAPI(`/service-categories?filters[slug][$eq]=${slug}&populate[sections][populate]=*`);
 }
 
-export async function getAllCompanyData(){
+export async function getAllCompanyData() {
     return fetchAPI("/companies-data?populate=*")
 }

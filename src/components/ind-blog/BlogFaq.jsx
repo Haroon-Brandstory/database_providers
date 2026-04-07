@@ -1,5 +1,4 @@
 "use client";
-import Script from "next/script";
 import { useMemo, useState } from "react";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
@@ -9,34 +8,12 @@ export default function BlogFaq({ section }) {
     // Dynamic FAQs from Strapi
     const faqs = section?.faq || [];
 
-    const faqSchema = useMemo(() => {
-        return {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
-                "@type": "Question",
-                "name": faq.question,
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": Array.isArray(faq.answer)
-                        ? faq.answer.map(block => block.children?.map(child => child.text).join("")).join(" ")
-                        : faq.answer
-                }
-            }))
-        };
-    }, [faqs]);
-
     const handleAccordion = (i) => {
         setOpenIndex(prev => (prev === i ? null : i));
     };
 
     return (
         <section className="mb-4 bg-white flex flex-col items-center text-black">
-            <Script
-                id="faq-schema"
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-            />
             <div className="max-w-5xl container lg:px-0 px-1 w-full mx-auto flex flex-col items-start">
                 <div className="text-start max-w-4xl mb-4">
                     <h2 className="text-[#000000] text-start lg:text-[36px] text-[28px] font-medium">FAQ's</h2>

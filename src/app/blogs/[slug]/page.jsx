@@ -50,10 +50,35 @@ export default async function BlogDetails({ params }) {
 
     const latest3Blogs = await getLatestThreeBlogs();
 
+    // Extract all FAQ sections from blogSections
+    const faqSections = blog.blogSections?.filter(s => s.__component === "blog.blog-faq") || [];
+    const allFaqs = faqSections.flatMap(s => s.faq || []);
+
+    const faqSchema = allFaqs.length > 0 ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": allFaqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": Array.isArray(faq.answer)
+                    ? faq.answer.map(block => block.children?.map(child => child.text).join("")).join(" ")
+                    : faq.answer
+            }
+        }))
+    } : null;
+
     try {
         return (
             <section className="">
-                <div style={{ background: `${blog?.BlogPreviewImage?.url ? `url(${STRAPI_URL + blog.BlogPreviewImage.url})` : '#001340'}`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className=" text-white  flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-10 overflow-hidden pt-30">
+                {faqSchema && (
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                    />
+                )}
+                <div style={{ background: `${blog?.BlogPreviewImage?.url ? `url(${STRAPI_URL + blog.BlogPreviewImage.url})` : '#001340'}` , backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className=" text-white  flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-10 overflow-hidden pt-30">
                     <div className="container max-w-7xl mx-auto flex justify-start items-center ">
                         <div className="h-[450px] flex items-start flex-col justify-center">
                             <h1 className="text-white md:text-[48px] max-w-4xl font-medium text-[36px]">{blog.BlogName}</h1>

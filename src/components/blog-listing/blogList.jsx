@@ -61,9 +61,10 @@ export default function BlogList() {
                                     {/* Blog Image */}
 
                                     <Image
-                                        src={STRAPI_URL+attrs.BlogPreviewImage.url}
+                                        src={STRAPI_URL + attrs.BlogPreviewImage.url}
                                         width={320}
                                         height={180}
+                                        unoptimized
                                         alt={attrs.BlogName}
                                         className="rounded-xl w-full h-[180px] object-cover mb-6"
                                     />

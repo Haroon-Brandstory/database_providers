@@ -7,6 +7,35 @@ import { API_URL } from "@/utils/config";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const res = await getBlogBySlug(slug);
+    const blog = res?.data?.[0];
+
+    if (!blog) {
+        return {
+            title: "Blog Not Found",
+        };
+    }
+
+    return {
+        title: blog.metaTitle || blog.BlogName,
+        description: blog.metaDescription || "Database Providers Blog",
+        keywords: blog.keywords || "",
+        alternates: {
+            canonical: `/blogs/${slug}/`,
+        },
+        authors: blog.author ? [{ name: blog.author.AuthorName }] : [],
+        robots: {
+            index: true,
+            follow: true,
+            maxImagePreview: 'large',
+            maxSnippet: -1,
+            maxVideoPreview: -1,
+        },
+    };
+}
+
 export default async function BlogDetails({ params }) {
     const STRAPI_URL = API_URL;
     const { slug } = await params;

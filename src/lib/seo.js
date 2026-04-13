@@ -9,12 +9,15 @@ export const localeMap = {
 const BASE_URL = "https://www.thedatabaseproviders.com";
 
 export function generateSeoMetadata({
-    locale,
+    locale = "en",
     slug,
     title,
     description,
+    keywords,
+    authors,
     noIntl = false,
     canonical,
+    robots,
 }) {
     const isHome = !slug;
 
@@ -24,6 +27,14 @@ export function generateSeoMetadata({
 
     const finalCanonical = canonical ? canonical : autoCanonical;
 
+    const finalRobots = robots || {
+        index: true,
+        follow: true,
+        maxImagePreview: 'large',
+        maxSnippet: -1,
+        maxVideoPreview: -1,
+    };
+
     /** -------------------------
      * NO INTL (no hreflang)
      * ------------------------- */
@@ -31,13 +42,12 @@ export function generateSeoMetadata({
         return {
             title,
             description,
+            keywords,
+            authors,
             alternates: {
                 canonical: finalCanonical,   // FIXED: now uses override
             },
-            robots: {
-                index: true,
-                follow: true,
-            },
+            robots: finalRobots,
         };
     }
 
@@ -58,13 +68,12 @@ export function generateSeoMetadata({
     return {
         title,
         description,
+        keywords,
+        authors,
         alternates: {
             canonical: finalCanonical,
             languages,
         },
-        robots: {
-            index: true,
-            follow: true,
-        },
+        robots: finalRobots,
     };
 }

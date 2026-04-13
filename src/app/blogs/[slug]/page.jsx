@@ -3,6 +3,7 @@ import EachBlogContent from "@/components/ind-blog/eachBlogContent";
 import RecentThreeBlogs from "@/components/ind-blog/recentThreeBlog";
 import { getBlogBySlug, getLatestThreeBlogs } from "@/lib/services";
 import { API_URL } from "@/utils/config";
+import { generateSeoMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -18,22 +19,13 @@ export async function generateMetadata({ params }) {
         };
     }
 
-    return {
+    return generateSeoMetadata({
+        slug: `blogs/${slug}/`,
         title: blog.metaTitle || blog.BlogName,
         description: blog.metaDescription || "Database Providers Blog",
         keywords: blog.keywords || "",
-        alternates: {
-            canonical: `/blogs/${slug}/`,
-        },
         authors: blog.author ? [{ name: blog.author.AuthorName }] : [],
-        robots: {
-            index: true,
-            follow: true,
-            maxImagePreview: 'large',
-            maxSnippet: -1,
-            maxVideoPreview: -1,
-        },
-    };
+    });
 }
 
 export default async function BlogDetails({ params }) {
@@ -78,7 +70,7 @@ export default async function BlogDetails({ params }) {
                         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
                     />
                 )}
-                <div style={{ background: `${blog?.BlogPreviewImage?.url ? `url(${STRAPI_URL + blog.BlogPreviewImage.url})` : '#001340'}` , backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className=" text-white  flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-10 overflow-hidden pt-30">
+                <div style={{ background: `${blog?.BlogPreviewImage?.url ? `url(${STRAPI_URL + blog.BlogPreviewImage.url})` : '#001340'}`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }} className=" text-white  flex flex-col items-center justify-center px-4 md:px-20 pt-20 pb-10 overflow-hidden pt-30">
                     <div className="container max-w-7xl mx-auto flex justify-start items-center ">
                         <div className="h-[450px] flex items-start flex-col justify-center">
                             <h1 className="text-white md:text-[48px] max-w-4xl font-medium text-[36px]">{blog.BlogName}</h1>

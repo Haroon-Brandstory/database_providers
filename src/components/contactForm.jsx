@@ -26,7 +26,7 @@ export default function ContactForm() {
         if (!/^[0-9]{10}$/.test(data.mobileNumber)) return { mobileNumber: "Enter a valid 10-digit mobile number" };
         if (!data.companyName.trim()) return { companyName: "Company name is required" };
         if (!data.message.trim()) return { message: "Message is required" };
-        if (data.message.trim().length < 50) return { message: "Message must be at least 50 characters" };
+        if (data.message.trim().length < 15) return { message: "Message must be at least 15 characters" };
         return {};
     };
 

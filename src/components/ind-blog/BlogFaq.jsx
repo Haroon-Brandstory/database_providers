@@ -54,7 +54,7 @@ export default function BlogFaq({ section }) {
                                     className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"}`}
                                     id={`faq-content-${i}`}
                                 >
-                                    <div className="text-[#444] text-[15px] leading-relaxed font-normal">
+                                    <div className="[&_a]:text-blue-600 [&_a]:hover:underline text-[#444] text-[15px] leading-relaxed font-normal">
                                         <BlocksRenderer content={faq.answer} />
                                     </div>
                                 </div>

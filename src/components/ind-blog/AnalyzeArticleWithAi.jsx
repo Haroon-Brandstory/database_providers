@@ -10,7 +10,7 @@ export default function AnalyzeArticleWithAi({ section }) {
   const aiProviders = [
     { name: 'ChatGPT', logo: "/blog/articleAnalyzer2.svg", url: chatGPT },
     { name: 'perplexity', logo: "/blog/articleAnalyzer5.svg", url: perplexity },
-    { name: 'Google Ai', logo: "/blog/articleAnalyzer1.svg", url: gemini },
+    { name: 'Google', logo: "/blog/google_noBg.svg", url: gemini },
     { name: 'Claude', logo: "/blog/articleAnalyzer3.svg", url: claude, copyOnly: true },
     { name: 'Copilot', logo: "/blog/articleAnalyzer4.svg", url: copilot, copyOnly: true },
   ];

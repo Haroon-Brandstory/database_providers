@@ -102,92 +102,92 @@ function LanguageDropdown() {
 	);
 }
 
+const HealthcareIcon = () => (
+	<Image src="/header/healthCare-icon.svg" alt="Healthcare" width={24} height={24} />
+);
+
+const GlobalIcon = () => (
+	<Image src="/header/global-icon.svg" alt="Healthcare" width={24} height={24} />
+);
+
+const IndustryIcon = () => (
+	<Image src="/header/industry-icon.svg" alt="Healthcare" width={24} height={24} />
+);
+
 const menuItems = [
 	{
 		label: "Home",
 		url: "/"
 	},
-	// {
-	// 	label: "About",
-	// 	url: "/about"
-	// },
 	{
-		label: "Our-Data",
+		label: "Data",
 		url: "/our-data",
-		childMenu: [
+		isMega: true,
+		sections: [
 			{
-				label: "Healthcare Data",
-				url: "/healthcare-data"
+				title: "Healthcare Data",
+				icon: <HealthcareIcon />,
+				items: [
+					{ label: "Physicians Email List", url: "/healthcare-data" },
+					{ label: "Dental Assistant Email List", url: "/healthcare-data" },
+					{ label: "Nurses Email List", url: "/healthcare-data" },
+					{ label: "Hospital Administrators Email List", url: "/healthcare-data" },
+					{ label: "Pharmacy Executive Email List", url: "/healthcare-data" },
+					{ label: "Cardiologist Email List", url: "/healthcare-data" },
+				]
 			},
 			{
-				label: "B2B Data",
-				url: "/b2b-data"
+				title: "Global",
+				icon: <GlobalIcon />,
+				items: [
+					{ label: "C-level Executives Email List", url: "/global-database" },
+					{ label: "Directors Email List", url: "/global-database" },
+					{ label: "HR Email List", url: "/global-database" },
+					{ label: "Manager Email List", url: "/global-database" },
+					{ label: "Lawyers Email List", url: "/global-database" },
+					{ label: "Accountants Email List", url: "/global-database" },
+				]
 			},
 			{
-				label: "Tech Install Base Data",
-				url: "/tech-install-data"
-			},
-			{
-				label: "Industry Data",
-				url: "/industry-data"
-			},
-			{
-				label: "Professional Data",
-				url: "/professional-data"
-			},
-			{
-				label: "Data Enrichment",
-				url: "/data-enrichment"
-			},
-			{
-				label: "Custom Data Solutions",
-				url: "/custom-data"
-			},
-			{
-				label: "Global Database",
-				url: "/global-database"
+				title: "Industry",
+				icon: <IndustryIcon />,
+				items: [
+					{ label: "IT Industry Email List", url: "/industry-data" },
+					{ label: "Hospitals and Health Care", url: "/industry-data" },
+					{ label: "Manufacturing Industry Email List", url: "/industry-data" },
+					{ label: "Education Industry Email List", url: "/industry-data" },
+					{ label: "BFSI Email Lists", url: "/industry-data" },
+					{ label: "Real Estate Email List", url: "/industry-data" },
+				]
 			}
 		]
 	},
 	{
-		label: "ABM",
-		url: "/abm"
+		label: "About Us",
+		url: "/about"
 	},
 	{
-		label: "Pricing",
-		url: "/pricing-plans"
-	},
-	{
-		label: "Resources",
+		label: "Resource",
 		url: "/resources",
-		childMenu: [
-			{
-				label: "Blogs",
-				url: "/blogs"
-			},
-			{
-				label: "Case Studies",
-				url: "/case-studies"
-			},
-			{
-				label: "White Papers",
-				url: "/white-papers"
-			},
-			{
-				label: "Webinars",
-				url: "/webinars"
-			},
-			{
-				label: "Tools",
-				url: "/tools"
-			},
-			{
-				label: "Videos",
-				url: "/videos"
-			}
-		]
+		isDropdown: true,
+		items: [
+			{ label: "Case Studies", url: "/case-studies" },
+			{ label: "Testimonials", url: "/testimonials" },
+			{ label: "News", url: "/news" },
+			{ label: "White Paper", url: "/white-papers" },
+			{ label: "Blogs", url: "/blogs" },
+			{ label: "Tools", url: "/tools" },
+			{ label: "Videos", url: "/videos" },
+		],
+		card: {
+			title: "Contact Us",
+			image: "/header/resource-contact-img.svg",
+			buttonLabel: "Contact Us",
+			url: "/contact-us"
+		}
 	}
 ]
+
 
 export default function Header() {
 	const getLocaleFromPath = (pathname) => {
@@ -293,106 +293,135 @@ export default function Header() {
 					</button>
 
 					{/* Desktop Navigation */}
-					<nav className="hidden lg:flex items-center space-x-6">
+					<nav className="hidden lg:flex items-center space-x-8">
 						{
 							menuItems.map((item, index) => {
-								// Check if item has childMenu
-								if (item?.childMenu && Array.isArray(item.childMenu) && item.childMenu.length > 0) {
-									const isOurData = item.label === "Our-Data";
-									const isResources = item.label === "Resources";
-
+								if (item.isMega || item.isDropdown) {
 									return (
 										<div
 											key={index}
-											className="relative"
-											data-menu-index={index}
+											className="relative group"
+											onMouseEnter={() => setOpenMenuIndex(index)}
+											onMouseLeave={() => setOpenMenuIndex(null)}
 										>
 											<button
 												type="button"
-												onClick={(e) => {
-													e.preventDefault();
-													setOpenMenuIndex(openMenuIndex === index ? null : index);
-												}}
-												className={`hover:text-blue-400 text-white cursor-pointer bg-transparent border-none p-0 ${isActive(navHref(item?.url)) ? "border-b-2 border-[#0133E9]" : ""
-													}`}
+												className={`flex items-center gap-1 hover:text-blue-400 text-white cursor-pointer bg-transparent border-none p-0 transition-colors ${isActive(navHref(item.url)) ? "text-blue-400 font-semibold" : ""}`}
 											>
-												{item?.label || "menu"}
-												<span className="text-[10px] pl-1">{item.label === "Our-Data" ? "▼" : ""}</span>
-												{/* <span className="text-[10px] pl-1">{item.label === "Resources" ? "▼" : ""}</span> */}
+												{item.label}
+												<svg className={`w-3 h-3 transition-transform duration-300 ${openMenuIndex === index ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+												</svg>
 											</button>
 
 											{openMenuIndex === index && (
-												<>
-													{/* Full-width Mega Menu for Our-Data */}
-													{isOurData && (
-														<div className={`flex items-center justify-center w-full fixed left-0 place-content-center top-24`} style={{
-															top: `${headerHeight}px`
-														}}>
-															<div
-																className="backdrop-blur-md w-[70vw] bg-[#0236ef3b] rounded shadow-lg z-[100]"
+												<div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]">
+													{/* Arrow Pointer */}
+													<div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-t border-l border-gray-100 shadow-[-2px_-2px_5px_rgba(0,0,0,0.02)]"></div>
 
-															>
-																<div className="container mx-auto px-4 md:px-6 lg:px-6 py-4">
-																	<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-																		{item.childMenu.map((childItem, childIndex) => {
-																			if (childItem?.label && childItem?.url) {
+													{item.isMega ? (
+														<div className="bg-white rounded-[32px] shadow-2xl p-10 w-[1000px] border border-gray-100">
+															<div className="grid grid-cols-3 gap-10">
+																{item.sections.map((section, sIndex) => (
+																	<div key={sIndex} className="flex flex-col gap-6">
+																		<div className="flex items-center gap-3">
+																			<div className="p-2.5 bg-blue-50 rounded-xl">
+																				{section.icon}
+																			</div>
+																			<h3 className="font-bold text-gray-900 text-lg">{section.title}</h3>
+																		</div>
+																		<div className="flex flex-col gap-1.5 border-r pr-2">
+																			{section.items.map((subItem, iIndex) => {
+																				const isSubActive = isActive(navHref(subItem.url));
 																				return (
 																					<Link
-																						key={childIndex}
-																						href={navHref(childItem.url)}
-																						className="block px-4 py-3 rounded hover:bg-[#0236EF] transition-colors text-white cursor-pointer"
-																						onClick={() => setOpenMenuIndex(null)}
+																						key={iIndex}
+																						href={navHref(subItem.url)}
+																						className={`flex items-center justify-between px-4 py-2.5 rounded-full transition-all transition-0.3s ease-in-out text-[15px] ${isSubActive
+																							? "bg-[#EBF2FF] text-[#0133E9] font-medium"
+																							: "text-gray-600 hover:text-[#0133E9] hover:bg-gray-50 hover:translate-x-1"
+																							}`}
 																					>
-																						{childItem.label}
+																						{subItem.label}
+																						{isSubActive && (
+																							<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+																								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+																							</svg>
+																						)}
 																					</Link>
 																				);
-																			}
-																			return null;
-																		})}
+																			})}
+																		</div>
+																	</div>
+																))}
+															</div>
+														</div>
+													) : (
+														<div className="bg-white rounded-[24px] shadow-2xl overflow-hidden w-[700px] border border-gray-100 flex p-2">
+															<div className="flex-1 p-6">
+																<h3 className="font-bold text-gray-900 text-xl mb-6">Resources</h3>
+																<div className="flex flex-col gap-1">
+																	{item.items.map((subItem, iIndex) => {
+																		const isSubActive = isActive(navHref(subItem.url));
+																		return (
+																			<Link
+																				key={iIndex}
+																				href={navHref(subItem.url)}
+																				className={`flex items-center justify-between group/item px-4 py-2.5 rounded-full transition-all text-[15px] ${isSubActive
+																					? "bg-[#EBF2FF] text-[#0133E9] font-medium"
+																					: "text-gray-600 hover:text-[#0133E9] hover:bg-gray-50 hover:translate-x-1"
+																					}`}
+																			>
+																				{subItem.label}
+																				{isSubActive && (
+																					<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+																						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+																					</svg>
+																				)}
+																			</Link>
+																		);
+																	})}
+																</div>
+															</div>
+															<div className="w-[55%] relative min-h-[350px]">
+																<div className="absolute inset-0 p-2">
+																	<div className="relative h-[90%] w-full rounded-[20px] overflow-hidden">
+																		<Image
+																			src={item.card.image}
+																			alt="Resource"
+																			fill
+																			className="object-cover"
+																		/>
+																		<div className="absolute inset-0 bg-gradient-to-t from-[#0133E9]/80 via-transparent to-transparent opacity-60"></div>
+																		<div className="absolute bottom-6 left-6">
+																			<Link
+																				href={navHref(item.card.url)}
+																				className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-[#0133E9] transition-all"
+																			>
+																				{item.card.buttonLabel}
+																				<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+																					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7" />
+																				</svg>
+																			</Link>
+																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
 													)}
-
-													{/* Normal Dropdown for Resources */}
-													{isResources && (
-														<div
-															className="absolute left-0 top-full mt-2 w-fit bg-[#0236ef3b] backdrop-blur-md rounded shadow-lg z-[100]"
-														>
-															{item.childMenu.map((childItem, childIndex) => {
-																if (childItem?.label && childItem?.url) {
-																	return (
-																		<div key={childIndex}
-																			className="flex items-center gap-2 px-4 py-2 w-full rounded cursor-pointer hover:bg-[#0236EF] text-white"
-																			onClick={() => setOpenMenuIndex(null)}>
-																			<Link
-																				href={navHref(childItem.url)}
-																			>
-																				{childItem.label}
-																			</Link>
-																		</div>
-																	);
-																}
-																return null;
-															})}
-														</div>
-													)}
-												</>
+												</div>
 											)}
 										</div>
 									);
 								}
 
-								// Regular menu item without childMenu
 								return (
 									<Link
-										href={navHref(item?.url)}
+										href={navHref(item.url)}
 										key={index}
-										className={`hover:text-blue-400 text-white ${isActive(navHref(item?.url)) ? "border-b-2 border-[#0133E9]" : ""
-											}`}
+										className={`hover:text-blue-400 text-white transition-colors ${isActive(navHref(item.url)) ? "text-blue-400 font-semibold" : ""}`}
 									>
-										{item?.label || "menu"}
+										{item.label}
 									</Link>
 								);
 							})
@@ -413,23 +442,21 @@ export default function Header() {
 
 				{/* Mobile Menu */}
 				<div
-					className={`lg:hidden relative left-0 right-0 transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-96 pt-4 " : "max-h-0"
+					className={`lg:hidden relative left-0 right-0 transition-all duration-300 overflow-y-auto ${isMenuOpen ? "max-h-[85vh] pt-4 " : "max-h-0 overflow-hidden"
 						}`}
 				>
 					<nav className="flex flex-col space-y-4 p-4">
 						{menuItems.map((item, index) => {
-							if (item?.childMenu && Array.isArray(item.childMenu) && item.childMenu.length > 0) {
+							if (item.isMega || item.isDropdown) {
 								return (
 									<div key={index} className="flex flex-col">
 										<button
-											className={`flex items-center justify-between w-full text-left hover:text-blue-400 ${activeMobileMenu === index ? "text-blue-400" : "text-white"
-												}`}
+											className={`flex items-center justify-between w-full text-left font-medium py-1 transition-colors ${activeMobileMenu === index ? "text-blue-400" : "text-white"}`}
 											onClick={() => setActiveMobileMenu(activeMobileMenu === index ? null : index)}
 										>
 											{item.label}
 											<svg
-												className={`w-4 h-4 transition-transform ${activeMobileMenu === index ? "rotate-180" : ""
-													}`}
+												className={`w-4 h-4 transition-transform duration-300 ${activeMobileMenu === index ? "rotate-180" : ""}`}
 												fill="none"
 												stroke="currentColor"
 												viewBox="0 0 24 24"
@@ -438,19 +465,43 @@ export default function Header() {
 											</svg>
 										</button>
 										<div
-											className={`flex flex-col space-y-3 pl-4 overflow-hidden transition-all duration-300 ${activeMobileMenu === index ? "max-h-96 mt-3" : "max-h-0"
-												}`}
+											className={`flex flex-col space-y-1 pl-4 transition-all duration-300 ${activeMobileMenu === index ? "max-h-[50vh] overflow-y-auto mt-4" : "max-h-0 overflow-hidden"}`}
 										>
-											{item.childMenu.map((child, childIndex) => (
-												<Link
-													key={childIndex}
-													href={navHref(child.url)}
-													className="text-gray-300 hover:text-white text-sm" // Slightly smaller or greyed to distinguish
-													onClick={() => setIsMenuOpen(false)}
-												>
-													{child.label}
-												</Link>
-											))}
+											{item.isMega ? (
+												item.sections.map((section, sIndex) => (
+													<div key={sIndex} className="flex flex-col mb-4 last:mb-0">
+														<div className="flex items-center gap-2 mb-2">
+															<span className="scale-75 origin-left">{section.icon}</span>
+															<h4 className="text-blue-400 font-bold text-sm uppercase tracking-wider">{section.title}</h4>
+														</div>
+														<div className="flex flex-col space-y-3 pl-2">
+															{section.items.map((subItem, iIndex) => (
+																<Link
+																	key={iIndex}
+																	href={navHref(subItem.url)}
+																	className="text-gray-300 hover:text-white text-sm py-1"
+																	onClick={() => setIsMenuOpen(false)}
+																>
+																	{subItem.label}
+																</Link>
+															))}
+														</div>
+													</div>
+												))
+											) : (
+												<div className="flex flex-col space-y-3">
+													{item.items.map((subItem, iIndex) => (
+														<Link
+															key={iIndex}
+															href={navHref(subItem.url)}
+															className="text-gray-300 hover:text-white text-sm py-1"
+															onClick={() => setIsMenuOpen(false)}
+														>
+															{subItem.label}
+														</Link>
+													))}
+												</div>
+											)}
 										</div>
 									</div>
 								);
@@ -458,12 +509,11 @@ export default function Header() {
 							return (
 								<Link
 									key={index}
-									href={navHref(item?.url)}
-									className={`hover:text-blue-400 ${isActive(navHref(item?.url)) ? "text-blue-400" : ""
-										}`}
+									href={navHref(item.url)}
+									className={`font-medium py-1 transition-colors ${isActive(navHref(item.url)) ? "text-blue-400" : "text-white hover:text-blue-400"}`}
 									onClick={() => setIsMenuOpen(false)}
 								>
-									{item?.label || "menu"}
+									{item.label}
 								</Link>
 							);
 						})}

@@ -18,7 +18,7 @@ export default function FooterMenu() {
                             Get started with accurate and industry-compliant data and experience a new level of marketing performance, successfully fueling your ABM and Email campaigns.
                         </p>
                         <div className="flex gap-4 mt-2">
-                            <a href="https://www.facebook.com/databaseprovidersbangalore/" aria-label="Facebook" className="hover:text-[#2C6BFF]">
+                            <a href="https://www.facebook.com/thedatabaseproviders/" aria-label="Facebook" className="hover:text-[#2C6BFF]">
                                 <Image src="/footer/footer-soc-icon1.svg" width={25} height={25} alt="img" />
                             </a>
                             <a href="https://in.linkedin.com/company/thedatabase-providers" aria-label="LinkedIn" className="hover:text-[#2C6BFF]">

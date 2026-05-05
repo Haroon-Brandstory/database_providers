@@ -43,7 +43,7 @@ const componentMap = {
 
 export async function generateMetadata({ params }) {
     const { locale, slug } = await params;
-    
+
     // 1. You can fetch SEO from Strapi here if those functions exist in your codebase in the future.
     // let seoData = ...
 
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }) {
         if (fs.existsSync(filePath)) {
             const htmlContent = fs.readFileSync(filePath, 'utf-8');
             const $ = cheerio.load(htmlContent);
-            
+
             const alternates = {
                 canonical: $('link[rel="canonical"]').attr('href') || '',
                 languages: {},
@@ -93,7 +93,7 @@ export async function generateMetadata({ params }) {
     } catch (err) {
         console.error("Error reading static HTML for metadata:", err);
     }
-    
+
     return {
         title: "Database Providers",
     }
@@ -107,10 +107,16 @@ export default async function Page({ params }) {
     if (fs.existsSync(filePath)) {
         try {
             const htmlContent = fs.readFileSync(filePath, 'utf-8');
+            const $ = cheerio.load(htmlContent);
+            const bodyContent = $('body').html();
 
             return (
-                <div className="static-page-container">
-                    <StaticPageFrame htmlContent={htmlContent} title={slug} />
+                <div className="static-page-container pt-[80px]">
+                    <StaticPageFrame
+                        htmlContent={htmlContent}
+                        bodyContent={bodyContent}
+                        title={slug}
+                    />
                 </div>
             );
         } catch (err) {
@@ -131,7 +137,7 @@ export default async function Page({ params }) {
     let sections = [];
 
     if (item.sections) {
-         sections = item.sections
+        sections = item.sections
     } else if (item.components) {
         sections = item.components
     } else {
@@ -148,7 +154,7 @@ export default async function Page({ params }) {
                 sections.map((sec, idx) => {
                     const Component = componentMap[sec.__component];
                     if (!Component) return null;
-
+                    y
                     try {
                         return <Component key={idx} data={sec} />;
                     } catch (err) {

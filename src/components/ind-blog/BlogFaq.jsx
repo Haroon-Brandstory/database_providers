@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import BlogBlocksRenderer from "./BlogBlocksRenderer";
 
 export default function BlogFaq({ section }) {
     const [openIndex, setOpenIndex] = useState(null);
@@ -55,7 +55,7 @@ export default function BlogFaq({ section }) {
                                     id={`faq-content-${i}`}
                                 >
                                     <div className="[&_a]:text-blue-600 [&_a]:hover:underline text-[#444] text-[15px] leading-relaxed font-normal">
-                                        <BlocksRenderer content={faq.answer} />
+                                        <BlogBlocksRenderer content={faq.answer} />
                                     </div>
                                 </div>
                             </div>

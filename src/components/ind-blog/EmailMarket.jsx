@@ -23,7 +23,7 @@ export default function EmailMarket({ section }) {
                     </h2>
                     <div className="text-white/90 text-[13px] md:text-[15px] font-medium leading-relaxed max-w-lg">
                         {descriptionAss ? (
-                            <BlogBlocksRenderer content={descriptionAss} />
+                            <BlogBlocksRenderer content={descriptionAss} lightText />
                         ) : (
                             <p>Build high-performing email campaigns that engage, convert, and retain your audience.</p>
                         )}

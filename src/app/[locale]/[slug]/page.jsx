@@ -112,9 +112,14 @@ export default async function Page({ params }) {
 
             return (
                 <div className="static-page-container pt-[80px]">
+                    {/* Server-rendered so tags appear in View Page Source (not RSC client payload) */}
+                    <div
+                        className="seo-content-source"
+                        style={{ display: 'none' }}
+                        dangerouslySetInnerHTML={{ __html: bodyContent }}
+                    />
                     <StaticPageFrame
                         htmlContent={htmlContent}
-                        bodyContent={bodyContent}
                         title={slug}
                     />
                 </div>

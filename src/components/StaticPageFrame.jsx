@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 
-export default function StaticPageFrame({ htmlContent, bodyContent, title }) {
+export default function StaticPageFrame({ htmlContent, title }) {
     const iframeRef = useRef(null);
 
     useEffect(() => {
@@ -34,20 +34,6 @@ export default function StaticPageFrame({ htmlContent, bodyContent, title }) {
 
     return (
         <div className="static-page-wrapper">
-            {/* 
-                This hidden div ensures the HTML tags are present in the page source 
-                for SEO and inspection, satisfying the requirement for "proper html codes with <>".
-            */}
-            <div 
-                className="seo-content-source" 
-                style={{ display: 'none' }} 
-                dangerouslySetInnerHTML={{ __html: bodyContent }} 
-            />
-
-            {/* 
-                The iframe provides perfect CSS and JS isolation, ensuring that the 
-                static page's styles do not break the main site's header and footer.
-            */}
             <iframe
                 ref={iframeRef}
                 srcDoc={htmlContent}

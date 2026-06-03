@@ -142,17 +142,32 @@
       </div>
     </section>
     <section class="data-process">
-      <div class="contaner-c">
-        <h2>Data Verification<span>Process</span></h2>
-        <!-- <img class="data-process-img"
-          src="https://www.thedatabaseproviders.com/secondary-assets/assets/images/data-process.webp"
-          alt="Data Process"
-        /> -->
-        <!-- Lottie Animation -->
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player src="https://proxy.corsfix.com/?https://www.thedatabaseproviders.com/secondary-assets/Data-Verification-Process.json" background="transparent" speed="1" class="lottie-player" loop="" autoplay=""></lottie-player>
-      </div>
-    </section>
+    <div class="contaner-c">
+      <h2>Data Verification <span>Process</span></h2>
+      <div id="lottie-container"></div>
+    </div>
+  </section>
+  <style>
+    #lottie-container {
+      width: 100%;
+      max-width: 1200px;
+      height: 600px;
+      /* important */
+      margin: 0 auto;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      lottie.loadAnimation({
+        container: document.getElementById('lottie-container'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/secondary-assets/Data-Verification-Process.json'
+      });
+    });
+  </script>
     <section class="reach-us-executives">
       <div class="contaner-c">
         <h2>Reach Singapore HR Professionals That Matter</h2>

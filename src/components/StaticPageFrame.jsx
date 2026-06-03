@@ -13,6 +13,7 @@ export default function StaticPageFrame({ htmlContent, title }) {
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow?.document;
                 if (doc?.body) {
+                    // Set height to scrollHeight to avoid internal scrollbars
                     iframe.style.height = doc.body.scrollHeight + 'px';
                 }
             } catch (e) {
@@ -32,16 +33,19 @@ export default function StaticPageFrame({ htmlContent, title }) {
     }, []);
 
     return (
-        <iframe
-            ref={iframeRef}
-            srcDoc={htmlContent}
-            style={{
-                width: '100%',
-                border: 'none',
-                minHeight: '100vh',
-                display: 'block',
-            }}
-            title={title}
-        />
+        <div className="static-page-wrapper">
+            <iframe
+                ref={iframeRef}
+                srcDoc={htmlContent}
+                style={{
+                    width: '100%',
+                    border: 'none',
+                    minHeight: '100vh',
+                    display: 'block',
+                    overflow: 'hidden'
+                }}
+                title={title}
+            />
+        </div>
     );
 }

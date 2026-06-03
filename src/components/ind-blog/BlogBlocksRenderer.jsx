@@ -1,9 +1,11 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
-export default function BlogBlocksRenderer({ content }) {
+export default function BlogBlocksRenderer({ content, lightText = false }) {
     if (!content || !Array.isArray(content)) {
         return null;
     }
+    const textClass = lightText ? "text-white font-normal" : "text-[#000000CC]";
+    const headingClass = lightText ? "text-white" : "";
     return (
         <BlocksRenderer
             content={content}
@@ -19,23 +21,23 @@ export default function BlogBlocksRenderer({ content }) {
 
                     switch (level) {
                         case 1:
-                            return <h1 id={id} className="md:text-[40px] text-[32px] font-bold mb-6 mt-8">{children}</h1>;
+                            return <h1 id={id} className={`md:text-[40px] text-[32px] font-bold mb-6 mt-8 ${headingClass}`}>{children}</h1>;
                         case 2:
-                            return <h2 id={id} className="md:text-[32px] text-[26px] font-semibold mb-4 mt-8">{children}</h2>;
+                            return <h2 id={id} className={`md:text-[32px] text-[26px] font-semibold mb-4 mt-8 ${headingClass}`}>{children}</h2>;
                         case 3:
-                            return <h3 id={id} className="md:text-[24px] text-[20px] font-medium mb-3 mt-6">{children}</h3>;
+                            return <h3 id={id} className={`md:text-[24px] text-[20px] font-medium mb-3 mt-6 ${headingClass}`}>{children}</h3>;
                         default:
-                            return <h2 id={id} className="md:text-[32px] text-[26px] font-semibold mb-4 mt-8">{children}</h2>;
+                            return <h2 id={id} className={`md:text-[32px] text-[26px] font-semibold mb-4 mt-8 ${headingClass}`}>{children}</h2>;
                     }
                 },
                 paragraph: ({ children }) => (
-                    <p className="text-[#000000CC] text-[16px] leading-[1.6] mb-4">{children}</p>
+                    <p className={`${textClass} text-[16px] leading-[1.6] mb-4`}>{children}</p>
                 ),
                 list: ({ children, format }) => {
                     if (format === "ordered") {
-                        return <ol className="list-decimal pl-6 mb-4 space-y-2 text-[#000000CC]">{children}</ol>;
+                        return <ol className={`list-decimal pl-6 mb-4 space-y-2 ${textClass}`}>{children}</ol>;
                     }
-                    return <ul className="list-disc pl-6 mb-4 space-y-2 text-[#000000CC]">{children}</ul>;
+                    return <ul className={`list-disc pl-6 mb-4 space-y-2 ${textClass}`}>{children}</ul>;
                 },
                 link: ({ children, url }) => (
                     <a href={url} className="text-[#2C6BFF] hover:underline" target="_blank" rel="noopener noreferrer">

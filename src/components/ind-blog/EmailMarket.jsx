@@ -1,10 +1,10 @@
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import BlogBlocksRenderer from "./BlogBlocksRenderer";
 import Link from "next/link";
 
 export default function EmailMarket({ section }) {
     const { title, description, buttonLabel, bgImage, buttonUrl } = section;
     const titleAss = title || "Start Your Email Marketing Journey";
-    const descriptionAss = description || "Build high-performing email campaigns that engage, convert, and retain your audience.";
+    const descriptionAss = description;
     const buttonText = buttonLabel || "Get Started";
     const imageUrl = bgImage?.url || "/blog/email-journeyBg.png";
 
@@ -22,7 +22,11 @@ export default function EmailMarket({ section }) {
                         {titleAss}
                     </h2>
                     <div className="text-white/90 text-[13px] md:text-[15px] font-medium leading-relaxed max-w-lg">
-                        <BlocksRenderer content={descriptionAss} />
+                        {descriptionAss ? (
+                            <BlogBlocksRenderer content={descriptionAss} lightText />
+                        ) : (
+                            <p>Build high-performing email campaigns that engage, convert, and retain your audience.</p>
+                        )}
                     </div>
                 </div>
 

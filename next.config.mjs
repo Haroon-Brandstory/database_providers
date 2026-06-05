@@ -1,4 +1,5 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import { LEGAL_PAGE_SLUGS } from './src/lib/legalPages.js';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
 
@@ -26,6 +27,12 @@ const nextConfig = {
     // DO NOT add i18n config here when using next-intl
     trailingSlash: true,
 
+    async rewrites() {
+        return LEGAL_PAGE_SLUGS.map((slug) => ({
+            source: `/${slug}/:path*`,
+            destination: `/legal/${slug}/:path*`,
+        }));
+    },
 };
 
 export default withNextIntl(nextConfig);

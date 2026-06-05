@@ -279,7 +279,7 @@ export async function getAllBlogs() {
 }
 
 export async function getLatestThreeBlogs() {
-    return fetchAPI("/blog-posts?populate=*&limit=3")
+    return fetchAPI("/blog-posts?populate=*&sort=publishedAt:desc&pagination[limit]=3");
 }
 
 export async function getBlogBySlug(slug) {

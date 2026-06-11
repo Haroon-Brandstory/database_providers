@@ -275,7 +275,31 @@ export async function getServicesBySlug(slug) {
 }
 
 export async function getAllBlogs() {
-    return fetchAPI("/blog-posts?populate=*")
+    const pageSize = 100;
+    let page = 1;
+    let pageCount = 1;
+    const allBlogs = [];
+
+    do {
+        const response = await fetchAPI(
+            `/blog-posts?populate=*&sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
+        );
+
+        allBlogs.push(...(response.data || []));
+        pageCount = response.meta?.pagination?.pageCount || 1;
+        page += 1;
+    } while (page <= pageCount);
+
+    return {
+        data: allBlogs,
+        meta: {
+            pagination: {
+                total: allBlogs.length,
+                pageCount,
+                pageSize,
+            },
+        },
+    };
 }
 
 export async function getLatestThreeBlogs() {

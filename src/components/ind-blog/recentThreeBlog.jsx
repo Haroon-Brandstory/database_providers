@@ -11,6 +11,8 @@ export default function RecentThreeBlogs({ recentBlogs }) {
         }
     })
 
+    console.log(demoBlogDAta);
+
     // Fetch all blogs and get 3 random ones
     // const allBlogs = await getAllBlogs();
     // const randomBlogs = getRandomThreeBlogs(allBlogs, currentSlug);
@@ -46,7 +48,7 @@ export default function RecentThreeBlogs({ recentBlogs }) {
                                         {item?.blogDesc}
                                     </p>
                                     <a
-                                        href={item?.blogRedirection} target="_blank"
+                                        href={`/blogs/${item?.blogRedirection}`} target="_blank"
                                         className="text-[#2C6BFF] font-medium flex items-center mb-4 gap-1"
                                     >
                                         Read More <span aria-hidden="true">→</span>

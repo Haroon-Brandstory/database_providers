@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { LEGAL_PAGE_SLUGS } from './lib/legalPages';
+import { LOCALE_FREE_PAGE_SLUGS } from './lib/staticPages.js';
 
 export default function proxy(request) {
     const { pathname } = request.nextUrl;
@@ -24,7 +24,7 @@ export default function proxy(request) {
         'tools',
         'searchDatabase',
         'abm',
-        ...LEGAL_PAGE_SLUGS,
+        ...LOCALE_FREE_PAGE_SLUGS,
     ];
 
     // Redirect localized global URLs to main URL

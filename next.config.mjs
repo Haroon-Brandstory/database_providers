@@ -1,5 +1,5 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import { LEGAL_PAGE_SLUGS } from './src/lib/legalPages.js';
+import { LEGAL_PAGE_SLUGS, STATIC_PAGE_SLUGS } from './src/lib/staticPages.js';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
 
@@ -28,10 +28,16 @@ const nextConfig = {
     trailingSlash: true,
 
     async rewrites() {
-        return LEGAL_PAGE_SLUGS.map((slug) => ({
-            source: `/${slug}/:path*`,
-            destination: `/legal/${slug}/:path*`,
-        }));
+        return [
+            ...LEGAL_PAGE_SLUGS.map((slug) => ({
+                source: `/${slug}/:path*`,
+                destination: `/legal/${slug}/:path*`,
+            })),
+            ...STATIC_PAGE_SLUGS.map((slug) => ({
+                source: `/${slug}/:path*`,
+                destination: `/en/${slug}/:path*`,
+            })),
+        ];
     },
 };
 

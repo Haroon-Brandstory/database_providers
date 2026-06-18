@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import { useNavHref } from "@/hooks/useNavHref";
+import { isLocaleFreePageSlug } from "@/lib/staticPages";
 
 const languages = [
 	{ code: "en", label: "English", flag: "/header/flag5.svg" },
@@ -51,10 +52,20 @@ function LanguageDropdown() {
 	}, [open]);
 
 	const handleLanguageChange = (newLocale) => {
+		const pathParts = pathname.split("/").filter(Boolean);
+		const slug =
+			["en", "in", "ae", "sg", "my"].includes(pathParts[0]) && pathParts.length > 1
+				? pathParts[1]
+				: pathParts[0];
+
+		if (slug && isLocaleFreePageSlug(slug)) {
+			setOpen(false);
+			return;
+		}
+
 		const pathWithoutLocale =
 			pathname.replace(new RegExp(`^/${locale}`), "") || "/";
 		router.push(`/${newLocale}${pathWithoutLocale}`);
-		// window.location.href = `/${newLocale}${pathWithoutLocale}`;
 		setOpen(false);
 	};
 

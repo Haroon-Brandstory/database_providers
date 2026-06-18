@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 import StaticPageFrame from '@/components/StaticPageFrame';
-import { LEGAL_PAGE_SLUGS, isLegalPageSlug } from '@/lib/legalPages';
+import { LEGAL_PAGE_SLUGS, isLegalPageSlug } from '@/lib/staticPages';
 import { extractStaticPageMetadata, getStaticPageFilePath } from '@/lib/staticPage';
 import { notFound } from 'next/navigation';
 

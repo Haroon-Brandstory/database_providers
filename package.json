@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "gen:static-slugs": "node scripts/generate-static-page-slugs.mjs",
+    "predev": "npm run gen:static-slugs",
+    "prebuild": "npm run gen:static-slugs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

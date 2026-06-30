@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import { useNavHref } from "@/hooks/useNavHref";
-import { isLocaleFreePageSlug } from "@/lib/staticPages";
+import { isStaticPageSlugForLocale } from "@/lib/localeFreePageSlugs";
 
 const languages = [
 	{ code: "en", label: "English", flag: "/header/flag5.svg" },
@@ -58,7 +58,7 @@ function LanguageDropdown() {
 				? pathParts[1]
 				: pathParts[0];
 
-		if (slug && isLocaleFreePageSlug(slug)) {
+		if (slug && isStaticPageSlugForLocale(locale, slug)) {
 			setOpen(false);
 			return;
 		}

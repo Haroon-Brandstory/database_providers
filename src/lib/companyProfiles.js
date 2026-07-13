@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 import { fetchSheetRows } from './googleSheets';
 import { slugify } from './slugify';
@@ -94,10 +95,10 @@ export async function getAllCompanyProfiles() {
     return getCachedCompanyProfiles();
 }
 
-export async function getCompanyProfileBySlug(slug) {
+export const getCompanyProfileBySlug = cache(async (slug) => {
     const companies = await getAllCompanyProfiles();
     return companies.find((company) => company.slug === slug) ?? null;
-}
+});
 
 export function formatCompactCurrency(value) {
     const num = Number(String(value || '').replace(/[^0-9.-]/g, ''));

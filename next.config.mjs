@@ -1,7 +1,10 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import { LEGAL_PAGE_SLUGS, STATIC_PAGE_SLUGS } from './src/lib/staticPages.js';
+import slugData from './src/lib/static-page-slugs.json' with { type: 'json' };
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
+
+const LEGAL_PAGE_SLUGS = slugData.LEGAL_PAGE_SLUGS ?? [];
+const STATIC_PAGE_SLUGS = slugData.STATIC_PAGE_SLUGS ?? [];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

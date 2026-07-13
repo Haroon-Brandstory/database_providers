@@ -14,6 +14,12 @@ import {
 import { generateSeoMetadata } from '@/lib/seo';
 
 export const revalidate = 300;
+export const dynamicParams = true;
+
+/** Do not pre-render every company at build time; generate on first request (ISR). */
+export function generateStaticParams() {
+    return [];
+}
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;

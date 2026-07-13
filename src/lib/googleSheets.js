@@ -1,6 +1,11 @@
-import { google } from 'googleapis';
+import 'server-only';
+
+import { GoogleAuth } from 'google-auth-library';
+import { sheets } from '@googleapis/sheets';
 
 const SHEETS_SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+
+let sheetsClientPromise = null;
 
 function getGoogleCredentials() {
     const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -17,30 +22,38 @@ function getGoogleCredentials() {
 }
 
 function getSheetsClient() {
+    if (sheetsClientPromise) {
+        return sheetsClientPromise;
+    }
+
     const credentials = getGoogleCredentials();
 
     if (!credentials) {
         return null;
     }
 
-    const auth = new google.auth.GoogleAuth({
-        credentials,
-        scopes: [SHEETS_SCOPE],
-    });
+    sheetsClientPromise = (async () => {
+        const auth = new GoogleAuth({
+            credentials,
+            scopes: [SHEETS_SCOPE],
+        });
 
-    return google.sheets({ version: 'v4', auth });
+        return sheets({ version: 'v4', auth });
+    })();
+
+    return sheetsClientPromise;
 }
 
 export async function fetchSheetRows() {
     const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
     const range = process.env.GOOGLE_SHEETS_RANGE || 'Sheet1!A:S';
-    const sheets = getSheetsClient();
+    const client = await getSheetsClient();
 
-    if (!spreadsheetId || !sheets) {
+    if (!spreadsheetId || !client) {
         return [];
     }
 
-    const response = await sheets.spreadsheets.values.get({
+    const response = await client.spreadsheets.values.get({
         spreadsheetId,
         range,
     });

@@ -1,6 +1,30 @@
 import 'dotenv/config';
-import { fetchSheetRows } from '../src/lib/googleSheets.js';
+import { GoogleAuth } from 'google-auth-library';
+import { sheets } from '@googleapis/sheets';
 import { slugify } from '../src/lib/slugify.js';
+
+async function fetchSheetRows() {
+    const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+    const range = process.env.GOOGLE_SHEETS_RANGE || 'Sheet1!A:S';
+
+    if (!clientEmail || !privateKey || !spreadsheetId) {
+        throw new Error('Missing Google Sheets env vars');
+    }
+
+    const auth = new GoogleAuth({
+        credentials: {
+            client_email: clientEmail,
+            private_key: privateKey,
+        },
+        scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+    });
+
+    const client = sheets({ version: 'v4', auth });
+    const response = await client.spreadsheets.values.get({ spreadsheetId, range });
+    return response.data.values ?? [];
+}
 
 try {
     const rows = await fetchSheetRows();

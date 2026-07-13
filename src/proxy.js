@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { LOCALE_FREE_PAGE_SLUGS } from './lib/staticPages.js';
+import slugData from './lib/static-page-slugs.json';
+
+const LOCALE_FREE_PAGE_SLUGS = slugData.LOCALE_FREE_PAGE_SLUGS ?? [];
 
 export default function proxy(request) {
     const { pathname } = request.nextUrl;

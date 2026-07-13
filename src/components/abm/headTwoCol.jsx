@@ -5,7 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 export default function HeadAndTwoCol({ content }) {
     return (
         <section className="py-20 bg-white flex items-center justify-center">
-            <div className="container max-w-7xl px-4">
+            <div className="container px-4">
                 <div className="flex items-center justify-center flex-col ">
                     <div className="bg-[#F5F5F5] mb-2 text-[#6D6D6D] px-3 py-2 w-fit rounded-full lg:text-[14px] text-[10px]">
                         {content.bubbleTitle}

@@ -20,7 +20,7 @@ export default function IconCategorySection({ data }) {
     const newInd = data.industriesCovered;
     return (
         <section className="bg-white py-16 px-6 justify-center flex">
-            <div className="container max-w-7xl">
+            <div className="container">
                 <h2 className="text-black lg:text-[36px] text-center text-[26px] font-medium mb-6">
                     {(() => {
                         const heading = data.sectionTitle;
@@ -54,7 +54,7 @@ export default function IconCategorySection({ data }) {
                 <p className="mt-4 text-center text-[20px] text-gray-500 max-w-2xl mx-auto">
                     {data.sectionDescription}
                 </p>
-                <div className="mt-10 flex flex-wrap justify-center items-center gap-6 max-w-7xl mx-auto">
+                <div className="mt-10 flex flex-wrap justify-center items-center gap-6 mx-auto">
                     {newInd.map((industry, index) => (
                         <div key={index} className="flex items-center gap-3 md:p-3 p-2 rounded-xl transition-all duration-200 ease-in-out hover:scale-105 border shadow border-gray-200 bg-white hover:shadow-lg transition">
                             <div className="md:w-[50px] md:h-[50px] w-[35px] h-[35px] flex items-center justify-center rounded-lg ">

@@ -69,7 +69,7 @@ export default function SliderTestimonial() {
             Client's Success <span className="text-[#00000080]">Stories</span>
           </h2>
         </div>
-        <div className="relative max-w-6xl mx-auto bg-[#F6F6F6]">
+        <div className="relative mx-auto bg-[#F6F6F6]">
           <div className="lg:grid hidden  grid-cols-1 bg-[#F6F6F6]  md:grid-cols-2 gap-0  rounded-2xl overflow-hidden shadow-md min-h-[420px]">
             {/* Left: 3x3 grid with two Swipers */}
             <div className="left-parent-wrapper">

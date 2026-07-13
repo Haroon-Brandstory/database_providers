@@ -68,7 +68,7 @@ export default function ABMStepMeter() {
 
     return (
         <section className="relative bg-[#F5F5F5] py-24 overflow-hidden">
-            <div className="mx-auto max-w-6xl px-6 text-center">
+            <div className="mx-auto px-6 text-center">
                 {/* HEADER */}
                 <div className="flex flex-col items-center">
                     <div className="bg-[#FFFFFF] mb-2 text-[#6D6D6D] text-center px-3 py-2 w-fit rounded-full lg:text-[14px] text-[10px]">

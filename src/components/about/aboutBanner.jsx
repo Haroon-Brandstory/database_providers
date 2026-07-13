@@ -12,7 +12,7 @@ export default function AboutUsBanner() {
     return (
         <section className="relative bg-[url('/about-us/aboutUsBannerBg.png')] bg-norepeat bg-center bg-cover text-white min-h-screen flex flex-col items-center justify-center px-4 md:px-20 pt-20  overflow-hidden pt-50">
             <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#133075] to-transparent pointer-events-none"></div>
-            <div className="container max-w-7xl h-full">
+            <div className="container h-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center ">
                     <div className="md:pb-20">
                         <h1 className="md:text-[48px] text-[36px] font-[500] mb-4">About <span className="text-[#5673F6]">Us</span></h1>

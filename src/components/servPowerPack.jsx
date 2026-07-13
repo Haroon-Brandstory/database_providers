@@ -7,7 +7,7 @@ export default function PowerPackSection({ data }) {
     return (
         <>
             <section className="bg-white py-16 px-6 justify-center flex">
-                <div className="container max-w-7xl flex justify-center flex-col items-center">
+                <div className="container flex justify-center flex-col items-center">
                     <div className="text-center max-w-4xl mx-auto">
                         {/* <h5 className="text-[#2C6BFF] text-[16px] font-medium">
                             { }

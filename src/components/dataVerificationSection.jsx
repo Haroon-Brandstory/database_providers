@@ -31,7 +31,7 @@ export default function VerificationProcess({ data }) {
 
     return (
         <section className="bg-[url('/servicesection/dataVerification-backgroundImage.png')] bg-top bg-cover bg-norepeat pt-16 md:pb-28 pb-16 px-6 text-white">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <h2 className="text-2xl md:text-[36px] text-center font-medium mb-4">
                     Data Verification <span className="text-[#5673F6]">Process</span>
                 </h2>

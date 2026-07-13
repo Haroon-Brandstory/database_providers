@@ -7,7 +7,7 @@ export default function AboutVisionMission() {
 
     return (
         <section className="py-16 px-6 bg-[#F5F5F5] justify-center flex">
-            <div className="container max-w-7xl">
+            <div className="container">
                 {(() => {
                     const title = t('about.section2.title', { defaultMessage: 'About Our Company' });
                     const words = title.split(" ");

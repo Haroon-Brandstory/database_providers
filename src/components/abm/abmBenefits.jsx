@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function AbmBenefits({ content }) {
     return (
         <section className="bg-white py-20">
-            <div className="container mx-auto px-4 max-w-7xl">
+            <div className="container mx-auto px-4">
                 <div>
                     <div className="flex justify-center flex-col items-center">
                         <div className="bg-[#F5F5F5] mb-2 text-[#6D6D6D] px-4 backdrop-blur-md py-2 w-fit rounded-full lg:text-[14px] text-[10px]">

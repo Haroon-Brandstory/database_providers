@@ -9,7 +9,7 @@ export default function FooterMenu() {
     return (
         <>
             <div className="container px-2 pt-5">
-                <div className="max-w-7xl mx-auto flex flex-wrap flex-col md:flex-row md:justify-between md:items-start gap-10 border-b border-[#222] py-8">
+                <div className="mx-auto flex flex-wrap flex-col md:flex-row md:justify-between md:items-start gap-10 border-b border-[#222] py-8">
                     <div className="flex-2 min-w-[220px] flex flex-col gap-6 hidden">
                         <div className="flex items-center gap-3">
                             <Image src="/header/db_pro_logo.svg" alt="Database Providers Logo" width={100} height={100} />
@@ -105,7 +105,7 @@ export default function FooterMenu() {
                     </div>
                 </div>
                 {/* Bottom bar */}
-                <div className="max-w-7xl hidden mx-auto flex flex-col justify-center items-center md:flex-row justify-between items-center pt-4 text-xs text-[#D0D0D0] gap-2">
+                <div className="hidden mx-auto flex flex-col justify-center items-center md:flex-row justify-between items-center pt-4 text-xs text-[#D0D0D0] gap-2">
                     <div>
                         Privacy policy &nbsp; &bull; &nbsp; © 2025 Database Providers. All Rights Reserved.
                     </div>

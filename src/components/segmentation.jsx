@@ -95,66 +95,68 @@ export default function Segmentation() {
         <>
             {/* <div className="h-[50vh]"></div> */}
 
-            <section className="bg-white px-4 py-24 md:px-20 pb-20">
-                <div className="text-center max-w-4xl mx-auto">
-                    <h5 className="text-[#2C6BFF] text-[16px] font-medium">
-                        Types of Segmentation
-                    </h5>
-                    <h2 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
-                        {(() => {
-                            const heading = t('home.section5.sectionHeading');
-                            const words = heading.split(' ');
-                            const lastThree = words.slice(-2).join(' ');
-                            const firstPart = words.slice(0, -2).join(' ');
-                            return (
-                                <>
-                                    {firstPart} <span className=" block text-[#00000080]">{lastThree}</span>
-                                </>
-                            );
-                        })()}
-                    </h2>
-                </div>
+            <section className="bg-white px-4 py-24 md:px-20 pb-20 flex flex-col justify-center items-center">
+                <div className="container flex flex-col justify-center items-center">
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h5 className="text-[#2C6BFF] text-[16px] font-medium">
+                            Types of Segmentation
+                        </h5>
+                        <h2 className="text-black lg:text-[36px] text-[28px] font-medium mb-6">
+                            {(() => {
+                                const heading = t('home.section5.sectionHeading');
+                                const words = heading.split(' ');
+                                const lastThree = words.slice(-2).join(' ');
+                                const firstPart = words.slice(0, -2).join(' ');
+                                return (
+                                    <>
+                                        {firstPart} <span className=" block text-[#00000080]">{lastThree}</span>
+                                    </>
+                                );
+                            })()}
+                        </h2>
+                    </div>
 
-                <div className="cards mx-auto max-w-6xl mt-16 space-y-16">
-                    {cardData.map((item, i) => (
-                        <div
-                            key={i}
-                            ref={(el) => (cardRefs.current[i] = el)}
-                            className="card sticky top-0"
-                        >
+                    <div className="cards mx-auto mt-16 space-y-16">
+                        {cardData.map((item, i) => (
                             <div
-                                className="card__inner transition-transform transition-filter duration-300 ease-out will-change-transform will-change-filter
-                flex flex-col lg:flex-row bg-white rounded-xl overflow-hidden shadow-xl origin-top min-h-[500px] p-6 lg:p-12"
+                                key={i}
+                                ref={(el) => (cardRefs.current[i] = el)}
+                                className="card sticky top-0"
                             >
-                                <div className="text-start flex-1 flex flex-col justify-center">
-                                    <h3 className="text-2xl text-black font-bold mb-2">{item.title}</h3>
-                                    <p className="text-gray-700 mb-2 text-sm md:text-base">
-                                        {item.description}
-                                    </p>
-                                    <p className="text-gray-700 text-sm md:text-base">
-                                        {/* {item.subDescription} */}
-                                    </p>
-                                    <div className="pt-4">
-                                        <a
-                                            href={item.cta}
-                                            className="text-[#2C6BFF] font-medium flex items-center gap-1"
-                                        >
-                                            Know More <span aria-hidden>→</span>
-                                        </a>
+                                <div
+                                    className="card__inner transition-transform transition-filter duration-300 ease-out will-change-transform will-change-filter
+                flex flex-col lg:flex-row bg-white rounded-xl overflow-hidden shadow-xl origin-top min-h-[500px] p-6 lg:p-12"
+                                >
+                                    <div className="text-start flex-1 flex flex-col justify-center">
+                                        <h3 className="text-2xl text-black font-bold mb-2">{item.title}</h3>
+                                        <p className="text-gray-700 mb-2 text-sm md:text-base">
+                                            {item.description}
+                                        </p>
+                                        <p className="text-gray-700 text-sm md:text-base">
+                                            {/* {item.subDescription} */}
+                                        </p>
+                                        <div className="pt-4">
+                                            <a
+                                                href={item.cta}
+                                                className="text-[#2C6BFF] font-medium flex items-center gap-1"
+                                            >
+                                                Know More <span aria-hidden>→</span>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="w-full lg:w-1/2 pt-4 md:pt-4 flex justify-center items-center">
-                                    {/* <Lottie
+                                    <div className="w-full lg:w-1/2 pt-4 md:pt-4 flex justify-center items-center">
+                                        {/* <Lottie
                                         animationData={item.animationData}
                                         loop
                                         autoplay
                                         className="max-w-[400px] w-full"
                                     /> */}
-                                    <video src={item.vid} loop muted autoPlay playsInline className="rounded-[30px]" />
+                                        <video src={item.vid} loop muted autoPlay playsInline className="rounded-[30px]" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
 

@@ -50,7 +50,7 @@ export default function EmailSizeCalculator() {
 
     return (
         <section className="bg-[url('/pricing-plan/bulkCta.png')] bg-center bg-norepeat bg-cover py-30">
-            <div className="container max-w-7xl mx-auto px-6">
+            <div className="container mx-auto px-6">
 
                 {/* HEADER */}
                 <p className="text-center text-blue-600 font-semibold tracking-widest">

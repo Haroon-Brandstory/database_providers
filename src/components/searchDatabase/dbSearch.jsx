@@ -7,7 +7,7 @@ export default async function DatabaseSearch() {
     // console.log(companies);
 
     return (
-        <div className="w-full max-w-[1400px] mx-auto p-4 font-sans text-gray-200">
+        <div className="container mx-auto w-full p-4 font-sans text-gray-200">
             <DatabaseTable initialCompanies={companies} />
         </div>
     );

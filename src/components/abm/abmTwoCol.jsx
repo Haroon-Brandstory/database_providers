@@ -6,7 +6,7 @@ export default function AbmTwoCol({ content }) {
     console.log(content)
     return (
         <section className="lg:py-20 pt-20 bg-white flex items-center justify-center">
-            <div className="container max-w-7xl px-4">
+            <div className="container px-4">
                 <div className="grid md:grid-cols-2 grid-cols-1 lg:gap-8 gap-4">
                     <div className="">
                         <Image src={content.image} width={content.imgWidth} height={content.imgHeight} alt={content.imgAlt} />

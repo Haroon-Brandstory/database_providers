@@ -24,6 +24,7 @@ export default function proxy(request) {
         'tools',
         'searchDatabase',
         'abm',
+        'company',
         ...LOCALE_FREE_PAGE_SLUGS,
     ];
 

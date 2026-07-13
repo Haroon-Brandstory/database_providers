@@ -8,7 +8,7 @@ export default function ServicePageBanner({ data }) {
         <section className="bg-[url(/service-category/service-cat-bg.png)] min-h-[100vh] flex justify-center bg-cover bg-bottom text-white py-16 px-6 pt-50">
             <div
                 key={data.id}
-                className="max-w-7xl grid md:grid-cols-2 gap-10 items-center"
+                className="grid md:grid-cols-2 gap-10 items-center"
             >
                 {/* LEFT CONTENT */}
                 <div>

@@ -33,8 +33,8 @@ export default function SvgMap() {
 
     return (
         <section className="bg-white flex items-center justify-center py-16 px-6" aria-label="Global map">
-            <div className="container max-w-7xl max-auto  flex-col items-center justify-center">
-                <div className="overflow-x-auto flex items-center lg:justify-center max-w-7xl">
+            <div className="container max-auto  flex-col items-center justify-center">
+                <div className="overflow-x-auto flex items-center lg:justify-center">
                     <div className="relative" ref={containerRef}>
                         <div
                             aria-hidden="true"

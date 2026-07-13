@@ -7,7 +7,7 @@ import animationData from "@/animations/abm-banner-lottie.json"
 export default function AbmBanner() {
     return (
         <section className="bg-[#264BD1] lg:min-h-[100vh] min-h-[80vh] transition-all ease-in-out lg:pt-40 pt-20 pb-10 flex items-center justify-center">
-            <div className="container max-w-7xl px-4">
+            <div className="container px-4">
                 {/* <div>
                     <div className="flex items-center justify-center">
                         <div className="backdrop-blur-md bg-[#4466DE] flex items-center justify-center py-2 px-3 rounded-[20px]">

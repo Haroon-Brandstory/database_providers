@@ -10,7 +10,7 @@ export default function FaqAccordion({ faqs }) {
 
     return (
         <section className="bg-black py-10">
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="mx-auto px-6">
                 <h2 className="text-center gradient-text text-4xl font-medium mb-12">
                     FAQ’s
                 </h2>

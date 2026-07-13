@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function CusContactSection() {
     return (
         <section className="bg-white py-16 px-6">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <div className="relative p-6">
                     <div className="absolute inset-0 w-full h-full z-0 ">
                         <Image

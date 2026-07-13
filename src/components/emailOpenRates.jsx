@@ -1,7 +1,7 @@
 export default function EmailOpenRates({ data }) {
     return (
         <section className="bg-[#F7F7F8] py-16 px-6">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <div>
                     <h2 className="text-black lg:text-[36px] mb-8 text-center text-[26px] font-medium mb-6">{data.sectionTitle}</h2>
                 </div>

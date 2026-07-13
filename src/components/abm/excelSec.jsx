@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function ExcelSec({ content }) {
     return (
         <section className="bg-[url('/abm/excel-sec-bg.png')] bg-cover bg-center bg-norepeat py-15 relative overflow-hidden">
-            <div className="container mx-auto px-4 max-w-7xl min-h-[400px] relative flex  ">
+            <div className="container mx-auto px-4 min-h-[400px] relative flex  ">
                 <div>
                     <div className="grid lg:grid-cols-[40%_60%] grid-cols-1">
                         <div className="">

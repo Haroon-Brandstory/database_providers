@@ -74,7 +74,7 @@ export default function BlogList() {
 
     return (
         <section className="bg-[#F0F4FF] py-16 px-4 md:px-6 flex justify-center items-center">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <ListSearchBar
                     title="Browse Blogs"
                     searchLabel="Search blogs"

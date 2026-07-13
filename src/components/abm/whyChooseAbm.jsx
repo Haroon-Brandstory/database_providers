@@ -5,7 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 export default function WhyChooseAbm({ content }) {
     return (
         <section className="bg-white lg:py-20 pt-5 pb-10">
-            <div className="container mx-auto px-4 max-w-7xl">
+            <div className="container mx-auto px-4">
                 <div>
                     <div className="flex justify-center flex-col items-center">
                         <div className="bg-[#F5F5F5] mb-2 text-[#6D6D6D] px-4 backdrop-blur-md py-2 w-fit rounded-full lg:text-[14px] text-[10px]">
@@ -18,7 +18,7 @@ export default function WhyChooseAbm({ content }) {
                 </div>
             </div>
             <div className="bg-[#F5F5F5] ">
-                <div className="container mx-auto px-4 max-w-7xl">
+                <div className="container mx-auto px-4">
                     <div className="grid lg:grid-cols-2 grid-cols-1 gap-8">
                         <div className="lg:py-15 pt-15 pb-5">
                             <div>

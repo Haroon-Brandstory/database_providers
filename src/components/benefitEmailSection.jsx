@@ -6,7 +6,7 @@ export default function BenefitEmailCategory({ data }) {
     const iconMap = data.iconBox
     return (
         <section className="bg-white py-16 px-6 justify-center flex">
-            <div className="container max-w-7xl flex justify-center flex-col items-center">
+            <div className="container flex justify-center flex-col items-center">
                 <div className="text-center max-w-4xl mx-auto">
                     <h2 className="text-black lg:text-[36px] text-center text-[26px] font-medium mb-6">
                         {(() => {

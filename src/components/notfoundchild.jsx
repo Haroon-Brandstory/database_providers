@@ -45,7 +45,7 @@ export default function NotFoundChild() {
 
     return (
         <section className="relative bg-[url('/about-us/aboutUsBannerBg.png')] bg-norepeat bg-center bg-cover text-white min-h-screen flex flex-col items-center justify-center px-4 md:px-20 pt-20  overflow-hidden pt-50">
-            <div className="container h-full max-w-7xl mx-auto">
+            <div className="container h-full mx-auto">
                 <div className="space-y-10">
                     <div className="h-full relative">
                         <div ref={oopsBallRef} className="absolute -top-30 left-20 md:flex hidden">

@@ -31,7 +31,7 @@ export default function BannerThankYou() {
 
     return (
         <section className="bg-white text-black flex flex-col items-center justify-center px-6 pt-20 pb-20 overflow-hidden pt-40">
-            <div className="container max-w-7xl mx-auto flex items-center justify-center">
+            <div className="container mx-auto flex items-center justify-center">
                 <div className="space-y-3">
                     <div className="flex justify-center lg:gap-4">
                         {/* <Image src="/thankYou/pinkMail.svg" alt="mail icon" width={310} height={70} /> */}

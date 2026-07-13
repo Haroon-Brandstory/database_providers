@@ -65,7 +65,7 @@ export default function RemoveEmailDuplicates() {
 
     return (
         <section className="bg-[url('/pricing-plan/bulkCta.png')] bg-center bg-norepeat bg-cover py-30">
-            <div className="container max-w-6xl mx-auto px-6">
+            <div className="container mx-auto px-6">
                 <div className="">
 
                     {/* HEADER */}

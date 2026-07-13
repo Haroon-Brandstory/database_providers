@@ -14,7 +14,7 @@ export default function RoiServiceSection({ data }) {
     const RetData = data.roiComponents;
     return (
         <section className="bg-white py-16 px-6">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <div className="roiWrapper rounded-[10px] bg-[url(/servicesection/segmented-list-banner.png)] py-10 px-3 bg-cover bg-center bg-norepeat">
                     <div className="flex flex-col items-center justify-center ">
                         <h2 className="text-2xl text-black md:text-[36px] text-center font-medium mb-4">

@@ -19,7 +19,7 @@ export default function PowerPackInfinitySection({ data }) {
     return (
         <>
             <section className="bg-[#F7F7F8] py-16 px-6 justify-center flex">
-                <div className="container max-w-7xl flex justify-center flex-col items-center">
+                <div className="container flex justify-center flex-col items-center">
                     <h2 className="text-black lg:text-[36px] text-[26px] font-medium mb-6">
                         {(() => {
                             const heading = data.sectionTitle;
@@ -53,7 +53,7 @@ export default function PowerPackInfinitySection({ data }) {
 
                     <div className="dum_wrapper w-[100%]">
                         {/* Items grid */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto">
                             {dummyContent.slice(0, visibleCount).map((item, index) => (
                                 <div
                                     key={index}

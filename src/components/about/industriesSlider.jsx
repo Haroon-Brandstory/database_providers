@@ -45,7 +45,7 @@ export default function IndustrySlider() {
                             }}
                             className="py-16 px-6 md:h-[500px] flex items-center justify-center"
                         >
-                            <div className="container max-w-7xl mx-auto">
+                            <div className="container mx-auto">
                                 <div className="grid grid-cols-1 lg:grid-cols-2">
                                     <div className="bg-[radial-gradient(70.91%_165.08%_at_38.85%_40.4%,_#000099_29.5%,_#000033_100%)] p-6 rounded-[10px]">
                                         <div className="border-b border-[#FFFFFF4D]">

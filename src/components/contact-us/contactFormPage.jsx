@@ -7,7 +7,7 @@ export default function ContactFormList() {
 
     return (
         <section className="bg-white py-16 px-6">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 container mx-auto">
                     <div>
                         <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-black mb-4">

@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 export default function LaunchAbm() {
     return (
         <section className="bg-white py-15">
-            <div className="container mx-auto px-4 max-w-7xl flex items-center justify-center">
+            <div className="container mx-auto px-4 flex items-center justify-center">
                 <div className="bg-[url('/abm/launch-abm-engine.png')] p-10 bg-center bg-cover bg-norepeat w-full flex flex-col items-center justify-center py-30 lg:rounded-[20px] rounded-[10px]">
                     <h2 className="text-center lg:text-5xl text-2xl text-white">Ready to Launch Your ABM Engine?</h2>
                     <div className="mt-8">

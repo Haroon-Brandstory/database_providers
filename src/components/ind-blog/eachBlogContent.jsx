@@ -72,7 +72,7 @@ export default function EachBlogContent({ blog, blogSections }) {
     return (
         <div className="bg-white py-8">
             <div>
-                <div className="container max-w-7xl mx-auto flex flex-col p-2 text-black justify-start  ">
+                <div className="container mx-auto flex flex-col p-2 text-black justify-start  ">
                     <div className="md:flex relative gap-4">
                         {/* Left Column - Table of Contents */}
                         <BlogTableOfContent

@@ -6,7 +6,7 @@ export default function BusinessExpansionSection({ data }) {
     const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL
     return (
         <section className="bg-white py-16 px-6">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <h2 className="text-black lg:text-[36px] text-center text-[26px] font-medium mb-6">
                     {(() => {
                         const heading = data?.sectionTitle;

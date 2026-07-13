@@ -25,7 +25,7 @@ export default function RecentThreeBlogs({ recentBlogs }) {
 
     return (
         <section className="bg-[#F0F4FF] pt-8 pb-14">
-            <div className="container max-w-7xl mx-auto">
+            <div className="container mx-auto">
                 <div>
                     <h2 className="text-black font-medium lg:text-[36px] text-[28px] mb-5 text-center">Keep <span className="text-[#00000080]">Reading</span></h2>
                 </div>

@@ -15,7 +15,7 @@ export default function EmailFormatSection({ data }) {
 
     return (
         <section className="relative bg-[url(/servicesection/emailFormatbg.png)] bg-white bg-center bg-cover bg-norepeat py-16 px-6 ">
-            <div className="container max-w-7xl mx-auto flex justify-center flex-col items-center">
+            <div className="container mx-auto flex justify-center flex-col items-center">
                 <div className="flex flex-col justify-center max-w-4xl items-center">
                     <h2 className="text-black lg:text-[36px] text-center text-[26px] font-medium mb-6">
                         {(() => {

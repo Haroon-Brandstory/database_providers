@@ -3,23 +3,23 @@ import CompanyBannerCard from './CompanyBannerCard';
 
 export default function CompanyHeroSection({ company, previewText, fullText }) {
     return (
-        <section className="bg-[#F4F6FA]">
-            {/* Full-width banner below site header */}
-            <div className="relative h-[560px] w-full sm:h-[300px] lg:h-[620px]">
+        <section className="relative bg-[#F4F6FA]">
+            {/* Banner as background band — does not push page height on its own */}
+            <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 h-[200px] sm:h-[280px] lg:h-[360px]"
+            >
                 <Image
                     src="/company/companyPg_banner.png"
                     alt=""
                     fill
-                    priority="high"
+                    priority
                     className="object-cover object-center"
                 />
             </div>
 
-            {/*
-              Card overlaps bottom ~45% of banner (matches reference):
-              banner 320px → card starts ~145px from banner top
-            */}
-            <div className="container relative z-10 mx-auto w-full -mt-[116px] px-4 sm:-mt-[132px] md:px-6 lg:-mt-[378px]">
+            {/* Card starts lower into the banner; less empty space on mobile */}
+            <div className="container relative z-10 mx-auto w-full px-4 pt-[88px] sm:px-6 sm:pt-[120px] lg:pt-[160px]">
                 <CompanyBannerCard
                     company={company}
                     previewText={previewText}

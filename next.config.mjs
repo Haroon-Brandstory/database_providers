@@ -8,11 +8,6 @@ const STATIC_PAGE_SLUGS = slugData.STATIC_PAGE_SLUGS ?? [];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // Keep static HTML available at runtime when fs reads use turbopackIgnore
-    outputFileTracingIncludes: {
-        '/[locale]/[slug]': ['./src/content/static-pages/**/*'],
-        '/legal/[slug]': ['./src/content/static-pages/en/**/*'],
-    },
     images: {
         remotePatterns: [
             {

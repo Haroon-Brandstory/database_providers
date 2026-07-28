@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getStaticPageSlugData } from './lib/static-page-slug-data.mjs';
+import { getStaticPageSlugData } from '../src/lib/staticPageSlugData.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.join(__dirname, '../src/lib/static-page-slugs.json');

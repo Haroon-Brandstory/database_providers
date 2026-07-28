@@ -11,7 +11,7 @@ import {
     getBaseSlug,
     getPageDescription,
     getSectionForPage,
-} from './lib/llms-txt-data.mjs';
+} from '../src/lib/llmsTxtData.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STATIC_PAGES_ROOT = path.join(__dirname, '../src/content/static-pages');

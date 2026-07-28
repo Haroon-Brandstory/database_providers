@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const STATIC_PAGES_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../src/content/static-pages');
+const STATIC_PAGES_ROOT = path.join(process.cwd(), 'src/content/static-pages');
 
 // Routing config only — which en pages use /legal/[slug] vs /en/[slug]
 export const LEGAL_ROUTE_SLUGS = new Set([

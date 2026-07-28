@@ -168,36 +168,36 @@ const menuItems = [
 				title: "Healthcare Data",
 				icon: <HealthcareIcon />,
 				items: [
-					{ label: "Physicians Email List", url: "/healthcare-data" },
-					{ label: "Dental Assistant Email List", url: "/healthcare-data" },
-					{ label: "Nurses Email List", url: "/healthcare-data" },
-					{ label: "Hospital Administrators Email List", url: "/healthcare-data" },
-					{ label: "Pharmacy Executive Email List", url: "/healthcare-data" },
-					{ label: "Cardiologist Email List", url: "/healthcare-data" },
+					{ label: "Physicians Email List", url: "/physicians-email-list" },
+					{ label: "Dental Assistant Email List", url: "/dental-assistant-email-list" },
+					{ label: "Nurses Email List", url: "/nurses-email-list" },
+					{ label: "Hospital Administrators Email List", url: "/hospital-administrators-email-list" },
+					{ label: "Pharmacy Executive Email List", url: "/pharmacy-executive-email-list" },
+					{ label: "Cardiologist Email List", url: "/cardiologist-email-list" },
 				]
 			},
 			{
 				title: "Global",
 				icon: <GlobalIcon />,
 				items: [
-					{ label: "C-level Executives Email List", url: "/global-database" },
-					{ label: "Directors Email List", url: "/global-database" },
-					{ label: "HR Email List", url: "/global-database" },
-					{ label: "Manager Email List", url: "/global-database" },
-					{ label: "Lawyers Email List", url: "/global-database" },
-					{ label: "Accountants Email List", url: "/global-database" },
+					{ label: "C-level Executives Email List", url: "/c-level-executives-email-list" },
+					{ label: "Directors Email List", url: "/directors-email-list" },
+					{ label: "HR Email List", url: "/hr-email-list" },
+					{ label: "Manager Email List", url: "/managers-email-list" },
+					{ label: "Lawyers Email List", url: "/lawyers-email-list" },
+					{ label: "Accountants Email List", url: "/accountants-email-list" },
 				]
 			},
 			{
 				title: "Industry",
 				icon: <IndustryIcon />,
 				items: [
-					{ label: "IT Industry Email List", url: "/industry-data" },
-					{ label: "Hospitals and Health Care", url: "/industry-data" },
-					{ label: "Manufacturing Industry Email List", url: "/industry-data" },
-					{ label: "Education Industry Email List", url: "/industry-data" },
-					{ label: "BFSI Email Lists", url: "/industry-data" },
-					{ label: "Real Estate Email List", url: "/industry-data" },
+					{ label: "IT Industry Email List", url: "/it-industry-email-list" },
+					{ label: "Hospitals and Health Care", url: "/hospitals-and-health-care-email-list" },
+					{ label: "Manufacturing Industry Email List", url: "/manufacturing-industry-email-list" },
+					{ label: "Education Industry Email List", url: "/education-industry-email-list" },
+					{ label: "BFSI Email Lists", url: "/bfsi-email-list" },
+					{ label: "Real Estate Email List", url: "/real-estate-email-list" },
 				]
 			}
 		]

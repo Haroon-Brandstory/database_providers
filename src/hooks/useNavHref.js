@@ -1,28 +1,35 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { isGeoPrefix } from "@/lib/geoPrefixes";
+
+const SUPPORTED_LOCALES = ["en", "in", "ae", "sg", "my"];
 
 export function useNavHref() {
     const pathname = usePathname();
 
-    // Derive locale from the first URL segment
+    // URL prefix for links: country locales OR geo (dubai). Flag display is separate.
     const getLocaleFromPath = () => {
         const parts = pathname.split("/").filter(Boolean);
-        const supportedLocales = ["en", "in", "ae", "sg", "my"];
-        return supportedLocales.includes(parts[0]) ? parts[0] : "en";
+        const first = parts[0];
+
+        if (isGeoPrefix(first)) {
+            return first;
+        }
+
+        return SUPPORTED_LOCALES.includes(first) ? first : "en";
     };
 
     const locale = getLocaleFromPath();
 
     const navHref = (path) => {
-         // Normalize the incoming path
         if (!path.startsWith("/")) path = `/${path}`;
 
-        // ✅ If locale is "en", omit it from the URL
+        // en: no prefix
         if (locale === "en") {
-            return path === "/" ? "/" : `${path}`;
+            return path === "/" ? "/" : path;
         }
-        
+
         if (path === "/") return `/${locale}`;
         return `/${locale}${path}`;
     };

@@ -2,14 +2,19 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 
+function resolveUnderCwd(...parts) {
+    const cwd = /* turbopackIgnore: true */ process.cwd();
+    return [cwd, ...parts].join(path.sep);
+}
+
 export function getStaticPageFilePath(locale, slug) {
-    return path.join(process.cwd(), 'src', 'content', 'static-pages', locale, `${slug}.html`);
+    return resolveUnderCwd('src', 'content', 'static-pages', locale, `${slug}.html`);
 }
 
 export function readStaticPageHtml(locale, slug) {
     const filePath = getStaticPageFilePath(locale, slug);
-    if (!fs.existsSync(filePath)) return null;
-    return fs.readFileSync(filePath, 'utf-8');
+    if (!fs.existsSync(/* turbopackIgnore: true */ filePath)) return null;
+    return fs.readFileSync(/* turbopackIgnore: true */ filePath, 'utf-8');
 }
 
 export function extractStaticPageMetadata(htmlContent) {

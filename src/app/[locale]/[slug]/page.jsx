@@ -1,6 +1,4 @@
 import { getCategoryBySlug, getServicesBySlug } from "@/lib/services";
-import fs from 'fs';
-import path from 'path';
 import * as cheerio from 'cheerio';
 import StaticPageFrame from '@/components/StaticPageFrame';
 import ServicePageBanner from '@/components/servicebanner';
@@ -19,6 +17,7 @@ import ClientForm from '@/components/clientForm';
 import ServiceFaqSection from '@/components/serviceFaq';
 import BenefitEmailCategory from '@/components/benefitEmailSection';
 import EmailOpenRates from '@/components/emailOpenRates';
+import { extractStaticPageMetadata, readStaticPageHtml } from '@/lib/staticPage';
 
 import { notFound } from "next/navigation";
 
@@ -44,51 +43,14 @@ const componentMap = {
 export async function generateMetadata({ params }) {
     const { locale, slug } = await params;
 
-    // 1. You can fetch SEO from Strapi here if those functions exist in your codebase in the future.
-    // let seoData = ...
-
-    // 2. Fallback to extracting from static HTML file
     try {
-        const filePath = path.join(process.cwd(), 'src', 'content', 'static-pages', locale, `${slug}.html`);
-        if (fs.existsSync(filePath)) {
-            const htmlContent = fs.readFileSync(filePath, 'utf-8');
-            const $ = cheerio.load(htmlContent);
-
-            const alternates = {
-                canonical: $('link[rel="canonical"]').attr('href') || '',
-                languages: {},
-            };
-
-            $('link[rel="alternate"][hreflang]').each((_, el) => {
-                const hreflang = $(el).attr('hreflang');
-                const href = $(el).attr('href');
-                if (hreflang && href) {
-                    alternates.languages[hreflang] = href;
-                }
-            });
-
-            return {
-                title: $('title').text() || `${slug} - Database Providers`,
-                description: $('meta[name="description"]').attr('content') || '',
-                keywords: $('meta[name="keywords"]').attr('content') || '',
-                alternates,
-                openGraph: {
-                    title: $('meta[property="og:title"]').attr('content') || $('title').text(),
-                    description: $('meta[property="og:description"]').attr('content') || $('meta[name="description"]').attr('content'),
-                    url: $('meta[property="og:url"]').attr('content') || '',
-                    siteName: $('meta[property="og:site_name"]').attr('content') || 'The Database Providers',
-                    images: [
-                        {
-                            url: $('meta[property="og:image"]').attr('content') || '',
-                        },
-                    ],
-                    type: $('meta[property="og:type"]').attr('content') || 'website',
-                },
-                robots: $('meta[name="robots"]').attr('content') || 'index, follow',
-                authors: [
-                    { name: $('meta[name="author"]').attr('content') || 'Database Providers' }
-                ],
-            };
+        const htmlContent = readStaticPageHtml(locale, slug);
+        if (htmlContent) {
+            const metadata = extractStaticPageMetadata(htmlContent);
+            if (!metadata.title || metadata.title === 'Database Providers') {
+                metadata.title = `${slug} - Database Providers`;
+            }
+            return metadata;
         }
     } catch (err) {
         console.error("Error reading static HTML for metadata:", err);
@@ -96,17 +58,16 @@ export async function generateMetadata({ params }) {
 
     return {
         title: "Database Providers",
-    }
+    };
 }
 
 export default async function Page({ params }) {
     const { locale, slug } = await params;
 
     // 1. Check for static HTML file FIRST (before Strapi, because fetchAPI calls notFound() on error)
-    const filePath = path.join(process.cwd(), 'src', 'content', 'static-pages', locale, `${slug}.html`);
-    if (fs.existsSync(filePath)) {
+    const htmlContent = readStaticPageHtml(locale, slug);
+    if (htmlContent) {
         try {
-            const htmlContent = fs.readFileSync(filePath, 'utf-8');
             const $ = cheerio.load(htmlContent);
             const bodyContent = $('body').html();
 
@@ -142,9 +103,9 @@ export default async function Page({ params }) {
     let sections = [];
 
     if (item.sections) {
-        sections = item.sections
+        sections = item.sections;
     } else if (item.components) {
-        sections = item.components
+        sections = item.components;
     } else {
         return sections;
     }
@@ -159,7 +120,7 @@ export default async function Page({ params }) {
                 sections.map((sec, idx) => {
                     const Component = componentMap[sec.__component];
                     if (!Component) return null;
-                    y
+
                     try {
                         return <Component key={idx} data={sec} />;
                     } catch (err) {

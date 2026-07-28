@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import { useNavHref } from "@/hooks/useNavHref";
+import { getFlagLocaleForSegment, isGeoPrefix } from "@/lib/geoPrefixes";
 import { isStaticPageSlugForLocale } from "@/lib/localeFreePageSlugs";
 
 const languages = [
@@ -14,22 +15,25 @@ const languages = [
 	{ code: "my", label: "Malaysia", flag: "/header/flag3.svg" },
 ];
 
+const LOCALE_CODES = languages.map((l) => l.code);
+
 function LanguageDropdown() {
 	const getLocaleFromPath = (pathname) => {
 		const parts = pathname.split("/");
 		const maybeLocale = parts[1];
-		const supported = ["en", "in", "ae", "sg", "my"];
-		return supported.includes(maybeLocale) ? maybeLocale : "en";
+		const geoFlag = getFlagLocaleForSegment(maybeLocale);
+		if (geoFlag) return geoFlag;
+		return LOCALE_CODES.includes(maybeLocale) ? maybeLocale : "en";
 	};
 	const pathname = usePathname();
 	const locale = getLocaleFromPath(pathname);
+	const pathParts = pathname.split("/").filter(Boolean);
+	const onGeoPage = isGeoPrefix(pathParts[0]);
 
 	const [open, setOpen] = useState(false);
 	const [selected, setSelected] = useState(languages[0]);
 	const dropdownRef = useRef(null);
-	// const locale = useLocale();
 	const router = useRouter();
-	// const pathname = usePathname();
 
 	useEffect(() => {
 		const match = languages.find((l) => l.code === locale);
@@ -52,11 +56,29 @@ function LanguageDropdown() {
 	}, [open]);
 
 	const handleLanguageChange = (newLocale) => {
-		const pathParts = pathname.split("/").filter(Boolean);
+		const first = pathParts[0];
 		const slug =
-			["en", "in", "ae", "sg", "my"].includes(pathParts[0]) && pathParts.length > 1
+			(LOCALE_CODES.includes(first) || onGeoPage) && pathParts.length > 1
 				? pathParts[1]
 				: pathParts[0];
+
+		// Already on geo page showing this flag — keep /dubai/... URL, do not go to /ae/...
+		if (onGeoPage && newLocale === locale) {
+			setOpen(false);
+			return;
+		}
+
+		// Geo pages: switch to country locale version of same slug when it exists
+		if (onGeoPage && slug) {
+			if (!isStaticPageSlugForLocale(newLocale, slug)) {
+				setOpen(false);
+				return;
+			}
+			const href = newLocale === "en" ? `/${slug}` : `/${newLocale}/${slug}`;
+			router.push(href);
+			setOpen(false);
+			return;
+		}
 
 		if (slug && isStaticPageSlugForLocale(locale, slug)) {
 			if (!isStaticPageSlugForLocale(newLocale, slug)) {
@@ -71,7 +93,7 @@ function LanguageDropdown() {
 		}
 
 		const pathWithoutLocale =
-			pathname.replace(new RegExp(`^/${locale}`), "") || "/";
+			pathname.replace(new RegExp(`^/${first === "en" ? "en" : locale}`), "") || "/";
 		router.push(`/${newLocale}${pathWithoutLocale}`);
 		setOpen(false);
 	};

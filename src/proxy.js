@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
+import { isGeoPrefix } from './lib/geoPrefixes';
 import slugData from './lib/static-page-slugs.json';
 
 const TRUE_GLOBAL_PAGES = [
@@ -44,6 +45,17 @@ export default function proxy(request) {
     const pathParts = pathname.split('/').filter(Boolean);
     const localeSegment = pathParts[0];
     const secondSegment = pathParts[1];
+
+    // City/geo static pages: /dubai/slug → internal /geo/dubai/slug (not a header locale)
+    if (isGeoPrefix(localeSegment)) {
+        if (!secondSegment) {
+            return NextResponse.next();
+        }
+
+        const url = request.nextUrl.clone();
+        url.pathname = `/geo/${pathParts.join('/')}`;
+        return NextResponse.rewrite(url);
+    }
 
     const globalPages = [
         ...TRUE_GLOBAL_PAGES,

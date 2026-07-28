@@ -59,6 +59,13 @@ function LanguageDropdown() {
 				: pathParts[0];
 
 		if (slug && isStaticPageSlugForLocale(locale, slug)) {
+			if (!isStaticPageSlugForLocale(newLocale, slug)) {
+				setOpen(false);
+				return;
+			}
+
+			const href = newLocale === "en" ? `/${slug}` : `/${newLocale}/${slug}`;
+			router.push(href);
 			setOpen(false);
 			return;
 		}

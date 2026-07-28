@@ -3,12 +3,12 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import * as cheerio from 'cheerio';
 import {
-    BASE_SLUG_ORDER,
-    EXCLUDED_SLUGS,
+    CORE_SITE_PAGES,
     LLMS_HEADER,
     SECTION_ORDER,
+    SITE_ORIGIN,
+    buildStaticPageUrl,
     formatLinkTitle,
-    getBaseSlug,
     getPageDescription,
     getSectionForPage,
 } from '../src/lib/llmsTxtData.js';
@@ -29,53 +29,60 @@ function readLocaleDirectories() {
         .sort();
 }
 
+function normalizeUrl(url) {
+    if (!url) return null;
+
+    try {
+        const parsed = new URL(url, SITE_ORIGIN);
+        let pathname = parsed.pathname || '/';
+        if (!pathname.endsWith('/')) {
+            pathname = `${pathname}/`;
+        }
+        return `${parsed.origin}${pathname}`;
+    } catch {
+        return null;
+    }
+}
+
 function parseStaticPage(filePath, locale, slug) {
     const html = fs.readFileSync(filePath, 'utf-8');
     const $ = cheerio.load(html);
-    const canonical = $('link[rel="canonical"]').attr('href')?.trim();
     const title = $('title').text().trim();
-
-    if (!canonical || !title) {
-        return null;
-    }
-
-    const section = getSectionForPage(locale, slug);
-    const description = getPageDescription(slug);
-    const baseSlug = getBaseSlug(slug);
-
-    if (!section || !description || !BASE_SLUG_ORDER.includes(baseSlug)) {
-        return null;
-    }
+    const metaDescription = $('meta[name="description"]').attr('content')?.trim() || '';
+    const canonical = normalizeUrl($('link[rel="canonical"]').attr('href')?.trim());
+    const fallbackUrl = buildStaticPageUrl(locale, slug);
+    const url = canonical || fallbackUrl;
+    const linkTitle = formatLinkTitle(title, locale, slug);
+    const description =
+        getPageDescription(slug) ||
+        metaDescription ||
+        `${linkTitle} landing page.`;
 
     return {
-        section,
-        baseSlug,
-        linkTitle: formatLinkTitle(title, locale, slug),
-        url: canonical,
+        section: getSectionForPage(locale, slug),
+        linkTitle,
+        url,
         description,
     };
 }
 
-function collectPages() {
+function collectStaticPages() {
     const pages = [];
 
     for (const locale of readLocaleDirectories()) {
         const localeDir = path.join(STATIC_PAGES_ROOT, locale);
         const files = fs
             .readdirSync(localeDir)
-            .filter((file) => file.endsWith('.html'));
+            .filter((file) => file.endsWith('.html'))
+            .sort();
 
         for (const file of files) {
             const slug = file.replace(/\.html$/, '');
 
-            if (EXCLUDED_SLUGS.has(slug)) {
-                continue;
-            }
-
-            const page = parseStaticPage(path.join(localeDir, file), locale, slug);
-
-            if (page) {
-                pages.push(page);
+            try {
+                pages.push(parseStaticPage(path.join(localeDir, file), locale, slug));
+            } catch (err) {
+                console.warn(`Skip ${locale}/${slug}: ${err.message}`);
             }
         }
     }
@@ -83,18 +90,49 @@ function collectPages() {
     return pages;
 }
 
+function collectCorePages() {
+    return CORE_SITE_PAGES.map((page) => ({
+        section: page.section,
+        linkTitle: page.title,
+        url: normalizeUrl(page.url),
+        description: page.description,
+    }));
+}
+
+function dedupeByUrl(pages) {
+    const seen = new Set();
+    const unique = [];
+
+    for (const page of pages) {
+        if (!page?.url || seen.has(page.url)) {
+            continue;
+        }
+
+        seen.add(page.url);
+        unique.push(page);
+    }
+
+    return unique;
+}
+
 function sortPages(pages) {
     const sectionRank = new Map(SECTION_ORDER.map((section, index) => [section, index]));
-    const slugRank = new Map(BASE_SLUG_ORDER.map((slug, index) => [slug, index]));
 
     return [...pages].sort((a, b) => {
-        const sectionDiff = (sectionRank.get(a.section) ?? 999) - (sectionRank.get(b.section) ?? 999);
+        const sectionDiff =
+            (sectionRank.get(a.section) ?? 900) - (sectionRank.get(b.section) ?? 900);
 
         if (sectionDiff !== 0) {
             return sectionDiff;
         }
 
-        return (slugRank.get(a.baseSlug) ?? 999) - (slugRank.get(b.baseSlug) ?? 999);
+        // Keep unknown city sections grouped after known ones, alpha by section then title
+        const sectionNameDiff = a.section.localeCompare(b.section);
+        if (sectionNameDiff !== 0) {
+            return sectionNameDiff;
+        }
+
+        return a.linkTitle.localeCompare(b.linkTitle);
     });
 }
 
@@ -109,9 +147,7 @@ function buildLlmsTxt(pages) {
             lines.push('', `## ${currentSection}`, '');
         }
 
-        lines.push(
-            `- [${page.linkTitle}](${page.url}): ${page.description}`
-        );
+        lines.push(`- [${page.linkTitle}](${page.url}): ${page.description}`);
     }
 
     lines.push('');
@@ -119,7 +155,7 @@ function buildLlmsTxt(pages) {
 }
 
 function main() {
-    const pages = sortPages(collectPages());
+    const pages = sortPages(dedupeByUrl([...collectCorePages(), ...collectStaticPages()]));
     const output = buildLlmsTxt(pages);
 
     fs.writeFileSync(OUTPUT_PATH, output);

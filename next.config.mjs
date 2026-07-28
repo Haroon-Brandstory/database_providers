@@ -1,10 +1,6 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import slugData from './src/lib/static-page-slugs.json' with { type: 'json' };
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
-
-const LEGAL_PAGE_SLUGS = slugData.LEGAL_PAGE_SLUGS ?? [];
-const STATIC_PAGE_SLUGS = slugData.STATIC_PAGE_SLUGS ?? [];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -29,19 +25,8 @@ const nextConfig = {
     },
     // DO NOT add i18n config here when using next-intl
     trailingSlash: true,
-
-    async rewrites() {
-        return [
-            ...LEGAL_PAGE_SLUGS.map((slug) => ({
-                source: `/${slug}/:path*`,
-                destination: `/legal/${slug}/:path*`,
-            })),
-            ...STATIC_PAGE_SLUGS.map((slug) => ({
-                source: `/${slug}/:path*`,
-                destination: `/en/${slug}/:path*`,
-            })),
-        ];
-    },
+    // EN locale-free + legal rewrites live in src/proxy.js (Set lookup)
+    // to avoid Next.js 1000+ custom-routes warning from per-slug rewrites.
 };
 
 export default withNextIntl(nextConfig);

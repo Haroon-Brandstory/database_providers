@@ -1,7 +1,7 @@
 import fs from 'fs';
-import path from 'path';
 
-const STATIC_PAGES_ROOT = path.join(process.cwd(), 'src/content/static-pages');
+// Used only by scripts/generate-static-page-slugs.mjs (Node prebuild), not by Next app.
+const STATIC_PAGES_ROOT = `${process.cwd()}/src/content/static-pages`;
 
 // Routing config only — which en pages use /legal/[slug] vs /en/[slug]
 export const LEGAL_ROUTE_SLUGS = new Set([
@@ -43,7 +43,7 @@ export function getStaticPageSlugData() {
 
     for (const locale of readLocaleDirectories()) {
         staticPageSlugsByLocale[locale] = readSlugNamesFromDir(
-            path.join(STATIC_PAGES_ROOT, locale)
+            `${STATIC_PAGES_ROOT}/${locale}`
         );
     }
 

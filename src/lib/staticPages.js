@@ -1,7 +1,6 @@
 import { existsSync, readFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getStaticPageSlugData } from './staticPageSlugData.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -12,7 +11,7 @@ const EMPTY_SLUG_DATA = {
     STATIC_PAGE_SLUGS_BY_LOCALE: {},
 };
 
-function loadJsonFallback() {
+function loadSlugData() {
     const jsonPath = path.join(__dirname, 'static-page-slugs.json');
 
     if (!existsSync(jsonPath)) {
@@ -20,14 +19,6 @@ function loadJsonFallback() {
     }
 
     return JSON.parse(readFileSync(jsonPath, 'utf8'));
-}
-
-function loadSlugData() {
-    try {
-        return getStaticPageSlugData();
-    } catch {
-        return loadJsonFallback();
-    }
 }
 
 const {

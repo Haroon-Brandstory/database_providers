@@ -1,9 +1,14 @@
 import fs from 'fs';
-import path from 'path';
 import * as cheerio from 'cheerio';
 
+// Obfuscate folder path so Turbopack does not expand a glob over all HTML files.
+// Runtime path is still: {cwd}/src/content/static-pages/{locale}/{slug}.html
+const STATIC_PAGES_REL = Buffer.from('c3JjL2NvbnRlbnQvc3RhdGljLXBhZ2Vz', 'base64').toString(
+    'utf8'
+);
+
 export function getStaticPageFilePath(locale, slug) {
-    return path.join(process.cwd(), 'src', 'content', 'static-pages', locale, `${slug}.html`);
+    return [process.cwd(), STATIC_PAGES_REL, locale, `${slug}.html`].join('/');
 }
 
 export function readStaticPageHtml(locale, slug) {

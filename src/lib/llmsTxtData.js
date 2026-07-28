@@ -1,4 +1,5 @@
 import { LEGAL_ROUTE_SLUGS } from './staticPageSlugData.js';
+import { GEO_PREFIXES } from './geoPrefixes.js';
 
 export const SITE_ORIGIN = 'https://www.thedatabaseproviders.com';
 
@@ -15,43 +16,10 @@ export const LLMS_HEADER = `# Database Providers
 - **Core offerings:** B2B email lists, business contact databases, targeted/segmented email lists (by industry, job title, company size, or zip code), bulk email leads, email marketing databases, and consumer email databases
 - **Target customers:** B2B sales teams, marketing and demand-generation teams, ABM practitioners, and agencies running email marketing or outbound campaigns
 - **Geographic markets covered:** United States (national and major metro markets), India (national and major metro markets), United Arab Emirates (national, Dubai, and other emirates), Singapore, and Malaysia
-- **Content scope of this file:** Programmatic SEO landing pages for email list and contact database offerings, organized by country and city
+- **Content scope of this file:** All public site routes and programmatic SEO landing pages under static-pages (all locales and geo prefixes)
 `;
 
-export const EXCLUDED_SLUGS = new Set([
-    ...LEGAL_ROUTE_SLUGS,
-    'professional-email-list',
-]);
-
-export const BASE_SLUG_ORDER = [
-    'best-b2b-email-list-providers',
-    'email-marketing-lists-for-purchase',
-    'buy-email-database',
-    'email-list-providers',
-    'buy-email-leads',
-    'best-email-list-providers',
-    'buy-targeted-email-list',
-    'buy-b2b-email-database',
-    'mailing-list-providers',
-    'b2b-email-list-providers',
-    'buy-business-email-list',
-    'buy-contact-database',
-    'buy-email-lists-by-zip-code',
-    'email-marketing-list-providers',
-    'buy-email-marketing-database',
-    'business-email-lists-for-sale',
-    'top-email-list-providers',
-    'best-email-marketing-list-providers',
-    'business-email-list-providers',
-    'email-data-list-providers',
-    'best-place-to-buy-email-leads',
-    'buy-bulk-email-leads',
-    'targeted-email-lists-for-sale',
-    'buy-email-contact-list',
-    'buy-email-address-database',
-    'buy-consumer-email-database',
-];
-
+/** Optional curated descriptions for known buy/provider base slugs. Others use meta description or title. */
 export const PAGE_DESCRIPTIONS = Object.fromEntries(
     [
         ['best-b2b-email-list-providers', 'Overview of what makes a top-tier B2B email list provider.'],
@@ -87,14 +55,14 @@ const US_CITY_SECTIONS = {
     'san-francisco': 'United States — San Francisco, CA',
     'san-jose': 'United States — San Jose, CA',
     'new-york-city': 'United States — New York City, NY',
-    'seattle': 'United States — Seattle, WA',
-    'austin': 'United States — Austin, TX',
+    seattle: 'United States — Seattle, WA',
+    austin: 'United States — Austin, TX',
     'los-angeles': 'United States — Los Angeles, CA',
-    'chicago': 'United States — Chicago, IL',
-    'boston': 'United States — Boston, MA',
-    'denver': 'United States — Denver, CO',
+    chicago: 'United States — Chicago, IL',
+    boston: 'United States — Boston, MA',
+    denver: 'United States — Denver, CO',
     'san-diego': 'United States — San Diego, CA',
-    'atlanta': 'United States — Atlanta, GA',
+    atlanta: 'United States — Atlanta, GA',
 };
 
 const IN_CITY_SECTIONS = {
@@ -109,12 +77,65 @@ const IN_CITY_SECTIONS = {
     ahmedabad: 'India — Ahmedabad',
 };
 
+const LOCALE_SECTION = {
+    en: 'United States (National)',
+    in: 'India',
+    ae: 'United Arab Emirates',
+    sg: 'Singapore',
+    my: 'Malaysia',
+    dubai: 'Dubai',
+};
+
+/** Fixed app routes outside static-pages HTML. */
+export const CORE_SITE_PAGES = [
+    { section: 'Site', title: 'Home', url: `${SITE_ORIGIN}/`, description: 'Database Providers homepage.' },
+    { section: 'Site', title: 'About Us', url: `${SITE_ORIGIN}/about/`, description: 'About Database Providers.' },
+    { section: 'Site', title: 'Contact Us', url: `${SITE_ORIGIN}/contact-us/`, description: 'Contact Database Providers.' },
+    { section: 'Site', title: 'Blogs', url: `${SITE_ORIGIN}/blogs/`, description: 'Blog articles and resources.' },
+    { section: 'Site', title: 'Pricing Plans', url: `${SITE_ORIGIN}/pricing-plans/`, description: 'Pricing plans and packages.' },
+    { section: 'Site', title: 'ABM', url: `${SITE_ORIGIN}/abm/`, description: 'Account-based marketing solutions.' },
+    { section: 'Site', title: 'Search Database', url: `${SITE_ORIGIN}/searchDatabase/`, description: 'Search the business database.' },
+    { section: 'Site', title: 'Testimonials', url: `${SITE_ORIGIN}/testimonials/`, description: 'Customer testimonials.' },
+    { section: 'Site', title: 'Videos', url: `${SITE_ORIGIN}/videos/`, description: 'Video resources.' },
+    { section: 'Site', title: 'Tools', url: `${SITE_ORIGIN}/tools/`, description: 'Free online tools.' },
+    {
+        section: 'Site',
+        title: 'Email Permutator',
+        url: `${SITE_ORIGIN}/tools/email-permutator/`,
+        description: 'Generate email address permutations.',
+    },
+    {
+        section: 'Site',
+        title: 'Remove Duplicates',
+        url: `${SITE_ORIGIN}/tools/remove-duplicate/`,
+        description: 'Remove duplicate emails from a list.',
+    },
+    {
+        section: 'Site',
+        title: 'ROI Calculator',
+        url: `${SITE_ORIGIN}/tools/roi/`,
+        description: 'Estimate campaign ROI.',
+    },
+    {
+        section: 'Site',
+        title: 'Size Checker',
+        url: `${SITE_ORIGIN}/tools/size-checker/`,
+        description: 'Check list or file size.',
+    },
+];
+
 export const SECTION_ORDER = [
+    'Site',
+    'Legal',
     'United States (National)',
     ...Object.values(US_CITY_SECTIONS),
+    'India',
     ...Object.values(IN_CITY_SECTIONS),
+    'United Arab Emirates',
+    'Dubai',
     'Singapore',
     'Malaysia',
+    'Other',
 ];
 
 export function getBaseSlug(slug) {
@@ -128,6 +149,10 @@ export function getLocationSuffix(slug) {
 }
 
 export function getSectionForPage(locale, slug) {
+    if (LEGAL_ROUTE_SLUGS.has(slug) && locale === 'en') {
+        return 'Legal';
+    }
+
     const location = getLocationSuffix(slug);
 
     if (locale === 'en') {
@@ -135,26 +160,47 @@ export function getSectionForPage(locale, slug) {
             return 'United States (National)';
         }
 
-        return US_CITY_SECTIONS[location] ?? null;
+        const label = location
+            .split('-')
+            .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+            .join(' ');
+
+        return US_CITY_SECTIONS[location] ?? `United States — ${label}`;
     }
 
     if (locale === 'in') {
-        return IN_CITY_SECTIONS[location] ?? null;
+        if (!location) {
+            return 'India';
+        }
+
+        const label = location
+            .split('-')
+            .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+            .join(' ');
+
+        return IN_CITY_SECTIONS[location] ?? `India — ${label}`;
     }
 
-    if (locale === 'sg') {
-        return 'Singapore';
+    if (LOCALE_SECTION[locale]) {
+        return LOCALE_SECTION[locale];
     }
 
-    if (locale === 'my') {
-        return 'Malaysia';
+    if (GEO_PREFIXES.includes(locale)) {
+        return LOCALE_SECTION[locale] ?? locale;
     }
 
-    return null;
+    return 'Other';
 }
 
 export function formatLinkTitle(title, locale, slug) {
-    let text = title.replace(/\s*\|\s*Database Providers\s*$/i, '').trim();
+    let text = (title || slug).replace(/\s*\|\s*Database Providers\s*$/i, '').trim();
+
+    if (!text) {
+        text = slug
+            .split('-')
+            .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+            .join(' ');
+    }
 
     if (locale === 'en' && !getLocationSuffix(slug)) {
         text = text.replace(/\s+in USA$/i, '');
@@ -165,4 +211,12 @@ export function formatLinkTitle(title, locale, slug) {
 
 export function getPageDescription(slug) {
     return PAGE_DESCRIPTIONS[getBaseSlug(slug)] ?? null;
+}
+
+export function buildStaticPageUrl(locale, slug) {
+    if (locale === 'en') {
+        return `${SITE_ORIGIN}/${slug}/`;
+    }
+
+    return `${SITE_ORIGIN}/${locale}/${slug}/`;
 }

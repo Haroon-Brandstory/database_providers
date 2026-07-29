@@ -1,20 +1,20 @@
 import fs from 'fs';
+import path from 'path';
 import * as cheerio from 'cheerio';
 
-// Obfuscate folder path so Turbopack does not expand a glob over all HTML files.
-// Runtime path is still: {cwd}/src/content/static-pages/{locale}/{slug}.html
-const STATIC_PAGES_REL = Buffer.from('c3JjL2NvbnRlbnQvc3RhdGljLXBhZ2Vz', 'base64').toString(
-    'utf8'
-);
+// Clear path so Vercel NFT + outputFileTracingIncludes can ship these files.
+// Turbopack "overly broad patterns" warn is suppressed in next.config.mjs.
+const STATIC_PAGES_ROOT = path.join(process.cwd(), 'src', 'content', 'static-pages');
 
 export function getStaticPageFilePath(locale, slug) {
-    return [process.cwd(), STATIC_PAGES_REL, locale, `${slug}.html`].join('/');
+    return path.join(STATIC_PAGES_ROOT, locale, `${slug}.html`);
 }
 
 export function readStaticPageHtml(locale, slug) {
     const filePath = getStaticPageFilePath(locale, slug);
-    if (!fs.existsSync(filePath)) return null;
-    return fs.readFileSync(filePath, 'utf-8');
+    // turbopackIgnore: runtime-only read; do not expand/bundle all HTML at build time
+    if (!fs.existsSync(/* turbopackIgnore: true */ filePath)) return null;
+    return fs.readFileSync(/* turbopackIgnore: true */ filePath, 'utf-8');
 }
 
 export function extractStaticPageMetadata(htmlContent) {

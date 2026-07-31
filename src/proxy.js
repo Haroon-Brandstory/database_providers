@@ -12,6 +12,10 @@ const TRUE_GLOBAL_PAGES = [
     'searchDatabase',
     'abm',
     'company',
+    'careers',
+    'case-studies',
+    'news',
+    'white-papers',
 ];
 
 const LEGAL_PAGE_SLUGS = slugData.LEGAL_PAGE_SLUGS ?? [];

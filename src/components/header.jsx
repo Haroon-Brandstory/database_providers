@@ -297,7 +297,7 @@ export default function Header() {
 			className="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent"
 		>
 			<div className={`absolute inset-0 -z-10 transition-all duration-500 ${scrolled || isMenuOpen ? "backdrop-blur-md bg-black/30" : "bg-transparent"}`} />
-			<div className="container mx-auto px-4 md:px-6 lg:px-15 py-4 md:py-6 lg:py-6">
+			<div className="container mx-auto px-4 md:px-6 lg:px-6 py-4 md:py-6 lg:py-6">
 				<div className="flex items-center justify-between">
 					{/* Logo */}
 					<div className="flex items-center gap-2">

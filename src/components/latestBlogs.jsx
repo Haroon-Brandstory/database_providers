@@ -1,24 +1,31 @@
 import Image from "next/image";
+import { getLatestThreeBlogs } from "@/lib/services";
+import { API_URL } from "@/utils/config";
 
-export default function LatestBlogs() {
+export default async function LatestBlogs() {
+    let blogs = [];
 
-    const demoBlogDAta = [
-        {
-            img: "/latestBlogs/blog1.png",
-            blogDesc: "5 proven techniques to identify and contact your B2B audience",
-            blogRedirection: "/blogs/5-proven-techniques-to-identify-and-contact-your-b2b-audience/"
-        },
-        {
-            img: "/latestBlogs/blog2.png",
-            blogDesc: "Potential of content syndication for B2B lead generation",
-            blogRedirection: "/blogs/potential-of-content-syndication-for-b2b-lead-generation/"
-        },
-        {
-            img: "/latestBlogs/blog3.png",
-            blogDesc: "Step by step guide for B2B Email marketing",
-            blogRedirection: "/blogs/step-by-step-guide-for-b2b-email-marketing/"
-        },
-    ]
+    try {
+        const response = await getLatestThreeBlogs();
+        blogs = response?.data || [];
+    } catch (err) {
+        console.error("Error fetching latest blogs:", err);
+    }
+
+    if (blogs.length === 0) {
+        return <div className="text-center text-2xl font-bold text-blue-500">No blogs found</div>;
+    }
+
+    const items = blogs.slice(0, 3).map((blog) => ({
+        id: blog.id,
+        img: blog.BlogPreviewImage?.url
+            ? `${API_URL}${blog.BlogPreviewImage.url}`
+            : "/latestBlogs/demo_blog.png",
+        blogDesc: blog.BlogName || "Untitled Blog",
+        blogRedirection: blog.BlogSlug
+            ? `/blogs/${blog.BlogSlug}`
+            : "/blogs",
+    }));
 
     return (
         <section className="py-24 px-4 md:px-20 bg-[#F0F4FF] relative">
@@ -30,31 +37,33 @@ export default function LatestBlogs() {
                 </div>
                 <div className="demoBlogSection">
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-                        {
-                            demoBlogDAta.map((item, i) => (
-                                <div key={i} className="each-blog bg-[#F6F8FF] rounded-2xl p-4 shadow-sm max-w-[320px] mx-auto">
-                                    <Image
-                                        src={item?.img}
-                                        width={320}
-                                        height={180}
-                                        alt="blog_demo"
-                                        className="rounded-xl w-full h-[180px] object-cover mb-6"
-                                    />
-                                    <h3 className="text-[#222] text-[16px]  font-normal mb-6">
-                                        {item?.blogDesc}
-                                    </h3>
-                                    <a
-                                        href={item?.blogRedirection} target="_blank"
-                                        className="text-[#2C6BFF] font-medium flex items-center mb-4 gap-1"
-                                    >
-                                        Read More <span aria-hidden="true">→</span>
-                                    </a>
-                                </div>
-                            ))
-                        }
+                        {items.map((item) => (
+                            <div
+                                key={item.id || item.blogRedirection}
+                                className="each-blog bg-[#F6F8FF] rounded-2xl p-4 shadow-sm max-w-[320px] mx-auto"
+                            >
+                                <Image
+                                    src={item.img}
+                                    width={320}
+                                    height={180}
+                                    unoptimized
+                                    alt={item.blogDesc}
+                                    className="rounded-xl w-full h-[180px] object-cover mb-6"
+                                />
+                                <h3 className="text-[#222] text-[16px] font-normal mb-6">
+                                    {item.blogDesc}
+                                </h3>
+                                <a
+                                    href={item.blogRedirection}
+                                    className="text-[#2C6BFF] font-medium flex items-center mb-4 gap-1"
+                                >
+                                    Read More <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
         </section>
-    )
+    );
 }

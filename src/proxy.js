@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { isGeoPrefix } from './lib/geoPrefixes';
+import { GEO_FLAG_LOCALE, isGeoPrefix } from './lib/geoPrefixes';
+import {
+    LOCALE_APP_SEGMENTS,
+    NONLOCALE_APP_SEGMENTS,
+} from './lib/navPaths';
 import slugData from './lib/static-page-slugs.json';
 
 const TRUE_GLOBAL_PAGES = [
@@ -61,15 +65,49 @@ export default function proxy(request) {
     const localeSegment = pathParts[0];
     const secondSegment = pathParts[1];
 
-    // City/geo static pages: /dubai/slug → internal /geo/dubai/slug (not a header locale)
+    // Geo prefix (dubai): only real static landings; never country/global app pages
     if (isGeoPrefix(localeSegment)) {
+        // /dubai or /dubai/ → send to mapped country home
         if (!secondSegment) {
-            return NextResponse.next();
+            const flagLocale = GEO_FLAG_LOCALE[localeSegment] || routing.defaultLocale;
+            const dest = flagLocale === 'en' ? '/' : `/${flagLocale}/`;
+            return NextResponse.redirect(new URL(dest, request.url), 301);
         }
 
-        const url = request.nextUrl.clone();
-        url.pathname = withTrailingSlash(`/geo/${pathParts.join('/')}`);
-        return NextResponse.rewrite(url);
+        const restPath = pathParts.slice(1).join('/');
+
+        // /dubai/blogs → /blogs
+        if (
+            trueGlobalSet.has(secondSegment) ||
+            NONLOCALE_APP_SEGMENTS.has(secondSegment)
+        ) {
+            return NextResponse.redirect(
+                new URL(withTrailingSlash(`/${restPath}`), request.url),
+                301
+            );
+        }
+
+        // /dubai/about → /ae/about
+        if (LOCALE_APP_SEGMENTS.has(secondSegment)) {
+            const flagLocale = GEO_FLAG_LOCALE[localeSegment] || 'ae';
+            const dest =
+                flagLocale === 'en'
+                    ? withTrailingSlash(`/${restPath}`)
+                    : withTrailingSlash(`/${flagLocale}/${restPath}`);
+            return NextResponse.redirect(new URL(dest, request.url), 301);
+        }
+
+        // /dubai/{landing} only if HTML exists under static-pages/dubai
+        if (hasStaticPageForLocale(localeSegment, secondSegment)) {
+            const url = request.nextUrl.clone();
+            url.pathname = withTrailingSlash(`/geo/${pathParts.join('/')}`);
+            return NextResponse.rewrite(url);
+        }
+
+        // Unknown /dubai/foo → country home
+        const flagLocale = GEO_FLAG_LOCALE[localeSegment] || routing.defaultLocale;
+        const dest = flagLocale === 'en' ? '/' : `/${flagLocale}/`;
+        return NextResponse.redirect(new URL(dest, request.url), 301);
     }
 
     // Redirect localized global URLs to main URL

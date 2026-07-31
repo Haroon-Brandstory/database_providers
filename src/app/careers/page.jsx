@@ -1,19 +1,20 @@
-import ContentListingPage from "@/components/content-listing/ContentListingPage";
-import { contentListingPages } from "@/lib/contentListingPages";
+import CareersPage from "@/components/careers/CareersPage";
+import { getCareersPageData } from "@/lib/careersData";
 import { generateSeoMetadata } from "@/lib/seo";
 
-const page = contentListingPages.careers;
-
 export async function generateMetadata() {
+    const data = await getCareersPageData();
+
     return generateSeoMetadata({
         locale: "en",
-        slug: page.slug,
-        title: `${page.title} | Database Providers`,
-        description: page.seoDescription,
+        slug: "careers",
+        title: data.seo?.title || "Careers | Database Providers",
+        description: data.seo?.description,
         noIntl: true,
     });
 }
 
-export default function CareersPage() {
-    return <ContentListingPage data={page} />;
+export default async function CareersRoutePage() {
+    const data = await getCareersPageData();
+    return <CareersPage data={data} />;
 }

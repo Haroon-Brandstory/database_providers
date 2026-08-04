@@ -20,6 +20,7 @@ const TRUE_GLOBAL_PAGES = [
     'case-studies',
     'news',
     'white-papers',
+    'sitemap',
 ];
 
 const LEGAL_PAGE_SLUGS = slugData.LEGAL_PAGE_SLUGS ?? [];

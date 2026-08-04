@@ -65,7 +65,7 @@ export default function ContactForm() {
                     specialties: formData.message
                 };
 
-                const res = await fetch("/api/monday", {
+                const res = await fetch("/apiv2/monday", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(mondayData),

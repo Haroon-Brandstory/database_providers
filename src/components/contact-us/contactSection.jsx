@@ -22,7 +22,7 @@ export default function CusContactSection() {
                         </h2>
                         <p className="text-white max-w-3xl lg:text-[24px] text-[18px] text-center mb-3">39109 Guardino Dr, Fremont, <br />
                             CA - 94538.</p>
-                        <Link href='#'>
+                        <Link href='mailto:sales@thedatabaseproviders.com'>
                             <button className="md:mt-4 md:px-6 cursor-pointer px-6 text-[12px] md:text-[18px] py-2 bg-white text-blue-700 font-medium rounded-full shadow-md hover:bg-blue-100 transition-all">
                                 Send mail
                             </button>

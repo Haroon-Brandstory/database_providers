@@ -34,6 +34,7 @@ const companyLinks = [
 	{ label: "About Us", url: "/about" },
 	{ label: "Careers", url: "/careers" },
 	{ label: "Contact Us", url: "/contact-us" },
+	{ label: "Sitemap", url: "/sitemap" },
 ];
 
 function FooterColumn({ title, links, navHref }) {

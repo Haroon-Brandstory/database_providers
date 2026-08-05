@@ -1,9 +1,16 @@
 "use client";
 import CountryCodeSelect from "@/components/CountryCodeSelect";
 import { useNavHref } from "@/hooks/useNavHref";
-import { DEFAULT_COUNTRY_CODE, getCountryByCode } from "@/lib/countryDialCodes";
+import {
+    DEFAULT_COUNTRY_CODE,
+    digitsOnly,
+    formatNationalNumber,
+    getCountryByCode,
+    normalizeNationalNumber,
+    validateNationalNumber,
+} from "@/lib/countryDialCodes";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
 const EMPTY_FORM = {
@@ -15,10 +22,6 @@ const EMPTY_FORM = {
     message: "",
 };
 
-function digitsOnly(value) {
-    return value.replace(/\D/g, "");
-}
-
 export default function ContactForm() {
     const [formData, setFormData] = useState(EMPTY_FORM);
     const [formErrors, setFormErrors] = useState({});
@@ -27,6 +30,19 @@ export default function ContactForm() {
     const router = useRouter();
     const { navHref } = useNavHref();
 
+    const selectedCountry = useMemo(
+        () => getCountryByCode(formData.countryCode),
+        [formData.countryCode]
+    );
+
+    const phoneMaxLength = useMemo(() => {
+        // digits + spaces between groups
+        const groups = selectedCountry.groups || [];
+        const maxDigits = selectedCountry.phoneMax || 15;
+        const spaces = Math.max(groups.length - 1, 0);
+        return maxDigits + spaces;
+    }, [selectedCountry]);
+
     const validate = (data) => {
         if (!data.name.trim()) return { name: "Name is required" };
         if (!data.businessEmail.trim()) return { businessEmail: "Business Email is required" };
@@ -34,11 +50,8 @@ export default function ContactForm() {
             return { businessEmail: "Invalid email address" };
         }
         if (!data.countryCode) return { mobileNumber: "Country code is required" };
-        const phoneDigits = digitsOnly(data.mobileNumber);
-        if (!phoneDigits) return { mobileNumber: "Mobile Number is required" };
-        if (phoneDigits.length < 6 || phoneDigits.length > 15) {
-            return { mobileNumber: "Enter a valid mobile number (6–15 digits)" };
-        }
+        const phoneError = validateNationalNumber(data.mobileNumber, data.countryCode);
+        if (phoneError) return { mobileNumber: phoneError };
         if (!data.companyName.trim()) return { companyName: "Company name is required" };
         if (!data.message.trim()) return { message: "Message is required" };
         if (data.message.trim().length < 15) return { message: "Message must be at least 15 characters" };
@@ -47,20 +60,55 @@ export default function ContactForm() {
 
     const handleFormValues = (e) => {
         const { name, value } = e.target;
-        const nextValue = name === "mobileNumber" ? digitsOnly(value).slice(0, 15) : value;
-        setFormData((item) => ({ ...item, [name]: nextValue }));
+
+        if (name === "countryCode") {
+            setFormData((prev) => {
+                const nextDigits = normalizeNationalNumber(prev.mobileNumber, value);
+                return {
+                    ...prev,
+                    countryCode: value,
+                    mobileNumber: formatNationalNumber(nextDigits, value),
+                };
+            });
+            setFormErrors({});
+            return;
+        }
+
+        if (name === "mobileNumber") {
+            const digits = normalizeNationalNumber(value, formData.countryCode);
+            setFormData((prev) => ({
+                ...prev,
+                mobileNumber: formatNationalNumber(digits, prev.countryCode),
+            }));
+            setFormErrors({});
+            return;
+        }
+
+        setFormData((item) => ({ ...item, [name]: value }));
         setFormErrors({});
     };
 
     const handleBlur = (e) => {
-        setTouched((prev) => ({ ...prev, [e.target.name]: true }));
-        const nextData = {
-            ...formData,
-            [e.target.name]:
-                e.target.name === "mobileNumber"
-                    ? digitsOnly(e.target.value).slice(0, 15)
-                    : e.target.value,
-        };
+        const field = e.target.name;
+        setTouched((prev) => ({ ...prev, [field]: true }));
+
+        let nextData = { ...formData };
+        if (field === "mobileNumber") {
+            const digits = normalizeNationalNumber(e.target.value, formData.countryCode);
+            nextData = {
+                ...formData,
+                mobileNumber: formatNationalNumber(digits, formData.countryCode),
+            };
+            setFormData(nextData);
+        } else if (field === "countryCode") {
+            nextData = {
+                ...formData,
+                countryCode: e.target.value || formData.countryCode,
+            };
+        } else {
+            nextData = { ...formData, [field]: e.target.value };
+        }
+
         setFormErrors(validate(nextData));
     };
 
@@ -71,7 +119,15 @@ export default function ContactForm() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const error = validate(formData);
+        const normalized = {
+            ...formData,
+            mobileNumber: formatNationalNumber(
+                normalizeNationalNumber(formData.mobileNumber, formData.countryCode),
+                formData.countryCode
+            ),
+        };
+        setFormData(normalized);
+        const error = validate(normalized);
         setFormErrors(error);
         setTouched({
             name: true,
@@ -85,14 +141,13 @@ export default function ContactForm() {
             setLoading(true);
             try {
                 const mondayData = {
-                    first_name: formData.name.trim(),
-                    email: formData.businessEmail.trim(),
-                    phone: fullPhone(),
-                    company: formData.companyName.trim(),
+                    first_name: normalized.name.trim(),
+                    email: normalized.businessEmail.trim(),
+                    phone: `${getCountryByCode(normalized.countryCode).dial}${digitsOnly(normalized.mobileNumber)}`,
+                    company: normalized.companyName.trim(),
                     years: "0",
                     services: "Contact Enquiry",
-                    // Collapse newlines/extra spaces — Monday GraphQL JSON rejects raw \n in embedded strings
-                    specialties: formData.message.replace(/\s+/g, " ").trim(),
+                    specialties: normalized.message.replace(/\s+/g, " ").trim(),
                 };
 
                 const res = await fetch("/apiv2/monday", {
@@ -117,9 +172,12 @@ export default function ContactForm() {
 
     const handleFormKeyDown = (e) => {
         if (e.key !== "Enter") return;
-        // Let country dropdown search handle its own Enter
-        if (e.target.closest?.("[data-country-code-select]")) return;
-        // Enter in any field (incl. message) submits; Shift+Enter keeps line break in textarea if needed
+        if (
+            e.target.closest?.("[data-country-code-select]") ||
+            e.target.closest?.("[data-country-code-menu]")
+        ) {
+            return;
+        }
         if (e.target.tagName === "TEXTAREA" && e.shiftKey) return;
         if (e.target.tagName === "BUTTON") return;
         e.preventDefault();
@@ -170,7 +228,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                     <label className="block text-[#222] text-[15px] mb-1">Mobile Number</label>
-                    <div className="flex gap-2 items-stretch">
+                    <div className="flex gap-2 items-stretch relative z-20 overflow-visible">
                         <CountryCodeSelect
                             name="countryCode"
                             value={formData.countryCode}
@@ -179,9 +237,9 @@ export default function ContactForm() {
                         />
                         <input
                             type="tel"
-                            placeholder="Enter mobile number"
+                            placeholder={selectedCountry.example || "Enter mobile number"}
                             name="mobileNumber"
-                            maxLength={15}
+                            maxLength={phoneMaxLength}
                             inputMode="numeric"
                             autoComplete="tel-national"
                             onChange={handleFormValues}
@@ -190,6 +248,12 @@ export default function ContactForm() {
                             className="min-w-0 flex-1 rounded-[20px] text-black bg-[#F6F6F6] px-4 py-3 outline-none focus:ring-2 focus:ring-blue-200 placeholder-[#B2B2B2]"
                         />
                     </div>
+                    <p className="mt-1 text-xs text-[#888]">
+                        {selectedCountry.dial} ·{" "}
+                        {selectedCountry.phoneMin === selectedCountry.phoneMax
+                            ? `${selectedCountry.phoneMax} digits`
+                            : `${selectedCountry.phoneMin}–${selectedCountry.phoneMax} digits`}
+                    </p>
                     {formErrors.mobileNumber && (touched.mobileNumber || touched.countryCode) && (
                         <div style={{ color: "red", fontSize: 14, marginTop: 4 }}>
                             {formErrors.mobileNumber}

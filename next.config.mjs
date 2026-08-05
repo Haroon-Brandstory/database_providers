@@ -22,7 +22,12 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'light-agreement-480bf24ca8.media.strapiapp.com',
-            }
+            },
+            {
+                protocol: 'https',
+                hostname: 'flagcdn.com',
+                pathname: '/**',
+            },
         ],
     },
     // DO NOT add i18n config here when using next-intl

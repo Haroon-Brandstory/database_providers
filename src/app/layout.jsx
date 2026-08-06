@@ -39,7 +39,12 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang={lang}>
-      <head />
+      <head>
+        <meta
+          name="facebook-domain-verification"
+          content="qtmez6a8czdregq0h7o91zsn0qy3ol"
+        />
+      </head>
       <body
         className={`antialiased min-h-screen ${interDisplay.variable} ${interTight.variable}`}
       >

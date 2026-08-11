@@ -1,19 +1,28 @@
-import ContentListingPage from "@/components/content-listing/ContentListingPage";
-import { contentListingPages } from "@/lib/contentListingPages";
+import ResourcesListingPage from "@/components/resources/ResourcesListingPage";
+import { getAllNews, getFeaturedNews } from "@/lib/newsData";
 import { generateSeoMetadata } from "@/lib/seo";
-
-const page = contentListingPages.news;
 
 export async function generateMetadata() {
     return generateSeoMetadata({
         locale: "en",
-        slug: page.slug,
-        title: `${page.title} | Database Providers`,
-        description: page.seoDescription,
+        slug: "news",
+        title: "News | Database Providers",
+        description:
+            "Product updates, industry insights, and company announcements from Database Providers.",
         noIntl: true,
     });
 }
 
 export default function NewsPage() {
-    return <ContentListingPage data={page} />;
+    return (
+        <ResourcesListingPage
+            heroTitle="News"
+            heroDescription="Product updates, industry insights, and company announcements from Database Providers."
+            sectionLabel="Our most recent articles"
+            breadcrumbLabel="News"
+            basePath="/news"
+            featured={getFeaturedNews()}
+            items={getAllNews()}
+        />
+    );
 }

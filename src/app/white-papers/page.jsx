@@ -1,19 +1,17 @@
-import ContentListingPage from "@/components/content-listing/ContentListingPage";
-import { contentListingPages } from "@/lib/contentListingPages";
+import WhitePapersListingPage from "@/components/resources/WhitePapersListingPage";
 import { generateSeoMetadata } from "@/lib/seo";
-
-const page = contentListingPages["white-papers"];
 
 export async function generateMetadata() {
     return generateSeoMetadata({
         locale: "en",
-        slug: page.slug,
-        title: `${page.title} | Database Providers`,
-        description: page.seoDescription,
+        slug: "white-papers",
+        title: "White Papers | Database Providers",
+        description:
+            "In-depth research and actionable insights on B2B data, targeting, and marketing performance.",
         noIntl: true,
     });
 }
 
 export default function WhitePapersPage() {
-    return <ContentListingPage data={page} />;
+    return <WhitePapersListingPage />;
 }

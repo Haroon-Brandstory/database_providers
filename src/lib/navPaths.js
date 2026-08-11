@@ -17,6 +17,7 @@ export const NONLOCALE_APP_PATHS = new Set([
     '/thank-you',
     '/company',
     '/sitemap',
+    '/community',
 ]);
 
 /**

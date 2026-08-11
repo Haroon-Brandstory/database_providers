@@ -1,19 +1,31 @@
-import ContentListingPage from "@/components/content-listing/ContentListingPage";
-import { contentListingPages } from "@/lib/contentListingPages";
+import ResourcesListingPage from "@/components/resources/ResourcesListingPage";
+import {
+    getAllCaseStudies,
+    getFeaturedCaseStudy,
+} from "@/lib/caseStudiesData";
 import { generateSeoMetadata } from "@/lib/seo";
-
-const page = contentListingPages["case-studies"];
 
 export async function generateMetadata() {
     return generateSeoMetadata({
         locale: "en",
-        slug: page.slug,
-        title: `${page.title} | Database Providers`,
-        description: page.seoDescription,
+        slug: "case-studies",
+        title: "Case Studies | Database Providers",
+        description:
+            "Real results from teams that scaled outreach with verified, targeted B2B data from Database Providers.",
         noIntl: true,
     });
 }
 
 export default function CaseStudiesPage() {
-    return <ContentListingPage data={page} />;
+    return (
+        <ResourcesListingPage
+            heroTitle="Case Studies"
+            heroDescription="Real results from teams that scaled outreach with verified, targeted B2B data."
+            sectionLabel="Our most recent case studies"
+            breadcrumbLabel="Case Studies"
+            basePath="/case-studies"
+            featured={getFeaturedCaseStudy()}
+            items={getAllCaseStudies()}
+        />
+    );
 }

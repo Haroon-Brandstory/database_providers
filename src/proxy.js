@@ -21,6 +21,7 @@ const TRUE_GLOBAL_PAGES = [
     'news',
     'white-papers',
     'sitemap',
+    'community',
 ];
 
 const LEGAL_PAGE_SLUGS = slugData.LEGAL_PAGE_SLUGS ?? [];

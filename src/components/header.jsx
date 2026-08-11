@@ -216,6 +216,7 @@ const menuItems = [
 			{ label: "News", url: "/news" },
 			{ label: "White Paper", url: "/white-papers" },
 			{ label: "Blogs", url: "/blogs" },
+			{ label: "Community", url: "/community" },
 			{ label: "Tools", url: "/tools" },
 			{ label: "Videos", url: "/videos" },
 		],

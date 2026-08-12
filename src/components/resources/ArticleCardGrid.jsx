@@ -34,7 +34,7 @@ export default function ArticleCardGrid({ items = [], basePath }) {
                         ) : null}
                     </div>
                     <div className="p-5 flex flex-col flex-1">
-                        <h3 className="text-lg font-semibold text-[#2a3547] leading-snug mb-4 flex-1">
+                        <h3 className="text-lg font-medium text-[#2a3547] leading-snug mb-4 flex-1">
                             <Link
                                 href={`${basePath}/${item.slug}/`}
                                 className="hover:text-[#0133e9] transition no-underline text-inherit"

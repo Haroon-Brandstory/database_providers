@@ -29,7 +29,7 @@ export default function ResourcesListingPage({
             <section className="py-16 md:py-[80px] md:pb-[100px] bg-[#f5f6fa]">
                 <div className="container mx-auto max-w-[1200px] px-4 md:px-6">
                     <div className="flex items-center justify-between gap-4 flex-wrap mb-7">
-                        <h2 className="text-[24px] md:text-[28px] font-semibold text-[#2a3547] m-0">
+                        <h2 className="text-[24px] md:text-[28px] font-medium text-[#2a3547] m-0">
                             {sectionLabel}
                         </h2>
                         <p className="text-[13px] text-[#7c8fac] m-0">

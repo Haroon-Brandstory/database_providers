@@ -126,7 +126,7 @@ export default function WhitePaperDetail({ item, related = [] }) {
                             <span className="mx-2.5 text-white/35">|</span>
                             {item.readTime}
                         </p>
-                        <h1 className="text-white text-[28px] md:text-[36px] lg:text-[52px] font-medium italic leading-[1.25] max-w-[920px]">
+                        <h1 className="text-white text-[34px] md:text-[48px] font-medium leading-tight max-w-[920px]">
                             {item.title}
                         </h1>
                     </div>
@@ -153,7 +153,7 @@ export default function WhitePaperDetail({ item, related = [] }) {
                                         return (
                                             <h3
                                                 key={index}
-                                                className="text-[20px] md:text-[22px] font-semibold text-[#1a1a1a] mt-8 mb-3"
+                                                className="text-[20px] md:text-[22px] font-medium text-[#1a1a1a] mt-8 mb-3"
                                             >
                                                 {block.text}
                                             </h3>
@@ -186,7 +186,7 @@ export default function WhitePaperDetail({ item, related = [] }) {
                                     );
                                 })}
 
-                                <h3 className="text-[20px] md:text-[22px] font-semibold text-[#1a1a1a] mt-8 mb-3">
+                                <h3 className="text-[20px] md:text-[22px] font-medium text-[#1a1a1a] mt-8 mb-3">
                                     What this white paper covers
                                 </h3>
                                 <ul className="list-disc ml-5 mb-5 text-[#51525c]">
@@ -197,14 +197,14 @@ export default function WhitePaperDetail({ item, related = [] }) {
                                     ))}
                                 </ul>
 
-                                <h3 className="text-[20px] md:text-[22px] font-semibold text-[#1a1a1a] mt-8 mb-3">
+                                <h3 className="text-[20px] md:text-[22px] font-medium text-[#1a1a1a] mt-8 mb-3">
                                     Who should download this
                                 </h3>
                                 <p className="text-base leading-[1.75] text-[#51525c] mb-4">
                                     {item.whoShouldDownload}
                                 </p>
 
-                                <h3 className="text-[20px] md:text-[22px] font-semibold text-[#1a1a1a] mt-8 mb-3">
+                                <h3 className="text-[20px] md:text-[22px] font-medium text-[#1a1a1a] mt-8 mb-3">
                                     Key takeaways
                                 </h3>
                                 <p className="text-base leading-[1.75] text-[#51525c] mb-4">
@@ -219,7 +219,7 @@ export default function WhitePaperDetail({ item, related = [] }) {
                                 <div className="text-[11px] font-semibold tracking-[0.12em] uppercase text-[#0133e9] mb-3">
                                     Free resource
                                 </div>
-                                <h2 className="text-xl font-semibold text-[#111827] mb-2 tracking-tight text-left">
+                                <h2 className="text-xl font-medium text-[#111827] mb-2 tracking-tight text-left">
                                     Download White Paper
                                 </h2>
                                 <p className="text-sm leading-relaxed text-[#6b7280] mb-6 text-left">
@@ -258,7 +258,7 @@ export default function WhitePaperDetail({ item, related = [] }) {
                     {/* Related — full width under grid */}
                     {related.length ? (
                         <div className="mt-16 md:mt-20 pt-12 md:pt-[60px] border-t border-[#e8ecf4]">
-                            <h2 className="text-[24px] md:text-[28px] font-semibold text-[#1a1a1a] mb-7 text-left">
+                            <h2 className="text-[24px] md:text-[28px] font-medium text-[#1a1a1a] mb-7 text-left">
                                 Other White Papers
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -279,7 +279,7 @@ export default function WhitePaperDetail({ item, related = [] }) {
                                         <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#9aa0a6] mb-2">
                                             {rel.readTime}
                                         </p>
-                                        <h3 className="text-lg font-medium italic text-[#1a1a1a] leading-snug mb-2 group-hover:text-[#0133e9] transition text-left">
+                                        <h3 className="text-lg font-medium text-[#1a1a1a] leading-snug mb-2 group-hover:text-[#0133e9] transition text-left">
                                             {rel.title}
                                         </h3>
                                         <p className="text-sm text-[#6b7280] leading-relaxed text-left">

@@ -36,7 +36,7 @@ body {
   max-width: 1240px;
 }
 
-/* Headings use Inter Display */
+/* Headings use Inter (display) — keep site-wide weight via utilities (prefer font-medium) */
 h1,
 h2,
 h3,
@@ -44,6 +44,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display) !important;
+  font-style: normal;
 }
 
 /* Body text uses Inter Tight */

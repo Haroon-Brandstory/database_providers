@@ -132,7 +132,7 @@ export default function ArticleDetail({
                                 </>
                             ) : null}
                         </p>
-                        <h1 className="text-white text-[28px] md:text-[40px] lg:text-[48px] font-medium italic leading-[1.25]">
+                        <h1 className="text-white text-[34px] md:text-[48px] font-medium leading-tight">
                             {item.title}
                         </h1>
                     </div>
@@ -162,7 +162,7 @@ export default function ArticleDetail({
 
                         <aside className="lg:sticky lg:top-28">
                             <div className="rounded-2xl border border-[rgba(8,15,52,0.06)] bg-[#f7f8fc] p-6">
-                                <h2 className="text-lg font-semibold text-[#1a1a1a] mb-4">
+                                <h2 className="text-lg font-medium text-[#1a1a1a] mb-4">
                                     {relatedTitle}
                                 </h2>
                                 <ul className="space-y-4">
@@ -192,7 +192,7 @@ export default function ArticleDetail({
 
                     {related.length ? (
                         <div className="mt-16 md:mt-20 pt-12 border-t border-[#e8ecf4]">
-                            <h2 className="text-[24px] md:text-[28px] font-semibold text-[#1a1a1a] mb-7">
+                            <h2 className="text-[24px] md:text-[28px] font-medium text-[#1a1a1a] mb-7">
                                 {relatedTitle}
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -213,7 +213,7 @@ export default function ArticleDetail({
                                         <p className="text-[11px] uppercase tracking-wide text-[#9aa0a6] mb-2">
                                             {rel.readTime}
                                         </p>
-                                        <h3 className="text-lg font-medium italic text-[#1a1a1a] leading-snug group-hover:text-[#0133e9] transition">
+                                        <h3 className="text-lg font-medium text-[#1a1a1a] leading-snug group-hover:text-[#0133e9] transition">
                                             {rel.title}
                                         </h3>
                                     </Link>

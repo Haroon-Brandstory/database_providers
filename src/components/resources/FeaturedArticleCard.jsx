@@ -7,7 +7,7 @@ export default function FeaturedArticleCard({ item, basePath }) {
     return (
         <article className="grid grid-cols-1 md:grid-cols-[1.15fr_1fr] bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(8,15,52,0.06)] hover:shadow-[0_8px_28px_rgba(44,107,255,0.12)] transition mb-6">
             <div className="p-7 md:p-9 lg:p-10 flex flex-col">
-                <h3 className="text-[22px] md:text-[28px] font-semibold text-[#2a3547] leading-[1.35] mb-3.5">
+                <h3 className="text-[22px] md:text-[28px] font-medium text-[#2a3547] leading-[1.35] mb-3.5">
                     <Link
                         href={`${basePath}/${item.slug}/`}
                         className="hover:text-[#0133e9] transition no-underline text-inherit"

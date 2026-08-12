@@ -4,27 +4,27 @@ export default function CategoryGrid({ categories = [] }) {
     if (!categories.length) return null;
 
     return (
-        <section>
-            <div className="flex items-end justify-between gap-4 mb-6">
-                <h2 className="text-2xl md:text-3xl font-medium text-[#111827]">Categories</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+        <section className="max-w-[900px] mx-auto">
+            <h2 className="text-[22px] md:text-[24px] font-medium text-[#202124] mb-4">
+                Categories
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {categories.map((category) => (
                     <Link
                         key={category.slug}
                         href={`/community/category/${category.slug}/`}
-                        className="rounded-xl border border-[#D6E3FF] bg-white p-5 md:p-6 shadow-sm hover:border-[#2C6BFF] hover:shadow-md transition"
+                        className="rounded-2xl border border-[#dadce0] bg-white p-4 hover:bg-[#f8f9fa] transition"
                     >
-                        <div className="flex items-start justify-between gap-3 mb-2">
-                            <h3 className="text-lg md:text-xl font-medium text-[#111827]">
+                        <div className="flex items-start justify-between gap-3 mb-1">
+                            <h3 className="text-base font-medium text-[#1a73e8]">
                                 {category.title}
                             </h3>
-                            <span className="shrink-0 text-xs font-medium text-[#2C6BFF] bg-[#EEF4FF] px-2 py-1 rounded-md mt-0.5">
+                            <span className="text-xs text-[#80868b] shrink-0">
                                 {category.postCount}{" "}
                                 {category.postCount === 1 ? "post" : "posts"}
                             </span>
                         </div>
-                        <p className="text-sm text-[#4b5563] leading-relaxed">
+                        <p className="text-sm text-[#5f6368] leading-relaxed">
                             {category.description}
                         </p>
                     </Link>

@@ -20,22 +20,26 @@ export default function CommunityHub({
     const isSearching = query.trim().length > 0;
 
     return (
-        <div className="bg-[#0B1020]">
+        <div className="bg-white min-h-screen pb-16">
+            {/* Keeps site header (white text) readable on light community pages */}
+            <div
+                className="h-[72px] md:h-[97px] bg-[#9a9a9a]/80 backdrop-blur-md"
+                aria-hidden
+            />
             <CommunityHero categories={categories} onSearch={setQuery} />
 
-            <section className="px-4 md:px-20 py-14 md:py-20 bg-[#F5F8FF]">
-                <div className="container mx-auto space-y-14 md:space-y-16">
+            <section className="px-4 py-8 md:py-10">
+                <div className="container mx-auto space-y-10 md:space-y-12">
                     {isSearching ? (
                         <>
                             <PostList
                                 title={`Search results for “${query.trim()}”`}
                                 posts={results.posts}
                                 emptyMessage="No matching posts."
-                                headingClassName="text-[#111827]"
                             />
                             <CommunityGuides guides={results.guides} />
                             {!results.posts.length && !results.guides.length ? (
-                                <p className="text-[#6b7280] text-sm">
+                                <p className="max-w-[900px] mx-auto text-[#5f6368] text-sm">
                                     Try different keywords, or browse categories below.
                                 </p>
                             ) : null}
@@ -46,11 +50,7 @@ export default function CommunityHub({
                             <FeaturedPosts posts={featuredPosts} />
                             <CommunityGuides guides={guides} />
                             <CategoryGrid categories={categories} />
-                            <PostList
-                                posts={recentPosts}
-                                title="Recent posts"
-                                headingClassName="text-[#111827]"
-                            />
+                            <PostList posts={recentPosts} title="Recent posts" />
                         </>
                     )}
                 </div>

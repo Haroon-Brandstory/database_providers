@@ -1,11 +1,9 @@
 import { notFound } from "next/navigation";
-import CommunityDetailBanner from "@/components/community/CommunityDetailBanner";
-import CommunitySidebar from "@/components/community/CommunitySidebar";
 import GuideDetail from "@/components/community/GuideDetail";
 import {
     communityGuides,
+    getFeaturedPosts,
     getGuideBySlug,
-    getRecentPosts,
 } from "@/lib/communityData";
 import { generateSeoMetadata } from "@/lib/seo";
 
@@ -34,31 +32,16 @@ export default async function CommunityGuidePage({ params }) {
     const guide = getGuideBySlug(slug);
     if (!guide) notFound();
 
-    return (
-        <div className="bg-[#0B1020]">
-            <CommunityDetailBanner
-                crumbs={[
-                    { label: "Community", href: "/community/" },
-                    { label: "Guides" },
-                    { label: guide.title },
-                ]}
-                title={guide.title}
-                meta={guide.summary}
-            />
+    const relatedGuides = communityGuides
+        .filter((item) => item.slug !== guide.slug)
+        .slice(0, 3);
+    const relatedPosts = getFeaturedPosts().slice(0, 3);
 
-            <section className="px-4 md:px-20 py-10 md:py-14 bg-[#F5F8FF]">
-                <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
-                    <div className="lg:col-span-2">
-                        <GuideDetail guide={guide} />
-                    </div>
-                    <div className="lg:col-span-1">
-                        <CommunitySidebar
-                            recentPosts={getRecentPosts(6)}
-                            title="Recent posts"
-                        />
-                    </div>
-                </div>
-            </section>
-        </div>
+    return (
+        <GuideDetail
+            guide={guide}
+            relatedGuides={relatedGuides}
+            relatedPosts={relatedPosts}
+        />
     );
 }

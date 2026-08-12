@@ -41,7 +41,7 @@ export default function WhitePapersListingPage() {
                                 <span className="mx-2.5 text-[#c5c9ce]">|</span>
                                 {featured.readTime}
                             </p>
-                            <h2 className="text-[24px] md:text-[32px] font-semibold text-[#1a1a1a] leading-snug mb-4">
+                            <h2 className="text-[24px] md:text-[32px] font-medium text-[#1a1a1a] leading-snug mb-4">
                                 <Link
                                     href={`/white-papers/${featured.slug}/`}
                                     className="hover:text-[#0133e9] transition no-underline text-inherit"
@@ -85,7 +85,7 @@ export default function WhitePapersListingPage() {
                                     <span className="mx-2.5 text-[#c5c9ce]">|</span>
                                     {item.readTime}
                                 </p>
-                                <h3 className="text-xl md:text-[22px] font-semibold text-[#1a1a1a] leading-snug mb-3">
+                                <h3 className="text-xl md:text-[22px] font-medium text-[#1a1a1a] leading-snug mb-3">
                                     <Link
                                         href={`/white-papers/${item.slug}/`}
                                         className="hover:text-[#0133e9] transition no-underline text-inherit"

@@ -10,7 +10,7 @@ export default function ResourcesPageHero({
         <section className="relative min-h-[420px] md:min-h-[520px] bg-[url('/blog/blogListingBanner.png')] flex justify-center items-center bg-center bg-cover bg-no-repeat px-4 md:px-6 pt-28 md:pt-[100px] pb-14 md:pb-16 overflow-hidden">
             <div className="container mx-auto max-w-[1200px]">
                 <div className="max-w-[760px]">
-                    <h1 className="text-white text-[32px] md:text-[48px] lg:text-[56px] font-medium italic leading-[1.2] mb-5">
+                    <h1 className="text-white text-[34px] md:text-[48px] font-medium leading-tight mb-5">
                         {title}
                     </h1>
                     {description ? (

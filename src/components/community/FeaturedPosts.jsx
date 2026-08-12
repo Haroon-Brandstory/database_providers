@@ -1,33 +1,43 @@
 import Link from "next/link";
-import { FaRegThumbsUp } from "react-icons/fa";
+import { FaThumbtack } from "react-icons/fa";
 
-export default function FeaturedPosts({ posts = [] }) {
+export default function FeaturedPosts({ posts = [], viewAllHref = "/community/" }) {
     if (!posts.length) return null;
 
     return (
-        <section>
-            <div className="flex items-end justify-between gap-4 mb-6">
-                <h2 className="text-2xl md:text-3xl font-medium text-[#111827]">Featured posts</h2>
-            </div>
-            <ul className="space-y-3">
+        <section className="max-w-[900px] mx-auto">
+            <h2 className="text-[22px] md:text-[24px] font-medium text-[#202124] mb-2">
+                Featured posts
+            </h2>
+            <Link
+                href={viewAllHref}
+                className="inline-flex items-center gap-1 text-sm font-medium text-[#1a73e8] hover:underline mb-4"
+            >
+                View all featured posts
+                <span aria-hidden>→</span>
+            </Link>
+
+            <ul className="rounded-2xl border border-[#dadce0] bg-white overflow-hidden divide-y divide-[#e8eaed]">
                 {posts.map((post) => (
                     <li key={post.slug}>
                         <Link
                             href={`/community/post/${post.slug}/`}
-                            className="block rounded-xl border border-[#D6E3FF] bg-white p-4 md:p-5 shadow-sm hover:border-[#2C6BFF] hover:shadow-md transition"
+                            className="flex items-start gap-4 px-4 md:px-5 py-4 hover:bg-[#f8f9fa] transition"
                         >
-                            <h3 className="text-base md:text-lg font-medium text-[#111827]">
-                                {post.title}
-                            </h3>
-                            <p className="text-sm text-[#6b7280] mt-1.5">
-                                {post.replyCount} {post.replyCount === 1 ? "reply" : "replies"} ·{" "}
-                                {post.authorName}
-                            </p>
-                            <p className="mt-3 inline-flex items-center gap-1.5 text-sm text-[#2C6BFF]">
-                                <FaRegThumbsUp className="text-[12px]" aria-hidden />
-                                <span className="font-medium tabular-nums">{post.upvotes}</span>
-                                <span className="text-[#6b7280]">likes</span>
-                            </p>
+                            <span className="mt-0.5 shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#e8f0fe] text-[#1a73e8]">
+                                <FaThumbtack className="text-sm" aria-hidden />
+                            </span>
+                            <div className="min-w-0 flex-1">
+                                <h3 className="text-[15px] md:text-base font-medium text-[#1a73e8] leading-snug">
+                                    {post.title}
+                                </h3>
+                                <p className="mt-1 text-sm text-[#5f6368] line-clamp-2 leading-relaxed">
+                                    {post.body}
+                                </p>
+                            </div>
+                            <span className="shrink-0 text-sm text-[#80868b] whitespace-nowrap pt-0.5">
+                                {post.replyCount} {post.replyCount === 1 ? "Reply" : "Replies"}
+                            </span>
                         </Link>
                     </li>
                 ))}

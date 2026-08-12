@@ -6,7 +6,7 @@ export default function ArticleBody({ blocks = [] }) {
                     return (
                         <h3
                             key={index}
-                            className="text-xl md:text-2xl font-semibold text-[#111827] pt-4"
+                            className="text-xl md:text-2xl font-medium text-[#111827] pt-4"
                         >
                             {block.text}
                         </h3>

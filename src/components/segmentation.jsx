@@ -1,15 +1,36 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Lottie from "lottie-react";
-
-import indBasedLottie from "../animations/Industry-Data-base.json";
-import jobBasedLottie from "../animations/Job-Roles-Data-base.json";
-import regionBasedLottie from "../animations/Region-Data-base.json";
-import technologyBasedLottie from "../animations/Technology-Data-base.json";
+import { useInView } from "react-intersection-observer";
 import { useTranslations } from "next-intl";
 
+function LazyVideo({ src, className }) {
+    const videoRef = useRef(null);
+    const { ref, inView } = useInView({ triggerOnce: true, rootMargin: "200px" });
 
+    const setRefs = (node) => {
+        videoRef.current = node;
+        ref(node);
+    };
+
+    useEffect(() => {
+        if (!inView) return;
+        videoRef.current?.play?.().catch(() => {});
+    }, [inView]);
+
+    return (
+        <video
+            ref={setRefs}
+            src={inView ? src : undefined}
+            loop
+            muted
+            playsInline
+            autoPlay={inView}
+            preload="none"
+            className={className}
+        />
+    );
+}
 
 export default function Segmentation() {
     const cardRefs = useRef([]);
@@ -19,28 +40,28 @@ export default function Segmentation() {
         {
             title: t('home.section5.slide1.title'),
             description: t('home.section5.slide1.para1'),
-            subDescription: ('home.section5.slide1.para2'),// animationData: indBasedLottie,
+            subDescription: ('home.section5.slide1.para2'),
             cta: "#",
             vid: "/lottiReplacedVideos/segmentation-comp-vid1.mp4",
         },
         {
             title: t('home.section5.slide2.title'),
             description: t('home.section5.slide2.para1'),
-            subDescription: ('home.section5.slide2.para2'),// animationData: indBasedLottie,
+            subDescription: ('home.section5.slide2.para2'),
             cta: "#",
             vid: "/lottiReplacedVideos/segmentation-comp-vid2.mp4",
         },
         {
             title: t('home.section5.slide3.title'),
             description: t('home.section5.slide3.para1'),
-            subDescription: ('home.section5.slide3.para2'),// animationData: indBasedLottie,
+            subDescription: ('home.section5.slide3.para2'),
             cta: "#",
             vid: "/lottiReplacedVideos/segmentation-comp-vid3.mp4",
         },
         {
             title: t('home.section5.slide4.title'),
             description: t('home.section5.slide4.para1'),
-            subDescription: ('home.section5.slide4.para2'),// animationData: indBasedLottie,
+            subDescription: ('home.section5.slide4.para2'),
             cta: "#",
             vid: "/lottiReplacedVideos/segmentation-comp-vid4.mp4",
         },
@@ -93,8 +114,6 @@ export default function Segmentation() {
 
     return (
         <>
-            {/* <div className="h-[50vh]"></div> */}
-
             <section className="bg-white px-4 py-24 md:px-20 pb-20 flex flex-col justify-center items-center">
                 <div className="container flex flex-col justify-center items-center">
                     <div className="text-center max-w-4xl mx-auto">
@@ -133,7 +152,6 @@ export default function Segmentation() {
                                             {item.description}
                                         </p>
                                         <p className="text-gray-700 text-sm md:text-base">
-                                            {/* {item.subDescription} */}
                                         </p>
                                         <div className="pt-4">
                                             <a
@@ -145,13 +163,7 @@ export default function Segmentation() {
                                         </div>
                                     </div>
                                     <div className="w-full lg:w-1/2 pt-4 md:pt-4 flex justify-center items-center">
-                                        {/* <Lottie
-                                        animationData={item.animationData}
-                                        loop
-                                        autoplay
-                                        className="max-w-[400px] w-full"
-                                    /> */}
-                                        <video src={item.vid} loop muted autoPlay playsInline className="rounded-[30px]" />
+                                        <LazyVideo src={item.vid} className="rounded-[30px]" />
                                     </div>
                                 </div>
                             </div>
@@ -159,8 +171,6 @@ export default function Segmentation() {
                     </div>
                 </div>
             </section>
-
-            {/* <div className="h-[80vh]"></div> */}
         </>
     );
 }

@@ -19,12 +19,28 @@ export async function generateMetadata() {
 }
 
 export default function CommunityPage() {
+    const listFields = (posts) =>
+        posts.map(({ slug, title, metaDescription, replyCount, createdAt, categorySlug }) => ({
+            slug,
+            title,
+            metaDescription,
+            replyCount,
+            createdAt,
+            categorySlug,
+        }));
+
+    const guideFields = communityGuides.map(({ slug, title, summary }) => ({
+        slug,
+        title,
+        summary,
+    }));
+
     return (
         <CommunityHub
             categories={getCategoriesWithCounts()}
-            featuredPosts={getFeaturedPosts()}
-            guides={communityGuides}
-            recentPosts={getRecentPosts(8)}
+            featuredPosts={listFields(getFeaturedPosts())}
+            guides={guideFields}
+            recentPosts={listFields(getRecentPosts(8))}
         />
     );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaThumbtack } from "react-icons/fa";
+import { getPostPath } from "@/lib/communityData";
 
 export default function FeaturedPosts({ posts = [], viewAllHref = "/community/" }) {
     if (!posts.length) return null;
@@ -21,7 +22,7 @@ export default function FeaturedPosts({ posts = [], viewAllHref = "/community/" 
                 {posts.map((post) => (
                     <li key={post.slug}>
                         <Link
-                            href={`/community/post/${post.slug}/`}
+                            href={getPostPath(post.slug)}
                             className="flex items-start gap-4 px-4 md:px-5 py-4 hover:bg-[#f8f9fa] transition"
                         >
                             <span className="mt-0.5 shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#e8f0fe] text-[#1a73e8]">
@@ -32,11 +33,11 @@ export default function FeaturedPosts({ posts = [], viewAllHref = "/community/" 
                                     {post.title}
                                 </h3>
                                 <p className="mt-1 text-sm text-[#5f6368] line-clamp-2 leading-relaxed">
-                                    {post.body}
+                                    {post.metaDescription || post.body}
                                 </p>
                             </div>
                             <span className="shrink-0 text-sm text-[#80868b] whitespace-nowrap pt-0.5">
-                                {post.replyCount} {post.replyCount === 1 ? "Reply" : "Replies"}
+                                {post.replyCount} {post.replyCount === 1 ? "Answer" : "Answers"}
                             </span>
                         </Link>
                     </li>

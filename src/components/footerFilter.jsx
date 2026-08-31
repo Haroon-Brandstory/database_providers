@@ -34,7 +34,7 @@ export default function FooterFilter() {
                                     </div>
                                 </div>
                                 <div className="flex justify-end">
-                                    <Image src='/footer/custom-database.svg' width={296} height={190} alt="img" />
+                                    <Image src='/footer/custom-database.svg' width={296} height={190} alt="" />
                                 </div>
                             </div>
                             <div className="flex md:flex-nowrap flex-wrap justify-end md:justify-center rounded-[8px] overflow-hidden backdrop-blur-[7px] bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(219,229,255,0.1)_100%),linear-gradient(0deg,rgba(0,0,0,0.1),rgba(0,0,0,0.1))] border border-transparent  border-[1px]  [border-image-source:linear-gradient(243.14deg,rgba(255,255,255,0.3)_-106.31%,rgba(21,45,103,0.3)_84.25%)]  border-image-slice-[1]">
@@ -44,7 +44,7 @@ export default function FooterFilter() {
                                         <p className="text-[#D0D0D0]">From data to delivery a complete 360° Marketing solution</p>
                                     </div>
                                     <div>
-                                        <Link href={"/pricing-plans"}>
+                                        <Link href={navHref("/pricing-plans/")}>
                                             <button className="header_cta_contact">
                                                 {/* {t("nav.contact", { defaultMessage: "Contact Us" })} */}
                                                 See Pricing
@@ -53,7 +53,7 @@ export default function FooterFilter() {
                                     </div>
                                 </div>
                                 <div className="flex justify-end items-end">
-                                    <Image src='/footer/integrated-marketing.svg' width={250} height={212} alt="img" />
+                                    <Image src='/footer/integrated-marketing.svg' width={250} height={212} alt="" />
                                 </div>
                             </div>
                         </div>

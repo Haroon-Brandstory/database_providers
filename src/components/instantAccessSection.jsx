@@ -10,11 +10,11 @@ export default function InstantAccessSection({ data }) {
             {/* SVG Background */}
             <div className="absolute inset-0 w-full h-full z-0">
                 <Image
-                    src="/whychooseus/hover-bg.svg"
+                    src="/whychooseus/hover-bg.webp"
                     alt="Background"
                     fill
+                    sizes="100vw"
                     style={{ objectFit: "cover" }}
-                    priority
                 />
             </div>
             {/* Content */}

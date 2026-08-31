@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { FaRegThumbsUp } from "react-icons/fa";
-import { getCategoriesWithCounts } from "@/lib/communityData";
+import { getCategoriesWithCounts, getPostPath } from "@/lib/communityData";
 
 export default function CommunitySidebar({
     recentPosts = [],
@@ -19,22 +18,19 @@ export default function CommunitySidebar({
                         {recentPosts.map((post) => (
                             <li key={post.slug} className="border-b border-[#E8EEF9] last:border-0 pb-4 last:pb-0">
                                 <Link
-                                    href={`/community/post/${post.slug}/`}
+                                    href={getPostPath(post.slug)}
                                     className="block group"
                                 >
                                     <h3 className="text-sm font-medium text-[#111827] group-hover:text-[#2C6BFF] transition leading-snug">
                                         {post.title}
                                     </h3>
-                                    <p className="mt-1.5 flex items-center gap-3 text-xs text-[#6b7280]">
-                                        <span className="inline-flex items-center gap-1 text-[#2C6BFF]">
-                                            <FaRegThumbsUp className="text-[10px]" aria-hidden />
-                                            {post.upvotes}
-                                        </span>
-                                        <span>
-                                            {post.replyCount}{" "}
-                                            {post.replyCount === 1 ? "reply" : "replies"}
-                                        </span>
-                                    </p>
+                                    {post.createdAt ? (
+                                        <p className="mt-1.5 text-xs text-[#6b7280]">
+                                            <time dateTime={post.createdAt}>
+                                                {post.createdAt}
+                                            </time>
+                                        </p>
+                                    ) : null}
                                 </Link>
                             </li>
                         ))}

@@ -1,9 +1,7 @@
-"use client";
-
 import Link from "next/link";
-import { FiArrowLeft, FiMoreVertical } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 import { HiOutlineDocumentText } from "react-icons/hi";
-import LikeButton from "./LikeButton";
+import { getPostPath, TEAM_AUTHOR } from "@/lib/communityData";
 
 function renderGuideBody(body) {
     const blocks = body.trim().split(/\n\n+/);
@@ -63,7 +61,7 @@ export default function GuideDetail({
                 className="h-[72px] md:h-[97px] bg-[#9a9a9a]/80 backdrop-blur-md"
                 aria-hidden
             />
-            <div className="container mx-auto max-w-[1100px] px-4 pt-6 md:pt-8">
+            <main className="container mx-auto max-w-[1100px] px-4 pt-6 md:pt-8">
                 <Link
                     href="/community/"
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-[#1a73e8] hover:underline mb-5"
@@ -73,64 +71,27 @@ export default function GuideDetail({
                 </Link>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-8 lg:gap-10 items-start">
-                    <div className="min-w-0 space-y-4">
-                        <article className="rounded-2xl border border-[#dadce0] bg-white p-5 md:p-6 shadow-sm">
-                            <div className="flex items-start justify-between gap-3 mb-5">
-                                <div className="flex items-start gap-3 min-w-0">
-                                    <div className="shrink-0 h-10 w-10 rounded-full bg-[#1a73e8] text-white text-sm font-medium flex items-center justify-center">
-                                        CG
-                                    </div>
-                                    <div className="min-w-0">
-                                        <div className="flex flex-wrap items-center gap-2">
-                                            <span className="text-sm font-medium text-[#1a73e8]">
-                                                Community Guide
-                                            </span>
-                                            <span className="rounded bg-[#e6f4ea] px-1.5 py-0.5 text-[11px] font-medium text-[#137333]">
-                                                Recommended
-                                            </span>
-                                            <span className="rounded bg-[#e8f0fe] px-1.5 py-0.5 text-[11px] font-medium text-[#1967d2]">
-                                                Official Guide
-                                            </span>
-                                        </div>
-                                        <p className="text-xs text-[#80868b] mt-1">
-                                            Database Providers Help Community
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2 shrink-0 text-[#5f6368]">
-                                    <span className="text-xs md:text-sm whitespace-nowrap">
-                                        Guide
-                                    </span>
-                                    <button
-                                        type="button"
-                                        className="p-1 rounded-full hover:bg-[#f1f3f4]"
-                                        aria-label="More options"
-                                    >
-                                        <FiMoreVertical />
-                                    </button>
-                                </div>
-                            </div>
+                    <article className="min-w-0 rounded-2xl border border-[#dadce0] bg-white p-5 md:p-6 shadow-sm">
+                        <div className="flex flex-wrap items-center gap-2 mb-5">
+                            <span className="rounded bg-[#e6f4ea] px-1.5 py-0.5 text-[11px] font-medium text-[#137333]">
+                                Official Guide
+                            </span>
+                            <span className="text-xs text-[#80868b]">
+                                {guide.authorName || TEAM_AUTHOR}
+                            </span>
+                        </div>
 
-                            <h1 className="text-[22px] md:text-[28px] font-medium text-[#202124] leading-snug mb-3">
-                                {guide.title}
-                            </h1>
-                            <p className="text-[#5f6368] text-[15px] md:text-base leading-relaxed mb-5">
-                                {guide.summary}
-                            </p>
+                        <h1 className="text-[22px] md:text-[28px] font-medium text-[#202124] leading-snug mb-3">
+                            {guide.title}
+                        </h1>
+                        <p className="text-[#5f6368] text-[15px] md:text-base leading-relaxed mb-5">
+                            {guide.summary}
+                        </p>
 
-                            <div className="border-t border-[#e8eaed] pt-5">
-                                {renderGuideBody(guide.body)}
-                            </div>
-
-                            <div className="mt-6 pt-4 border-t border-[#e8eaed] flex flex-wrap items-center gap-3">
-                                <LikeButton
-                                    count={guide.upvotes}
-                                    storageKey={`guide:${guide.slug}`}
-                                    label="Like this guide"
-                                />
-                            </div>
-                        </article>
-                    </div>
+                        <div className="border-t border-[#e8eaed] pt-5">
+                            {renderGuideBody(guide.body)}
+                        </div>
+                    </article>
 
                     <aside className="lg:sticky lg:top-28">
                         <div className="rounded-2xl border border-[#dadce0] bg-white p-5 shadow-sm">
@@ -157,7 +118,7 @@ export default function GuideDetail({
                                 {relatedPosts.map((item) => (
                                     <li key={`post-${item.slug}`}>
                                         <Link
-                                            href={`/community/post/${item.slug}/`}
+                                            href={getPostPath(item.slug)}
                                             className="flex items-start gap-2.5 group"
                                         >
                                             <HiOutlineDocumentText
@@ -188,7 +149,7 @@ export default function GuideDetail({
                         </div>
                     </aside>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }

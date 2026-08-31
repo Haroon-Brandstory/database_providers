@@ -27,9 +27,6 @@ export default function CommunityGuides({ guides = [] }) {
                                     {guide.summary}
                                 </p>
                             </div>
-                            <span className="shrink-0 text-sm text-[#80868b] whitespace-nowrap">
-                                {guide.upvotes} likes
-                            </span>
                         </Link>
                     </li>
                 ))}

@@ -1,10 +1,39 @@
 "use client"
 import Lottie from "lottie-react"
-import animationData from '../animations/email-verification.json'
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { useTranslations } from "next-intl";
 
+function LazyEmailVerificationLottie() {
+    const { ref, inView } = useInView({ triggerOnce: true, rootMargin: "200px" });
+    const [animationData, setAnimationData] = useState(null);
+
+    useEffect(() => {
+        if (!inView) return;
+        let cancelled = false;
+        fetch("/animations/email-verification.json")
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to load animation");
+                return res.json();
+            })
+            .then((data) => {
+                if (!cancelled) setAnimationData(data);
+            })
+            .catch(() => {});
+        return () => {
+            cancelled = true;
+        };
+    }, [inView]);
+
+    return (
+        <div ref={ref} className="w-full max-w-[500px] min-h-[280px] flex items-center justify-center">
+            {animationData ? (
+                <Lottie animationData={animationData} loop={true} className="w-full max-w-[500px] h-auto" />
+            ) : null}
+        </div>
+    );
+}
 
 export default function BtoBMarketing() {
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -90,7 +119,7 @@ export default function BtoBMarketing() {
                         </div>
                     </div>
                     <div className="lottie-container flex flex-col items-center justify-center">
-                        <Lottie animationData={animationData} loop={true} className="w-full max-w-[500px] h-auto" />
+                        <LazyEmailVerificationLottie />
                     </div>
                 </div>
             </div>

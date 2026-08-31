@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCategoryBySlug } from "@/lib/communityData";
+import { getCategoryBySlug, getPostPath } from "@/lib/communityData";
 
 export default function PostList({
     posts = [],
@@ -22,7 +22,7 @@ export default function PostList({
                         return (
                             <li key={post.slug}>
                                 <Link
-                                    href={`/community/post/${post.slug}/`}
+                                    href={getPostPath(post.slug)}
                                     className="flex items-start justify-between gap-4 px-4 md:px-5 py-4 hover:bg-[#f8f9fa] transition"
                                 >
                                     <div className="min-w-0">
@@ -30,13 +30,20 @@ export default function PostList({
                                             {post.title}
                                         </h3>
                                         <p className="mt-1 text-sm text-[#5f6368]">
-                                            {category?.title ?? "Community"} · {post.authorName} ·{" "}
-                                            {post.createdAt}
+                                            {category?.title ?? "Community"}
+                                            {post.createdAt ? (
+                                                <>
+                                                    {" · "}
+                                                    <time dateTime={post.createdAt}>
+                                                        {post.createdAt}
+                                                    </time>
+                                                </>
+                                            ) : null}
                                         </p>
                                     </div>
                                     <span className="shrink-0 text-sm text-[#80868b] whitespace-nowrap">
                                         {post.replyCount}{" "}
-                                        {post.replyCount === 1 ? "Reply" : "Replies"}
+                                        {post.replyCount === 1 ? "Answer" : "Answers"}
                                     </span>
                                 </Link>
                             </li>

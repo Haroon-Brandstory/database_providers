@@ -1,146 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useRef, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useNavHref } from "@/hooks/useNavHref";
-import { getFlagLocaleForSegment, isGeoPrefix } from "@/lib/geoPrefixes";
-import { isStaticPageSlugForLocale } from "@/lib/localeFreePageSlugs";
-
-const languages = [
-	{ code: "en", label: "English", flag: "/header/flag5.svg" },
-	{ code: "in", label: "English (IN)", flag: "/header/flag1.svg" },
-	{ code: "ae", label: "Arabic (UAE)", flag: "/header/flag2.svg" },
-	{ code: "sg", label: "English (SGP)", flag: "/header/flag4.svg" },
-	{ code: "my", label: "Malaysia", flag: "/header/flag3.svg" },
-];
-
-const LOCALE_CODES = languages.map((l) => l.code);
-
-function LanguageDropdown() {
-	const getLocaleFromPath = (pathname) => {
-		const parts = pathname.split("/");
-		const maybeLocale = parts[1];
-		const geoFlag = getFlagLocaleForSegment(maybeLocale);
-		if (geoFlag) return geoFlag;
-		return LOCALE_CODES.includes(maybeLocale) ? maybeLocale : "en";
-	};
-	const pathname = usePathname();
-	const locale = getLocaleFromPath(pathname);
-	const pathParts = pathname.split("/").filter(Boolean);
-	const onGeoPage = isGeoPrefix(pathParts[0]);
-
-	const [open, setOpen] = useState(false);
-	const [selected, setSelected] = useState(languages[0]);
-	const dropdownRef = useRef(null);
-	const router = useRouter();
-
-	useEffect(() => {
-		const match = languages.find((l) => l.code === locale);
-		if (match) {
-			setSelected(match);
-		} else {
-			setSelected(languages[0]);
-		}
-	}, [locale]);
-
-	useEffect(() => {
-		if (!open) return;
-		function handleClickOutside(event) {
-			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-				setOpen(false);
-			}
-		}
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, [open]);
-
-	const handleLanguageChange = (newLocale) => {
-		const first = pathParts[0];
-		const slug =
-			(LOCALE_CODES.includes(first) || onGeoPage) && pathParts.length > 1
-				? pathParts[1]
-				: pathParts[0];
-
-		// Already on geo page showing this flag — keep /dubai/... URL, do not go to /ae/...
-		if (onGeoPage && newLocale === locale) {
-			setOpen(false);
-			return;
-		}
-
-		// Geo pages: switch to country locale version of same slug when it exists
-		if (onGeoPage && slug) {
-			if (!isStaticPageSlugForLocale(newLocale, slug)) {
-				setOpen(false);
-				return;
-			}
-			const href = newLocale === "en" ? `/${slug}` : `/${newLocale}/${slug}`;
-			router.push(href);
-			setOpen(false);
-			return;
-		}
-
-		if (slug && isStaticPageSlugForLocale(locale, slug)) {
-			if (!isStaticPageSlugForLocale(newLocale, slug)) {
-				setOpen(false);
-				return;
-			}
-
-			const href = newLocale === "en" ? `/${slug}` : `/${newLocale}/${slug}`;
-			router.push(href);
-			setOpen(false);
-			return;
-		}
-
-		const pathWithoutLocale =
-			pathname.replace(new RegExp(`^/${first === "en" ? "en" : locale}`), "") || "/";
-		router.push(`/${newLocale}${pathWithoutLocale}`);
-		setOpen(false);
-	};
-
-	return (
-		<div ref={dropdownRef} className="relative inline-block text-left">
-			<button
-				type="button"
-				className="flex items-center gap-2  px-3 py-2 rounded cursor-pointer"
-				onClick={() => setOpen((o) => !o)}
-			>
-				<Image
-					src={selected.flag}
-					alt={selected.label}
-					width={24}
-					height={16}
-				/>
-				<svg
-					className="w-4 h-4 text-white"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						strokeWidth={2}
-						d="M19 9l-7 7-7-7"
-					/>
-				</svg>
-			</button>
-			{open && (
-				<ul className="absolute right-0 mt-2 w-auto bg-[#0236ef3b] border-[#0236EF] rounded shadow-lg z-50">
-					{languages.map((lang) => (
-						<li
-							key={lang.code}
-							className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-[#0236EF]"
-							onClick={() => handleLanguageChange(lang.code)}
-						>
-							<Image src={lang.flag} alt={lang.label} width={24} height={16} />
-						</li>
-					))}
-				</ul>
-			)}
-		</div>
-	);
-}
 
 const HealthcareIcon = () => (
 	<Image src="/header/healthCare-icon.svg" alt="Healthcare" width={24} height={24} />
@@ -287,9 +150,12 @@ export default function Header() {
 	const { navHref } = useNavHref();
 
 	const isActive = (target) => {
-		const cleanPath = pathname.replace(/^\/(en|in|uae|my|tur)(?=\/|$)/, "");
-		const cleanTarget = target.replace(/^\/(en|in|uae|my|tur)(?=\/|$)/, "");
-		return cleanPath === cleanTarget;
+		const normalize = (value) => {
+			const cleaned = value.replace(/^\/(en|in|uae|ae|sg|my|tur|dubai)(?=\/|$)/, "");
+			if (!cleaned || cleaned === "/") return "/";
+			return cleaned.replace(/\/+$/, "") || "/";
+		};
+		return normalize(pathname) === normalize(target);
 	};
 
 	return (
@@ -471,8 +337,7 @@ export default function Header() {
 
 					{/* Desktop Actions */}
 					<div className="hidden lg:flex items-center gap-10">
-						<LanguageDropdown />
-						<Link href={navHref("/contact-us")}>
+						<Link href={navHref("/contact-us/")}>
 							<button className="header_cta_contact">
 								{/* {t("nav.contact", { defaultMessage: "Contact Us" })} */}
 								Contact Us

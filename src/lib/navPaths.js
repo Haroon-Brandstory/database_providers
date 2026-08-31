@@ -70,19 +70,25 @@ export function isLocaleAppPath(path) {
  * @param {string} path - app path e.g. /about or /physicians-email-list
  * @param {string} urlPrefix - first URL segment: en|in|ae|sg|my|dubai (or "")
  */
+function withTrailingSlash(path) {
+    if (!path || path === '#') return path;
+    if (path === '/') return '/';
+    return path.endsWith('/') ? path : `${path}/`;
+}
+
 export function resolveNavHref(path, urlPrefix) {
     const normalized = normalizeNavPath(path);
     if (!normalized || normalized === '#') return normalized;
 
     // Global site routes — never geo/country prefix
     if (isNonLocaleAppPath(normalized)) {
-        return normalized;
+        return withTrailingSlash(normalized);
     }
 
     const prefix = urlPrefix && urlPrefix !== 'en' ? urlPrefix : null;
 
     if (!prefix) {
-        return normalized;
+        return withTrailingSlash(normalized);
     }
 
     const slug = firstSegment(normalized);
@@ -91,18 +97,18 @@ export function resolveNavHref(path, urlPrefix) {
     if (isGeoPrefix(prefix)) {
         if (isLocaleAppPath(normalized)) {
             const flagLocale = GEO_FLAG_LOCALE[prefix] || 'en';
-            if (flagLocale === 'en') return normalized;
-            return `/${flagLocale}${normalized}`;
+            if (flagLocale === 'en') return withTrailingSlash(normalized);
+            return withTrailingSlash(`/${flagLocale}${normalized}`);
         }
 
         if (isStaticPageSlugForLocale(prefix, slug)) {
-            return `/${prefix}${normalized}`;
+            return withTrailingSlash(`/${prefix}${normalized}`);
         }
 
         // Missing dubai landing → EN root URL
-        return normalized;
+        return withTrailingSlash(normalized);
     }
 
     // Country locale: prefix [locale] pages + static slugs
-    return `/${prefix}${normalized}`;
+    return withTrailingSlash(`/${prefix}${normalized}`);
 }

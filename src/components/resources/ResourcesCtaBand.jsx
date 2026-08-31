@@ -6,7 +6,7 @@ export default function ResourcesCtaBand() {
             className="py-16 md:py-20 text-center bg-[#0B1020] bg-cover bg-center"
             style={{
                 backgroundImage:
-                    "url('/whychooseus/hover-bg.svg'), linear-gradient(135deg, #0B1020 0%, #0a1a4a 100%)",
+                    "url('/whychooseus/hover-bg.webp'), linear-gradient(135deg, #0B1020 0%, #0a1a4a 100%)",
             }}
         >
             <div className="container mx-auto max-w-[1200px] px-4 md:px-6">

@@ -1,4 +1,5 @@
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { getNodeText, slugify } from "@/utils/slugify";
 
 export default function BlogBlocksRenderer({ content, lightText = false }) {
     if (!content || !Array.isArray(content)) {
@@ -10,14 +11,8 @@ export default function BlogBlocksRenderer({ content, lightText = false }) {
         <BlocksRenderer
             content={content}
             blocks={{
-                heading: ({ children, level }) => {
-                    // Generate ID for TOC
-                    const text = children.map(child => {
-                        if (typeof child === 'string') return child;
-                        if (child.props && child.props.text) return child.props.text;
-                        return '';
-                    }).join('');
-                    const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                heading: ({ children, level, plainText }) => {
+                    const id = slugify(plainText || getNodeText(children));
 
                     switch (level) {
                         case 1:

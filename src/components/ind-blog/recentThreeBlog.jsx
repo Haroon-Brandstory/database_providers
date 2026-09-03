@@ -48,7 +48,7 @@ export default function RecentThreeBlogs({ recentBlogs }) {
                                         {item?.blogDesc}
                                     </p>
                                     <a
-                                        href={`/blogs/${item?.blogRedirection}`} target="_blank"
+                                        href={`/blogs/${item?.blogRedirection}`}
                                         className="text-[#2C6BFF] font-medium flex items-center mb-4 gap-1"
                                     >
                                         Read More <span aria-hidden="true">→</span>

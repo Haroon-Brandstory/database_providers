@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import BlogBlocksRenderer from "./BlogBlocksRenderer";
 import BlogKeyPoint from "./blogKeyPoint";
 import AuthorDetails from "./AuthorDetails";
@@ -12,6 +12,7 @@ import BlogFaq from "./BlogFaq";
 import DynamicTable from "./DynamicTable";
 import BlogTableOfContent from "./BlogTableOfContent";
 import BlogContentImage from "./BlogContentImage";
+import { slugify } from "@/utils/slugify";
 
 const COMPONENT_MAP = {
     "blog.article-analyzer": AnalyzeArticleWithAi,
@@ -25,24 +26,71 @@ const COMPONENT_MAP = {
     "blog.blog-faq": BlogFaq,
 };
 
+/** Distance from viewport top used to decide which heading is "current". */
+const ACTIVE_OFFSET = 140;
+
 export default function EachBlogContent({ blog, blogSections }) {
     const [activeId, setActiveId] = useState(null);
 
-    useEffect(() => {
-        const sections = document.querySelectorAll("article [id]");
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveId(entry.target.id);
-                    }
-                });
-            },
-            { threshold: 0.3 } // 30% visible before switching active
+    const getTocHeadings = useCallback(() => {
+        const tocIds = new Set(
+            (blog.BlogTableOfContents || []).map((toc) => slugify(toc.sectionTitle))
         );
 
-        sections.forEach((section) => observer.observe(section));
-        return () => observer.disconnect();
+        return Array.from(
+            document.querySelectorAll("article h1[id], article h2[id], article h3[id]")
+        ).filter((el) => el.id && tocIds.has(el.id));
+    }, [blog.BlogTableOfContents]);
+
+    const syncActiveFromScroll = useCallback(() => {
+        const headings = getTocHeadings();
+        if (!headings.length) return;
+
+        // Last heading whose top has crossed the offset line = current section
+        let current = headings[0].id;
+        for (const heading of headings) {
+            if (heading.getBoundingClientRect().top <= ACTIVE_OFFSET) {
+                current = heading.id;
+            }
+        }
+        setActiveId(current);
+    }, [getTocHeadings]);
+
+    useEffect(() => {
+        const headings = getTocHeadings();
+        if (!headings.length) return;
+
+        // Initial + hash deep-link
+        const hashId = window.location.hash.replace(/^#/, "");
+        if (hashId && headings.some((h) => h.id === hashId)) {
+            setActiveId(hashId);
+        } else {
+            syncActiveFromScroll();
+        }
+
+        let ticking = false;
+        const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                syncActiveFromScroll();
+                ticking = false;
+            });
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("hashchange", syncActiveFromScroll);
+        window.addEventListener("resize", syncActiveFromScroll);
+
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("hashchange", syncActiveFromScroll);
+            window.removeEventListener("resize", syncActiveFromScroll);
+        };
+    }, [blog.BlogTableOfContents, blogSections, getTocHeadings, syncActiveFromScroll]);
+
+    const handleTocClick = useCallback((id) => {
+        setActiveId(id);
     }, []);
 
     const renderSection = (section, index) => {
@@ -74,14 +122,12 @@ export default function EachBlogContent({ blog, blogSections }) {
             <div>
                 <div className="container mx-auto flex flex-col p-2 text-black justify-start  ">
                     <div className="md:flex relative gap-4">
-                        {/* Left Column - Table of Contents */}
                         <BlogTableOfContent
                             tableOfContents={blog.BlogTableOfContents}
                             activeId={activeId}
+                            onItemClick={handleTocClick}
                         />
-                        {/* Right Column - Blog Content */}
                         <article className="w-full md:w-3/4" >
-                            {/* Blog Content */}
                             <AuthorDetails author={blog.author} updatedAt={blog.updatedAt} />
 
                             {blogSections && blogSections.length > 0 ? (

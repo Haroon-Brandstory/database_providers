@@ -7,7 +7,7 @@ import { IoLinkOutline } from 'react-icons/io5';
 import toast from 'react-hot-toast';
 
 export default function AuthorDetails({ author, updatedAt }) {
-  const authorName = author?.AuthorName || "- No Author";
+  const authorName = author?.AuthorName || "Database Providers";
   const authorImage = author?.AuthorImage?.url || "/blog/dpLogo.svg";
 
   const formatDate = (dateString) => {

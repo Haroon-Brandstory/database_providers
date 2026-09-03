@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import BlogBlocksRenderer from "./BlogBlocksRenderer";
 import BlogKeyPoint from "./blogKeyPoint";
 import AuthorDetails from "./AuthorDetails";
@@ -12,7 +12,7 @@ import BlogFaq from "./BlogFaq";
 import DynamicTable from "./DynamicTable";
 import BlogTableOfContent from "./BlogTableOfContent";
 import BlogContentImage from "./BlogContentImage";
-import { slugify } from "@/utils/slugify";
+import { resolveBlogTableOfContents, slugify } from "@/utils/slugify";
 
 const COMPONENT_MAP = {
     "blog.article-analyzer": AnalyzeArticleWithAi,
@@ -32,21 +32,25 @@ const ACTIVE_OFFSET = 140;
 export default function EachBlogContent({ blog, blogSections }) {
     const [activeId, setActiveId] = useState(null);
 
+    const tableOfContents = useMemo(
+        () => resolveBlogTableOfContents(blog, blogSections),
+        [blog, blogSections]
+    );
+
     const getTocHeadings = useCallback(() => {
         const tocIds = new Set(
-            (blog.BlogTableOfContents || []).map((toc) => slugify(toc.sectionTitle))
+            tableOfContents.map((toc) => slugify(toc.sectionTitle))
         );
 
         return Array.from(
             document.querySelectorAll("article h1[id], article h2[id], article h3[id]")
         ).filter((el) => el.id && tocIds.has(el.id));
-    }, [blog.BlogTableOfContents]);
+    }, [tableOfContents]);
 
     const syncActiveFromScroll = useCallback(() => {
         const headings = getTocHeadings();
         if (!headings.length) return;
 
-        // Last heading whose top has crossed the offset line = current section
         let current = headings[0].id;
         for (const heading of headings) {
             if (heading.getBoundingClientRect().top <= ACTIVE_OFFSET) {
@@ -60,7 +64,6 @@ export default function EachBlogContent({ blog, blogSections }) {
         const headings = getTocHeadings();
         if (!headings.length) return;
 
-        // Initial + hash deep-link
         const hashId = window.location.hash.replace(/^#/, "");
         if (hashId && headings.some((h) => h.id === hashId)) {
             setActiveId(hashId);
@@ -87,7 +90,7 @@ export default function EachBlogContent({ blog, blogSections }) {
             window.removeEventListener("hashchange", syncActiveFromScroll);
             window.removeEventListener("resize", syncActiveFromScroll);
         };
-    }, [blog.BlogTableOfContents, blogSections, getTocHeadings, syncActiveFromScroll]);
+    }, [tableOfContents, getTocHeadings, syncActiveFromScroll]);
 
     const handleTocClick = useCallback((id) => {
         setActiveId(id);
@@ -123,7 +126,7 @@ export default function EachBlogContent({ blog, blogSections }) {
                 <div className="container mx-auto flex flex-col p-2 text-black justify-start  ">
                     <div className="md:flex relative gap-4">
                         <BlogTableOfContent
-                            tableOfContents={blog.BlogTableOfContents}
+                            tableOfContents={tableOfContents}
                             activeId={activeId}
                             onItemClick={handleTocClick}
                         />

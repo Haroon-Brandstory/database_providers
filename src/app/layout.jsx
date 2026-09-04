@@ -73,6 +73,7 @@ export default async function RootLayout({ children }) {
         <ToasterWrapper>
           {children}
         </ToasterWrapper>
+        <script src="//code.tidio.co/mdudmujprglia6kvb4bsoffytkvy7dpd.js" async></script>
       </body>
     </html>
   );

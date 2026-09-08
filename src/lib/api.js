@@ -22,7 +22,6 @@ export async function fetchAPI(endpoint, options = {}) {
         return await res.json();
     } catch (error) {
         console.error("Error fetching:", error);
-        notFound();
         throw error;
     }
 }

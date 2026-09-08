@@ -1,11 +1,9 @@
-import { Toaster } from "react-hot-toast";
 import { interDisplay, interTight } from "../lib/fonts";
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import Script from "next/script";
 import { getLocale } from "next-intl/server";
 import ToasterWrapper from "./toasterWrapper";
+import LeadChatWidget from "@/components/lead-chat/LeadChatWidget";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -73,7 +71,7 @@ export default async function RootLayout({ children }) {
         <ToasterWrapper>
           {children}
         </ToasterWrapper>
-        <script src="//code.tidio.co/mdudmujprglia6kvb4bsoffytkvy7dpd.js" async></script>
+        <LeadChatWidget />
       </body>
     </html>
   );

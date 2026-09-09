@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T09:34:54.845Z",
+  "generatedAt": "2026-09-09T12:41:19.153Z",
   "posts": [
     {
       "slug": "apac-coverage-for-vp-marketing-titles",
@@ -8,11 +8,11 @@
       "categorySlug": "data-quality",
       "createdAt": "2026-06-30",
       "featured": false,
-      "metaDescription": "Singapore and Malaysia VP/Head of Marketing coverage varies by firmographic filters—share ICP details with your AE for a count estimate before ordering.",
+      "metaDescription": "Singapore and Malaysia VP/Head of Marketing coverage varies by company size, industry and title mix. Share your ICP for a more useful count estimate.",
       "authorName": "Sam Okonkwo",
       "authorAvatar": "/community/avatars/05.svg",
       "replyCount": 2,
-      "searchText": "APAC coverage for VP Marketing titles Need Singapore + Malaysia VP/Head of Marketing. Roughly how deep is coverage for mid-market SaaS? Coverage for Singapore and Malaysia marketing leadership is available and depth depends on company size, industry, and title mix. Share your ICP with your account executive for a count estimate before you order. We pulled a similar Singapore + Malaysia marketing leadership list last quarter. Mid-market SaaS depth was solid once we narrowed company size; share your employee-count band with your AE for a tighter count."
+      "searchText": "APAC coverage for VP Marketing titles Need Singapore + Malaysia VP/Head of Marketing. Roughly how deep is coverage for mid-market SaaS? Coverage for Singapore and Malaysia marketing leadership is available, but usable volume depends on filters such as employee count, SaaS segment, geography and the exact seniority/title set. Share your target company-size band, industries and preferred titles with your account executive so the team can prepare a more relevant count estimate before you order. We pulled a similar Singapore + Malaysia marketing leadership list recently. The count became much more useful after we narrowed the employee range and included both VP and Head-level title variations. I would define the firmographic filters first, then ask for the estimated reachable records within that ICP."
     },
     {
       "slug": "best-way-to-push-contacts-into-salesforce",
@@ -55,16 +55,16 @@
     },
     {
       "slug": "gdpr-friendly-outreach-with-purchased-b2b-lists",
-      "oldSlug": "gdpr-compliant-outreach",
+      "oldSlug": "gdpr-friendly-purchased-b2b-lists",
       "title": "GDPR-friendly outreach with purchased B2B lists",
-      "categorySlug": "outreach-campaigns",
-      "createdAt": "2026-07-12",
-      "featured": true,
-      "metaDescription": "Operational GDPR hygiene for B2B lists: document lawful basis, honor opt-outs fast, prefer role-based contacts, and keep clear unsubscribe paths—always confirm with your counsel.",
-      "authorName": "Marcus Chen",
-      "authorAvatar": "/community/avatars/03.svg",
-      "replyCount": 1,
-      "searchText": "GDPR-friendly outreach with purchased B2B lists We sell into EU accounts. What do teams typically document when using B2B contact data for cold email under GDPR? Looking for practical process tips, not legal advice. Talk to your counsel. Operationally, teams keep a lawful-basis record, honor opt-outs fast, and avoid scraping personal inboxes. Use role-based B2B contacts and clear unsubscribe paths."
+      "categorySlug": "compliance",
+      "createdAt": "2026-07-08",
+      "featured": false,
+      "metaDescription": "Using purchased B2B data in Europe requires careful sourcing, lawful-basis assessment, transparency, suppression handling and outreach rules that fit each market.",
+      "authorName": "Daniel Weber",
+      "authorAvatar": "/community/avatars/07.svg",
+      "replyCount": 2,
+      "searchText": "GDPR-friendly outreach with purchased B2B lists Can we use a purchased B2B contact list for outreach in Europe without creating GDPR problems? Purchased B2B data is not automatically GDPR-compliant simply because it contains work contact details. Before outreach, document where the data came from, what fields were collected, the intended use, your lawful-basis assessment, and how people will be informed about the processing. You should also maintain opt-out and suppression controls and check the electronic-marketing rules that apply in each target country. Your legal or privacy team should approve the final outreach process for your specific use case. The biggest issue for us was not the list purchase itself but proving the source and setting up a clear process for notices, objections and suppression. We also separated countries instead of treating all European outreach the same, because email and direct-marketing requirements can differ by market. Ask the provider for sourcing and compliance documentation before importing anything into your CRM."
     },
     {
       "slug": "how-long-does-list-delivery-usually-take",

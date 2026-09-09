@@ -30,6 +30,14 @@ export default function PostList({
                                             {post.title}
                                         </h3>
                                         <p className="mt-1 text-sm text-[#5f6368]">
+                                            {post.authorName ? (
+                                                <>
+                                                    <span className="text-[#202124]">
+                                                        {post.authorName}
+                                                    </span>
+                                                    {" · "}
+                                                </>
+                                            ) : null}
                                             {category?.title ?? "Community"}
                                             {post.createdAt ? (
                                                 <>

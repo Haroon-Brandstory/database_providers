@@ -6,6 +6,7 @@ import {
     getRelatedPostSummaries,
     isReservedCommunitySegment,
 } from "@/lib/communityData";
+import { getCommunityPostDetail } from "@/lib/communityHtml";
 import { generateSeoMetadata } from "@/lib/seo";
 
 const BASE_URL = "https://www.thedatabaseproviders.com";
@@ -35,7 +36,22 @@ export async function generateMetadata({ params }) {
 }
 
 function buildQaSchema(post) {
-    const answer = post.acceptedAnswer;
+    const answers = Array.isArray(post.answers) ? post.answers : [];
+    const accepted = answers.find((a) => a.accepted) || post.acceptedAnswer || null;
+    const others = answers.filter((a) => !a.accepted);
+
+    const toSchemaAnswer = (answer) => ({
+        "@type": "Answer",
+        text: answer.body,
+        dateCreated: answer.createdAt,
+        author: {
+            "@type": /database providers/i.test(answer.authorName || "")
+                ? "Organization"
+                : "Person",
+            name: answer.authorName || "Community member",
+        },
+    });
+
     return {
         "@context": "https://schema.org",
         "@type": "QAPage",
@@ -43,20 +59,15 @@ function buildQaSchema(post) {
             "@type": "Question",
             name: post.title,
             text: post.body,
-            answerCount: answer ? 1 : 0,
+            answerCount: answers.length,
             dateCreated: post.createdAt,
-            ...(answer
-                ? {
-                      acceptedAnswer: {
-                          "@type": "Answer",
-                          text: answer.body,
-                          dateCreated: answer.createdAt,
-                          author: {
-                              "@type": "Organization",
-                              name: answer.authorName,
-                          },
-                      },
-                  }
+            author: {
+                "@type": "Person",
+                name: post.authorName || "Community member",
+            },
+            ...(accepted ? { acceptedAnswer: toSchemaAnswer(accepted) } : {}),
+            ...(others.length
+                ? { suggestedAnswer: others.map(toSchemaAnswer) }
                 : {}),
         },
     };
@@ -93,9 +104,11 @@ export default async function CommunityPostPage({ params }) {
     const { slug } = await params;
     if (isReservedCommunitySegment(slug)) notFound();
 
-    const post = getPostBySlug(slug);
-    if (!post) notFound();
+    const listing = getPostBySlug(slug);
+    const detail = getCommunityPostDetail(slug);
+    if (!listing || !detail) notFound();
 
+    const post = { ...listing, ...detail };
     const related = getRelatedPostSummaries(post.slug, 5);
     const schemas = [buildQaSchema(post), buildBreadcrumbSchema(post)];
 

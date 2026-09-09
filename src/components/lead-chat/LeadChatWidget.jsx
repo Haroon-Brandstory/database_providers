@@ -13,6 +13,7 @@ import gsap from "gsap";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { CHAT_STEPS, buildLeadMessage } from "./leadChatFlow";
+import { getFaqFallback, getFaqQuickQuestions, matchFaq } from "./matchFaq";
 
 const EMAIL_RE = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -68,12 +69,16 @@ export default function LeadChatWidget() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [done, setDone] = useState(false);
+    const [phase, setPhase] = useState("lead"); // lead | faq | done
+    const [faqMode, setFaqMode] = useState("prompt"); // prompt | ask
+    const [showFaqChips, setShowFaqChips] = useState(false);
     const [honeypot, setHoneypot] = useState("");
     const [started, setStarted] = useState(false);
     const listRef = useRef(null);
     const inputRef = useRef(null);
     const panelRef = useRef(null);
     const bubbleRef = useRef(null);
+    const faqChipsTimerRef = useRef(null);
 
     const hideOnThankYou = /thank-you\/?$/i.test(pathname);
 
@@ -124,7 +129,15 @@ export default function LeadChatWidget() {
         [scrollToBottom]
     );
 
+    const clearFaqChipsTimer = useCallback(() => {
+        if (faqChipsTimerRef.current) {
+            clearTimeout(faqChipsTimerRef.current);
+            faqChipsTimerRef.current = null;
+        }
+    }, []);
+
     const resetChat = useCallback(() => {
+        clearFaqChipsTimer();
         setStepIndex(0);
         setAnswers(EMPTY_ANSWERS);
         setMessages([]);
@@ -132,9 +145,12 @@ export default function LeadChatWidget() {
         setError("");
         setLoading(false);
         setDone(false);
+        setPhase("lead");
+        setFaqMode("prompt");
+        setShowFaqChips(false);
         setHoneypot("");
         setStarted(false);
-    }, []);
+    }, [clearFaqChipsTimer]);
 
     const startConversation = useCallback(() => {
         if (started) return;
@@ -216,11 +232,15 @@ export default function LeadChatWidget() {
     }, [open]);
 
     useEffect(() => {
-        if (open && !done && currentStep?.type !== "buttons") {
+        if (open && phase === "lead" && !done && currentStep?.type !== "buttons") {
             const t = setTimeout(() => inputRef.current?.focus(), 80);
             return () => clearTimeout(t);
         }
-    }, [open, done, stepIndex, currentStep?.type]);
+        if (open && phase === "faq" && faqMode === "ask") {
+            const t = setTimeout(() => inputRef.current?.focus(), 80);
+            return () => clearTimeout(t);
+        }
+    }, [open, done, stepIndex, currentStep?.type, phase, faqMode]);
 
     useEffect(() => {
         scrollToBottom();
@@ -242,13 +262,70 @@ export default function LeadChatWidget() {
         return "";
     };
 
+    useEffect(() => () => clearFaqChipsTimer(), [clearFaqChipsTimer]);
+
+    const finishFaq = useCallback(() => {
+        clearFaqChipsTimer();
+        setShowFaqChips(false);
+        pushBot("Thanks again — our team will follow up soon.");
+        setPhase("done");
+        setDone(true);
+        setInput("");
+        setError("");
+    }, [pushBot, clearFaqChipsTimer]);
+
+    const startFaqAsk = useCallback(() => {
+        clearFaqChipsTimer();
+        setFaqMode("ask");
+        setShowFaqChips(true);
+        setError("");
+        pushBot("Type your question (or tap a quick one below).");
+    }, [pushBot, clearFaqChipsTimer]);
+
+    const answerFaq = useCallback(
+        (rawQuery) => {
+            const query = String(rawQuery || "").replace(/\s+/g, " ").trim();
+            if (!query) {
+                setError("Enter a question or skip.");
+                return;
+            }
+            setError("");
+            pushUser(query);
+            setInput("");
+            clearFaqChipsTimer();
+            setShowFaqChips(false);
+
+            const hit = matchFaq(query);
+            setTimeout(() => {
+                if (hit) {
+                    pushBot(hit.answer);
+                } else {
+                    pushBot(getFaqFallback());
+                }
+                setTimeout(() => {
+                    pushBot("Ask another question, or tap Done.");
+                }, 320);
+                // Show quick-question chips again after 5s
+                faqChipsTimerRef.current = setTimeout(() => {
+                    setShowFaqChips(true);
+                    faqChipsTimerRef.current = null;
+                }, 5000);
+            }, 220);
+        },
+        [pushBot, pushUser, clearFaqChipsTimer]
+    );
+
     const submitLead = async (finalAnswers) => {
         setLoading(true);
         setError("");
         try {
             if (honeypot.trim()) {
-                setDone(true);
                 pushBot("Thanks! Our team will reach out shortly.");
+                setPhase("faq");
+                setFaqMode("prompt");
+                setTimeout(() => {
+                    pushBot("Want a quick answer from our FAQ before you go?");
+                }, 350);
                 return;
             }
 
@@ -274,8 +351,12 @@ export default function LeadChatWidget() {
                 return;
             }
 
-            setDone(true);
             pushBot("Thanks! Our team will reach out shortly.");
+            setPhase("faq");
+            setFaqMode("prompt");
+            setTimeout(() => {
+                pushBot("Want a quick answer from our FAQ before you go?");
+            }, 350);
         } catch {
             setError("Something went wrong. Please try again.");
         } finally {
@@ -284,7 +365,7 @@ export default function LeadChatWidget() {
     };
 
     const advance = async (rawValue, displayText, answersOverride) => {
-        if (!currentStep || loading || done) return;
+        if (!currentStep || loading || phase !== "lead") return;
 
         const nextAnswers = { ...(answersOverride || answers) };
         if (currentStep.type !== "phone" && currentStep.field) {
@@ -329,6 +410,10 @@ export default function LeadChatWidget() {
 
     const handleTextSubmit = (e) => {
         e.preventDefault();
+        if (phase === "faq" && faqMode === "ask") {
+            answerFaq(input);
+            return;
+        }
         if (!currentStep || currentStep.type === "buttons" || currentStep.type === "phone") return;
         advance(input, input.trim() || (currentStep.allowSkip ? "Skip" : input));
     };
@@ -430,7 +515,11 @@ export default function LeadChatWidget() {
                                 </svg>
                             </button>
                         </div>
-                        <ChatProgress stepIndex={stepIndex} total={totalSteps} done={done} />
+                        <ChatProgress
+                            stepIndex={stepIndex}
+                            total={totalSteps}
+                            done={done || phase !== "lead"}
+                        />
                     </header>
 
                     {/* honeypot */}
@@ -477,7 +566,10 @@ export default function LeadChatWidget() {
                                 </div>
                             ))}
 
-                            {!done && currentStep?.type === "buttons" && messages.length > 0 && (
+                            {!done &&
+                                phase === "lead" &&
+                                currentStep?.type === "buttons" &&
+                                messages.length > 0 && (
                                 <div className="ml-10 grid grid-cols-2 gap-2">
                                     {currentStep.options.map((opt) => (
                                         <button
@@ -488,6 +580,40 @@ export default function LeadChatWidget() {
                                             className="cursor-pointer rounded-full border border-[#0133E9]/25 bg-white/95 px-3 py-2.5 text-left text-[13px] font-medium text-[#0133E9] shadow-[0_2px_8px_rgba(1,51,233,0.08)] transition hover:-translate-y-0.5 hover:border-[#0133E9] hover:bg-[#0133E9] hover:text-white hover:shadow-[0_8px_18px_rgba(1,51,233,0.25)] disabled:opacity-50"
                                         >
                                             {opt.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+
+                            {phase === "faq" && faqMode === "prompt" && !loading && (
+                                <div className="ml-10 flex flex-wrap gap-2">
+                                    <button
+                                        type="button"
+                                        onClick={startFaqAsk}
+                                        className="cursor-pointer rounded-full border border-[#0133E9]/25 bg-white/95 px-3.5 py-2.5 text-[13px] font-medium text-[#0133E9] shadow-[0_2px_8px_rgba(1,51,233,0.08)] transition hover:bg-[#0133E9] hover:text-white"
+                                    >
+                                        Ask a question
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={finishFaq}
+                                        className="cursor-pointer rounded-full border border-[#D8DEEE] bg-white/95 px-3.5 py-2.5 text-[13px] font-medium text-[#51525C] transition hover:border-[#0133E9]/40 hover:text-[#0133E9]"
+                                    >
+                                        No thanks
+                                    </button>
+                                </div>
+                            )}
+
+                            {phase === "faq" && faqMode === "ask" && showFaqChips && (
+                                <div className="ml-10 flex flex-wrap gap-2">
+                                    {getFaqQuickQuestions().map((q) => (
+                                        <button
+                                            key={q}
+                                            type="button"
+                                            onClick={() => answerFaq(q)}
+                                            className="cursor-pointer rounded-full border border-[#0133E9]/20 bg-white/95 px-3 py-2 text-left text-[12px] font-medium text-[#0133E9] transition hover:bg-[#0133E9] hover:text-white"
+                                        >
+                                            {q}
                                         </button>
                                     ))}
                                 </div>
@@ -512,7 +638,10 @@ export default function LeadChatWidget() {
                         </p>
                     )}
 
-                    {!done && currentStep && currentStep.type !== "buttons" && (
+                    {!done &&
+                        phase === "lead" &&
+                        currentStep &&
+                        currentStep.type !== "buttons" && (
                         <div className="border-t border-[#E8ECF6] bg-white/95 p-3 backdrop-blur-sm">
                             {currentStep.type === "phone" ? (
                                 <form onSubmit={handlePhoneSubmit} className="flex flex-col gap-2.5">
@@ -591,6 +720,39 @@ export default function LeadChatWidget() {
                                     </div>
                                 </form>
                             )}
+                        </div>
+                    )}
+
+                    {phase === "faq" && faqMode === "ask" && (
+                        <div className="border-t border-[#E8ECF6] bg-white/95 p-3 backdrop-blur-sm">
+                            <form onSubmit={handleTextSubmit} className="flex flex-col gap-2.5">
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    value={input}
+                                    onChange={(e) => {
+                                        setInput(e.target.value);
+                                        setError("");
+                                    }}
+                                    placeholder="Ask about delivery, pricing, format…"
+                                    className="w-full rounded-[20px] bg-[#F6F6F6] px-4 py-3 text-[14px] text-black outline-none transition focus:ring-2 focus:ring-[#0133E9]/25"
+                                />
+                                <div className="flex gap-2">
+                                    <button
+                                        type="button"
+                                        onClick={finishFaq}
+                                        className="flex-1 cursor-pointer rounded-full border border-[#D8DEEE] py-3 text-[14px] font-medium text-[#51525C] transition hover:border-[#0133E9]/40 hover:text-[#0133E9]"
+                                    >
+                                        Done
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="flex-[2] cursor-pointer rounded-full bg-[#0133E9] py-3 text-[14px] font-medium text-white shadow-[0_8px_20px_rgba(1,51,233,0.28)] transition hover:bg-[#001444]"
+                                    >
+                                        Ask
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     )}
 

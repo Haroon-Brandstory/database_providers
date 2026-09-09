@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "gen:static-slugs": "node scripts/generate-static-page-slugs.mjs",
+    "gen:community-index": "node scripts/generate-community-index.mjs",
     "gen:llms-txt": "node scripts/generate-llms-txt.mjs",
-    "predev": "npm run gen:static-slugs && npm run gen:llms-txt",
-    "prebuild": "npm run gen:static-slugs && npm run gen:llms-txt",
+    "predev": "npm run gen:static-slugs && npm run gen:community-index && npm run gen:llms-txt",
+    "prebuild": "npm run gen:static-slugs && npm run gen:community-index && npm run gen:llms-txt",
     "dev": "next dev",
     "build": "next build",
     "build:memory-safe": "npm run prebuild && cross-env NODE_OPTIONS=--max-old-space-size=3072 next build",

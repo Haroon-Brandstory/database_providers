@@ -1,0 +1,212 @@
+{
+  "fallback": "I don't have that exact answer in our FAQ yet. Our sales team will cover it when they reach out — your details are already with us.",
+  "quickQuestions": [
+    "How long does delivery take?",
+    "What data format do you provide?",
+    "Do you verify emails?",
+    "What industries do you cover?",
+    "How do I reset my password?"
+  ],
+  "faqs": [
+    {
+      "id": "data-attributes",
+      "question": "What data attributes do you provide?",
+      "answer": "We can provide business email, key executive names and LinkedIn URLs, company name, industry, employee size, company domain, and job title — scoped to your targeting requirements.",
+      "keywords": ["attributes", "fields", "data elements", "what data", "linkedin", "job title", "designation", "columns", "what do you provide"],
+      "category": "product",
+      "source": "serviceFaq"
+    },
+    {
+      "id": "data-driven-marketing",
+      "question": "What are the advantages of data-driven marketing?",
+      "answer": "With verified B2B data you can reach the right decision-makers faster: higher lead generation, better targeting and personalization, improved sales efficiency, and stronger retention when you market to the right accounts.",
+      "keywords": ["data-driven", "advantages", "benefits", "why buy", "roi", "marketing efficiency"],
+      "category": "product",
+      "source": "serviceFaq"
+    },
+    {
+      "id": "industries",
+      "question": "For what industries do you provide data?",
+      "answer": "We work across industries — healthcare, manufacturing, technology, education, and many more. Tell us your verticals and we build lists to match.",
+      "keywords": ["industries", "verticals", "healthcare", "manufacturing", "technology", "education", "which industry", "sectors"],
+      "category": "product",
+      "source": "serviceFaq"
+    },
+    {
+      "id": "data-format",
+      "question": "In what format do you provide the data?",
+      "answer": "We deliver lists in Excel format for easy access and CRM import.",
+      "keywords": ["format", "excel", "xlsx", "csv", "file type", "download", "how delivered"],
+      "category": "product",
+      "source": "serviceFaq"
+    },
+    {
+      "id": "data-verification",
+      "question": "Do you verify the data before delivery?",
+      "answer": "Yes. We focus on accurate, reliable contacts so you can reach the right leads with better deliverability.",
+      "keywords": ["verify", "verified", "validation", "accurate", "reliable", "quality", "check data"],
+      "category": "data-quality",
+      "source": "serviceFaq"
+    },
+    {
+      "id": "company-size",
+      "question": "Can you provide data from small businesses too?",
+      "answer": "Yes. We support company-size bands from 1–50 through 5000+ employees, including SMB and enterprise.",
+      "keywords": ["small business", "smb", "employee size", "company size", "startup", "enterprise", "headcount"],
+      "category": "product",
+      "source": "serviceFaq"
+    },
+    {
+      "id": "delivery-time",
+      "question": "How long does list delivery usually take?",
+      "answer": "Most standard list orders complete within 1–2 business days. Custom multi-geo or enrichment jobs can take longer. If it passes 3 business days, follow up with your order ID.",
+      "keywords": ["delivery", "turnaround", "how long", "processing", "timeline", "order status", "when will i get", "lead time"],
+      "category": "orders",
+      "source": "community/how-long-does-list-delivery-usually-take"
+    },
+    {
+      "id": "high-bounce",
+      "question": "Why is bounce higher than expected after export?",
+      "answer": "Before blaming the file, check suppression lists, domain warm-up, and whether old CRM contacts were mixed into the same campaign. Bounce around ~8% often points to sending hygiene or list mixing rather than a single export issue.",
+      "keywords": ["bounce", "bounces", "undeliverable", "hard bounce", "soft bounce", "deliverability", "spam"],
+      "category": "data-quality",
+      "source": "community/seeing-higher-bounce-than-expected-after-export"
+    },
+    {
+      "id": "improve-deliverability",
+      "question": "How do I improve email list deliverability?",
+      "answer": "Suppress unsubscribes and hard bounces, prefer recently verified segments, warm domains gradually, keep copy relevant to the persona, and monitor bounce/complaint rates after each batch. Share sample bounce codes with support if rates stay high.",
+      "keywords": ["improve deliverability", "warm domain", "suppression", "sending hygiene", "complaint rate", "inbox"],
+      "category": "outreach",
+      "source": "community/guides/improve-list-deliverability"
+    },
+    {
+      "id": "gdpr-outreach",
+      "question": "How do teams stay GDPR-friendly with purchased B2B lists?",
+      "answer": "This is not legal advice — talk to your counsel. Operationally, teams document lawful basis, honor opt-outs fast, prefer role-based B2B contacts, avoid scraping personal inboxes, and keep clear unsubscribe paths.",
+      "keywords": ["gdpr", "privacy", "compliance", "eu", "lawful basis", "opt-out", "cold email legal"],
+      "category": "compliance",
+      "source": "community/gdpr-friendly-outreach-with-purchased-b2b-lists"
+    },
+    {
+      "id": "password-reset",
+      "question": "Password reset email never arrives — what should I do?",
+      "answer": "Ask IT to allowlist our sender domain, confirm the email matches your original purchase, check spam, and retry. If it still fails, open a support ticket with company name and order ID. Use Forgot password on the sign-in page — we cannot reset passwords for you manually.",
+      "keywords": ["password", "reset", "forgot password", "login", "sign in", "portal access", "email not arriving"],
+      "category": "account",
+      "source": "community/password-reset-email-never-arrives"
+    },
+    {
+      "id": "forgot-password-guide",
+      "question": "How do I reset my account password?",
+      "answer": "Go to sign-in → Forgot password → enter the email on your account → open the reset link (check spam) → set a new password. If nothing arrives, confirm the purchase email and contact support with company name and order ID.",
+      "keywords": ["forgot", "recover login", "locked out", "reset steps", "account recovery"],
+      "category": "account",
+      "source": "community/guides/forgot-account-password"
+    },
+    {
+      "id": "apac-coverage",
+      "question": "Do you have APAC coverage for marketing titles?",
+      "answer": "Yes — including Singapore and Malaysia VP/Head of Marketing. Depth depends on company size, industry, and title mix. Share your ICP with your account executive for a count estimate before ordering.",
+      "keywords": ["apac", "singapore", "malaysia", "asia", "vp marketing", "coverage", "geo", "geography"],
+      "category": "data-quality",
+      "source": "community/apac-coverage-for-vp-marketing-titles"
+    },
+    {
+      "id": "technographics",
+      "question": "Can I filter by CRM or marketing stack?",
+      "answer": "Technographic filters (e.g. HubSpot or Salesforce) are available as add-ons on some packages. Ask your AE — not every firmographic-only build includes stack filters by default.",
+      "keywords": ["technographic", "hubspot", "salesforce", "tech stack", "crm filter", "marketing stack", "intent"],
+      "category": "outreach",
+      "source": "community/can-i-filter-by-crm-or-marketing-stack"
+    },
+    {
+      "id": "salesforce-import",
+      "question": "Best way to push contacts into Salesforce?",
+      "answer": "Map Email as an external ID when possible, match Company to Account Name, store LinkedIn URL in a custom field, and deduplicate before import. Many teams stage in a sheet first, then VLOOKUP Accounts.",
+      "keywords": ["salesforce", "crm import", "mapping", "external id", "account name", "push contacts"],
+      "category": "integrations",
+      "source": "community/best-way-to-push-contacts-into-salesforce"
+    },
+    {
+      "id": "email-permutator",
+      "question": "When should I use the email permutator vs verified lists?",
+      "answer": "Use the permutator to enrich known names, then verify. It is not a substitute for a verified database pull.",
+      "keywords": ["permutator", "email pattern", "enrichment", "guess email", "verified list"],
+      "category": "integrations",
+      "source": "community/email-permutator-when-to-use-vs-verified-lists"
+    },
+    {
+      "id": "partial-credit",
+      "question": "What if my list count comes up short?",
+      "answer": "For short counts on rare title combos, open a support ticket with your order ID. We review delivery against the scoped filters and typically offer credit or replenishment when the count falls short of what was confirmed.",
+      "keywords": ["short count", "partial", "refund", "credit", "under count", "missing contacts", "replenishment"],
+      "category": "orders",
+      "source": "community/partial-credit-when-count-is-short"
+    },
+    {
+      "id": "dedupe-tool",
+      "question": "Should I use the remove-duplicate tool or Excel?",
+      "answer": "Run the on-site remove-duplicate tool on email first, then optionally a second pass on domain + title in Sheets for edge cases before CRM upload.",
+      "keywords": ["duplicate", "dedupe", "remove duplicate", "excel", "unique emails"],
+      "category": "integrations",
+      "source": "community/remove-duplicate-tool-vs-excel"
+    },
+    {
+      "id": "choosing-segment",
+      "question": "How do I choose the right B2B segment?",
+      "answer": "Start from who can buy or influence your product, which titles reply in past campaigns, and which geos you can support. Avoid mixing too many industries, targeting only C-level when managers own the workflow, or ignoring company size vs your pricing.",
+      "keywords": ["segment", "targeting", "icp", "titles", "filters", "list building", "persona"],
+      "category": "outreach",
+      "source": "community/guides/choosing-the-right-segment"
+    },
+    {
+      "id": "pricing",
+      "question": "How does pricing work?",
+      "answer": "Pricing depends on volume, filters (title, industry, geo), and any enrichment add-ons. Share your ICP in this chat or on the contact form and sales will send a tailored quote.",
+      "keywords": ["pricing", "price", "cost", "quote", "how much", "rates", "package"],
+      "category": "sales",
+      "source": "lead-chat"
+    },
+    {
+      "id": "buy-list",
+      "question": "How do I buy a B2B email list?",
+      "answer": "Tell us your target titles, industries, geos, and volume. We scope the count, confirm filters, and deliver a verified Excel list — usually within 1–2 business days for standard orders. Use this chat or Contact Us to start.",
+      "keywords": ["buy", "purchase", "order list", "get a list", "email list", "database"],
+      "category": "sales",
+      "source": "lead-chat"
+    },
+    {
+      "id": "demo",
+      "question": "Can I book a demo?",
+      "answer": "Yes. Leave your details in this chat (or Contact Us) and mention you’d like a demo — sales will schedule a walkthrough of coverage, samples, and workflow.",
+      "keywords": ["demo", "call", "meeting", "walkthrough", "schedule", "show me"],
+      "category": "sales",
+      "source": "lead-chat"
+    },
+    {
+      "id": "sample-data",
+      "question": "Can I get a sample before buying?",
+      "answer": "Yes — ask sales for a sample aligned to your ICP. Share industry, titles, and geo so the sample reflects what you’d order.",
+      "keywords": ["sample", "free sample", "trial", "preview", "example records"],
+      "category": "sales",
+      "source": "lead-chat"
+    },
+    {
+      "id": "contact-support",
+      "question": "How do I contact support?",
+      "answer": "Use Contact Us on the site, email sales@thedatabaseproviders.com, or leave details in this chat. For open orders, include your order ID and company name.",
+      "keywords": ["support", "contact", "help", "email support", "talk to someone", "human"],
+      "category": "account",
+      "source": "lead-chat"
+    },
+    {
+      "id": "multi-geo",
+      "question": "Do you cover multiple countries?",
+      "answer": "Yes. We build global and regional lists (including US, India, UAE, Singapore, Malaysia, and more). Multi-geo custom jobs can take longer than standard single-geo deliveries.",
+      "keywords": ["countries", "global", "international", "multi-geo", "usa", "india", "uae", "regions"],
+      "category": "product",
+      "source": "lead-chat"
+    }
+  ]
+}

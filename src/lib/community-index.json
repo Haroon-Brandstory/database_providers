@@ -1,0 +1,161 @@
+{
+  "generatedAt": "2026-09-09T09:34:54.845Z",
+  "posts": [
+    {
+      "slug": "apac-coverage-for-vp-marketing-titles",
+      "oldSlug": "coverage-for-apac-titles",
+      "title": "APAC coverage for VP Marketing titles",
+      "categorySlug": "data-quality",
+      "createdAt": "2026-06-30",
+      "featured": false,
+      "metaDescription": "Singapore and Malaysia VP/Head of Marketing coverage varies by firmographic filters—share ICP details with your AE for a count estimate before ordering.",
+      "authorName": "Sam Okonkwo",
+      "authorAvatar": "/community/avatars/05.svg",
+      "replyCount": 2,
+      "searchText": "APAC coverage for VP Marketing titles Need Singapore + Malaysia VP/Head of Marketing. Roughly how deep is coverage for mid-market SaaS? Coverage for Singapore and Malaysia marketing leadership is available and depth depends on company size, industry, and title mix. Share your ICP with your account executive for a count estimate before you order. We pulled a similar Singapore + Malaysia marketing leadership list last quarter. Mid-market SaaS depth was solid once we narrowed company size; share your employee-count band with your AE for a tighter count."
+    },
+    {
+      "slug": "best-way-to-push-contacts-into-salesforce",
+      "oldSlug": "export-to-salesforce",
+      "title": "Best way to push contacts into Salesforce",
+      "categorySlug": "integrations-tools",
+      "createdAt": "2026-06-15",
+      "featured": false,
+      "metaDescription": "For Salesforce imports, map Email as an external ID, match Company to Account Name, store LinkedIn URL in a custom field, and deduplicate before import.",
+      "authorName": "Noah Patel",
+      "authorAvatar": "/community/avatars/07.svg",
+      "replyCount": 2,
+      "searchText": "Best way to push contacts into Salesforce We get CSV exports today. Anyone using a cleaner Salesforce import mapping for title, company, and LinkedIn URL fields? Map Email as external ID when possible, keep Company as Account Name match, and store LinkedIn URL in a custom field. Deduplicate before import. Also map Title carefully — we use a staging object, dedupe on email, then Account VLOOKUP. Saved a lot of duplicate Accounts."
+    },
+    {
+      "slug": "can-i-filter-by-crm-or-marketing-stack",
+      "oldSlug": "segment-by-technographics",
+      "title": "Can I filter by CRM or marketing stack?",
+      "categorySlug": "outreach-campaigns",
+      "createdAt": "2026-06-22",
+      "featured": false,
+      "metaDescription": "Technographic filters such as HubSpot or Salesforce are available as add-ons on some packages—ask your AE; they are not included in every firmographic-only build.",
+      "authorName": "Avery Kim",
+      "authorAvatar": "/community/avatars/06.svg",
+      "replyCount": 1,
+      "searchText": "Can I filter by CRM or marketing stack? Want accounts already on HubSpot or Salesforce. Is technographic filtering available on list builds, or only firmographic? Ask your AE for intent/technographic add-ons. Not every package includes stack filters by default; many builds start firmographic and add technology filters when scoped."
+    },
+    {
+      "slug": "email-permutator-when-to-use-vs-verified-lists",
+      "oldSlug": "email-permutator-tips",
+      "title": "Email permutator — when to use it vs verified lists",
+      "categorySlug": "integrations-tools",
+      "createdAt": "2026-06-08",
+      "featured": false,
+      "metaDescription": "Use the email permutator to enrich known names, then verify—do not treat it as a substitute for a verified database pull.",
+      "authorName": "Riley Brooks",
+      "authorAvatar": "/community/avatars/08.svg",
+      "replyCount": 1,
+      "searchText": "Email permutator — when to use it vs verified lists Is the on-site email permutator meant for enrichment when I already have names, or as a replacement for verified lists? Treat it as a helper for known names, then verify. It is not a substitute for a verified database pull."
+    },
+    {
+      "slug": "gdpr-friendly-outreach-with-purchased-b2b-lists",
+      "oldSlug": "gdpr-compliant-outreach",
+      "title": "GDPR-friendly outreach with purchased B2B lists",
+      "categorySlug": "outreach-campaigns",
+      "createdAt": "2026-07-12",
+      "featured": true,
+      "metaDescription": "Operational GDPR hygiene for B2B lists: document lawful basis, honor opt-outs fast, prefer role-based contacts, and keep clear unsubscribe paths—always confirm with your counsel.",
+      "authorName": "Marcus Chen",
+      "authorAvatar": "/community/avatars/03.svg",
+      "replyCount": 1,
+      "searchText": "GDPR-friendly outreach with purchased B2B lists We sell into EU accounts. What do teams typically document when using B2B contact data for cold email under GDPR? Looking for practical process tips, not legal advice. Talk to your counsel. Operationally, teams keep a lawful-basis record, honor opt-outs fast, and avoid scraping personal inboxes. Use role-based B2B contacts and clear unsubscribe paths."
+    },
+    {
+      "slug": "how-long-does-list-delivery-usually-take",
+      "oldSlug": "order-delivery-timeline",
+      "title": "How long does list delivery usually take?",
+      "categorySlug": "account-access",
+      "createdAt": "2026-07-28",
+      "featured": true,
+      "metaDescription": "Most standard list orders complete within 1–2 business days. Custom multi-geo or enrichment jobs can take longer—follow up after 3 business days with your order ID.",
+      "authorName": "Jordan Blake",
+      "authorAvatar": "/community/avatars/01.svg",
+      "replyCount": 2,
+      "searchText": "How long does list delivery usually take? I placed an order for a targeted IT decision-maker list yesterday. Portal still shows processing. What is a normal turnaround, and when should I follow up with support? Most standard list orders complete within 1–2 business days. Custom multi-geo or enrichment jobs can take longer. If it passes 3 business days, reply with your order ID in a support ticket. Same here — standard IT DM list landed next business day. Only saw longer waits on multi-country custom filters."
+    },
+    {
+      "slug": "partial-credit-when-count-is-short",
+      "oldSlug": "order-partial-refund",
+      "title": "Partial credit when count is short",
+      "categorySlug": "account-access",
+      "createdAt": "2026-05-28",
+      "featured": false,
+      "metaDescription": "When a rare title combo delivers under count, contact support with your order ID—credits or replenishment options are handled case by case.",
+      "authorName": "Camila Santos",
+      "authorAvatar": "/community/avatars/01.svg",
+      "replyCount": 1,
+      "searchText": "Partial credit when count is short Ordered 5k contacts; delivery came in under count for a rare title combo. How do refunds or credits usually work? For short counts on rare title combinations, open a support ticket with your order ID. We review delivery against the scoped filters and typically offer credit or replenishment options when the count falls short of what was confirmed."
+    },
+    {
+      "slug": "password-reset-email-never-arrives",
+      "oldSlug": "cannot-reset-portal-password",
+      "title": "Password reset email never arrives",
+      "categorySlug": "account-access",
+      "createdAt": "2026-07-05",
+      "featured": false,
+      "metaDescription": "If portal password-reset mail never arrives, allowlist the sender domain with IT and confirm the email matches the one on your original purchase.",
+      "authorName": "Elena Vargas",
+      "authorAvatar": "/community/avatars/04.svg",
+      "replyCount": 1,
+      "searchText": "Password reset email never arrives Tried forgot-password three times. Nothing in inbox or spam. Company uses Google Workspace. Anyone else hit this? Ask IT to allowlist the sender domain. Also confirm the email matches the one on the original purchase. If it still fails, open a support ticket with your company name and order ID."
+    },
+    {
+      "slug": "remove-duplicate-tool-vs-excel",
+      "oldSlug": "remove-duplicate-tool",
+      "title": "Remove-duplicate tool vs Excel",
+      "categorySlug": "integrations-tools",
+      "createdAt": "2026-05-18",
+      "featured": false,
+      "metaDescription": "Run the on-site remove-duplicate tool on email first, then optionally a second pass on domain and title in Sheets for edge cases before CRM upload.",
+      "authorName": "Drew Nguyen",
+      "authorAvatar": "/community/avatars/02.svg",
+      "replyCount": 1,
+      "searchText": "Remove-duplicate tool vs Excel Anyone prefer the site remove-duplicate tool over spreadsheet dedupe before uploads to CRM? Run the tool first on email, then a second pass on domain+title in Sheets for edge cases before CRM upload."
+    },
+    {
+      "slug": "seeing-higher-bounce-than-expected-after-export",
+      "oldSlug": "high-bounce-after-export",
+      "title": "Seeing higher bounce than expected after export",
+      "categorySlug": "data-quality",
+      "createdAt": "2026-07-20",
+      "featured": true,
+      "metaDescription": "Before blaming the file, check suppression lists, domain warm-up, and whether old CRM contacts were mixed into the same campaign as your verified export.",
+      "authorName": "Priya Raman",
+      "authorAvatar": "/community/avatars/02.svg",
+      "replyCount": 2,
+      "searchText": "Seeing higher bounce than expected after export Exported a verified manufacturing segment and bounce sat around 8% on first send. Is that normal? Any checklist before blaming the file? Check suppression and whether the sending domain was warmed. Also confirm you did not mix old CRM contacts into the same campaign. Bounce around that range often points to sending hygiene or list mixing rather than a single export issue. We had ~7% bounce until we stopped merging an old CRM suppress list into the same campaign. After a clean verified-only send, bounce dropped under 3%."
+    }
+  ],
+  "guides": [
+    {
+      "slug": "choosing-the-right-segment",
+      "title": "Choosing the right B2B segment",
+      "summary": "How to pick industry, title, and geography filters so your list matches campaign goals.",
+      "authorName": "Database Providers",
+      "authorAvatar": "/pricing-plan/db_bubble.png",
+      "searchText": "Choosing the right B2B segment How to pick industry, title, and geography filters so your list matches campaign goals. A good segment is narrow enough to personalize, wide enough to fill pipeline. Start from the offer - Who can buy or influence this product? - Which titles actually reply in your past campaigns? - Which geos can you support with follow-up? Common mistakes - Mixing too many industries in one send. - Targeting C-level only when managers own the workflow. - Ignoring company size when your pricing is SMB-only. Talk with your account team about what has worked for your niche."
+    },
+    {
+      "slug": "forgot-account-password",
+      "title": "I forgot my account password — FAQ",
+      "summary": "Steps to reset access, recover your Database Providers portal login, and what to do if recovery email is missing.",
+      "authorName": "Database Providers",
+      "authorAvatar": "/pricing-plan/db_bubble.png",
+      "searchText": "I forgot my account password — FAQ Steps to reset access, recover your Database Providers portal login, and what to do if recovery email is missing. Important: This is an official guide from Database Providers. We cannot reset your password for you. Use the official recovery flow, then contact support if you still need help. Quick steps 1. Go to the sign-in page and choose Forgot password. 2. Enter the email tied to your Database Providers account. 3. Open the reset link from your inbox (check spam). 4. Set a new password and sign in again. If you never get the email - Confirm you are using the same email used on the original order. - Wait a few minutes and request another reset. - Contact support with your company name and recent order ID. Still locked out? Open a support ticket with what you already tried. Do not share passwords or full payment details."
+    },
+    {
+      "slug": "improve-list-deliverability",
+      "title": "How to improve email list deliverability",
+      "summary": "Practical checklist for verification, suppression, and sending practices that keep bounce rates low.",
+      "authorName": "Database Providers",
+      "authorAvatar": "/pricing-plan/db_bubble.png",
+      "searchText": "How to improve email list deliverability Practical checklist for verification, suppression, and sending practices that keep bounce rates low. Deliverability problems usually come from stale contacts, weak targeting, or aggressive sending — not from one bad export. Before you send - Suppress known unsubscribes and hard bounces. - Prefer recently verified segments for cold outreach. - Align titles and industries with your ICP before volume ramps. Sending hygiene - Warm domains gradually; avoid blasting a brand-new domain. - Keep subject lines and body copy relevant to the persona. - Monitor bounce and complaint rates after each batch. When bounce is high Share sample bounce codes (without contact PII) with support so we can help diagnose."
+    }
+  ]
+}

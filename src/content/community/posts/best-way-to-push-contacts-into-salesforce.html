@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Best way to push contacts into Salesforce</title>
+  <meta name="description"
+    content="For Salesforce imports, map Email as an external ID, match Company to Account Name, store LinkedIn URL in a custom field, and deduplicate before import.">
+  <link rel="canonical"
+    href="https://www.thedatabaseproviders.com/community/best-way-to-push-contacts-into-salesforce/">
+  <meta name="robots" content="index, follow">
+  <meta name="community:type" content="post">
+  <meta name="community:category" content="integrations-tools">
+  <meta name="community:created" content="2026-06-15">
+  <meta name="community:featured" content="false">
+  <meta name="community:old-slug" content="export-to-salesforce">
+  <meta name="community:author" content="Noah Patel">
+  <meta name="community:avatar" content="/community/avatars/07.svg">
+</head>
+
+<body>
+  <article class="community-question">
+    <p>We get CSV exports today. Anyone using a cleaner Salesforce import mapping for title, company, and LinkedIn URL
+      fields?</p>
+  </article>
+  
+  <section class="community-answer" data-author="Database Providers" data-date="2026-06-16" data-id="a1"
+    data-avatar="/pricing-plan/db_bubble.png" data-accepted="true">
+    <p>Map Email as external ID when possible, keep Company as Account Name match, and store LinkedIn URL in a custom
+      field. Deduplicate before import.</p>
+  </section>
+
+  <section class="community-answer" data-id="a2" data-author="Noah Patel" data-avatar="/community/avatars/07.svg"
+    data-date="2026-06-17" data-accepted="false">
+    <p>Also map Title carefully — we use a staging object, dedupe on email, then Account VLOOKUP. Saved a lot of
+      duplicate Accounts.</p>
+  </section>
+</body>
+
+</html>

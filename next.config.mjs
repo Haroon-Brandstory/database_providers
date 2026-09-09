@@ -3,6 +3,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
 
 const STATIC_PAGES_GLOB = ['./src/content/static-pages/**/*'];
+const COMMUNITY_CONTENT_GLOB = ['./src/content/community/**/*'];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -37,10 +38,12 @@ const nextConfig = {
 
     // Vercel: force HTML into serverless bundles (dynamic fs paths alone are unreliable).
     outputFileTracingIncludes: {
-        '/*': STATIC_PAGES_GLOB,
+        '/*': [...STATIC_PAGES_GLOB, ...COMMUNITY_CONTENT_GLOB],
         '/[locale]/[slug]': STATIC_PAGES_GLOB,
         '/legal/[slug]': STATIC_PAGES_GLOB,
         '/geo/[geo]/[slug]': STATIC_PAGES_GLOB,
+        '/community/[slug]': COMMUNITY_CONTENT_GLOB,
+        '/community/guides/[slug]': COMMUNITY_CONTENT_GLOB,
     },
 
     // Quiet known Turbopack warn from intentional runtime fs reads of static-pages/.
@@ -53,6 +56,14 @@ const nextConfig = {
             },
             {
                 path: '**/src/lib/staticPage.js',
+                title: /Overly broad patterns/i,
+            },
+            {
+                path: '**/src/lib/communityHtml.js',
+                description: /Overly broad patterns/i,
+            },
+            {
+                path: '**/src/lib/communityHtml.js',
                 title: /Overly broad patterns/i,
             },
         ],

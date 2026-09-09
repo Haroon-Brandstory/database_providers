@@ -3,53 +3,6 @@ import { FiArrowLeft } from "react-icons/fi";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { getPostPath, TEAM_AUTHOR } from "@/lib/communityData";
 
-function renderGuideBody(body) {
-    const blocks = body.trim().split(/\n\n+/);
-    return blocks.map((block, index) => {
-        const trimmed = block.trim();
-        if (trimmed.startsWith("## ")) {
-            return (
-                <h2
-                    key={index}
-                    className="text-xl font-medium text-[#202124] mt-8 mb-3"
-                >
-                    {trimmed.replace(/^##\s+/, "")}
-                </h2>
-            );
-        }
-        if (/^\d+\.\s/m.test(trimmed) || trimmed.startsWith("- ")) {
-            const lines = trimmed.split("\n").filter(Boolean);
-            const isOrdered = /^\d+\.\s/.test(lines[0]);
-            const ListTag = isOrdered ? "ol" : "ul";
-            return (
-                <ListTag
-                    key={index}
-                    className={`text-[#3c4043] text-base leading-relaxed mb-4 space-y-2 pl-5 ${
-                        isOrdered ? "list-decimal" : "list-disc"
-                    }`}
-                >
-                    {lines.map((line, lineIndex) => (
-                        <li key={lineIndex}>
-                            {line
-                                .replace(/^\d+\.\s+/, "")
-                                .replace(/^-\s+/, "")
-                                .replace(/\*\*(.*?)\*\*/g, "$1")}
-                        </li>
-                    ))}
-                </ListTag>
-            );
-        }
-        return (
-            <p
-                key={index}
-                className="text-[#3c4043] text-base leading-relaxed mb-4 whitespace-pre-wrap"
-            >
-                {trimmed.replace(/\*\*(.*?)\*\*/g, "$1")}
-            </p>
-        );
-    });
-}
-
 export default function GuideDetail({
     guide,
     relatedGuides = [],
@@ -76,9 +29,20 @@ export default function GuideDetail({
                             <span className="rounded bg-[#e6f4ea] px-1.5 py-0.5 text-[11px] font-medium text-[#137333]">
                                 Official Guide
                             </span>
-                            <span className="text-xs text-[#80868b]">
+                        </div>
+
+                        <div className="flex items-center gap-2.5 mb-5">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={guide.authorAvatar || "/pricing-plan/db_bubble.png"}
+                                alt=""
+                                width={36}
+                                height={36}
+                                className="h-9 w-9 rounded-full object-cover bg-[#e8eaed] ring-1 ring-[#dadce0]"
+                            />
+                            <p className="text-sm font-medium text-[#202124]">
                                 {guide.authorName || TEAM_AUTHOR}
-                            </span>
+                            </p>
                         </div>
 
                         <h1 className="text-[22px] md:text-[28px] font-medium text-[#202124] leading-snug mb-3">
@@ -88,8 +52,14 @@ export default function GuideDetail({
                             {guide.summary}
                         </p>
 
-                        <div className="border-t border-[#e8eaed] pt-5">
-                            {renderGuideBody(guide.body)}
+                        <div className="border-t border-[#e8eaed] pt-5 community-guide-body [&_h2]:text-xl [&_h2]:font-medium [&_h2]:text-[#202124] [&_h2]:mt-8 [&_h2]:mb-3 [&_p]:text-[#3c4043] [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-4 [&_ol]:space-y-2 [&_li]:text-[#3c4043] [&_li]:text-base [&_li]:leading-relaxed">
+                            {guide.bodyHtml ? (
+                                <div dangerouslySetInnerHTML={{ __html: guide.bodyHtml }} />
+                            ) : (
+                                <p className="text-[#3c4043] text-base leading-relaxed whitespace-pre-wrap">
+                                    {guide.body}
+                                </p>
+                            )}
                         </div>
                     </article>
 

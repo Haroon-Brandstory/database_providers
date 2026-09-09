@@ -6,6 +6,7 @@ import {
     getRelatedGuideSummaries,
     getRelatedPostSummaries,
 } from "@/lib/communityData";
+import { getCommunityGuideDetail } from "@/lib/communityHtml";
 import { generateSeoMetadata } from "@/lib/seo";
 
 const BASE_URL = "https://www.thedatabaseproviders.com";
@@ -76,9 +77,11 @@ function buildArticleSchema(guide) {
 
 export default async function CommunityGuidePage({ params }) {
     const { slug } = await params;
-    const guide = getGuideBySlug(slug);
-    if (!guide) notFound();
+    const listing = getGuideBySlug(slug);
+    const detail = getCommunityGuideDetail(slug);
+    if (!listing || !detail) notFound();
 
+    const guide = { ...listing, ...detail };
     const relatedGuides = getRelatedGuideSummaries(guide.slug, 3);
     const relatedPosts = getRelatedPostSummaries(null, 3);
     const schemas = [buildArticleSchema(guide), buildBreadcrumbSchema(guide)];

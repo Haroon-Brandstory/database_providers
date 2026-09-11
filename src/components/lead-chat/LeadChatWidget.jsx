@@ -17,6 +17,9 @@ import { getFaqFallback, getFaqQuickQuestions, matchFaq } from "./matchFaq";
 
 const EMAIL_RE = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
+const SESSION_KEY = "dp-lead-chat-session";
+const SESSION_TTL_MS = 60 * 60 * 1000;
+
 const EMPTY_ANSWERS = {
     intent: "",
     companyName: "",
@@ -26,6 +29,34 @@ const EMPTY_ANSWERS = {
     name: "",
     notes: "",
 };
+
+const FAQ_WELCOME =
+    "Hi again! Ask me anything about lists, pricing, delivery, or formats.";
+
+function readLeadSession() {
+    try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        if (!raw) return null;
+        const data = JSON.parse(raw);
+        if (!data || typeof data !== "object") return null;
+        return data;
+    } catch {
+        return null;
+    }
+}
+
+function writeLeadSession(data) {
+    try {
+        localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    } catch {
+        /* ignore quota / private mode */
+    }
+}
+
+function isSessionExpired(session, now = Date.now()) {
+    if (!session?.lastActivityAt) return true;
+    return now - Number(session.lastActivityAt) > SESSION_TTL_MS;
+}
 
 function BotAvatar() {
     return (
@@ -74,11 +105,14 @@ export default function LeadChatWidget() {
     const [showFaqChips, setShowFaqChips] = useState(false);
     const [honeypot, setHoneypot] = useState("");
     const [started, setStarted] = useState(false);
+    const [leadSubmitted, setLeadSubmitted] = useState(false);
+    const [sessionReady, setSessionReady] = useState(false);
     const listRef = useRef(null);
     const inputRef = useRef(null);
     const panelRef = useRef(null);
     const bubbleRef = useRef(null);
     const faqChipsTimerRef = useRef(null);
+    const leadSubmittedRef = useRef(false);
 
     const hideOnThankYou = /thank-you\/?$/i.test(pathname);
 
@@ -100,6 +134,10 @@ export default function LeadChatWidget() {
         if (nextOpen) {
             setPanelVisible(true);
             setOpen(true);
+            const session = readLeadSession();
+            if (session && !isSessionExpired(session)) {
+                writeLeadSession({ ...session, lastActivityAt: Date.now() });
+            }
             return;
         }
         setOpen(false);
@@ -136,31 +174,240 @@ export default function LeadChatWidget() {
         }
     }, []);
 
-    const resetChat = useCallback(() => {
+    const persistSession = useCallback((patch = {}) => {
+        const prev = readLeadSession() || {};
+        const next = {
+            ...prev,
+            ...patch,
+            lastActivityAt: Date.now(),
+            leadSubmitted:
+                patch.leadSubmitted !== undefined
+                    ? Boolean(patch.leadSubmitted)
+                    : leadSubmittedRef.current,
+        };
+        writeLeadSession(next);
+    }, []);
+
+    const startFaqKeywordFlow = useCallback(() => {
         clearFaqChipsTimer();
-        setStepIndex(0);
+        setStepIndex(CHAT_STEPS.length);
         setAnswers(EMPTY_ANSWERS);
-        setMessages([]);
         setInput("");
         setError("");
         setLoading(false);
         setDone(false);
+        setPhase("faq");
+        setFaqMode("ask");
+        setShowFaqChips(true);
+        setHoneypot("");
+        setStarted(true);
+        setMessages([{ role: "bot", text: FAQ_WELCOME }]);
+    }, [clearFaqChipsTimer]);
+
+    const resetChat = useCallback(() => {
+        clearFaqChipsTimer();
+        setInput("");
+        setError("");
+        setLoading(false);
+        setHoneypot("");
+
+        if (leadSubmittedRef.current) {
+            startFaqKeywordFlow();
+            persistSession({
+                leadSubmitted: true,
+                messages: [{ role: "bot", text: FAQ_WELCOME }],
+                phase: "faq",
+                faqMode: "ask",
+                showFaqChips: true,
+                done: false,
+                started: true,
+                stepIndex: CHAT_STEPS.length,
+                answers: EMPTY_ANSWERS,
+            });
+            return;
+        }
+
+        setStepIndex(0);
+        setAnswers(EMPTY_ANSWERS);
+        setMessages([{ role: "bot", text: CHAT_STEPS[0].bot }]);
+        setDone(false);
         setPhase("lead");
         setFaqMode("prompt");
         setShowFaqChips(false);
-        setHoneypot("");
-        setStarted(false);
-    }, [clearFaqChipsTimer]);
+        setStarted(true);
+        persistSession({
+            leadSubmitted: false,
+            messages: [{ role: "bot", text: CHAT_STEPS[0].bot }],
+            phase: "lead",
+            faqMode: "prompt",
+            showFaqChips: false,
+            done: false,
+            started: true,
+            stepIndex: 0,
+            answers: EMPTY_ANSWERS,
+        });
+    }, [clearFaqChipsTimer, persistSession, startFaqKeywordFlow]);
 
     const startConversation = useCallback(() => {
         if (started) return;
+        if (leadSubmittedRef.current) {
+            startFaqKeywordFlow();
+            persistSession({
+                leadSubmitted: true,
+                messages: [{ role: "bot", text: FAQ_WELCOME }],
+                phase: "faq",
+                faqMode: "ask",
+                showFaqChips: true,
+                done: false,
+                started: true,
+                stepIndex: CHAT_STEPS.length,
+            });
+            return;
+        }
         setStarted(true);
         setMessages([{ role: "bot", text: CHAT_STEPS[0].bot }]);
-    }, [started]);
+        persistSession({
+            leadSubmitted: false,
+            messages: [{ role: "bot", text: CHAT_STEPS[0].bot }],
+            phase: "lead",
+            started: true,
+            stepIndex: 0,
+        });
+    }, [started, startFaqKeywordFlow, persistSession]);
+
+    // Hydrate / expire session from localStorage
+    useEffect(() => {
+        const now = Date.now();
+        const session = readLeadSession();
+        const submitted = Boolean(session?.leadSubmitted);
+        leadSubmittedRef.current = submitted;
+        setLeadSubmitted(submitted);
+
+        if (!session || isSessionExpired(session, now)) {
+            writeLeadSession({
+                leadSubmitted: submitted,
+                lastActivityAt: now,
+            });
+            setSessionReady(true);
+            return;
+        }
+
+        // Restore in-progress chat within 1 hour
+        if (Array.isArray(session.messages) && session.messages.length > 0) {
+            setMessages(session.messages);
+            setPhase(session.phase === "faq" || session.phase === "done" ? session.phase : submitted ? "faq" : "lead");
+            setFaqMode(session.faqMode === "ask" ? "ask" : "prompt");
+            setShowFaqChips(Boolean(session.showFaqChips));
+            setDone(Boolean(session.done));
+            setStarted(Boolean(session.started));
+            setStepIndex(
+                Number.isFinite(session.stepIndex) ? session.stepIndex : submitted ? CHAT_STEPS.length : 0
+            );
+            if (session.answers && typeof session.answers === "object") {
+                setAnswers({ ...EMPTY_ANSWERS, ...session.answers });
+            }
+        } else if (submitted) {
+            // Form done, transcript cleared / empty → keyword FAQ
+            setPhase("faq");
+            setFaqMode("ask");
+            setShowFaqChips(true);
+            setDone(false);
+            setStarted(true);
+            setStepIndex(CHAT_STEPS.length);
+            setMessages([{ role: "bot", text: FAQ_WELCOME }]);
+        }
+
+        setSessionReady(true);
+    }, []);
 
     useEffect(() => {
+        leadSubmittedRef.current = leadSubmitted;
+    }, [leadSubmitted]);
+
+    // Persist live chat while session active
+    useEffect(() => {
+        if (!sessionReady || !started) return;
+        persistSession({
+            leadSubmitted: leadSubmittedRef.current,
+            messages,
+            phase,
+            faqMode,
+            showFaqChips,
+            done,
+            started,
+            stepIndex,
+            answers,
+        });
+    }, [
+        sessionReady,
+        started,
+        messages,
+        phase,
+        faqMode,
+        showFaqChips,
+        done,
+        stepIndex,
+        answers,
+        persistSession,
+    ]);
+
+    // Clear chat after 1 hour of last activity
+    useEffect(() => {
+        if (!sessionReady) return undefined;
+
+        const clearIfExpired = () => {
+            const session = readLeadSession();
+            if (!session || !isSessionExpired(session)) return;
+
+            const submitted = Boolean(session.leadSubmitted);
+            leadSubmittedRef.current = submitted;
+            setLeadSubmitted(submitted);
+            clearFaqChipsTimer();
+            setInput("");
+            setError("");
+            setLoading(false);
+            setHoneypot("");
+
+            writeLeadSession({
+                leadSubmitted: submitted,
+                lastActivityAt: Date.now(),
+            });
+
+            if (submitted) {
+                startFaqKeywordFlow();
+            } else {
+                setStepIndex(0);
+                setAnswers(EMPTY_ANSWERS);
+                setDone(false);
+                setPhase("lead");
+                setFaqMode("prompt");
+                setShowFaqChips(false);
+                setStarted(true);
+                setMessages([{ role: "bot", text: CHAT_STEPS[0].bot }]);
+                writeLeadSession({
+                    leadSubmitted: false,
+                    lastActivityAt: Date.now(),
+                    messages: [{ role: "bot", text: CHAT_STEPS[0].bot }],
+                    phase: "lead",
+                    faqMode: "prompt",
+                    showFaqChips: false,
+                    done: false,
+                    started: true,
+                    stepIndex: 0,
+                    answers: EMPTY_ANSWERS,
+                });
+            }
+        };
+
+        clearIfExpired();
+        const id = setInterval(clearIfExpired, 30_000);
+        return () => clearInterval(id);
+    }, [sessionReady, clearFaqChipsTimer, startFaqKeywordFlow]);
+
+    useEffect(() => {
+        if (!sessionReady) return;
         if (open) startConversation();
-    }, [open, startConversation]);
+    }, [open, startConversation, sessionReady]);
 
     useEffect(() => {
         if (hideOnThankYou) return undefined;
@@ -319,13 +566,20 @@ export default function LeadChatWidget() {
         setLoading(true);
         setError("");
         try {
-            if (honeypot.trim()) {
+            const markSubmittedAndFaq = () => {
+                leadSubmittedRef.current = true;
+                setLeadSubmitted(true);
                 pushBot("Thanks! Our team will reach out shortly.");
                 setPhase("faq");
                 setFaqMode("prompt");
+                persistSession({ leadSubmitted: true, phase: "faq", faqMode: "prompt" });
                 setTimeout(() => {
                     pushBot("Want a quick answer from our FAQ before you go?");
                 }, 350);
+            };
+
+            if (honeypot.trim()) {
+                markSubmittedAndFaq();
                 return;
             }
 
@@ -351,12 +605,7 @@ export default function LeadChatWidget() {
                 return;
             }
 
-            pushBot("Thanks! Our team will reach out shortly.");
-            setPhase("faq");
-            setFaqMode("prompt");
-            setTimeout(() => {
-                pushBot("Want a quick answer from our FAQ before you go?");
-            }, 350);
+            markSubmittedAndFaq();
         } catch {
             setError("Something went wrong. Please try again.");
         } finally {

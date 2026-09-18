@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Bounce Rate Spiked and I Don't Know Why | Community | Database Providers</title>
+    <meta name="description" content="A bounce spike after a purchased-list send usually traces to file age, not record quality. How to diagnose it in the right order.">
+    <link rel="canonical" href="https://www.thedatabaseproviders.com/community/my-bounce-rate-spiked-and-i-dont-know-why/">
+    <meta name="robots" content="index, follow">
+    <meta name="community:type" content="Pain point">
+    <meta name="community:category" content="Deliverability & Sending">
+    <meta name="community:created" content="2026-09-10">
+    <meta name="community:featured" content="TRUE">
+    <meta name="community:old-slug" content="https://www.thedatabaseproviders.com/pricing-plan/db_bubble.png">
+    <meta name="community:author" content="Community Member">
+    <meta name="community:avatar" content="https://www.thedatabaseproviders.com/pricing-plan/db_bubble.png">
+</head>
+
+<body>
+    <article class="community-question">
+        <p>First send on a new list and my bounce rate came back at 14%. The sample I tested a few weeks ago was clean. My ESP is threatening to suspend the account. I don't know whether to blame the file or something I did.</p>
+    </article>
+    <section class="community-answer" data-author="Database Providers — Data Operations" data-date="2026-09-10"
+        data-id="a1" data-avatar="https://www.thedatabaseproviders.com/pricing-plan/db_bubble.png" data-accepted="TRUE">
+        <p>A bounce spike on a first send almost always traces to file age rather than record quality — and the detail in your message points straight at it. You tested the sample a few weeks ago, which means the file has been sitting while people changed roles, companies restructured and mailboxes were retired. B2B contact data degrades continuously from the day it is compiled, so a gap between verification and send is the single most common cause of exactly this number.
+
+Work through it in this order before concluding anything:
+
+Check the compile date on the file, not the purchase date. If more than two weeks separate compilation from your send, re-verify before doing anything else.
+
+Check whether SPF, DKIM and DMARC are aligned on the sending domain. An authentication failure produces rejections that many platforms report in the same bucket as hard bounces.
+
+Check how your ESP classifies deferrals. Some platforms count soft bounces and deferrals into the headline figure, which can turn a healthy 4% into an alarming 14% without a single bad record.
+
+Check whether old CRM contacts were merged into the same campaign. Stale in-house data mixed with a fresh file is a frequent culprit, and the blame lands on the purchased list by default.
+
+On your immediate problem: stop sending, pull the bounce log, and separate hard from soft before you talk to your ESP. Going back to them with a classified breakdown is what gets an account reinstated.
+
+This is the reason we compile and verify at order time rather than pulling from a stored archive — your file is dated to your purchase, not to whenever the underlying database was last touched. If your hard bounce rate is meaningfully above what the sample showed, send us the log with your order ID and we will review the affected records and replace them from the same segment. That process is straightforward in the first weeks after delivery and much harder once a file has aged past a full quarter, so raise it now rather than after the next send.</p>
+    </section>
+    <section class="community-answer" data-id="a2" data-author="Database Providers — Data Operations"
+        data-avatar="https://www.thedatabaseproviders.com/pricing-plan/db_bubble.png" data-date="2026-09-16" data-accepted="TRUE">
+        <p>One compliance note for healthcare outreach in the US: CAN-SPAM governs the send, but if your messaging touches patient data or clinical claims, FDA promotional rules and your own regulatory review apply on top. Physician contact data is business contact information and is not protected health information, so HIPAA does not apply to the list itself — but it does apply to anything a recipient sends back to you.</p>
+    </section>
+</body>
+
+</html>
